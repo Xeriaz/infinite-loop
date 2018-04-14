@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -35,6 +36,13 @@ class Challanges
      * @ORM\Column(type="datetime")
      */
     private $endDate;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\ChallangesGroups", inversedBy="challenges")
+     * @ORM\JoinTable(name="groupedChallenges")
+     * @ORM\Column(type="string")
+     */
+    private $challengesGroups;
 
     public function getId()
     {
@@ -87,5 +95,10 @@ class Challanges
         $this->endDate = $endDate;
 
         return $this;
+    }
+
+    public function __construct()
+    {
+        $this->challengesGroups = new ArrayCollection();
     }
 }
