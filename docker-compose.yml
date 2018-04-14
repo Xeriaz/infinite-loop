@@ -15,7 +15,7 @@ services:
     container_name: php.symfony
     build: .docker/php/
     environment: # Passing to environment same configuration as in .env file
-      - APP_ENV=$APP_ENV
+#      - APP_ENV=$APP_ENV
       - APP_SECRET=$APP_SECRET
       - DATABASE_URL=$DATABASE_URL
     volumes:
