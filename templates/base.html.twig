@@ -30,6 +30,9 @@
                         </li>
                     {% else %}
                         <li class="nav-item">
+                            <a class="btn btn-outline-success" href="{{ path('fos_user_registration_register') }}">Sign Up</a>
+                        </li>&nbsp;
+                        <li class="nav-item">
                             <a class="btn btn-outline-success" href="{{ path('fos_user_security_login') }}">Login</a>
                         </li>
                     {% endif %}
