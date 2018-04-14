@@ -20,9 +20,12 @@ security:
             # https://symfony.com/doc/current/security.html#a-configuring-how-your-users-will-authenticate
 
             form_login:
+                provider: fos_userbundle
                 csrf_token_generator: security.csrf.token_manager
-#              login_path: login
-#              check_path: login
+
+            remember_me:
+                secret: '%secret%'
+
             # https://symfony.com/doc/current/security/form_login_setup.html
 
     # Easy way to control access for large sections of your site
