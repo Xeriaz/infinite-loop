@@ -13,7 +13,9 @@ security:
             security: false
         main:
             anonymous: true
-
+            logout:
+              path: fos_user_security_logout
+              target: home
             # activate different ways to authenticate
 
             # http_basic: true
