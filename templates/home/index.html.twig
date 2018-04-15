@@ -4,6 +4,16 @@
 
 {% block stylesheets %}
     {{ parent() }}
+    {# FIXME .spacingHack from base.twig.html push .contentLeft lower, this is workaround to push it up#}
+    <style>
+        .content {
+            margin-top: -2rem;
+        }
+
+        body {
+            overflow-y: hidden;
+        }
+    </style>
 {% endblock %}
 {% block body %}
 
