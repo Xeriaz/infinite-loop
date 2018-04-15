@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use FOS\UserBundle\Model\User as BaseUser;
 
@@ -24,6 +25,17 @@ class User extends BaseUser
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * @ORM\ManyToMany(targetEntity="Challenges.php", mappedBy="userChallenges")
+     * @ORM\Column(type="string")
+     */
+    private $challenges;
+
+    public function __construct()
+    {
+        $this->challenges = new ArrayCollection();
     }
 
 }
