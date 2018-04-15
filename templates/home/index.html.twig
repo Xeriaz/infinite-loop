@@ -3,15 +3,50 @@
 {% block title %}Homepage - {{ parent() }}{% endblock %}
 
 {% block stylesheets %}
-    <link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">
     {{ parent() }}
-    <style>
-        .title {
-            margin: 20px auto;
-            text-align: center;
-            font-size: 96px;
-        }
-    </style>
 {% endblock %}
 {% block body %}
+    <div class="content">
+        <div class="contentLeft">
+            <nav class="sidebar">
+                <ul class="side-nav">
+                    <li class="side-nav__item side-nav__item--active">
+                        <a href="#" class="side-nav__link">
+                            <svg class="side-nav__icon">
+                                <use xlink:href="{{ asset('images/sprite.svg#icon-home') }}"></use>
+                                <span>Home</span>
+                            </svg>
+                        </a>
+                    </li>
+                    <li class="side-nav__item">
+                        <a href="#" class="side-nav__link">
+                            <svg class="side-nav__icon">
+                                <use xlink:href="{{ asset('images/sprite.svg#icon-aircraft') }}"></use>
+                                <span>Features</span>
+                            </svg>
+                        </a>
+                    </li>
+                </ul>
+
+                <div class="legal">
+                    &copy; 2018 by Infinite Loop.
+                </div>
+            </nav>
+
+        </div>
+        <div class="contentRight">
+            <h1 class="mainHeading">Behind Every <span class="sp-1">Success</span><br>There is a <span class="sp-2">Cactus</span></h1>
+            <div class="cta">
+                <h2 class="cta__book-now">
+                    Meet your challenges now!
+                </h2>
+                <button class="btn">
+                    <span class="btn__visible">Getting Started</span>
+                    <span class="btn__invisible">New challenge</span>
+                </button>
+            </div>
+
+        </div>
+
+    </div>
 {% endblock %}
