@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ChallangesRepository")
@@ -18,6 +19,7 @@ class Challanges
     private $id;
 
     /**
+     * @Assert\NotBlank()
      * @ORM\Column(type="string", length=255)
      */
     private $title;
@@ -28,11 +30,15 @@ class Challanges
     private $description;
 
     /**
+     * @Assert\NotBlank()
+     * @Assert\Type("\DateTime")
      * @ORM\Column(type="datetime")
      */
     private $startDate;
 
     /**
+     * @Assert\NotBlank()
+     * @Assert\Type("\DateTime")
      * @ORM\Column(type="datetime")
      */
     private $endDate;
@@ -44,6 +50,22 @@ class Challanges
      * @var
      */
     private $challengesGroups;
+
+    /**
+     * @return mixed
+     */
+    public function getChallengesGroups()
+    {
+        return $this->challengesGroups;
+    }
+
+    /**
+     * @param mixed $challengesGroups
+     */
+    public function setChallengesGroups($challengesGroups): void
+    {
+        $this->challengesGroups = $challengesGroups;
+    }
 
     /**
      * @return mixed
