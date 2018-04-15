@@ -12,7 +12,9 @@
     </head>
     <body>
             <header class="header">
-                <img class="iL-logoImg" src="{{ asset('images/logo.png') }}" alt="logo"/>
+                <a href="{{ path('home') }}">
+                    <img class="iL-logoImg" src="{{ asset('images/logo.png') }}" alt="logo"/>
+                </a>
                 <form action="#" class="search">
                     <input type="text" class="search__input" placeholder="Search Challenges">
                     <button class="search__button">
@@ -22,79 +24,40 @@
                     </button>
                 </form>
                 <nav class="user-nav">
-                    <div class="user-nav__icon-box">
-                        <svg class="user-nav__icon">
-                            <use xlink:href="{{ asset('images/sprite.svg#icon-bookmark') }}"></use>
-                        </svg>
-                        <span class="user-nav__notification">7</span>
-                    </div>
-                    {#<div class="user-nav__icon-box">#}
-                        {#<svg class="user-nav__icon">#}
-                            {#<use xlink:href="{{ asset('images/sprite.svg#icon-chat') }}"></use>#}
-                        {#</svg>#}
-                        {#<span class="user-nav__notification">13</span>#}
-                    {#</div>#}
-                    <div class="user-nav__user">
-                        <img src="{{ asset('images/user.jpg') }}" alt="user photo" class="user-nav__user-photo">
-                        <span class="user-nav__user-name">Viktoras</span>
-                    </div>
+                    {% if is_granted('ROLE_USER') %}
+                        <div class="user-nav__icon-box">
+                            <svg class="user-nav__icon">
+                                <use xlink:href="{{ asset('images/sprite.svg#icon-bookmark') }}"></use>
+                            </svg>
+                            <span class="user-nav__notification">7</span>
+                        </div>
+                        {#<div class="user-nav__icon-box">#}
+                            {#<svg class="user-nav__icon">#}
+                                {#<use xlink:href="{{ asset('images/sprite.svg#icon-chat') }}"></use>#}
+                            {#</svg>#}
+                            {#<span class="user-nav__notification">13</span>#}
+                        {#</div>#}
+                        <a href="{{ path('fos_user_profile_show') }}">
+                            <div class="user-nav__user">
+                                <img src="{{ asset('images/user.jpg') }}" alt="user photo" class="user-nav__user-photo">
+                                <span class="user-nav__user-name">{{ app.user.username }}</span>
+                            </div>
+                        </a>
+                    {% endif %}
+
                     <div class="user-nav__login">
                         {% if is_granted('ROLE_USER') %}
-                                <a class="btn-inline" href="{{ path('fos_user_security_logout') }}">Logout</a>
+                            <a class="btn-inline" href="{{ path('fos_user_security_logout') }}">Logout</a>
                         {% else %}
-                                <a class="btn-inline mr-3" href="{{ path('fos_user_registration_register') }}">Sign Up</a>
-                                <a class="btn-inline" href="{{ path('fos_user_security_login') }}">Login</a>
+                            <a class="btn-inline mr-3" href="{{ path('fos_user_registration_register') }}">Sign Up</a>
+                            <a class="btn-inline" href="{{ path('fos_user_security_login') }}">Login</a>
                         {% endif %}
-
                     </div>
-
                 </nav>
             </header>
-
-        <div class="content">
-            <div class="contentLeft">
-                <nav class="sidebar">
-                    <ul class="side-nav">
-                        <li class="side-nav__item side-nav__item--active">
-                            <a href="#" class="side-nav__link">
-                                <svg class="side-nav__icon">
-                                    <use xlink:href="{{ asset('images/sprite.svg#icon-home') }}"></use>
-                                    <span>Home</span>
-                                </svg>
-                            </a>
-                        </li>
-                        <li class="side-nav__item">
-                            <a href="#" class="side-nav__link">
-                                <svg class="side-nav__icon">
-                                    <use xlink:href="{{ asset('images/sprite.svg#icon-aircraft') }}"></use>
-                                    <span>Features</span>
-                                </svg>
-                            </a>
-                        </li>
-                    </ul>
-
-                    <div class="legal">
-                        &copy; 2018 by Infinite Loop.
-                    </div>
-                </nav>
-
-            </div>
-            <div class="contentRight">
-                <h1 class="mainHeading">Behind Every <span class="sp-1">Success</span><br>There is a <span class="sp-2">Cactus</span></h1>
-                <div class="cta">
-                    <h2 class="cta__book-now">
-                        Meet your challanges now!
-                    </h2>
-                    <button class="btn">
-                        <span class="btn__visible">Getting Started</span>
-                        <span class="btn__invisible">New challange</span>
-                    </button>
-                </div>
-
-            </div>
-
-        </div>
-
+            {# FIXME! I added this to avoid content overlap with header#}
+            <div class="spacingHack" style="height: 8rem"></div>
+            {# TODO there should be div.content and div.contentLeft, however if div.content is closed here, div.contentRight goes below div.contentLeft #}
         {% block body %}{% endblock %}
         {% block javascripts %}
             <script src="{{ asset('build/js/app.js') }}"></script>
