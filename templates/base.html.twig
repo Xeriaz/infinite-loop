@@ -12,7 +12,9 @@
     </head>
     <body>
             <header class="header">
-                <img class="iL-logoImg" src="{{ asset('images/logo.png') }}" alt="logo"/>
+                <a href="{{ path('home') }}">
+                    <img class="iL-logoImg" src="{{ asset('images/logo.png') }}" alt="logo"/>
+                </a>
                 <form action="#" class="search">
                     <input type="text" class="search__input" placeholder="Search Challenges">
                     <button class="search__button">
@@ -35,10 +37,12 @@
                             {#</svg>#}
                             {#<span class="user-nav__notification">13</span>#}
                         {#</div>#}
-                        <div class="user-nav__user">
-                            <img src="{{ asset('images/user.jpg') }}" alt="user photo" class="user-nav__user-photo">
-                            <span class="user-nav__user-name">{{ app.user.username }}</span>
-                        </div>
+                        <a href="{{ path('fos_user_profile_show') }}">
+                            <div class="user-nav__user">
+                                <img src="{{ asset('images/user.jpg') }}" alt="user photo" class="user-nav__user-photo">
+                                <span class="user-nav__user-name">{{ app.user.username }}</span>
+                            </div>
+                        </a>
                     {% endif %}
 
                     <div class="user-nav__login">
