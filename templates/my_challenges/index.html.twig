@@ -6,21 +6,21 @@
 
 <div class="container">
     <div class="row">
-        {#<div class="col-md-8">#}
             <div class="card-deck">
                 {% for challenge in challenges %}
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ challenge.title }}</h5>
-                        <p class="card-text">{{ challenge.description }}</p>
-                        <p class="card-text"><small class="text-muted">Start Date: {{ challenge.startDate|date('Y-m-d') }}</small></p>
-                        <p class="card-text"><small class="text-muted">End Date: {{ challenge.endDate|date('Y-m-d') }}</small></p>
-
+                <div class="col-sm-6 col-md-3">
+                    {# FIXME remove inline css#}
+                    <div class="card" style="min-height: 208px">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ challenge.title }}</h5>
+                            <p class="card-text">{{ challenge.description }}</p>
+                            <p class="card-text"><small class="text-muted">Start Date: {{ challenge.startDate|date('Y-m-d') }}</small></p>
+                            <p class="card-text"><small class="text-muted">End Date: {{ challenge.endDate|date('Y-m-d') }}</small></p>
+                        </div>
                     </div>
                 </div>
                 {% endfor %}
-            </div>
-        {#</div>#}
+        </div>
     </div>
 </div>
 
