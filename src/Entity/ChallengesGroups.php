@@ -2,13 +2,13 @@
 
 namespace App\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ChallangesGroupsRepository")
  */
-class ChallangesGroups
+class ChallengesGroups
 {
     /**
      * @ORM\Id()
@@ -18,15 +18,10 @@ class ChallangesGroups
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank()
+     * @ORM\Column(type="string", length=255, unique=true)
      */
     private $groupName;
-
-    /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Challanges", mappedBy="challengesGroups")
-     * @ORM\Column(type="string")
-     */
-    private $challenges;
 
     /**
      * @return mixed
@@ -46,17 +41,12 @@ class ChallangesGroups
 
     /**
      * @param string $groupName
-     * @return ChallangesGroups
+     * @return ChallengesGroups
      */
     public function setGroupName(string $groupName): self
     {
         $this->groupName = $groupName;
 
         return $this;
-    }
-
-    public function __construct()
-    {
-        $this->challenges = new ArrayCollection();
     }
 }

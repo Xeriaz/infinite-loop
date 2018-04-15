@@ -4,11 +4,12 @@ namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ChallangesRepository")
  */
-class Challanges
+class Challenges
 {
     /**
      * @ORM\Id()
@@ -18,6 +19,7 @@ class Challanges
     private $id;
 
     /**
+     * @Assert\NotBlank()
      * @ORM\Column(type="string", length=255)
      */
     private $title;
@@ -28,22 +30,43 @@ class Challanges
     private $description;
 
     /**
+     * @Assert\NotBlank()
+     * @Assert\Type("\DateTime")
      * @ORM\Column(type="datetime")
      */
     private $startDate;
 
     /**
+     * @Assert\NotBlank()
+     * @Assert\Type("\DateTime")
      * @ORM\Column(type="datetime")
      */
     private $endDate;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\ChallangesGroups", inversedBy="challenges")
-     * @ORM\JoinTable(name="grouped_challenges")
+     * @Assert\NotBlank()
+     * @ORM\ManyToMany(targetEntity="App\Entity\User", inversedBy="challenges")
+     * @ORM\JoinTable(name="user_challenges")
      * @ORM\Column(type="string")
-     * @var
+     * @var ArrayCollection
      */
-    private $challengesGroups;
+    private $userChallenges;
+
+    /**
+     * @return mixed
+     */
+    public function getUserChallenges()
+    {
+        return $this->userChallenges;
+    }
+
+    /**
+     * @param mixed $userChallenges
+     */
+    public function setUserChallenges($userChallenges): void
+    {
+        $this->userChallenges = $userChallenges;
+    }
 
     /**
      * @return mixed
@@ -63,7 +86,7 @@ class Challanges
 
     /**
      * @param string $title
-     * @return Challanges
+     * @return Challenges
      */
     public function setTitle(string $title): self
     {
@@ -82,7 +105,7 @@ class Challanges
 
     /**
      * @param null|string $description
-     * @return Challanges
+     * @return Challenges
      */
     public function setDescription(?string $description): self
     {
@@ -101,7 +124,7 @@ class Challanges
 
     /**
      * @param \DateTimeInterface $startDate
-     * @return Challanges
+     * @return Challenges
      */
     public function setStartDate(\DateTimeInterface $startDate): self
     {
@@ -120,7 +143,7 @@ class Challanges
 
     /**
      * @param \DateTimeInterface $endDate
-     * @return Challanges
+     * @return Challenges
      */
     public function setEndDate(\DateTimeInterface $endDate): self
     {
@@ -131,6 +154,6 @@ class Challanges
 
     public function __construct()
     {
-        $this->challengesGroups = new ArrayCollection();
+        $this->userChallenges = new ArrayCollection();
     }
 }
