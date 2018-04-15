@@ -4,16 +4,7 @@ NFQ Akademija
 ============
 
 # Intro
-
-Sveiki! Tai yra Jūsų startinis projekto "template". 
-Šioje repositorijoje rasite Symfony `4.0.6` minimalų projekto paketą su jau paruoštais 
-visais reikalingais failais ir įrankiais darbui:
- 
-- Lokalaus development'o aplinka (docker) (PHP 7.2, MySql DB, Nginx)
-- Pradinis bundle (AppBundle) kartu su stiliaus failais.
-- Įdiegtas bootstrap
-- Asset'ų buildinimas (npm, yarn, sass)
-- Travis CI template
+[TRELLO Board](https://trello.com/b/Ozw5C2RW)
 
 
 # Paleidimo instrukcija
