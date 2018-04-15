@@ -28,16 +28,26 @@ class ChallangesGroups
      */
     private $challenges;
 
+    /**
+     * @return mixed
+     */
     public function getId()
     {
         return $this->id;
     }
 
+    /**
+     * @return null|string
+     */
     public function getGroupName(): ?string
     {
         return $this->groupName;
     }
 
+    /**
+     * @param string $groupName
+     * @return ChallangesGroups
+     */
     public function setGroupName(string $groupName): self
     {
         $this->groupName = $groupName;
