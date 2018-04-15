@@ -44,10 +44,11 @@ class Challanges
     private $endDate;
 
     /**
+     * @Assert\NotBlank()
      * @ORM\ManyToMany(targetEntity="App\Entity\ChallangesGroups", inversedBy="challenges")
      * @ORM\JoinTable(name="grouped_challenges")
      * @ORM\Column(type="string")
-     * @var
+     * @var ArrayCollection
      */
     private $challengesGroups;
 
