@@ -2,7 +2,6 @@
 
 namespace App\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -23,12 +22,6 @@ class ChallangesGroups
      * @ORM\Column(type="string", length=255)
      */
     private $groupName;
-
-    /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Challanges", mappedBy="challengesGroups")
-     * @ORM\Column(type="string")
-     */
-    private $challenges;
 
     /**
      * @return mixed
@@ -55,10 +48,5 @@ class ChallangesGroups
         $this->groupName = $groupName;
 
         return $this;
-    }
-
-    public function __construct()
-    {
-        $this->challenges = new ArrayCollection();
     }
 }
