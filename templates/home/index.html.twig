@@ -38,7 +38,7 @@
                             </svg>
                         </a>
                     </li>
-                    {% if is_granted('ROLE_USER') %}
+                    {% if is_granted('ROLE_ADMIN') %}
                     <li class="side-nav__item">
                         <a href="{{ path('new_challenge_group_form') }}" class="side-nav__link">
                             <svg class="side-nav__icon">
@@ -70,10 +70,13 @@
                 <h2 class="cta__book-now">
                     Meet your challenges now!
                 </h2>
-                <button class="btn">
-                    <span class="btn__visible">Getting Started</span>
-                    <span class="btn__invisible">New challenge</span>
-                </button>
+                <a href="{{ path('new_challenge_form') }}">
+                    <button class="btn">
+                        {# TODO 'New challenge' span should be in vertical-center (same position as 'Getting Started' #}
+                        <span class="btn__visible">Getting Started</span>
+                        <span class="btn__invisible">New challenge</span>
+                    </button>
+                </a>
             </div>
         </div>
     </div>
