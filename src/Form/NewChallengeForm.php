@@ -15,7 +15,7 @@ class NewChallengeForm extends AbstractType
     {
         $builder
             ->add('Title', TextType::class)
-            ->add('Description', TextType::class)
+            ->add('Description', TextType::class, ['required' => false])
             ->add('Start_date', DateType::class)
             ->add('End_date', DateType::class)
             ->add('save', SubmitType::class, ['label' => 'Create challenge'])
