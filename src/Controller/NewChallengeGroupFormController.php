@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\Entity\ChallangesGroups;
+use App\Entity\ChallengesGroups;
 use App\Form\NewChallengeGroupForm;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -23,7 +23,7 @@ class NewChallengeGroupFormController extends Controller
 
     public function new(Request $request)
     {
-        $challengeGroup = new ChallangesGroups();
+        $challengeGroup = new ChallengesGroups();
         $challengeGroup->setGroupName('');
 
         $form = $this->createForm(NewChallengeGroupForm::class, $challengeGroup);
@@ -39,7 +39,7 @@ class NewChallengeGroupFormController extends Controller
             $entityManager->flush();
 
             // TODO change route
-            return $this->redirectToRoute('home');
+//            return $this->redirectToRoute('home');
         }
 
         return $form->createView();

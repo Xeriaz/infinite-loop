@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\Entity\Challanges;
+use App\Entity\Challenges;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -26,12 +26,11 @@ class NewChallengeFormController extends Controller
 
     public function new(Request $request)
     {
-        $challenge = new Challanges();
+        $challenge = new Challenges();
         $challenge->setTitle('');
         $challenge->setDescription('');
         $challenge->setStartDate(new \DateTime('now'));
         $challenge->setEndDate(new \DateTime('now'));
-//        $challenge->setChallengesGroups();
 
         $form = $this->createForm(NewChallengeForm::class, $challenge);
 
@@ -46,7 +45,7 @@ class NewChallengeFormController extends Controller
             $entityManager->flush();
 
             // TODO change route
-            return $this->redirectToRoute('home');
+//            return $this->redirectToRoute('home');
         }
 
         return $form->createView();
