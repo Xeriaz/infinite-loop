@@ -2,25 +2,25 @@
 
 namespace App\Repository;
 
-use App\Entity\Challanges;
+use App\Entity\Challenges;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
- * @method Challanges|null find($id, $lockMode = null, $lockVersion = null)
- * @method Challanges|null findOneBy(array $criteria, array $orderBy = null)
- * @method Challanges[]    findAll()
- * @method Challanges[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Challenges|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Challenges|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Challenges[]    findAll()
+ * @method Challenges[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
 class ChallangesRepository extends ServiceEntityRepository
 {
     public function __construct(RegistryInterface $registry)
     {
-        parent::__construct($registry, Challanges::class);
+        parent::__construct($registry, Challenges::class);
     }
 
 //    /**
-//     * @return Challanges[] Returns an array of Challanges objects
+//     * @return Challenges[] Returns an array of Challenges objects
 //     */
     /*
     public function findByExampleField($value)
@@ -37,7 +37,7 @@ class ChallangesRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?Challanges
+    public function findOneBySomeField($value): ?Challenges
     {
         return $this->createQueryBuilder('c')
             ->andWhere('c.exampleField = :val')
