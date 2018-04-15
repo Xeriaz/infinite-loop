@@ -52,7 +52,7 @@
                     </div>
                 </nav>
             </header>
-
+            {# TODO there should be div.content and div.contentLeft, however if div.content is closed here, div.contentRight goes below div.contentLeft #}
         {% block body %}{% endblock %}
         {% block javascripts %}
             <script src="{{ asset('build/js/app.js') }}"></script>

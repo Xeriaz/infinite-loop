@@ -6,6 +6,8 @@
     {{ parent() }}
 {% endblock %}
 {% block body %}
+
+    {# TODO FIX THIS HACK div.content and div.contentLeft should be on base.html.twig #}
     <div class="content">
         <div class="contentLeft">
             <nav class="sidebar">
@@ -32,8 +34,8 @@
                     &copy; 2018 by Infinite Loop.
                 </div>
             </nav>
-
         </div>
+
         <div class="contentRight">
             <h1 class="mainHeading">Behind Every <span class="sp-1">Success</span><br>There is a <span class="sp-2">Cactus</span></h1>
             <div class="cta">
@@ -45,8 +47,6 @@
                     <span class="btn__invisible">New challenge</span>
                 </button>
             </div>
-
         </div>
-
     </div>
 {% endblock %}
