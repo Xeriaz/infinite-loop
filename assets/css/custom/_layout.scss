@@ -1,0 +1,23 @@
+.header {
+  font-size: 1.4rem;
+  height: 7rem;
+  background-color: #fff;
+  border-bottom: var(--border-light);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 10;
+
+  @media only screen and (max-width: $bp-large) {
+    flex-wrap: wrap;
+    height: 11rem;
+    align-content: space-between;
+    padding-top: 1.5rem;
+
+  }
+
+}
