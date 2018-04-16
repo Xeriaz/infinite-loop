@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\ChallengesGroups;
 use App\Form\NewChallengeGroupForm;
+use Symfony\Component\Form\FormView;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -21,7 +22,11 @@ class NewChallengeGroupFormController extends Controller
         ]);
     }
 
-    public function new(Request $request)
+    /**
+     * @param Request $request
+     * @return \Symfony\Component\Form\FormView
+     */
+    public function new(Request $request): FormView
     {
         $challengeGroup = new ChallengesGroups();
         $challengeGroup->setGroupName('');

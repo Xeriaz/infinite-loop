@@ -10,6 +10,10 @@ use Symfony\Component\Form\FormBuilderInterface;
 
 class NewChallengeGroupForm extends AbstractType
 {
+    /**
+     * @param FormBuilderInterface $builder
+     * @param array $options
+     */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder

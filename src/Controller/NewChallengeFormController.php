@@ -6,6 +6,7 @@ use App\Entity\Challenges;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\FormView;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -24,7 +25,11 @@ class NewChallengeFormController extends Controller
         ]);
     }
 
-    public function new(Request $request)
+    /**
+     * @param Request $request
+     * @return \Symfony\Component\Form\FormView
+     */
+    public function new(Request $request): FormView
     {
         $challenge = new Challenges();
         $challenge->setTitle('');
