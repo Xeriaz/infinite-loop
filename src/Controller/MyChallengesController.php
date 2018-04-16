@@ -21,7 +21,6 @@ class MyChallengesController extends Controller
         ]);
     }
 
-
     /**
      * @return array
      */
