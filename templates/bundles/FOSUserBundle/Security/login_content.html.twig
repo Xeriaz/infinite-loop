@@ -4,7 +4,7 @@
     <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
 {% endif %}
 
-<h1>Sign in</h1>
+
 <form action="{{ path("fos_user_security_check") }}" method="post">
     {% if csrf_token %}
         <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
@@ -21,3 +21,32 @@
 
     <input class="btn btn-primary" type="submit" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans }}" />
 </form>
+
+
+
+<div class="container">
+    <div class="modal fade" id="myModal">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h1>Sign in</h1>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    Modal body..
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>
