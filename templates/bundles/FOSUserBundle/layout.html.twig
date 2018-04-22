@@ -1,8 +1,13 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <div class="container">
 
-                {% block fos_user_content %}{% endblock %}
-    </div>
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-sm-6 col-md-4 ">
+                    {% block fos_user_content %}{% endblock %}
+                </div>
+            </div>
+        </div>
+
 {% endblock %}
