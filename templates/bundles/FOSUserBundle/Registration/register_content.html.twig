@@ -18,7 +18,7 @@
         {{ form_errors(form.plainPassword.first) }}
 
         {{ form_widget(form.plainPassword.second, { 'attr': {'class': 'form-control', 'placeholder': 'form.password_confirmation'|trans } }) }}
-        {{ form_errors(form.plainPassword.second) }}       
+        {{ form_errors(form.plainPassword.second) }}
 
 
 
@@ -29,7 +29,7 @@
 
     </div>
 </div>
-<a class="text-center new-account" href="{{ path('fos_user_registration_register') }}">Create an account </a>
+<a class="text-center new-account" href="{{ path('fos_user_security_login') }}">Already registered? Login </a>
 
 
 {{ form_end(form) }}
