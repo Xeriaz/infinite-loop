@@ -55,8 +55,7 @@
                     </div>
                 </nav>
             </header>
-            {# FIXME! I added this to avoid content overlap with header#}
-            <div class="spacingHack" style="height: 8rem"></div>
+            <div class="header-fluid"></div>
             {# TODO there should be div.content and div.contentLeft, however if div.content is closed here, div.contentRight goes below div.contentLeft #}
         {% block body %}{% endblock %}
         {% block javascripts %}
