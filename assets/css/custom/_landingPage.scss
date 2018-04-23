@@ -1,0 +1,105 @@
+
+
+$color-grey-light-1: #f7f7f7;
+$color-grey-light-2: #eee;
+
+
+
+
+.wrapperLanding {
+  padding: 2em;
+  height: 100vh;
+}
+
+.mainHeading {
+  font-size: 4.8em;
+  font-weight: 100;
+  line-height: 1.2em;
+  text-align: center;
+  color: var(--color-grey-dark-1);
+
+  .sp-1 {
+    font-weight: 900;
+    color: var(--color-primary);
+  }
+
+  .sp-2 {
+    font-weight: 900;
+    color: var(--color-green-normal);
+  }
+}
+
+
+.landingPage {
+  height: 100%;
+
+  background-image: linear-gradient(
+                  to right bottom,
+                  rgba($color-grey-light-1, .8),
+                  rgba($color-grey-light-2, .8)),
+  url("../public/images/hero-small.jpg");
+  background-size: cover;
+  background-position: center;
+  position: relative;
+
+
+  @media (min-resolution: 192dpi) and (min-width: 37.5em),
+  (-webkit-min-device-pixel-ratio: 2) and (min-width: 37.5em),
+  (min-width: 125em) {
+    background-image: linear-gradient(
+                    to right bottom,
+                    rgba($color-grey-light-1, .8),
+                    rgba($color-grey-light-2, .8)),
+    url("../public/images/hero.jpg");
+  }
+
+  &__text-box {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    width: 80%;
+  }
+}
+
+//-----------CALL TO ACTION------------
+
+.cta {
+  padding: 3.5rem 0;
+  text-align: center;
+
+  @media only screen and (max-width: $bp-medium){
+    padding: 2.5rem 0;
+  }
+
+  @media only screen and (max-width: $bp-smallest){
+    padding: 2rem 0;
+  }
+
+  &__book-now {
+    color: var(--color-grey-dark-1);
+    font-size: 2rem;
+    text-transform: uppercase;
+    font-weight: 300;
+    margin-bottom: 2.5rem;
+
+    @media only screen and (max-width: $bp-small){
+      font-size: 1.75rem;
+    }
+
+    @media only screen and (max-width: $bp-smallest){
+      font-size: 1.6rem;
+      margin-bottom: 2rem;
+    }
+  }
+}
+
+
+
+
+
+
+
+
+
