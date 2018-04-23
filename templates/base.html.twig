@@ -11,51 +11,8 @@
         {% block canonical_meta %}{% endblock %}
     </head>
     <body>
-            <header class="header">
-                <a href="{{ path('home') }}">
-                    <img class="iL-logoImg" src="{{ asset('images/logo.png') }}" alt="logo"/>
-                </a>
-                <form action="#" class="search">
-                    <input type="text" class="search__input" placeholder="Search Challenges">
-                    <button class="search__button">
-                        <svg class="search__icon">
-                            <use xlink:href="{{ asset('images/sprite.svg#icon-magnifying-glass') }}"></use>
-                        </svg>
-                    </button>
-                </form>
-                <nav class="user-nav">
-                    {% if is_granted('ROLE_USER') %}
-                        <div class="user-nav__icon-box">
-                            <svg class="user-nav__icon">
-                                <use xlink:href="{{ asset('images/sprite.svg#icon-bookmark') }}"></use>
-                            </svg>
-                            <span class="user-nav__notification">7</span>
-                        </div>
-                        {#<div class="user-nav__icon-box">#}
-                            {#<svg class="user-nav__icon">#}
-                                {#<use xlink:href="{{ asset('images/sprite.svg#icon-chat') }}"></use>#}
-                            {#</svg>#}
-                            {#<span class="user-nav__notification">13</span>#}
-                        {#</div>#}
-                        <a href="{{ path('fos_user_profile_show') }}">
-                            <div class="user-nav__user">
-                                <img src="{{ asset('images/user.jpg') }}" alt="user photo" class="user-nav__user-photo">
-                                <span class="user-nav__user-name">{{ app.user.username }}</span>
-                            </div>
-                        </a>
-                    {% endif %}
+        {% include 'includes/header.html.twig' %}
 
-                    <div class="user-nav__login">
-                        {% if is_granted('ROLE_USER') %}
-                            <a class="btn-inline" href="{{ path('fos_user_security_logout') }}">Logout</a>
-                        {% else %}
-                            <a class="btn-inline mr-3" href="{{ path('fos_user_registration_register') }}">Sign Up</a>
-                            <a class="btn-inline" href="{{ path('fos_user_security_login') }}">Login</a>
-                        {% endif %}
-                    </div>
-                </nav>
-            </header>
-            <div class="header-fluid"></div>
             {# TODO there should be div.content and div.contentLeft, however if div.content is closed here, div.contentRight goes below div.contentLeft #}
         {% block body %}{% endblock %}
         {% block javascripts %}
