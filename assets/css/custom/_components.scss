@@ -312,6 +312,7 @@
   line-height: 1.2em;
   margin-bottom: 2rem;
   margin-top: 2rem;
+  text-align: center;
 
   .sp-1 {
     font-weight: 900;
@@ -390,7 +391,11 @@
   }
 
   &:hover {
-    background-image: linear-gradient(to left, var(--color-primary-light), var(--color-primary))
+    background-image: linear-gradient(to left, var(--color-primary-light), var(--color-primary));
+  }
+
+  &:active {
+    background-image: linear-gradient(to left, var(--color-primary-light), var(--color-primary))!important;
   }
 
   &:hover &__visible {
@@ -398,7 +403,7 @@
   }
 
   &:hover &__invisible {
-    top: 0;
+    top: .6rem;
   }
 
   &:focus {

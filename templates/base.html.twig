@@ -11,12 +11,39 @@
         {% block canonical_meta %}{% endblock %}
     </head>
     <body>
+
+    {% if is_granted('ROLE_USER') %}
         {% include 'includes/header.html.twig' %}
 
-            {# TODO there should be div.content and div.contentLeft, however if div.content is closed here, div.contentRight goes below div.contentLeft #}
-        {% block body %}{% endblock %}
+        <div class="content">
+            {% include 'includes/sideNav.html.twig' %}
+            {% block content %}{% endblock %}
+        </div>
+
         {% block javascripts %}
-            <script src="{{ asset('build/js/app.js') }}"></script>
+        <script src="{{ asset('build/js/app.js') }}"></script>
         {% endblock %}
+
+    {% else %}
+
+        <div class="wrapperLanding">
+            <section class="landingPage">
+
+                {#<a class="btn-inline mr-3" href="{{ path('fos_user_registration_register') }}">Sign Up</a>#}
+                {#<a class="btn-inline" href="{{ path('fos_user_security_login') }}">Login</a>#}
+                {% block body %}{% endblock %}
+
+
+            </section>
+        </div>
+
+
+
+
+
+    {% endif %}
+
+
+
     </body>
 </html>

@@ -33,6 +33,7 @@
 
 .content {
   display: flex;
+  height: calc(100vh - 7em);
 
   @media only screen and (max-width: $bp-medium){
     flex-direction: column;
@@ -45,10 +46,16 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 90vh;
+  height: 100%;
 }
 
 .contentRight {
-  padding: 10rem 10rem;
+  height: 100%;
+  width: 100%;
+
+}
+
+.sf-toolbar {
+  position: absolute;
 }
 
