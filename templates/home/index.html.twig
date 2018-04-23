@@ -2,72 +2,8 @@
 
 {% block title %}Homepage - {{ parent() }}{% endblock %}
 
-{% block stylesheets %}
-    {{ parent() }}
-    {# FIXME .spacingHack from base.twig.html push .contentLeft lower, this is workaround to push it up#}
-    <style>
-        .content {
-            margin-top: -1rem;
-        }
 
-        .contentLeft {
-            height: 100vh;
-        }
-
-        body {
-            overflow-y: hidden;
-        }
-    </style>
-{% endblock %}
 {% block body %}
-
-    {# TODO FIX THIS HACK div.content and div.contentLeft should be on base.html.twig #}
-    <div class="content">
-        <div class="contentLeft">
-            <nav class="sidebar">
-                <ul class="side-nav">
-                    <li class="side-nav__item side-nav__item--active">
-                        <a href="{{ path('home') }}" class="side-nav__link">
-                            <svg class="side-nav__icon">
-                                <use xlink:href="{{ asset('images/sprite.svg#icon-home') }}"></use>
-                                <span>Home</span>
-                            </svg>
-                        </a>
-                    </li>
-                    <li class="side-nav__item">
-                        <a href="{{ path('new_challenge_form') }}" class="side-nav__link">
-                            <svg class="side-nav__icon">
-                                <use xlink:href="{{ asset('images/sprite.svg#icon-home') }}"></use>
-                                <span>Create challenge</span>
-                            </svg>
-                        </a>
-                    </li>
-                    {% if is_granted('ROLE_ADMIN') %}
-                    <li class="side-nav__item">
-                        <a href="{{ path('new_challenge_group_form') }}" class="side-nav__link">
-                            <svg class="side-nav__icon">
-                                <use xlink:href="{{ asset('images/sprite.svg#icon-home') }}"></use>
-                                <span>Create challenge group</span>
-                            </svg>
-                        </a>
-                    </li>
-                    {% endif %}
-                    <li class="side-nav__item">
-                        <a href="{{ path('my_challenges') }}" class="side-nav__link">
-                            <svg class="side-nav__icon">
-                                <use xlink:href="{{ asset('images/sprite.svg#icon-aircraft') }}"></use>
-                                <span>My Challenges</span>
-                            </svg>
-                        </a>
-                    </li>
-                </ul>
-
-                <div class="legal">
-                    &copy; 2018 by Infinite Loop.
-                </div>
-            </nav>
-        </div>
-
         <div class="contentRight">
             <h1 class="mainHeading">Behind Every <span class="sp-1">Success</span><br>There is a <span class="sp-2">Cactus</span></h1>
             <div class="cta">
@@ -76,12 +12,11 @@
                 </h2>
                 <a href="{{ path('new_challenge_form') }}">
                     <button class="btn">
-                        {# TODO 'New challenge' span should be in vertical-center (same position as 'Getting Started' #}
                         <span class="btn__visible">Getting Started</span>
                         <span class="btn__invisible">New challenge</span>
                     </button>
                 </a>
             </div>
         </div>
-    </div>
+
 {% endblock %}
