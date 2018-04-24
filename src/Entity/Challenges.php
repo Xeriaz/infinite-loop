@@ -53,6 +53,12 @@ class Challenges
     private $userChallenges;
 
     /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Milestone", mappedBy="challenge")
+     * @var ArrayCollection
+     */
+    private $milestones;
+
+    /**
      * @return mixed
      */
     public function getUserChallenges()
@@ -155,5 +161,6 @@ class Challenges
     public function __construct()
     {
         $this->userChallenges = new ArrayCollection();
+        $this->milestones = new ArrayCollection();
     }
 }
