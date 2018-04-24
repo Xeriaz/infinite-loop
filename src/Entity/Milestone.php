@@ -45,6 +45,22 @@ class Milestone
     /**
      * @return mixed
      */
+    public function getChallenge()
+    {
+        return $this->challenge;
+    }
+
+    /**
+     * @param mixed $challenge
+     */
+    public function setChallenge($challenge): void
+    {
+        $this->challenge = $challenge;
+    }
+
+    /**
+     * @return mixed
+     */
     public function getId()
     {
         return $this->id;
