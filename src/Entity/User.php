@@ -32,6 +32,22 @@ class User extends BaseUser
      */
     private $challenges = [];
 
+    /**
+     * @return mixed
+     */
+    public function getChallenges()
+    {
+        return $this->challenges;
+    }
+
+    /**
+     * @param mixed $challenges
+     */
+    public function setChallenges($challenges): void
+    {
+        $this->challenges = $challenges;
+    }
+
     public function __construct()
     {
         $this->challenges = new ArrayCollection();

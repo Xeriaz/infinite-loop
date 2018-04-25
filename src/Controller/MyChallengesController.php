@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Challenges;
+use App\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -17,19 +18,17 @@ class MyChallengesController extends Controller
     {
         return $this->render('my_challenges/index.html.twig', [
             'controller_name' => 'MyChallengesController',
-            'challenges' => $this->getChallenges()
+            'challenges' => $this->getUserChallenges()
         ]);
     }
 
     /**
-     * @return array
+     * @return object
      */
-    public function getChallenges(): array
+    public function getUserChallenges(): object
     {
-        $challenges = $this->getDoctrine()
-            ->getRepository(Challenges::class)
-            ->findAll();
-
+        $user = $this->getUser();
+        $challenges = $user->getChallenges();
         return $challenges;
     }
 }
