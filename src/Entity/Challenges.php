@@ -47,7 +47,6 @@ class Challenges
      * @Assert\NotBlank()
      * @ORM\ManyToMany(targetEntity="App\Entity\User", inversedBy="challenges")
      * @ORM\JoinTable(name="user_challenges")
-     * @ORM\Column(type="string")
      * @var ArrayCollection
      */
     private $userChallenges;
