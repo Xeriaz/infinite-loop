@@ -28,10 +28,9 @@ class User extends BaseUser
     }
 
     /**
-     * @ORM\ManyToMany(targetEntity="Challenges.php", mappedBy="userChallenges")
-     * @ORM\Column(type="string")
+     * @ORM\ManyToMany(targetEntity="Challenges", mappedBy="userChallenges")
      */
-    private $challenges;
+    private $challenges = [];
 
     public function __construct()
     {

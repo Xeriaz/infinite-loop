@@ -58,6 +58,22 @@ class Challenges
     private $milestones;
 
     /**
+     * @return ArrayCollection
+     */
+    public function getMilestones(): ArrayCollection
+    {
+        return $this->milestones;
+    }
+
+    /**
+     * @param ArrayCollection $milestones
+     */
+    public function setMilestones(ArrayCollection $milestones): void
+    {
+        $this->milestones = $milestones;
+    }
+
+    /**
      * @return mixed
      */
     public function getUserChallenges()

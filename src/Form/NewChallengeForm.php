@@ -3,6 +3,9 @@
 namespace App\Form;
 
 
+use App\Entity\ChallengesGroups;
+use App\Entity\Milestone;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -20,6 +23,13 @@ class NewChallengeForm extends AbstractType
         $builder
             ->add('Title', TextType::class)
             ->add('Description', TextType::class, ['required' => false])
+//            TODO add challengesGroups
+//            ->add('challengesGroups', EntityType::class, [
+//                'class' => ChallengesGroups::class,
+//                'choice_label' => 'group_name',
+//                'label' => 'Type',
+//                'multiple' => true,
+//            ])
             ->add('Start_date', DateType::class)
             ->add('End_date', DateType::class)
             ->add('save', SubmitType::class, ['label' => 'Create challenge'])
