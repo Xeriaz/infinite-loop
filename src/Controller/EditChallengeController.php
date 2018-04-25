@@ -59,11 +59,12 @@ class EditChallengeController extends Controller
             $entityManager->flush();
 
             // TODO change route
-            return $this->redirectToRoute('my_challenges');
+//            return $this->redirectToRoute('my_challenges');
         }
 
         return $form->createView();
     }
+
     /**
      * @param int $id
      * @Route("/delete/challenge/{id}", name="delete_challenge")
