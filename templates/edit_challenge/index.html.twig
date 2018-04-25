@@ -7,4 +7,6 @@
     {{ form_start(form) }}
     {{ form_widget(form) }}
     {{ form_end(form) }}
+
+    <a href="{{ path('delete_challenge', {'id': app.request.get('id')}) }}" class="btn btn-danger">Remove this challenge!</a>
 {% endblock %}

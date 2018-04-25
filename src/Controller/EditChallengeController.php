@@ -34,7 +34,7 @@ class EditChallengeController extends Controller
 
         if (!$challengeData) {
             throw $this->createNotFoundException(
-                'No product found for id '.$id
+                'No product found for id ' . $id
             );
         }
 
@@ -43,6 +43,7 @@ class EditChallengeController extends Controller
 
     /**
      * @param Request $request
+     * @param int $id
      * @return \Symfony\Component\Form\FormView
      */
     public function updateChallenge(Request $request, int $id): FormView
@@ -53,15 +54,29 @@ class EditChallengeController extends Controller
 
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid())
-        {
+        if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->flush();
 
             // TODO change route
-//            return $this->redirectToRoute('home');
+            return $this->redirectToRoute('my_challenges');
         }
 
         return $form->createView();
+    }
+    /**
+     * @param int $id
+     * @Route("/delete/challenge/{id}", name="delete_challenge")
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function removeChallenge(int $id)
+    {
+        $challenge = $this->getChallengeData($id);
+
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->remove($challenge);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('my_challenges');
     }
 }
