@@ -58,6 +58,28 @@ class Challenges
     private $milestones;
 
     /**
+     * @ORM\OneToMany(targetEntity="App\Entity\ChallengesGroups", mappedBy="challenge")
+     * @var ArrayCollection
+     */
+    private $challengeGroup;
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getChallengeGroup(): ArrayCollection
+    {
+        return $this->challengeGroup;
+    }
+
+    /**
+     * @param ArrayCollection $challengeGroup
+     */
+    public function setChallengeGroup(ArrayCollection $challengeGroup): void
+    {
+        $this->challengeGroup = $challengeGroup;
+    }
+
+    /**
      * @return ArrayCollection
      */
     public function getMilestones(): ArrayCollection
@@ -177,5 +199,6 @@ class Challenges
     {
         $this->userChallenges = new ArrayCollection();
         $this->milestones = new ArrayCollection();
+        $this->challengeGroup = new ArrayCollection();
     }
 }

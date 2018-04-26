@@ -24,6 +24,28 @@ class ChallengesGroups
     private $groupName;
 
     /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Challenges", inversedBy="challengeGroup")
+     * @ORM\JoinColumn(name="challenge_id", referencedColumnName="id")
+     */
+    private $challenge;
+
+    /**
+     * @return mixed
+     */
+    public function getChallenge()
+    {
+        return $this->challenge;
+    }
+
+    /**
+     * @param mixed $challenge
+     */
+    public function setChallenge($challenge): void
+    {
+        $this->challenge = $challenge;
+    }
+
+    /**
      * @return mixed
      */
     public function getId()
