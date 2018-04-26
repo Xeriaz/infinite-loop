@@ -24,12 +24,12 @@ class NewChallengeForm extends AbstractType
             ->add('Title', TextType::class)
             ->add('Description', TextType::class, ['required' => false])
 //            TODO add challengesGroups
-//            ->add('challengesGroups', EntityType::class, [
-//                'class' => ChallengesGroups::class,
-//                'choice_label' => 'group_name',
-//                'label' => 'Type',
-//                'multiple' => true,
-//            ])
+            ->add('challengeGroup', EntityType::class, [
+                'class' => ChallengesGroups::class,
+                'choice_label' => 'group_name',
+                'label' => 'Type',
+                'multiple' => true,
+            ])
             ->add('Start_date', DateType::class)
             ->add('End_date', DateType::class)
             ->add('save', SubmitType::class, ['label' => 'Create challenge'])
