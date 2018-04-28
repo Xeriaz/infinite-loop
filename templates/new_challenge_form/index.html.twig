@@ -6,8 +6,8 @@
     <div class="newChallenge__wrapper">
         <div class="formBlock">
             <div class="formHead">
-                <h1 class="formHeading">New Challenge:</h1>
-                <p class="formText">Lorem ipsum dolor sit amet.</p>
+                <h1 class="formTitle mb-0 text-left">Start Challenge</h1>
+                <p class="formText mb-0">If you can dream it, you can do it!</p>
             </div>
             {{ form_start(form, {'method': 'post', 'action': path('new_challenge_form'), 'attr': {'class': 'new_challenge_form'}}) }}
 
@@ -18,17 +18,17 @@
                         {{ form_label(form.Title) }}
                     </div>
                     <div class="formControl">
-                        {{ form_widget(form.Title, { 'attr': {'class': 'formInput', 'autofocus': 'true' } }) }}
+                        {{ form_widget(form.Title, { 'attr': {'class': 'formInput','autofocus': 'true','placeholder':'Give a title for your challenge' } }) }}
                         {{ form_errors(form.Title) }}
                     </div>
                 </div>
 
-                <div class="formRow">
+                <div class="formRow mb-3">
                     <div class="formLabel">
                         {{ form_label(form.Description) }}
                     </div>
                     <div class="formControl">
-                        {{ form_widget(form.Description, { 'attr': {'class': 'formInput' } }) }}
+                        {{ form_widget(form.Description, { 'attr': {'class': 'formInput','placeholder':'Short description (*optional)' } }) }}
                         {{ form_errors(form.Description) }}
                     </div>
                 </div>
@@ -54,7 +54,7 @@
 
             </div>
 
-            <div class="formFooter">
+            <div class="formFooter ">
                 <input class="btn btn-lg btn-block mb-2" type="submit" id="_submit" name="_submit"
                        value="{{ 'Start' }}"/>
 
