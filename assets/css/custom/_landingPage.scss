@@ -5,29 +5,57 @@ $color-grey-light-2: #eee;
 
 
 
-
 .wrapperLanding {
-  padding: 2em;
   height: 100vh;
-}
 
-.mainHeading {
-  font-size: 4.8em;
-  font-weight: 100;
-  line-height: 1.2em;
-  text-align: center;
-  color: var(--color-grey-dark-1);
+  .login {
+    width: 3rem;
+    height: 3rem;
+    position: absolute;
+    top: 3rem;
+    right: 3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: transform 150ms ease-in-out ;
 
-  .sp-1 {
-    font-weight: 900;
-    color: var(--color-primary);
+    &:hover .loginIcon {
+      transform: translateY(-2px);
+      box-shadow: 0 0.7rem 2rem rgba(0,0,0, .2);
+    }
+
+    &:active .loginIcon {
+      transform: translateY(-1px);
+      box-shadow: 0 0.5rem 2rem rgba(0,0,0, .2);
+    }
+
   }
 
-  .sp-2 {
-    font-weight: 900;
-    color: var(--color-green-normal);
+  .loginIcon{
+    width: auto;
+    height: 2.2rem;
+    display: block;
+    pointer-events: none;
+
+  }
+
+
+
+  .logo {
+    display: block;
+    width: auto;
+    height: 3rem;
+    position: absolute;
+    top: 3rem;
+    left: 3rem;
+  }
+
+  .logoImg {
+    height: 100%;
+    width: auto;
   }
 }
+
 
 
 .landingPage {
@@ -61,6 +89,27 @@ $color-grey-light-2: #eee;
     text-align: center;
     width: 80%;
   }
+
+
+  .mainHeading {
+    font-size: 4.8em;
+    font-weight: 100;
+    line-height: 1.2em;
+    text-align: center;
+    color: var(--color-grey-dark-1);
+
+    .sp-1 {
+      font-weight: 900;
+      color: var(--color-primary);
+    }
+
+    .sp-2 {
+      font-weight: 900;
+      color: var(--color-green-normal);
+    }
+  }
+
+
 }
 
 //-----------CALL TO ACTION------------
