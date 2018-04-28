@@ -1,10 +1,46 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello {{ controller_name }}!{% endblock %}
+{% block title %}Hello {{ app.user.username }} - start new challenge!{% endblock %}
 
 {% block content %}
-    <h1>New Challenge:</h1>
-    {{ form_start(form) }}
-    {{ form_widget(form) }}
-    {{ form_end(form) }}
+<div class="newChallenge__wrapper">
+    <div class="container">
+        <h1 class="mainHeading">New Challenge:</h1>
+        {{ form_start(form) }}
+        {{ form_widget(form) }}
+        {{ form_end(form) }}
+    </div>
+</div>
+
+
+
 {% endblock %}
+
+
+
+{#<div class="container">#}
+
+    {#{{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register'}}) }}#}
+
+    {#<div class="form-signin" id="fos_user_registration_form">#}
+        {#{{ form_widget(form.email, { 'attr': {'class': 'form-control', 'autofocus': 'true','placeholder': 'form.email'|trans } }) }}#}
+        {#{{ form_errors(form.email) }}#}
+
+        {#{{ form_widget(form.username, { 'attr': {'class': 'form-control', 'placeholder': 'form.username'|trans } }) }}#}
+        {#{{ form_errors(form.username) }}#}
+
+        {#{{ form_widget(form.plainPassword.first, { 'attr': {'class': 'form-control', 'placeholder': 'form.password'|trans } }) }}#}
+        {#{{ form_errors(form.plainPassword.first) }}#}
+
+        {#{{ form_widget(form.plainPassword.second, { 'attr': {'class': 'form-control', 'placeholder': 'form.password_confirmation'|trans } }) }}#}
+        {#{{ form_errors(form.plainPassword.second) }}#}
+
+
+
+        {#<input class="btn btn-lg btn-block mb-2" type="submit" id="_submit" name="_submit"#}
+               {#value="{{ 'registration.submit'|trans }}"/>#}
+
+        {#<a href="#" class="float-right need-help">Need help? </a><span class="clearfix"></span>#}
+
+    {#</div>#}
+{#</div>#}
