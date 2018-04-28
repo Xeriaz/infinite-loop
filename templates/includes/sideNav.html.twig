@@ -1,36 +1,41 @@
 <div class="contentLeft">
     <nav class="sidebar">
+        {% set route = app.request.attributes.get('_route') %}
         <ul class="side-nav">
-            <li class="side-nav__item side-nav__item--active">
+            <li {{ route ==  'home' ? 'class="side-nav__item isClicked"' }}
+                    class="side-nav__item">
                 <a href="{{ path('home') }}" class="side-nav__link">
                     <svg class="side-nav__icon">
-                        <use xlink:href="{{ asset('images/sprite.svg#icon-home') }}"></use>
+                        <use xlink:href="{{ asset('images/sprite.svg#icon-meter') }}"></use>
                         <span>Home</span>
                     </svg>
                 </a>
             </li>
-            <li class="side-nav__item">
+            <li {{ route ==  'new_challenge_form' ? 'class="side-nav__item isClicked"' }}
+                    class="side-nav__item">
                 <a href="{{ path('new_challenge_form') }}" class="side-nav__link">
                     <svg class="side-nav__icon">
-                        <use xlink:href="{{ asset('images/sprite.svg#icon-home') }}"></use>
-                        <span>Create challenge</span>
+                        <use xlink:href="{{ asset('images/sprite.svg#icon-add-outline') }}"></use>
+                        <span>Create</span>
                     </svg>
                 </a>
             </li>
             {% if is_granted('ROLE_ADMIN') %}
-                <li class="side-nav__item">
+                <li {{ route ==  'new_challenge_group_form' ? 'class="side-nav__item isClicked"' }}
+                        class="side-nav__item">
                     <a href="{{ path('new_challenge_group_form') }}" class="side-nav__link">
                         <svg class="side-nav__icon">
-                            <use xlink:href="{{ asset('images/sprite.svg#icon-home') }}"></use>
-                            <span>Create challenge group</span>
+                            <use xlink:href="{{ asset('images/sprite.svg#icon-add-outline') }}"></use>
+                            <span>Add group</span>
                         </svg>
                     </a>
                 </li>
             {% endif %}
-            <li class="side-nav__item">
+            <li {{ route ==  'my_challenges' ? 'class="side-nav__item isClicked"' }}
+                    class="side-nav__item">
                 <a href="{{ path('my_challenges') }}" class="side-nav__link">
                     <svg class="side-nav__icon">
-                        <use xlink:href="{{ asset('images/sprite.svg#icon-aircraft') }}"></use>
+                        <use xlink:href="{{ asset('images/sprite.svg#icon-list') }}"></use>
                         <span>My Challenges</span>
                     </svg>
                 </a>
