@@ -10,6 +10,11 @@
                     <div class="card-body body-bg d-flex align-items-center">
                         <div class="card-body__textBlock">
                             <h4 class="card-title z-index--10">{{ challenge.title }}</h4>
+                            {% for challengeGroup in challenge.challengeGroup %}
+                                <span class="label label-danger" style="color:#ff0000;font-weight: bold">
+                                    {{ challengeGroup.groupName }}
+                                </span>
+                            {% endfor %}
                             <p class="card-text z-index--10">{{ challenge.description }}</p>
                         </div>
                         <div class="card-body__dateBlock text-right">
@@ -17,49 +22,53 @@
                             <div class="z-index--10"><span class="mr-2">End:</span>{{ challenge.endDate|date('Y-m-d') }}</div>
                         </div>
                     </div>
+
+                    {% set completedMilestones = 0 %}
+                    {% set milestonesCount = 0 %}
                     <ul class="list-group list-group-flush">
-                        <li class="list-group-item d-flex align-items-center">
-                            <h5 class="card-subtitle customCard-subtitle">Millestone1 nusipirkti ispanu kalbos zodyna</h5>
-                            <div class="milestone-statusBlock">
-                                <div class="date-subtitle"><span class="d-block">Due Date</span> {{ challenge.endDate|date('Y-m-d') }}</div>
-                                <select class="milestone-statusSelect" name="milestone-status" id="milestone-status">
-                                    <option value="ongoing">On Progress</option>
-                                    <option value="done"> Done!!</option>
-                                    <option value="failed">Failed</option>
-                                </select>
-                            </div>
-                        </li>
-                        <li class="list-group-item d-flex align-items-center">
-                            <h5 class="card-subtitle customCard-subtitle">Millestone2 ismokti 50 zodziu</h5>
-                            <div class="milestone-statusBlock">
-                                <div class="date-subtitle"><span class="d-block">Due Date</span> {{ challenge.endDate|date('Y-m-d') }}</div>
-                                <select class="milestone-statusSelect" name="milestone-status" id="milestone-status">
-                                    <option value="ongoing">On Progress</option>
-                                    <option value="done"> Done!!</option>
-                                    <option value="failed">Failed</option>
-                                </select>
-                            </div>
-                        </li>
-                        <li class="list-group-item d-flex align-items-center">
-                            <h5 class="card-subtitle customCard-subtitle">Millestone3 uzkalbinti ispana</h5>
-                            <div class="milestone-statusBlock">
-                                <div class="date-subtitle"><span class="d-block">Due Date</span> {{ challenge.endDate|date('Y-m-d') }}</div>
-                                <select class="milestone-statusSelect" name="milestone-status" id="milestone-status">
-                                    <option value="ongoing">On Progress</option>
-                                    <option value="done"> Done!!</option>
-                                    <option value="failed">Failed</option>
-                                </select>
-                            </div>
-                        </li>
+                        {% for milestone in challenge.milestones %}
+                            {% if milestone.status and not milestone.deleted%}
+                                {% set completedMilestones = completedMilestones + 1 %}
+                            {% endif %}
+                            {% if not milestone.deleted %}
+                                {% set milestonesCount = milestonesCount + 1 %}
+
+                            <li class="list-group-item d-flex align-items-center">
+                                <h5 class="card-subtitle customCard-subtitle">{{ milestone.title }}</h5>
+                                <div class="milestone-statusBlock">
+                                    <div class="date-subtitle">
+                                        <span class="d-block">Completed on: <br>
+                                            {% if milestone.completedOn == null %}
+                                                TBD
+                                            {% else %}
+                                                {{ milestone.completedOn|date('Y-m-d') }}
+                                            {% endif %}
+                                        </span>
+                                    </div>
+
+                                    {% if not milestone.status %}
+                                        <a href="{{ path('complete_milestone', {'id': milestone.id}) }}">Completed</a>
+                                        <a href="{{ path('remove_milestone', {'id': milestone.id}) }}">Remove</a>
+                                    {% endif %}
+                                    {#<select class="milestone-statusSelect" name="milestone-status" id="milestone-status">#}
+                                        {#<option value="ongoing">On Progress</option>#}
+                                        {#<option value="done"> Done!!</option>#}
+                                        {#<option value="failed">Failed</option>#}
+                                    {#</select>#}
+                                </div>
+                            </li>
+                            {% endif %}
+                        {% endfor %}
                     </ul>
                     <div class="card-footer">
                         <div class="card-footer__control">
-                            <a href="#" class="btn-inline">Remove</a>
-                            <a href="#" class="btn-inline">Edit</a>
+                            <a href="{{ path('delete_challenge', {'id': challenge.id}) }}" class="btn-inline">Remove</a>
+                            <a href="{{ path('edit_challenge', {'id': challenge.id }) }}" class="btn-inline">Edit</a>
+                            <a href="{{ path('milestone', {'id': challenge.id}) }}" class="btn-inline">Add Milestone</a>
                             <a href="#" class="btn-inline">Close</a>
                         </div>
                         <div class="card-footer__statusBlock">
-                            <span>Progress:</span> 1/3
+                            <span>Progress: {{ completedMilestones }} / {{ milestonesCount }} </span>
                         </div>
                     </div>
                 </div>
