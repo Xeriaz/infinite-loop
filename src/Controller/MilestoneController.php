@@ -27,8 +27,7 @@ class MilestoneController extends Controller
     public function new(Request $request): FormView
     {
         $id = $request->attributes->get('id');
-
-        $challenge = $this->getChallengeData($id);
+        $challenge = $this->getDataById($id, Challenges::class);
 
         $milestone = new Milestone();
         $milestone->setChallenge($challenge);
@@ -52,22 +51,46 @@ class MilestoneController extends Controller
         return $form->createView();
     }
 
+
     /**
      * @param int $id
+     * @param string $object
      * @return object
      */
-    private function getChallengeData(int $id): object
+    private function getDataById(int $id, string $object): object
     {
-        $challengeData = $this->getDoctrine()
-            ->getRepository(Challenges::class)
+        $data = $this->getDoctrine()
+            ->getRepository($object)
             ->find($id);
 
-        if (!$challengeData) {
+        if (!$data) {
             throw $this->createNotFoundException(
-                'No product found for id ' . $id
+                'Nothing found for id ' . $id
             );
         }
 
-        return $challengeData;
+        return $data;
+    }
+
+    /**
+     * @param Request $request
+     * @Route("/completed/milestone/{id}", name="completed_milestone")
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function markMilestoneAsCompleted (Request $request)
+    {
+        $id = $request->attributes->get('id');
+
+        /**
+         * @var Milestone $milestone
+         */
+        $milestone = $this->getDataById($id, Milestone::class);
+        $milestone->setStatus(true);
+        $milestone->setCompletedOn(new \DateTime('now'));
+
+        $em = $this->getDoctrine()->getManager();
+        $em->flush();
+
+        return $this->redirectToRoute('my_challenges');
     }
 }

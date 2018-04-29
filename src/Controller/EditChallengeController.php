@@ -34,7 +34,7 @@ class EditChallengeController extends Controller
 
         if (!$challengeData) {
             throw $this->createNotFoundException(
-                'No product found for id ' . $id
+                'Nothing found for id ' . $id
             );
         }
 

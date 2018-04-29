@@ -30,7 +30,6 @@ class MyChallengesController extends Controller
     {
         $user = $this->getUser();
         $challenges = $user->getChallenges();
-        dump($challenges);
         return $challenges;
     }
 

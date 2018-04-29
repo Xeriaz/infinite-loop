@@ -23,7 +23,10 @@
                             <h6>Milestones:</h6>
                             <ul class="list-group">
                                 {% for milestone in challenge.milestones %}
-                                    <li class="list-group-item">{{ milestone.title }}</li>
+                                    <li class="list-group-item">
+                                        {{ milestone.title }}
+                                        <a href="{{ path('completed_milestone', {'id': milestone.id}) }}">✔</a>
+                                    </li>
                                 {% endfor %}
                             </ul>
                             <p class="card-text"><small class="text-muted">Start Date: {{ challenge.startDate|date('Y-m-d') }}</small></p>
