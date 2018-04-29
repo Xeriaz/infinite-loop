@@ -53,6 +53,11 @@
                             <h5 class="card-subtitle customCard-subtitle">Millestone1 nusipirkti ispanu kalbos zodyna</h5>
                             <div class="milestone-statusBlock">
                                 <div class="date-subtitle"><span class="d-block">Due Date</span> {{ challenge.endDate|date('Y-m-d') }}</div>
+                                <select class="milestone-statusSelect" name="milestone-status" id="milestone-status">
+                                    <option value="ongoing">On Progress</option>
+                                    <option value="done"> Done!!</option>
+                                    <option value="failed">Failed</option>
+                                </select>
                             </div>
 
                         </li>

@@ -84,9 +84,6 @@
 
     &__dateBlock {
       flex: 1;
-      font-size: 1rem;
-
-
     }
 
 
@@ -98,13 +95,15 @@
   }
 
   .customCard-subtitle {
-
     flex: 3;
   }
 
   .milestone-statusBlock {
     flex: 1;
     font-size: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
 
   .card-footer {
@@ -126,10 +125,35 @@
   }
 
   .date-subtitle {
-    font-size: 1rem;
+    font-size: 0.8rem;
     line-height: 1.2;
     text-align: center;
     color: var(--color-grey-light-5);
+  }
+
+  .milestone-statusSelect {
+
+    margin:0;
+    display:inline-block;
+    vertical-align:middle;
+    white-space:normal;
+    background:none;
+    line-height:1;
+    border: 0;
+    padding: 1rem 0;
+    font-size: 1rem;
+    letter-spacing: -0.025em;
+    color: var(--color-primary);
+    cursor: pointer;
+
+    &:focus
+
+    {
+      outline:0;
+    }
+
+
+
   }
 
 
