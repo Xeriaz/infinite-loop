@@ -14,7 +14,6 @@
   background-position: center;
   position: relative;
 
-
   @media (min-resolution: 192dpi) and (min-width: 37.5em),
   (-webkit-min-device-pixel-ratio: 2) and (min-width: 37.5em),
   (min-width: 125em) {
@@ -33,14 +32,12 @@
   justify-content: space-around;
   align-items: center;
 
-
   .customCard {
     width: 80%;
     margin-bottom: 3rem;
     border-radius: 0.5rem;
     overflow: hidden;
   }
-
 
   .body-bg {
     color: var(--color-grey-dark-1);
@@ -59,7 +56,6 @@
       right: 0;
       position: absolute;
 
-
     }
 
   }
@@ -76,7 +72,6 @@
       font-size: 1.2rem;
     }
 
-
     &__textBlock {
       flex: 3;
 
@@ -85,7 +80,6 @@
     &__dateBlock {
       flex: 1;
     }
-
 
   }
 
@@ -107,13 +101,19 @@
   }
 
   .card-footer {
-    border-top:  2px solid var(--color-grey-light-5);
+    border-top: 2px solid var(--color-grey-light-5);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    &__statusBlock {
+      color: var(--color-grey-dark-1);
+    }
   }
 
   .list-group-item {
     margin: 0 1rem;
     color: var(--color-grey-dark-2);
-
 
     &:last-of-type {
       border-bottom: none;
@@ -133,12 +133,12 @@
 
   .milestone-statusSelect {
 
-    margin:0;
-    display:inline-block;
-    vertical-align:middle;
-    white-space:normal;
-    background:none;
-    line-height:1;
+    margin: 0;
+    display: inline-block;
+    vertical-align: middle;
+    white-space: normal;
+    background: none;
+    line-height: 1;
     border: 0;
     padding: 1rem 0;
     font-size: 1rem;
@@ -146,16 +146,17 @@
     color: var(--color-primary);
     cursor: pointer;
 
-    &:focus
-
-    {
-      outline:0;
+    &:focus {
+      outline: 0;
     }
-
-
-
   }
 
+  .btn-inline {
+    text-decoration: none!important;
+    &:not(:first-of-type) {
+      margin-left: 1rem;
+    }
 
+  }
 
 }

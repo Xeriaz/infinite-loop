@@ -162,6 +162,7 @@
   transition: all .2s;
   backface-visibility: hidden;
 
+
   & span {
     margin-left: 3px;
     transition: margin-left .2s;
@@ -177,7 +178,7 @@
 
   &:focus {
     outline: none;
-    animation: pulsate 1s infinite;
+    //animation: pulsate 1s infinite;
   }
 }
 

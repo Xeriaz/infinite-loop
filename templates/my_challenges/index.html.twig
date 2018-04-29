@@ -2,35 +2,6 @@
 
 {% block title %}Hello {{ controller_name }}!{% endblock %}
 
-{#{% block content %}#}
-    {#<div class="myChallenge__wrapper">#}
-        {#<div class="card-columns">#}
-            {#{% for challenge in challenges %}#}
-                {#<div class="card" style="width: 18rem;">#}
-                    {#<img class="card-img-top" src="" alt="Card image cap">#}
-                    {#<div class="card-body">#}
-                        {#<h5 class="card-title">{{ challenge.title }}</h5>#}
-                        {#<p class="card-text">{{ challenge.description }}</p>#}
-                    {#</div>#}
-                    {#<ul class="list-group list-group-flush">#}
-                        {#<li class="list-group-item">#}
-                            {#Start Date: {{ challenge.startDate|date('Y-m-d') }}#}
-                        {#</li>#}
-                        {#<li class="list-group-item">#}
-                            {#End Date: {{ challenge.endDate|date('Y-m-d') }}#}
-                        {#</li>#}
-                    {#</ul>#}
-                    {#<div class="card-body">#}
-                        {#<a href="#" class="card-link">Open</a>#}
-                        {#<a href="#" class="card-link">Edit</a>#}
-                    {#</div>#}
-                {#</div>#}
-
-            {#{% endfor %}#}
-        {#</div>#}
-    {#</div>#}
-{#{% endblock %}#}
-
 {% block content %}
     <div class="myChallenge-wrapper">
         <div class="cards-wrapper">
@@ -62,16 +33,40 @@
 
                         </li>
                         <li class="list-group-item d-flex align-items-center">
-                            <h5 class="card-subtitle customCard-subtitle">Millestone1 nusipirkti ispanu kalbos zodyna</h5>
+                            <h5 class="card-subtitle customCard-subtitle">Millestone2 ismokti 50 zodziu</h5>
                             <div class="milestone-statusBlock">
                                 <div class="date-subtitle"><span class="d-block">Due Date</span> {{ challenge.endDate|date('Y-m-d') }}</div>
+                                <select class="milestone-statusSelect" name="milestone-status" id="milestone-status">
+                                    <option value="ongoing">On Progress</option>
+                                    <option value="done"> Done!!</option>
+                                    <option value="failed">Failed</option>
+                                </select>
+                            </div>
+
+                        </li>
+                        <li class="list-group-item d-flex align-items-center">
+                            <h5 class="card-subtitle customCard-subtitle">Millestone3 uzkalbinti ispana</h5>
+                            <div class="milestone-statusBlock">
+                                <div class="date-subtitle"><span class="d-block">Due Date</span> {{ challenge.endDate|date('Y-m-d') }}</div>
+                                <select class="milestone-statusSelect" name="milestone-status" id="milestone-status">
+                                    <option value="ongoing">On Progress</option>
+                                    <option value="done"> Done!!</option>
+                                    <option value="failed">Failed</option>
+                                </select>
                             </div>
 
                         </li>
                     </ul>
                     <div class="card-footer">
-                        <a href="#" class="card-link">Open</a>
-                        <a href="#" class="card-link">Edit</a>
+                        <div class="card-footer__control">
+                            <a href="#" class="btn-inline">Remove</a>
+                            <a href="#" class="btn-inline">Edit</a>
+                            <a href="#" class="btn-inline">Close</a>
+                        </div>
+                        <div class="card-footer__statusBlock">
+                            <span>Progress:</span> 1/3
+                        </div>
+
                     </div>
                 </div>
 
