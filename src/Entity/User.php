@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use FOS\UserBundle\Model\User as BaseUser;
 
@@ -28,14 +29,49 @@ class User extends BaseUser
     }
 
     /**
-     * @ORM\ManyToMany(targetEntity="Challenges.php", mappedBy="userChallenges")
-     * @ORM\Column(type="string")
+     * @ORM\ManyToMany(targetEntity="Challenges", mappedBy="userChallenges")
      */
-    private $challenges;
+    private $challenges = [];
+
+    /**
+     * @return mixed
+     */
+    public function getChallenges()
+    {
+        return $this->challenges;
+    }
+
+    /**
+     * @param mixed $challenges
+     */
+    public function setChallenges($challenges): void
+    {
+        $this->challenges = $challenges;
+    }
 
     public function __construct()
     {
         $this->challenges = new ArrayCollection();
+    }
+
+    public function addChallenge(Challenges $challenge): self
+    {
+        if (!$this->challenges->contains($challenge)) {
+            $this->challenges[] = $challenge;
+            $challenge->addUserChallenge($this);
+        }
+
+        return $this;
+    }
+
+    public function removeChallenge(Challenges $challenge): self
+    {
+        if ($this->challenges->contains($challenge)) {
+            $this->challenges->removeElement($challenge);
+            $challenge->removeUserChallenge($this);
+        }
+
+        return $this;
     }
 
 }

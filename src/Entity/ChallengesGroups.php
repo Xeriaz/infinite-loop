@@ -24,6 +24,27 @@ class ChallengesGroups
     private $groupName;
 
     /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Challenges", mappedBy="challengeGroup")
+     */
+    private $challenge;
+
+    /**
+     * @return mixed
+     */
+    public function getChallenge()
+    {
+        return $this->challenge;
+    }
+
+    /**
+     * @param mixed $challenge
+     */
+    public function setChallenge($challenge): void
+    {
+        $this->challenge = $challenge;
+    }
+
+    /**
      * @return mixed
      */
     public function getId()

@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -47,10 +48,54 @@ class Challenges
      * @Assert\NotBlank()
      * @ORM\ManyToMany(targetEntity="App\Entity\User", inversedBy="challenges")
      * @ORM\JoinTable(name="user_challenges")
-     * @ORM\Column(type="string")
      * @var ArrayCollection
      */
     private $userChallenges;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Milestone", mappedBy="challenge")
+     * @var Collection
+     */
+    private $milestones;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\ChallengesGroups", inversedBy="challenge")
+     * @ORM\JoinTable(name="challenge_groups")
+     * @var Collection
+     */
+    private $challengeGroup;
+
+    /**
+     * @return Collection
+     */
+    public function getChallengeGroup(): Collection
+    {
+        return $this->challengeGroup;
+    }
+
+    /**
+     * @param Collection $challengeGroup
+     */
+    public function setChallengeGroup(Collection $challengeGroup): void
+    {
+        $this->challengeGroup = $challengeGroup;
+    }
+
+    /**
+     * @return Collection
+     */
+    public function getMilestones(): Collection
+    {
+        return $this->milestones;
+    }
+
+    /**
+     * @param Collection $milestones
+     */
+    public function setMilestones(Collection $milestones): void
+    {
+        $this->milestones = $milestones;
+    }
 
     /**
      * @return mixed
@@ -155,5 +200,7 @@ class Challenges
     public function __construct()
     {
         $this->userChallenges = new ArrayCollection();
+        $this->milestones = new ArrayCollection();
+        $this->challengeGroup = new ArrayCollection();
     }
 }

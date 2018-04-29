@@ -32,10 +32,10 @@ class NewChallengeFormController extends Controller
     public function new(Request $request): FormView
     {
         $challenge = new Challenges();
-        $challenge->setTitle('');
-        $challenge->setDescription('');
         $challenge->setStartDate(new \DateTime('now'));
         $challenge->setEndDate(new \DateTime('now'));
+//        FIXME casting to array, it shouldn't be there, I think
+        $challenge->setUserChallenges((array($this->getUser())));
 
         $form = $this->createForm(NewChallengeForm::class, $challenge);
 
