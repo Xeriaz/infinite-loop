@@ -54,13 +54,13 @@ class Challenges
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Milestone", mappedBy="challenge")
-     * @ORM\JoinTable(name="challenge_groups")
      * @var ArrayCollection
      */
     private $milestones;
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\ChallengesGroups", inversedBy="challenge")
+     * @ORM\JoinTable(name="challenge_groups")
      * @var Collection
      */
     private $challengeGroup;
