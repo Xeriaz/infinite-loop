@@ -23,7 +23,6 @@
                             <h6>Milestones:</h6>
                             <ul class="list-group">
                                 {% for milestone in challenge.milestones %}
-                                    {{ dump(milestone) }}
                                         {% if milestone.deleted or milestone.status%}
                                             <li class="list-group-item disabled">
                                         {% else %}
