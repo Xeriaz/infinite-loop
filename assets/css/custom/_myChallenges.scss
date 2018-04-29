@@ -1,0 +1,162 @@
+.myChallenge-wrapper {
+
+  padding: 3rem 1rem;
+  height: 100%;
+  width: 100%;
+  overflow: scroll;
+
+  background-image: linear-gradient(
+                  to right bottom,
+                  rgba($color-grey-light-1, .8),
+                  rgba($color-grey-light-2, .8)),
+  url("../public/images/hero-small.jpg");
+  background-size: cover;
+  background-position: center;
+  position: relative;
+
+  @media (min-resolution: 192dpi) and (min-width: 37.5em),
+  (-webkit-min-device-pixel-ratio: 2) and (min-width: 37.5em),
+  (min-width: 125em) {
+    background-image: linear-gradient(
+                    to right bottom,
+                    rgba($color-grey-light-1, .8),
+                    rgba($color-grey-light-2, .8)),
+    url("../public/images/hero.jpg");
+  }
+
+}
+
+.cards-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+
+  .customCard {
+    width: 80%;
+    margin-bottom: 3rem;
+    border-radius: 0.5rem;
+    overflow: hidden;
+  }
+
+  .body-bg {
+    color: var(--color-grey-dark-1);
+    position: relative;
+
+    &::after {
+      content: "";
+      background-image: url("public/images/cbg.jpeg");
+      background-size: 80%;
+      background-position: 50% 50%;
+
+      opacity: 0.4;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      position: absolute;
+
+    }
+
+  }
+
+  .card-body {
+    color: var(--color-grey-dark-1);
+    border-bottom: 2px solid var(--color-grey-light-5);
+
+    .card-title {
+      font-size: 2rem;
+    }
+
+    .card-text {
+      font-size: 1.2rem;
+    }
+
+    &__textBlock {
+      flex: 3;
+
+    }
+
+    &__dateBlock {
+      flex: 1;
+    }
+
+  }
+
+  .z-index--10 {
+    z-index: 10;
+    position: relative
+  }
+
+  .customCard-subtitle {
+    flex: 3;
+  }
+
+  .milestone-statusBlock {
+    flex: 1;
+    font-size: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .card-footer {
+    border-top: 2px solid var(--color-grey-light-5);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    &__statusBlock {
+      color: var(--color-grey-dark-1);
+    }
+  }
+
+  .list-group-item {
+    margin: 0 1rem;
+    color: var(--color-grey-dark-2);
+
+    &:last-of-type {
+      border-bottom: none;
+    }
+
+    &:first-of-type {
+      border-top: none;
+    }
+  }
+
+  .date-subtitle {
+    font-size: 0.8rem;
+    line-height: 1.2;
+    text-align: center;
+    color: var(--color-grey-light-5);
+  }
+
+  .milestone-statusSelect {
+
+    margin: 0;
+    display: inline-block;
+    vertical-align: middle;
+    white-space: normal;
+    background: none;
+    line-height: 1;
+    border: 0;
+    padding: 1rem 0;
+    font-size: 1rem;
+    letter-spacing: -0.025em;
+    color: var(--color-primary);
+    cursor: pointer;
+
+    &:focus {
+      outline: 0;
+    }
+  }
+
+  .btn-inline {
+    text-decoration: none!important;
+    &:not(:first-of-type) {
+      margin-left: 1rem;
+    }
+
+  }
+
+}
