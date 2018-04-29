@@ -12,7 +12,6 @@
             {{ form_start(form, {'method': 'post', 'action': path('new_challenge_form'), 'attr': {'class': 'new_challenge_form'}}) }}
 
             <div class="formBody">
-
                 <div class="formRow">
                     <div class="formLabel">
                         {{ form_label(form.Title) }}
@@ -57,7 +56,6 @@
             <div class="formFooter ">
                 <input class="btn btn-lg btn-block mb-2" type="submit" id="_submit" name="_submit"
                        value="{{ 'Start' }}"/>
-
             </div>
             {{ form_end(form) }}
         </div>
