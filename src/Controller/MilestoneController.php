@@ -109,4 +109,23 @@ class MilestoneController extends Controller
 
         return $this->redirectToRoute('my_challenges');
     }
+
+    /**
+     * @param Request $request
+     * @Route("/remove/completed/milestone/{id}", name="remove_completed_milestone")
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function removeCompletedMilestone (Request $request)
+    {
+        $id = $request->attributes->get('id');
+
+        /** @var Milestone $milestone */
+        $milestone = $this->getDataById($id, Milestone::class);
+
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->remove($milestone);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('my_challenges');
+    }
 }
