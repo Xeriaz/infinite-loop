@@ -23,23 +23,23 @@
                             <h6>Milestones:</h6>
                             <ul class="list-group">
                                 {% for milestone in challenge.milestones %}
-                                        {% if milestone.deleted or milestone.status%}
-                                            <li class="list-group-item disabled">
-                                        {% else %}
-                                            <li class="list-group-item">
-                                        {% endif %}
+                                    {% if milestone.deleted or milestone.status%}
+                                        <li class="list-group-item disabled">
+                                    {% else %}
+                                        <li class="list-group-item">
+                                    {% endif %}
 
-                                        {{ milestone.title }}
+                                    {{ milestone.title }}
 
-                                        {% if milestone.status %}
-                                            <a href="{{ path('remove_milestone', {'id': milestone.id}) }}">✗</a>
-                                            <br>
-                                            {{ milestone.completedOn|date('Y-m-d') }}
-                                        {% elseif not milestone.deleted %}
-                                            <a href="{{ path('complete_milestone', {'id': milestone.id}) }}">✔</a>
-                                            <a href="{{ path('remove_milestone', {'id': milestone.id}) }}">✗</a>
-                                        {% endif %}
-                                    </li>
+                                    {% if milestone.status %}
+                                        <a href="{{ path('remove_milestone', {'id': milestone.id}) }}">✗</a>
+                                        <br>
+                                        {{ milestone.completedOn|date('Y-m-d') }}
+                                    {% elseif not milestone.deleted %}
+                                        <a href="{{ path('complete_milestone', {'id': milestone.id}) }}">✔</a>
+                                        <a href="{{ path('remove_milestone', {'id': milestone.id}) }}">✗</a>
+                                    {% endif %}
+                                        </li>
                                 {% endfor %}
                             </ul>
                             <p class="card-text"><small class="text-muted">Start Date: {{ challenge.startDate|date('Y-m-d') }}</small></p>

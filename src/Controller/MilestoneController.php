@@ -51,7 +51,6 @@ class MilestoneController extends Controller
         return $form->createView();
     }
 
-
     /**
      * @param int $id
      * @param string $object
@@ -91,7 +90,6 @@ class MilestoneController extends Controller
 
         return $this->redirectToRoute('my_challenges');
     }
-
 
     /**
      * @param Request $request
