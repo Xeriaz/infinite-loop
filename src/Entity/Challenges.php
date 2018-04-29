@@ -54,7 +54,7 @@ class Challenges
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Milestone", mappedBy="challenge")
-     * @var ArrayCollection
+     * @var Collection
      */
     private $milestones;
 
@@ -82,17 +82,17 @@ class Challenges
     }
 
     /**
-     * @return ArrayCollection
+     * @return Collection
      */
-    public function getMilestones(): ArrayCollection
+    public function getMilestones(): Collection
     {
         return $this->milestones;
     }
 
     /**
-     * @param ArrayCollection $milestones
+     * @param Collection $milestones
      */
-    public function setMilestones(ArrayCollection $milestones): void
+    public function setMilestones(Collection $milestones): void
     {
         $this->milestones = $milestones;
     }

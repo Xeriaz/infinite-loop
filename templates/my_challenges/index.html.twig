@@ -17,13 +17,22 @@
                             {% for challengeGroup in challenge.challengeGroup %}
                                 <span class="label label-danger">{{ challengeGroup.groupName }}</span>
                             {% endfor %}
+
                             <p class="card-text">{{ challenge.description }}</p>
+
+                            <h6>Milestones:</h6>
+                            <ul class="list-group">
+                                {% for milestone in challenge.milestones %}
+                                    <li class="list-group-item">{{ milestone.title }}</li>
+                                {% endfor %}
+                            </ul>
                             <p class="card-text"><small class="text-muted">Start Date: {{ challenge.startDate|date('Y-m-d') }}</small></p>
                             <p class="card-text"><small class="text-muted">End Date: {{ challenge.endDate|date('Y-m-d') }}</small></p>
                         </div>
                         <div class="card-footer">
                             <a href="{{ path('edit_challenge', {'id': challenge.id }) }}">Edit</a>
-                            <a href="{{ path('delete_challenge', {'id': challenge.id}) }}">Delete</a>
+                            <a href="{{ path('delete_challenge', {'id': challenge.id}) }}">Delete</a><br>
+                            <a href="{{ path('milestone', {'id': challenge.id}) }}">Add Milestone</a>
                         </div>
                     </div>
                 </div>

@@ -10,7 +10,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 
-class EditChallengeForm extends AbstractType
+class NewChallengeMilestoneForm extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -20,16 +20,7 @@ class EditChallengeForm extends AbstractType
     {
         $builder
             ->add('Title', TextType::class)
-            ->add('Description', TextType::class, ['required' => false])
-            ->add('challengeGroup', EntityType::class, [
-                'class' => ChallengesGroups::class,
-                'choice_label' => 'group_name',
-                'label' => 'Type',
-                'multiple' => true,
-            ])
-            ->add('Start_date', DateType::class)
-            ->add('End_date', DateType::class)
-            ->add('update', SubmitType::class, ['label' => 'Update challenge'])
+            ->add('save', SubmitType::class, ['label' => 'Add milestone'])
             ;
     }
 }
