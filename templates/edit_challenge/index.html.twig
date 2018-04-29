@@ -6,7 +6,8 @@
     <h1>Edit Challenge:</h1>
     {{ form_start(form) }}
     {{ form_widget(form) }}
+    <div class="form-group">
+        <a href="{{ path('delete_challenge', {'id': app.request.get('id')}) }}" class="btn btn-danger">Remove this challenge!</a>
+    </div>
     {{ form_end(form) }}
-
-    <a href="{{ path('delete_challenge', {'id': app.request.get('id')}) }}" class="btn btn-danger">Remove this challenge!</a>
 {% endblock %}
