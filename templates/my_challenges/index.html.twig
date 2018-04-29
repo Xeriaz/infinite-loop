@@ -23,9 +23,23 @@
                             <h6>Milestones:</h6>
                             <ul class="list-group">
                                 {% for milestone in challenge.milestones %}
-                                    <li class="list-group-item">
+                                    {{ dump(milestone) }}
+                                        {% if milestone.deleted or milestone.status%}
+                                            <li class="list-group-item disabled">
+                                        {% else %}
+                                            <li class="list-group-item">
+                                        {% endif %}
+
                                         {{ milestone.title }}
-                                        <a href="{{ path('completed_milestone', {'id': milestone.id}) }}">✔</a>
+
+                                        {% if milestone.status %}
+                                            <a href="{{ path('remove_milestone', {'id': milestone.id}) }}">✗</a>
+                                            <br>
+                                            {{ milestone.completedOn|date('Y-m-d') }}
+                                        {% elseif not milestone.deleted %}
+                                            <a href="{{ path('complete_milestone', {'id': milestone.id}) }}">✔</a>
+                                            <a href="{{ path('remove_milestone', {'id': milestone.id}) }}">✗</a>
+                                        {% endif %}
                                     </li>
                                 {% endfor %}
                             </ul>
