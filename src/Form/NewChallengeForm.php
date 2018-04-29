@@ -23,7 +23,6 @@ class NewChallengeForm extends AbstractType
         $builder
             ->add('Title', TextType::class)
             ->add('Description', TextType::class, ['required' => false])
-//            TODO add challengesGroups
             ->add('challengeGroup', EntityType::class, [
                 'class' => ChallengesGroups::class,
                 'choice_label' => 'group_name',

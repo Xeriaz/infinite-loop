@@ -24,8 +24,7 @@ class ChallengesGroups
     private $groupName;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Challenges", inversedBy="challengeGroup")
-     * @ORM\JoinColumn(name="challenge_id", referencedColumnName="id")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Challenges", mappedBy="challengeGroup")
      */
     private $challenge;
 

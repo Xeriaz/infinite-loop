@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -53,28 +54,29 @@ class Challenges
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Milestone", mappedBy="challenge")
+     * @ORM\JoinTable(name="challenge_groups")
      * @var ArrayCollection
      */
     private $milestones;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\ChallengesGroups", mappedBy="challenge")
-     * @var ArrayCollection
+     * @ORM\ManyToMany(targetEntity="App\Entity\ChallengesGroups", inversedBy="challenge")
+     * @var Collection
      */
     private $challengeGroup;
 
     /**
-     * @return ArrayCollection
+     * @return Collection
      */
-    public function getChallengeGroup(): ArrayCollection
+    public function getChallengeGroup(): Collection
     {
         return $this->challengeGroup;
     }
 
     /**
-     * @param ArrayCollection $challengeGroup
+     * @param Collection $challengeGroup
      */
-    public function setChallengeGroup(ArrayCollection $challengeGroup): void
+    public function setChallengeGroup(Collection $challengeGroup): void
     {
         $this->challengeGroup = $challengeGroup;
     }

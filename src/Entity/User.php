@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use FOS\UserBundle\Model\User as BaseUser;
 
@@ -51,6 +52,26 @@ class User extends BaseUser
     public function __construct()
     {
         $this->challenges = new ArrayCollection();
+    }
+
+    public function addChallenge(Challenges $challenge): self
+    {
+        if (!$this->challenges->contains($challenge)) {
+            $this->challenges[] = $challenge;
+            $challenge->addUserChallenge($this);
+        }
+
+        return $this;
+    }
+
+    public function removeChallenge(Challenges $challenge): self
+    {
+        if ($this->challenges->contains($challenge)) {
+            $this->challenges->removeElement($challenge);
+            $challenge->removeUserChallenge($this);
+        }
+
+        return $this;
     }
 
 }
