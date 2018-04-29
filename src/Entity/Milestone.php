@@ -24,7 +24,7 @@ class Milestone
     /**
      * @ORM\Column(type="boolean")
      */
-    private $status;
+    private $status = false;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
@@ -34,7 +34,7 @@ class Milestone
     /**
      * @ORM\Column(type="boolean")
      */
-    private $deleted;
+    private $deleted = false;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Challenges", inversedBy="milestones")
