@@ -134,7 +134,18 @@
 
   &__user-name {
 
+    font-size: 1.2rem;
+    color: var(--color-grey-dark-2);
+
   }
+
+  a {
+    text-decoration: none;
+  }
+}
+
+.isClicked {
+  background-color: var(--color-primary);
 }
 
 //-------------BUTTONS--------------------
@@ -151,6 +162,7 @@
   transition: all .2s;
   backface-visibility: hidden;
 
+
   & span {
     margin-left: 3px;
     transition: margin-left .2s;
@@ -166,7 +178,7 @@
 
   &:focus {
     outline: none;
-    animation: pulsate 1s infinite;
+    //animation: pulsate 1s infinite;
   }
 }
 
@@ -194,7 +206,7 @@
 
 
 .side-nav {
-  font-size: 1.4rem;
+  font-size: 1.2rem;
   list-style: none;
   margin-top: 3.5rem;
 
@@ -218,10 +230,7 @@
       flex: 1;
     }
 
-    &--active:before {
-      transform: scaleY(1)!important;
-      width: 100%!important;
-    }
+
 
     &:hover::before {
       transform: scaleY(1);
@@ -254,9 +263,10 @@
     color: var(--color-grey-light-1);
     text-decoration: none;
     text-transform: uppercase;
-    padding: 1.5rem 3rem;
+    padding: 1.5rem 2rem;
     position: relative;
     z-index: 10;
+    white-space: nowrap;
 
     display: flex;
     align-items: center;

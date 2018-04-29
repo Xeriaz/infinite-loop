@@ -8,6 +8,7 @@
         {% endblock %}
         <meta name="viewport" content="width=device-width,initial-scale=1.0">
         <link rel="icon" type="image/x-icon" href="{{ asset('images/favicon.ico')}}">
+
         {% block canonical_meta %}{% endblock %}
     </head>
     <body>
@@ -28,11 +29,13 @@
 
         <div class="wrapperLanding">
             <section class="landingPage">
-
-                {#<a class="btn-inline mr-3" href="{{ path('fos_user_registration_register') }}">Sign Up</a>#}
-                {#<a class="btn-inline" href="{{ path('fos_user_security_login') }}">Login</a>#}
+                <a href="{{ path('home') }}" class="logo">
+                    <img class="logoImg" src="{{ asset('images/logo.png') }}" alt="logo">
+                </a>
+                <a href="{{ path('fos_user_security_login') }}" class="login">
+                    <svg class="loginIcon" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="16" height="16" viewBox="0 0 16 16"><path fill="#8e44ad" d="M7 1v2l1 1v-2h7v12h-7v-2l-1 1v2h9v-14z"></path><path fill="#8e44ad" d="M10 8l-5-4v2h-5v4h5v2z"></path></svg>
+                </a>
                 {% block body %}{% endblock %}
-
 
             </section>
         </div>
