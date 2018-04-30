@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\ChallengesGroups;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -26,6 +27,10 @@ class EditChallengeForm extends AbstractType
                 'choice_label' => 'group_name',
                 'label' => 'Type',
                 'multiple' => true,
+            ])
+            ->add('isPublic', CheckboxType::class, [
+                'label' => 'Is it public?',
+                'required' => false
             ])
             ->add('Start_date', DateType::class)
             ->add('End_date', DateType::class)
