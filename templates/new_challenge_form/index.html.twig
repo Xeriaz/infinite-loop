@@ -51,6 +51,26 @@
                         {{ form_errors(form.End_date) }}
                     </div>
                 </div>
+
+                <div class="formRow">
+                    <div class="formLabel">
+                        {{ form_label(form.challengeGroup) }}
+                    </div>
+                    <div class="formControl">
+                        {{ form_widget(form.challengeGroup, { 'attr': {'class': 'formInput' } }) }}
+                        {{ form_errors(form.challengeGroup) }}
+                    </div>
+                </div>
+
+                <div class="formRow">
+                    <div class="formLabel">
+                        {{ form_label(form.isPublic) }}
+                    </div>
+                    <div class="formControl">
+                        {{ form_widget(form.isPublic, { 'attr': {'class': 'formInput' } }) }}
+                        {{ form_errors(form.isPublic) }}
+                    </div>
+                </div>
             </div>
 
             <div class="formFooter ">
