@@ -34,7 +34,7 @@ class EditChallengeForm extends AbstractType
             ])
             ->add('Start_date', DateType::class)
             ->add('End_date', DateType::class)
-            ->add('update', SubmitType::class, ['label' => 'Update challenge'])
+//            ->add('update', SubmitType::class, ['label' => 'Update challenge'])
             ;
     }
 }

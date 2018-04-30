@@ -1,13 +1,92 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Hello {{ controller_name }}!{% endblock %}
-
 {% block content %}
-    <h1>Edit Challenge:</h1>
-    {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <div class="form-group">
-        <a href="{{ path('delete_challenge', {'id': app.request.get('id')}) }}" class="btn btn-danger">Remove this challenge!</a>
+    {# FIXME this is temporary fix for datetime selection #}
+    <style>
+        select.form-control:not([size]):not([multiple]) {height: 100%}
+    </style>
+    <div class="newChallenge__wrapper">
+        <div class="formBlock">
+            <div class="formHead">
+                <h1 class="formTitle mb-0 text-left">Start Challenge</h1>
+                <p class="formText mb-0">If you can dream it, you can do it!</p>
+            </div>
+            {{ form_start(form, {'method': 'post', 'action': path('edit_challenge', {'id': app.request.get('id') }), 'attr': {'class': 'edit_challenge_form'}}) }}
+
+            <div class="formBody">
+                <div class="formRow">
+                    <div class="formLabel">
+                        {{ form_label(form.Title) }}
+                    </div>
+                    <div class="formControl">
+                        {{ form_widget(form.Title, { 'attr': {'class': 'formInput','autofocus': 'true','placeholder':'Give a title for your challenge' } }) }}
+                        {{ form_errors(form.Title) }}
+                    </div>
+                </div>
+
+                <div class="formRow mb-3">
+                    <div class="formLabel">
+                        {{ form_label(form.Description) }}
+                    </div>
+                    <div class="formControl">
+                        {{ form_widget(form.Description, { 'attr': {'class': 'formInput','placeholder':'Short description (*optional)' } }) }}
+                        {{ form_errors(form.Description) }}
+                    </div>
+                </div>
+
+                <div class="formRow">
+                    <div class="formLabel">
+                        {{ form_label(form.Start_date) }}
+                    </div>
+                    <div class="formControl">
+                        {{ form_widget(form.Start_date, { 'attr': {'class': 'formInput' } }) }}
+                        {{ form_errors(form.Start_date) }}
+                    </div>
+                </div>
+
+                <div class="formRow">
+                    <div class="formLabel">
+                        {{ form_label(form.End_date) }}
+                    </div>
+                    <div class="formControl">
+                        {{ form_widget(form.End_date, { 'attr': {'class': 'formInput' } }) }}
+                        {{ form_errors(form.End_date) }}
+                    </div>
+                </div>
+
+                <div class="formRow">
+                    <div class="formLabel">
+                        {{ form_label(form.challengeGroup) }}
+                    </div>
+                    <div class="formControl">
+                        {{ form_widget(form.challengeGroup, { 'attr': {'class': 'formInput' } }) }}
+                        {{ form_errors(form.challengeGroup) }}
+                    </div>
+                </div>
+
+                <div class="formRow">
+                    <div class="formLabel">
+                        {{ form_label(form.isPublic) }}
+                    </div>
+                    <div class="formControl">
+                        {{ form_widget(form.isPublic, { 'attr': {'class': 'formInput' } }) }}
+                        {{ form_errors(form.isPublic) }}
+                    </div>
+                </div>
+            </div>
+
+            <div class="formFooter ">
+                <input class="btn btn-lg btn-block mb-2" type="submit" id="_submit" name="_submit"
+                       value="{{ 'Update challenge' }}"/>
+                {# FIXME This button should be somewhere else #}
+                    <br>
+                    <a href="{{ path('delete_challenge', {'id': app.request.get('id')}) }}" class="btn btn-lg btn-block mb-2">Remove challenge!</a>
+                {# FIXME code above #}
+            </div>
+            {{ form_end(form) }}
+
+
+        </div>
     </div>
-    {{ form_end(form) }}
 {% endblock %}
