@@ -34,7 +34,28 @@ class Milestone
     /**
      * @ORM\Column(type="boolean")
      */
-    private $deleted = false;
+    private $isDeleted = false;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isFailed = false;
+
+    /**
+     * @return mixed
+     */
+    public function getIsFailed()
+    {
+        return $this->isFailed;
+    }
+
+    /**
+     * @param mixed $isFailed
+     */
+    public function setIsFailed($isFailed): void
+    {
+        $this->isFailed = $isFailed;
+    }
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Challenges", inversedBy="milestones")
@@ -126,18 +147,18 @@ class Milestone
     /**
      * @return bool|null
      */
-    public function getDeleted(): ?bool
+    public function getIsDeleted(): ?bool
     {
-        return $this->deleted;
+        return $this->isDeleted;
     }
 
     /**
-     * @param bool $deleted
+     * @param bool $isDeleted
      * @return Milestone
      */
-    public function setDeleted(bool $deleted): self
+    public function setIsDeleted(bool $isDeleted): self
     {
-        $this->deleted = $deleted;
+        $this->isDeleted = $isDeleted;
 
         return $this;
     }

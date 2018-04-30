@@ -30,17 +30,21 @@
                     {% set milestonesCount = 0 %}
                     <ul class="list-group list-group-flush">
                         {% for milestone in challenge.milestones %}
-                            {% if milestone.status and not milestone.deleted%}
+                            {% if milestone.status and not milestone.isDeleted%}
                                 {% set completedMilestones = completedMilestones + 1 %}
                             {% endif %}
-                            {% if not milestone.deleted %}
+                            {% if not milestone.isDeleted %}
                                 {% set milestonesCount = milestonesCount + 1 %}
 
                             <li class="list-group-item d-flex align-items-center">
                                 <h5 class="card-subtitle customCard-subtitle">{{ milestone.title }}</h5>
                                 <div class="milestone-statusBlock">
                                     <div class="date-subtitle">
-                                        <span class="d-block">Completed on: <br>
+                                        {% if milestone.isFailed %}
+                                            <span class="d-block">Failed on: <br>
+                                        {% else %}
+                                            <span class="d-block">Completed on: <br>
+                                        {% endif %}
                                             {% if milestone.completedOn == null %}
                                                 TBD
                                             {% else %}
@@ -48,9 +52,11 @@
                                             {% endif %}
                                         </span>
                                     </div>
-
-                                    {% if not milestone.status %}
+                                    {% if milestone.isFailed %}
+                                        <a href="{{ path('remove_milestone', {'id': milestone.id}) }}">Remove</a>
+                                    {% elseif not milestone.status %}
                                         <a href="{{ path('complete_milestone', {'id': milestone.id}) }}">Complete</a>
+                                        <a href="{{ path('failed_milestone', {'id': milestone.id}) }}">Failed</a>
                                         <a href="{{ path('remove_milestone', {'id': milestone.id}) }}">Remove</a>
                                     {% endif %}
                                     {#<select class="milestone-statusSelect" name="milestone-status" id="milestone-status">#}
