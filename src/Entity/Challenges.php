@@ -36,6 +36,16 @@ class Challenges
     private $isPublic = false;
 
     /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isCompleted = false;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $completedOn;
+
+        /**
      * @return mixed
      */
     public function getIsPublic()
@@ -64,6 +74,38 @@ class Challenges
      * @ORM\Column(type="datetime")
      */
     private $endDate;
+
+    /**
+     * @return mixed
+     */
+    public function getIsCompleted()
+    {
+        return $this->isCompleted;
+    }
+
+    /**
+     * @param mixed $isCompleted
+     */
+    public function setIsCompleted($isCompleted): void
+    {
+        $this->isCompleted = $isCompleted;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCompletedOn()
+    {
+        return $this->completedOn;
+    }
+
+    /**
+     * @param mixed $completedOn
+     */
+    public function setCompletedOn($completedOn): void
+    {
+        $this->completedOn = $completedOn;
+    }
 
     /**
      * @Assert\NotBlank()
