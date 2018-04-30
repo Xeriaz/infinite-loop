@@ -50,7 +50,7 @@
                                     </div>
 
                                     {% if not milestone.status %}
-                                        <a href="{{ path('complete_milestone', {'id': milestone.id}) }}">Completed</a>
+                                        <a href="{{ path('complete_milestone', {'id': milestone.id}) }}">Complete</a>
                                         <a href="{{ path('remove_milestone', {'id': milestone.id}) }}">Remove</a>
                                     {% endif %}
                                     {#<select class="milestone-statusSelect" name="milestone-status" id="milestone-status">#}
@@ -71,7 +71,7 @@
                             <a href="#" class="btn-inline">Close</a>
                         </div>
                         <div class="card-footer__statusBlock">
-                            <span>Progress: {{ completedMilestones }} / {{ milestonesCount }} </span>
+                            <span>Milestone progress: {{ completedMilestones }} / {{ milestonesCount }} </span>
                         </div>
                     </div>
                 </div>
