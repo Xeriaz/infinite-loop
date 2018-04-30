@@ -68,7 +68,7 @@
                             <a href="{{ path('delete_challenge', {'id': challenge.id}) }}" class="btn-inline">Remove</a>
                             <a href="{{ path('edit_challenge', {'id': challenge.id }) }}" class="btn-inline">Edit</a>
                             <a href="{{ path('milestone', {'id': challenge.id}) }}" class="btn-inline">Add Milestone</a>
-                            <a href="#" class="btn-inline">Close</a>
+                            {#<a href="#" class="btn-inline">Close</a>#}
                         </div>
                         <div class="card-footer__statusBlock">
                             <span>Milestone progress: {{ completedMilestones }} / {{ milestonesCount }} </span>
