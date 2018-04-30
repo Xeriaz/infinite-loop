@@ -31,6 +31,27 @@ class Challenges
     private $description;
 
     /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isPublic = false;
+
+    /**
+     * @return mixed
+     */
+    public function getIsPublic()
+    {
+        return $this->isPublic;
+    }
+
+    /**
+     * @param mixed $isPublic
+     */
+    public function setIsPublic($isPublic): void
+    {
+        $this->isPublic = $isPublic;
+    }
+
+    /**
      * @Assert\NotBlank()
      * @Assert\Type("\DateTime")
      * @ORM\Column(type="datetime")
