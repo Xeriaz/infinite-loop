@@ -3,6 +3,11 @@
 {% block title %}Hello {{ app.user.username }} - start new challenge!{% endblock %}
 
 {% block content %}
+    {# FIXME this is temporary fix for datetime selection #}
+    <style>
+        select.form-control:not([size]):not([multiple]) {height: 100%}
+    </style>
+
     <div class="newChallenge__wrapper">
         <div class="formBlock">
             <div class="formHead">
