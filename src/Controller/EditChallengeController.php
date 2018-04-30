@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Challenges;
 use App\Form\EditChallengeForm;
 use Symfony\Component\Form\FormView;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -63,6 +64,26 @@ class EditChallengeController extends Controller
         }
 
         return $form->createView();
+    }
+
+    /**
+     * @param Request $request
+     * @Route("/complete/challenge/{id}", name="mark_challenge_completed")
+     * @return RedirectResponse
+     */
+    public function markChallengeAsCompleted(Request $request)
+    {
+        $id = $request->attributes->get('id');
+
+        /** @var Challenges $challenge */
+        $challenge = $this->getChallengeData($id);
+        $challenge->setIsCompleted(true);
+        $challenge->setCompletedOn(new \DateTime('now'));
+
+        $em = $this->getDoctrine()->getManager();
+        $em->flush();
+
+        return $this->redirectToRoute('my_challenges');
     }
 
     /**
