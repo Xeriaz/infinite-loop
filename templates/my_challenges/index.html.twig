@@ -53,7 +53,7 @@
                                         </span>
                                     </div>
                                     {% if milestone.isFailed %}
-                                        <a href="{{ path('remove_milestone', {'id': milestone.id}) }}">Remove</a>
+                                        {#<a href="{{ path('remove_milestone', {'id': milestone.id}) }}">Remove</a>#}
                                     {% elseif not milestone.status %}
                                         <a href="{{ path('complete_milestone', {'id': milestone.id}) }}">Complete</a>
                                         <a href="{{ path('failed_milestone', {'id': milestone.id}) }}">Failed</a>
