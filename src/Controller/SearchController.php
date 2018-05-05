@@ -21,8 +21,6 @@ class SearchController extends Controller
             ->add('Submit', SubmitType::class)
             ->getForm();
 
-        dump($form->createView());
-
         return $this->render('includes/search.html.twig', [
             'form' => $form->createView()
         ]);
