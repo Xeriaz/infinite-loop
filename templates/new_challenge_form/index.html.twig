@@ -3,10 +3,6 @@
 {% block title %}Hello {{ app.user.username }} - start new challenge!{% endblock %}
 
 {% block content %}
-    {# FIXME this is temporary fix for datetime selection #}
-    <style>
-        select.form-control:not([size]):not([multiple]) {height: 100%}
-    </style>
 
     <div class="newChallenge__wrapper">
         <div class="formBlock">
@@ -47,7 +43,7 @@
                     </div>
                 </div>
 
-                <div class="formRow">
+                <div class="formRow mb-3">
                     <div class="formLabel">
                         {{ form_label(form.End_date) }}
                     </div>
@@ -79,7 +75,7 @@
             </div>
 
             <div class="formFooter ">
-                <input class="btn btn-lg btn-block mb-2" type="submit" id="_submit" name="_submit"
+                <input class="btn" type="submit" id="_submit" name="_submit"
                        value="{{ 'Start' }}"/>
             </div>
             {{ form_end(form) }}
