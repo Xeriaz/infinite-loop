@@ -33,7 +33,7 @@
   align-items: center;
 
   .customCard {
-    width: 80%;
+    width: 90%;
     margin-bottom: 3rem;
     border-radius: 0.5rem;
     overflow: hidden;
@@ -42,6 +42,7 @@
   .body-bg {
     color: var(--color-grey-dark-1);
     position: relative;
+    background-color: #26C281;
 
     &::after {
       content: "";
@@ -49,7 +50,7 @@
       background-size: 80%;
       background-position: 50% 50%;
 
-      opacity: 0.4;
+      opacity: 0.1;
       top: 0;
       left: 0;
       bottom: 0;
