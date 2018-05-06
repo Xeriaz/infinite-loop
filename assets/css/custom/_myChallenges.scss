@@ -47,7 +47,7 @@
     &::after {
       content: "";
       background-image: url("public/images/cbg.jpeg");
-      background-size: 80%;
+      background-size: cover;
       background-position: 50% 50%;
 
       opacity: 0.1;

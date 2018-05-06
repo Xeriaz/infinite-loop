@@ -4,9 +4,9 @@
   display: flex;
   justify-content: center;
   align-items: center;
-
   height: 100%;
   width: 100%;
+  padding: 3rem 1rem;
 
   background-image: linear-gradient(
                   to right bottom,
@@ -33,12 +33,10 @@
 
 .formBlock {
   margin: 0 auto;
-  min-width: 35rem;
-  width: 40%;
-  border-radius: 0.5rem ;
+  width: 90%;
+  border-radius: 1px;
   box-shadow: 0px 2rem 4rem rgba(0, 0, 0, 0.3);
   overflow: hidden;
-  //background-color: rgba(52,73,94, .9);
   background-color: rgba(255,255,255, .95);
 
 
@@ -57,18 +55,20 @@
     padding: 1rem 0;
     font-size: 1.6rem;
     color: var(--color-grey-dark-1);
+    border-radius: 0;
 
   }
 
   /* Remove the stupid outer glow in Webkit */
   input[type=text]:focus,
   select:focus,
-  textarea:focus
-
-  {
+  textarea:focus  {
     outline:0;
+    box-shadow:none;
     border-color: var(--color-green-normal);
   }
+
+
 
   label {
     border: none;
@@ -99,20 +99,43 @@
     min-height: 8rem;
   }
 
+  option {
+    display: inline-block;
+    padding: 0.3rem 0.8rem;
+    border: 1px solid var(--color-primary);
+    border-radius: 10rem;
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+    color: var(--color-primary);
+    cursor: pointer;
+    transition:all 150ms ease-in-out ;
 
+    &:not(:last-of-type) {
+      margin-right: 0.5rem;
+    }
+
+    &:hover {
+      background-color: var(--color-grey-dark-1);
+      color: var(--color-grey-light-1);
+    }
+
+
+  }
 
 }
 
 .formHead {
-  padding: 2rem 1rem;
+  padding: 3.5rem 2rem 2.5rem 2rem;
   position: relative;
-
-  color: var(--color-grey-dark-1);
+  background-color: rgb(52, 73, 94);
+  color: var(--color-grey-light-1);
 
   &::after {
     content: "";
-    background: url("public/images/cbg.jpeg") center bottom 80% no-repeat;
-    opacity: 0.4;
+    background: url("public/images/cbg.jpeg");
+    background-position: center;
+    background-size: cover;
+    opacity: 0.1;
     top: 0;
     left: 0;
     bottom: 0;
@@ -134,10 +157,10 @@
 
   .formTitle {
     font-size: 3.2rem;
-    color: var(--color-grey-dark-1);
     letter-spacing: 0.05em;
     z-index: 10;
     position: relative;
+
   }
 
 
@@ -151,12 +174,12 @@
   padding-bottom: 2rem;
   width: 50%;
   margin: 0 auto;
+
 }
 
 
 .formBody {
-  padding: 1rem;
-  //background-color: rgba(52,73,94, .8);
+  padding: 2rem;
 }
 
 .formRow {
