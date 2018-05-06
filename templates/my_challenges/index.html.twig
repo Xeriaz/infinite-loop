@@ -52,18 +52,27 @@
                                             {% endif %}
                                         </span>
                                     </div>
-                                    {% if milestone.isFailed %}
-                                        {#<a href="{{ path('remove_milestone', {'id': milestone.id}) }}">Remove</a>#}
-                                    {% elseif not milestone.status %}
-                                        <a href="{{ path('complete_milestone', {'id': milestone.id}) }}">Complete</a>
-                                        <a href="{{ path('failed_milestone', {'id': milestone.id}) }}">Failed</a>
-                                        <a href="{{ path('remove_milestone', {'id': milestone.id}) }}">Remove</a>
-                                    {% endif %}
-                                    {#<select class="milestone-statusSelect" name="milestone-status" id="milestone-status">#}
-                                        {#<option value="ongoing">On Progress</option>#}
-                                        {#<option value="done"> Done!!</option>#}
-                                        {#<option value="failed">Failed</option>#}
-                                    {#</select>#}
+                                    <div>
+                                        {% if milestone.isFailed %}
+                                            {#<a href="{{ path('remove_milestone', {'id': milestone.id}) }}">Remove</a>#}
+                                        {% elseif not milestone.status %}
+                                            <a class="milestone-statusLink" href="{{ path('complete_milestone', {'id': milestone.id}) }}">
+                                                <svg class="milestone-statusIcon">
+                                                    <use xlink:href="{{ asset('images/sprite.svg#icon-checkmark') }}"></use>
+                                                </svg>
+                                            </a>
+                                            <a class="milestone-statusLink" href="{{ path('failed_milestone', {'id': milestone.id}) }}">
+                                                <svg class="milestone-statusIcon">
+                                                    <use xlink:href="{{ asset('images/sprite.svg#icon-cross') }}"></use>
+                                                </svg>
+                                            </a>
+                                            <a class="milestone-statusLink" href="{{ path('remove_milestone', {'id': milestone.id}) }}">
+                                                <svg class="milestone-statusIcon">
+                                                    <use xlink:href="{{ asset('images/sprite.svg#icon-bin') }}"></use>
+                                                </svg>
+                                            </a>
+                                        {% endif %}
+                                    </div>
                                 </div>
                             </li>
                             {% endif %}

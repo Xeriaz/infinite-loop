@@ -35,7 +35,7 @@
   .customCard {
     width: 90%;
     margin-bottom: 3rem;
-    border-radius: 0.5rem;
+    border-radius: 1px;
     overflow: hidden;
   }
 
@@ -97,8 +97,27 @@
     flex: 1;
     font-size: 1rem;
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
     align-items: center;
+  }
+
+  .milestone-statusIcon {
+    height: 1rem;
+    width: 1rem;
+    fill: var(--color-grey-dark-1);
+    transition: fill 150ms ease-in-out;
+    pointer-events: none;
+  }
+
+
+  .milestone-statusLink {
+    margin-left: 0.7rem;
+    width: 1.5rem;
+    height: 1.5rem;
+
+    &:hover .milestone-statusIcon {
+      fill: var(--color-primary);
+    }
   }
 
   .card-footer {
@@ -132,25 +151,7 @@
     color: var(--color-grey-light-5);
   }
 
-  .milestone-statusSelect {
 
-    margin: 0;
-    display: inline-block;
-    vertical-align: middle;
-    white-space: normal;
-    background: none;
-    line-height: 1;
-    border: 0;
-    padding: 1rem 0;
-    font-size: 1rem;
-    letter-spacing: -0.025em;
-    color: var(--color-primary);
-    cursor: pointer;
-
-    &:focus {
-      outline: 0;
-    }
-  }
 
   .btn-inline {
     text-decoration: none!important;
