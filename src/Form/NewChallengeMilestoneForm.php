@@ -20,7 +20,7 @@ class NewChallengeMilestoneForm extends AbstractType
     {
         $builder
             ->add('Title', TextType::class)
-            ->add('save', SubmitType::class, ['label' => 'Add milestone'])
+            //->add('save', SubmitType::class, ['label' => 'Add milestone'])
             ;
     }
 }
