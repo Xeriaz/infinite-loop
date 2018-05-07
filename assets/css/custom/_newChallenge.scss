@@ -59,13 +59,20 @@
 
   }
 
-  /* Remove the stupid outer glow in Webkit */
+
   input[type=text]:focus,
   select:focus,
   textarea:focus  {
     outline:0;
     box-shadow:none;
     border-color: var(--color-green-normal);
+  }
+
+  input[type=checkbox] {
+    width: 1.5rem;
+    height: 1.5rem;
+    display: block;
+
   }
 
 
@@ -84,14 +91,14 @@
   }
 
   #new_challenge_form_challengeGroup {
-    height: 4rem;
-    overflow-y: auto
+    height: 4.4rem;
+    overflow-y: auto;
+    width: 100%;
+    display: block;
   }
 
 
-  .form-control {
-    padding: 0;
-  }
+
 
   textarea,
   input[type=text] {
@@ -177,14 +184,10 @@
 
   }
 
-
-
-
-
 }
 
 .formFooter {
-  padding-top: 1rem;
+
   padding-bottom: 2rem;
   text-align: center;
 
@@ -209,7 +212,8 @@
 
 .formControl {
   flex: 0 0 75%;
-
+  display: flex;
+  align-items: center;
 }
 
 
