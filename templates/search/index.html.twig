@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Homepage - {{ parent() }}{% endblock %}
+
+
+{% block content %}
+
+    {{ dump(challenges) }}
+    <div class="container">
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Public status</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>User</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for challenge in challenges %}
+                <tr>
+                    <td>{{ challenge.id }}</td>
+                    <td>{{ challenge.title }}</td>
+                    <td>{{ challenge.description }}</td>
+                    <td>{{ challenge.isPublic }}</td>
+                    <td>{{ challenge.startDate|date('Y-m-d') }}</td>
+                    <td>{{ challenge.endDate|date('Y-m-d') }}</td>
+                    <td>{{ challenge.endDate|date('Y-m-d') }}</td>
+                    <td>{{ dump(challenge.users) }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

@@ -113,7 +113,7 @@ class Challenges
      * @ORM\JoinTable(name="user_challenges")
      * @var ArrayCollection
      */
-    private $userChallenges;
+    private $users;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Milestone", mappedBy="challenge")
@@ -163,17 +163,17 @@ class Challenges
     /**
      * @return mixed
      */
-    public function getUserChallenges()
+    public function getUsers()
     {
-        return $this->userChallenges;
+        return $this->users;
     }
 
     /**
-     * @param mixed $userChallenges
+     * @param mixed $users
      */
-    public function setUserChallenges($userChallenges): void
+    public function setUsers($users): void
     {
-        $this->userChallenges = $userChallenges;
+        $this->users = $users;
     }
 
     /**
@@ -262,7 +262,7 @@ class Challenges
 
     public function __construct()
     {
-        $this->userChallenges = new ArrayCollection();
+        $this->users = new ArrayCollection();
         $this->milestones = new ArrayCollection();
         $this->challengeGroup = new ArrayCollection();
     }

@@ -29,7 +29,7 @@ class User extends BaseUser
     }
 
     /**
-     * @ORM\ManyToMany(targetEntity="Challenges", mappedBy="userChallenges")
+     * @ORM\ManyToMany(targetEntity="Challenges", mappedBy="users")
      */
     private $challenges = [];
 
