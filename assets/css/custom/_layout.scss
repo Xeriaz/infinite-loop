@@ -59,3 +59,31 @@
   position: absolute;
 }
 
+
+
+
+.new-milestone {
+
+  .formHead {
+    background-color: #894100;
+
+    &::after {
+      background: url("public/images/milestone.jpeg");
+      background-position: bottom;
+      background-size: 60%;
+      opacity: 0.3;
+
+    }
+
+  }
+
+
+  input[type=text]:focus,
+  select:focus,
+  textarea:focus  {
+
+    border-color: #894100!important;
+  }
+
+}
+

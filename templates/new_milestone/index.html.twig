@@ -1,10 +1,36 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello {{ controller_name }}!{% endblock %}
+
+{% block title %}Hello {{ app.user.username }} - enter new milestone!{% endblock %}
 
 {% block content %}
-    <h1>Add New Milestone:</h1>
-    {{ form_start(form) }}
-    {{ form_widget(form) }}
-    {{ form_end(form) }}
+
+    <div class="newChallenge__wrapper new-milestone">
+        <div class="formBlock">
+            <div class="formHead">
+                <h1 class="formTitle text-left">Add New Milestone</h1>
+                <p class="formText mb-0">Don't be pushed by you problems, be lead by your dreams</p>
+            </div>
+            {{ form_start(form) }}
+
+            <div class="formBody">
+                <div class="formRow">
+                    <div class="formLabel">
+                        {{ form_label(form.Title) }}
+                    </div>
+                    <div class="formControl">
+                        {{ form_widget(form.Title, { 'attr': {'class': 'formInput','autofocus': 'true','placeholder':'Name your milestone' } }) }}
+                        {{ form_errors(form.Title) }}
+                    </div>
+                </div>
+            </div>
+
+            <div class="formFooter ">
+                <input class="btn" type="submit" id="_submit" name="_submit"
+                       value="{{ 'Add' }}"/>
+            </div>
+
+            {{ form_end(form) }}
+        </div>
+    </div>
 {% endblock %}

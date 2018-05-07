@@ -6,5 +6,5 @@ fos_user:
         address: '%env(FOSUB_EMAIL_ADDRESS)%'
         sender_name: '%env(FOSUB_SENDER_NAME)%'
 
-twig:
-  form_themes: ['bootstrap_4_layout.html.twig']
+#twig:
+#  form_themes: ['bootstrap_4_layout.html.twig']
