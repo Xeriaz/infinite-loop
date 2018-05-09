@@ -2,14 +2,10 @@
     <a href="{{ path('home') }}">
         <img class="iL-logoImg" src="{{ asset('images/logo.png') }}" alt="logo"/>
     </a>
-    <form action="#" class="search">
-        <input type="text" class="search__input" placeholder="Search Challenges">
-        <button class="search__button">
-            <svg class="search__icon">
-                <use xlink:href="{{ asset('images/sprite.svg#icon-magnifying-glass') }}"></use>
-            </svg>
-        </button>
-    </form>
+    {{ render(controller(
+        'App\\Controller\\SearchController::searchBarAction'
+    )) }}
+
     <nav class="user-nav">
         {% if is_granted('ROLE_USER') %}
             <div class="user-nav__icon-box">

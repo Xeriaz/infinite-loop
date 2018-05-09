@@ -19,6 +19,17 @@ class ChallangesRepository extends ServiceEntityRepository
         parent::__construct($registry, Challenges::class);
     }
 
+    public function searchChallengesByTitle($title, $user)
+    {
+        $qb = $this->createQueryBuilder('challenge');
+
+        $qb->where($qb->expr()->like('challenge.title', ':title'))
+            ->setParameter('title', sprintf('%%%s%%', $title))
+            ->addOrderBy('challenge.isPublic', 'ASC')
+            ;
+        return $qb->getQuery()->getResult();
+    }
+
 //    /**
 //     * @return Challenges[] Returns an array of Challenges objects
 //     */

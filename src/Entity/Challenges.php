@@ -113,7 +113,7 @@ class Challenges
      * @ORM\JoinTable(name="user_challenges")
      * @var ArrayCollection
      */
-    private $userChallenges;
+    private $users;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Milestone", mappedBy="challenge")
@@ -163,17 +163,17 @@ class Challenges
     /**
      * @return mixed
      */
-    public function getUserChallenges()
+    public function getUsers()
     {
-        return $this->userChallenges;
+        return $this->users;
     }
 
     /**
-     * @param mixed $userChallenges
+     * @param mixed $users
      */
-    public function setUserChallenges($userChallenges): void
+    public function setUsers($users): void
     {
-        $this->userChallenges = $userChallenges;
+        $this->users = $users;
     }
 
     /**
@@ -262,8 +262,67 @@ class Challenges
 
     public function __construct()
     {
-        $this->userChallenges = new ArrayCollection();
+        $this->users = new ArrayCollection();
         $this->milestones = new ArrayCollection();
         $this->challengeGroup = new ArrayCollection();
+    }
+
+    public function addUser(User $user): self
+    {
+        if (!$this->users->contains($user)) {
+            $this->users[] = $user;
+        }
+
+        return $this;
+    }
+
+    public function removeUser(User $user): self
+    {
+        if ($this->users->contains($user)) {
+            $this->users->removeElement($user);
+        }
+
+        return $this;
+    }
+
+    public function addMilestone(Milestone $milestone): self
+    {
+        if (!$this->milestones->contains($milestone)) {
+            $this->milestones[] = $milestone;
+            $milestone->setChallenge($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMilestone(Milestone $milestone): self
+    {
+        if ($this->milestones->contains($milestone)) {
+            $this->milestones->removeElement($milestone);
+            // set the owning side to null (unless already changed)
+            if ($milestone->getChallenge() === $this) {
+                $milestone->setChallenge(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function addChallengeGroup(ChallengesGroups $challengeGroup): self
+    {
+        if (!$this->challengeGroup->contains($challengeGroup)) {
+            $this->challengeGroup[] = $challengeGroup;
+        }
+
+        return $this;
+    }
+
+    public function removeChallengeGroup(ChallengesGroups $challengeGroup): self
+    {
+        if ($this->challengeGroup->contains($challengeGroup)) {
+            $this->challengeGroup->removeElement($challengeGroup);
+        }
+
+        return $this;
     }
 }
