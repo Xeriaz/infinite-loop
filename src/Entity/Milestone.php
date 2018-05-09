@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -42,6 +44,11 @@ class Milestone
     private $isFailed = false;
 
     /**
+     * @ORM\OneToMany(targetEntity="App\Entity\UserMilestone", mappedBy="user")
+     */
+    private $user;
+
+    /**
      * @return mixed
      */
     public function getIsFailed()
@@ -62,6 +69,11 @@ class Milestone
      * @ORM\JoinColumn(name="challenge_id", referencedColumnName="id")
      */
     private $challenge;
+
+    public function __construct()
+    {
+        $this->user = new ArrayCollection();
+    }
 
     /**
      * @return mixed
@@ -159,6 +171,37 @@ class Milestone
     public function setIsDeleted(bool $isDeleted): self
     {
         $this->isDeleted = $isDeleted;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|UserMilestone[]
+     */
+    public function getUser(): Collection
+    {
+        return $this->user;
+    }
+
+    public function addUser(UserMilestone $user): self
+    {
+        if (!$this->user->contains($user)) {
+            $this->user[] = $user;
+            $user->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUser(UserMilestone $user): self
+    {
+        if ($this->user->contains($user)) {
+            $this->user->removeElement($user);
+            // set the owning side to null (unless already changed)
+            if ($user->getUser() === $this) {
+                $user->setUser(null);
+            }
+        }
 
         return $this;
     }

@@ -18,11 +18,9 @@ class SearchController extends Controller
         $searchQuery = $request->query->get('form');
         $searchQuery = $searchQuery['Search'];
 
-            if ($searchQuery !== null) {
-            $challenge = $this->getDoctrine()
-                ->getRepository('App:Challenges')
-                ->searchChallengesByTitle($searchQuery);
-            dump($challenge);
+        if ($searchQuery !== null) {
+            $em = $this->getDoctrine()->getRepository('App:Challenges');
+            $challenge = $em->searchChallengesByTitle($searchQuery, $this->getUser());
         } else {
             $challenge = $this->getDoctrine()
                 ->getRepository('App:Challenges')

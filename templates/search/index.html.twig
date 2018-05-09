@@ -2,10 +2,7 @@
 
 {% block title %}Homepage - {{ parent() }}{% endblock %}
 
-
 {% block content %}
-
-    {{ dump(challenges) }}
     <div class="container">
         <table class="table">
             <thead>
@@ -28,8 +25,7 @@
                     <td>{{ challenge.isPublic }}</td>
                     <td>{{ challenge.startDate|date('Y-m-d') }}</td>
                     <td>{{ challenge.endDate|date('Y-m-d') }}</td>
-                    <td>{{ challenge.endDate|date('Y-m-d') }}</td>
-                    <td>{{ dump(challenge.users) }}</td>
+                    <td>{{ challenge.users|join(' ') }}</td>
                 </tr>
             {% endfor %}
             </tbody>

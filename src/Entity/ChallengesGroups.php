@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -27,6 +29,11 @@ class ChallengesGroups
      * @ORM\ManyToMany(targetEntity="App\Entity\Challenges", mappedBy="challengeGroup")
      */
     private $challenge;
+
+    public function __construct()
+    {
+        $this->challenge = new ArrayCollection();
+    }
 
     /**
      * @return mixed
@@ -67,6 +74,26 @@ class ChallengesGroups
     public function setGroupName(string $groupName): self
     {
         $this->groupName = $groupName;
+
+        return $this;
+    }
+
+    public function addChallenge(Challenges $challenge): self
+    {
+        if (!$this->challenge->contains($challenge)) {
+            $this->challenge[] = $challenge;
+            $challenge->addChallengeGroup($this);
+        }
+
+        return $this;
+    }
+
+    public function removeChallenge(Challenges $challenge): self
+    {
+        if ($this->challenge->contains($challenge)) {
+            $this->challenge->removeElement($challenge);
+            $challenge->removeChallengeGroup($this);
+        }
 
         return $this;
     }
