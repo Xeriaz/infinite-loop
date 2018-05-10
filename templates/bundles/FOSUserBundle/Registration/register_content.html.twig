@@ -2,9 +2,11 @@
 
 
 <div class="account-wall">
-    <img class="profile-img"
-         src="https://lh5.googleusercontent.com/-b0-k99FZlyE/AAAAAAAAAAI/AAAAAAAAAAA/eu7opA4byxI/photo.jpg?sz=120"
-         alt="user foto">
+    <div class="user-block">
+        <svg class="user-icon">
+            <use xlink:href="{{ asset('images/sprite.svg#icon-group') }}"></use>
+        </svg>
+    </div>
     {{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register'}}) }}
 
     <div class="form-signin" id="fos_user_registration_form">

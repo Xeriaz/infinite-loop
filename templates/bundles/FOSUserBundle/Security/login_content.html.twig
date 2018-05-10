@@ -5,9 +5,11 @@
 {% endif %}
 
 <div class="account-wall">
-    <img class="profile-img"
-         src="https://lh5.googleusercontent.com/-b0-k99FZlyE/AAAAAAAAAAI/AAAAAAAAAAA/eu7opA4byxI/photo.jpg?sz=120"
-         alt="user foto">
+    <div class="user-block">
+        <svg class="user-icon">
+            <use xlink:href="{{ asset('images/sprite.svg#icon-group') }}"></use>
+        </svg>
+    </div>
     <form class="form-signin" action="{{ path("fos_user_security_check") }}" method="post">
         {% if csrf_token %}
             <input type="hidden" name="_csrf_token" value="{{ csrf_token }}"/>
