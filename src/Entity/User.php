@@ -34,24 +34,24 @@ class User extends BaseUser
     private $challenges = [];
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\UserMilestone", mappedBy="user")
+     * @ORM\OneToMany(targetEntity="UserMilestoneStatus", mappedBy="user")
      */
-    private $milestone;
+    private $milestoneStatus;
 
     /**
      * @return mixed
      */
-    public function getMilestone()
+    public function getMilestoneStatus()
     {
-        return $this->milestone;
+        return $this->milestoneStatus;
     }
 
     /**
-     * @param mixed $milestone
+     * @param mixed $milestoneStatus
      */
-    public function setMilestone($milestone): void
+    public function setMilestoneStatus($milestoneStatus): void
     {
-        $this->milestone = $milestone;
+        $this->milestoneStatus = $milestoneStatus;
     }
 
     /**
@@ -73,7 +73,7 @@ class User extends BaseUser
     public function __construct()
     {
         $this->challenges = new ArrayCollection();
-        $this->milestone = new ArrayCollection();
+        $this->milestoneStatus = new ArrayCollection();
     }
 
     public function addChallenge(Challenges $challenge): self
@@ -96,20 +96,20 @@ class User extends BaseUser
         return $this;
     }
 
-    public function addMilestone(UserMilestone $milestone): self
+    public function addMilestone(UserMilestoneStatus $milestone): self
     {
-        if (!$this->milestone->contains($milestone)) {
-            $this->milestone[] = $milestone;
+        if (!$this->milestoneStatus->contains($milestone)) {
+            $this->milestoneStatus[] = $milestone;
             $milestone->setUser($this);
         }
 
         return $this;
     }
 
-    public function removeMilestone(UserMilestone $milestone): self
+    public function removeMilestone(UserMilestoneStatus $milestone): self
     {
-        if ($this->milestone->contains($milestone)) {
-            $this->milestone->removeElement($milestone);
+        if ($this->milestoneStatus->contains($milestone)) {
+            $this->milestoneStatus->removeElement($milestone);
             // set the owning side to null (unless already changed)
             if ($milestone->getUser() === $this) {
                 $milestone->setUser(null);

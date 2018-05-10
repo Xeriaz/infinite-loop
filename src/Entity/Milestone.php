@@ -24,45 +24,9 @@ class Milestone
     private $title;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\OneToMany(targetEntity="UserMilestoneStatus", mappedBy="milestone")
      */
-    private $status = false;
-
-    /**
-     * @ORM\Column(type="datetime", nullable=true)
-     */
-    private $completedOn;
-
-    /**
-     * @ORM\Column(type="boolean")
-     */
-    private $isDeleted = false;
-
-    /**
-     * @ORM\Column(type="boolean")
-     */
-    private $isFailed = false;
-
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\UserMilestone", mappedBy="user")
-     */
-    private $user;
-
-    /**
-     * @return mixed
-     */
-    public function getIsFailed()
-    {
-        return $this->isFailed;
-    }
-
-    /**
-     * @param mixed $isFailed
-     */
-    public function setIsFailed($isFailed): void
-    {
-        $this->isFailed = $isFailed;
-    }
+    private $userStatus;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Challenges", inversedBy="milestones")
@@ -72,7 +36,7 @@ class Milestone
 
     public function __construct()
     {
-        $this->user = new ArrayCollection();
+        $this->userStatus = new ArrayCollection();
     }
 
     /**
@@ -119,84 +83,27 @@ class Milestone
     }
 
     /**
-     * @return bool|null
+     * @return Collection|UserMilestoneStatus[]
      */
-    public function getStatus(): ?bool
+    public function getUserStatus(): Collection
     {
-        return $this->status;
+        return $this->userStatus;
     }
 
-    /**
-     * @param bool $status
-     * @return Milestone
-     */
-    public function setStatus(bool $status): self
+    public function addUser(UserMilestoneStatus $user): self
     {
-        $this->status = $status;
-
-        return $this;
-    }
-
-    /**
-     * @return \DateTimeInterface|null
-     */
-    public function getCompletedOn(): ?\DateTimeInterface
-    {
-        return $this->completedOn;
-    }
-
-    /**
-     * @param \DateTimeInterface|null $completedOn
-     * @return Milestone
-     */
-    public function setCompletedOn(?\DateTimeInterface $completedOn): self
-    {
-        $this->completedOn = $completedOn;
-
-        return $this;
-    }
-
-    /**
-     * @return bool|null
-     */
-    public function getIsDeleted(): ?bool
-    {
-        return $this->isDeleted;
-    }
-
-    /**
-     * @param bool $isDeleted
-     * @return Milestone
-     */
-    public function setIsDeleted(bool $isDeleted): self
-    {
-        $this->isDeleted = $isDeleted;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|UserMilestone[]
-     */
-    public function getUser(): Collection
-    {
-        return $this->user;
-    }
-
-    public function addUser(UserMilestone $user): self
-    {
-        if (!$this->user->contains($user)) {
-            $this->user[] = $user;
+        if (!$this->userStatus->contains($user)) {
+            $this->userStatus[] = $user;
             $user->setUser($this);
         }
 
         return $this;
     }
 
-    public function removeUser(UserMilestone $user): self
+    public function removeUser(UserMilestoneStatus $user): self
     {
-        if ($this->user->contains($user)) {
-            $this->user->removeElement($user);
+        if ($this->userStatus->contains($user)) {
+            $this->userStatus->removeElement($user);
             // set the owning side to null (unless already changed)
             if ($user->getUser() === $this) {
                 $user->setUser(null);

@@ -32,5 +32,4 @@ class MyChallengesController extends Controller
         $challenges = $user->getChallenges();
         return $challenges;
     }
-
 }
