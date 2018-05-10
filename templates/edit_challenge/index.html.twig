@@ -2,14 +2,12 @@
 
 {% block title %}Hello {{ controller_name }}!{% endblock %}
 {% block content %}
-    {# FIXME this is temporary fix for datetime selection #}
-    <style>
-        select.form-control:not([size]):not([multiple]) {height: 100%}
-    </style>
+
+
     <div class="newChallenge__wrapper">
         <div class="formBlock">
             <div class="formHead">
-                <h1 class="formTitle mb-0 text-left">Start Challenge</h1>
+                <h1 class="formTitle text-left">Edit Challenge</h1>
                 <p class="formText mb-0">If you can dream it, you can do it!</p>
             </div>
             {{ form_start(form, {'method': 'post', 'action': path('edit_challenge', {'id': app.request.get('id') }), 'attr': {'class': 'edit_challenge_form'}}) }}
@@ -45,7 +43,7 @@
                     </div>
                 </div>
 
-                <div class="formRow">
+                <div class="formRow mb-3">
                     <div class="formLabel">
                         {{ form_label(form.End_date) }}
                     </div>
@@ -77,15 +75,12 @@
             </div>
 
             <div class="formFooter ">
-                <input class="btn btn-lg btn-block mb-2" type="submit" id="_submit" name="_submit"
-                       value="{{ 'Update challenge' }}"/>
-                {# FIXME This button should be somewhere else #}
-                    <br>
-                    <a href="{{ path('delete_challenge', {'id': app.request.get('id')}) }}" class="btn btn-lg btn-block mb-2">Remove challenge!</a>
-                {# FIXME code above #}
+                <input class="btn" type="submit" iid="_submit" name="_submit"
+                       value="{{ 'Save' }}"/>
+                <a href="{{ path('delete_challenge', {'id': app.request.get('id')}) }}" class="btn">Remove</a>
             </div>
             {{ form_end(form) }}
-
         </div>
     </div>
+
 {% endblock %}

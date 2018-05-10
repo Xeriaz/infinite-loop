@@ -373,6 +373,7 @@
   font-size: 1.5rem;
   font-weight: 300;
   text-transform: uppercase;
+  text-decoration: none;
   border: none;
   border-radius: 100px;
   background-image: linear-gradient(to right, var(--color-primary-light), var(--color-primary));
@@ -402,6 +403,7 @@
 
   &:hover {
     background-image: linear-gradient(to left, var(--color-primary-light), var(--color-primary));
+    color: #fff;
   }
 
   &:active {
