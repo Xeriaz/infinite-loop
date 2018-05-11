@@ -13,7 +13,7 @@
                 <th>Public status</th>
                 <th>Start Date</th>
                 <th>End Date</th>
-                <th>User</th>
+                <th>Owner</th>
             </tr>
             </thead>
             <tbody>
@@ -25,7 +25,7 @@
                     <td>{{ challenge.isPublic }}</td>
                     <td>{{ challenge.startDate|date('Y-m-d') }}</td>
                     <td>{{ challenge.endDate|date('Y-m-d') }}</td>
-                    <td>{{ challenge.users|join(' ') }}</td>
+                    <td>{{ challenge.owner }}</td>
                     <td><a href="{{ path('join_in_challenge', {'id': challenge.id }) }}">Join In</a></td>
                     
                 </tr>
