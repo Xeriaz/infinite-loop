@@ -88,13 +88,12 @@ class MilestoneController extends Controller
         return $data;
     }
 
-
     /**
-     * @param object $milestone
+     * @param Milestone $milestone
      * @param string $objectName
      * @return object
      */
-    private function getDataByMilestone(object $milestone, string $objectName): object
+    private function getDataByMilestone(Milestone $milestone, string $objectName): object
     {
         $data = $this->getDoctrine()
             ->getRepository($objectName)
@@ -120,8 +119,7 @@ class MilestoneController extends Controller
     public function markMilestoneAsCompleted (Request $request)
     {
         $milestoneId = $request->attributes->get('id');
-        $userId = $this->getUser()->getId();
-//        $userId =
+
         /** @var Milestone $milestone */
         $milestone = $this->getDataById($milestoneId, Milestone::class);
 
@@ -132,7 +130,7 @@ class MilestoneController extends Controller
         );
 
         $userMilestoneStatus->setIsCompleted(true);
-        $userMilestoneStatus->setCompletedOn(new \DateTime('now'));
+        $userMilestoneStatus->setSubmittedOn(new \DateTime('now'));
 
         $em = $this->getDoctrine()->getManager();
         $em->flush();
@@ -151,7 +149,14 @@ class MilestoneController extends Controller
 
         /** @var Milestone $milestone */
         $milestone = $this->getDataById($id, Milestone::class);
-        $milestone->setIsDeleted(true);
+
+        /** @var UserMilestoneStatus $userMilestoneStatus */
+        $userMilestoneStatus = $this->getDataByMilestone(
+            $milestone,
+            UserMilestoneStatus::class
+        );
+
+        $userMilestoneStatus->setIsDeleted(true);
 
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->flush();
@@ -170,8 +175,15 @@ class MilestoneController extends Controller
 
         /** @var Milestone $milestone */
         $milestone = $this->getDataById($id, Milestone::class);
-        $milestone->setIsFailed(true);
-        $milestone->setCompletedOn(new \DateTime('now'));
+
+        /** @var UserMilestoneStatus $userMilestoneStatus */
+        $userMilestoneStatus = $this->getDataByMilestone(
+            $milestone,
+            UserMilestoneStatus::class
+        );
+
+        $userMilestoneStatus->setIsFailed(true);
+        $userMilestoneStatus->setSubmittedOn(new \DateTime('now'));
 
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->flush();
@@ -191,8 +203,15 @@ class MilestoneController extends Controller
         /** @var Milestone $milestone */
         $milestone = $this->getDataById($id, Milestone::class);
 
+        /** @var UserMilestoneStatus $userMilestoneStatus */
+        $userMilestoneStatus = $this->getDataByMilestone(
+            $milestone,
+            UserMilestoneStatus::class
+        );
+
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->remove($milestone);
+        $entityManager->remove($userMilestoneStatus);
         $entityManager->flush();
 
         return $this->redirectToRoute('my_challenges');

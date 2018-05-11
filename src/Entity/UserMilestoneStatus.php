@@ -103,25 +103,6 @@ class UserMilestoneStatus
         return $this;
     }
 
-    /**
-     * @return \DateTimeInterface|null
-     */
-    public function getCompletedOn(): ?\DateTimeInterface
-    {
-        return $this->submittedOn;
-    }
-
-    /**
-     * @param \DateTimeInterface|null $completedOn
-     * @return Milestone
-     */
-    public function setCompletedOn(?\DateTimeInterface $completedOn): self
-    {
-        $this->submittedOn = $completedOn;
-
-        return $this;
-    }
-
     public function getSubmittedOn(): ?\DateTimeInterface
     {
         return $this->submittedOn;

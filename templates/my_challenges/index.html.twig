@@ -48,17 +48,16 @@
                                             {% else %}
                                                 <span class="d-block">Completed on: <br>
                                             {% endif %}
-                                                {% if milestoneUserStatus.completedOn == null %}
+                                                {% if milestoneUserStatus.submittedOn == null %}
                                                     TBD
                                                 {% else %}
-                                                    {{ milestoneUserStatus.completedOn|date('Y-m-d') }}
+                                                    {{ milestoneUserStatus.submittedOn|date('Y-m-d') }}
                                                 {% endif %}
                                             </span>
                                         </div>
                                         <div>
                                             {#{% if milestoneUserStatus.isFailed %}#}
-                                                {#<a href="{{ path('remove_milestone', {'id': milestone.id}) }}">Remove</a>#}
-                                            {#{% elseif not milestone.status %}#}
+                                            {% if (not milestoneUserStatus.isCompleted and not milestoneUserStatus.isFailed )%}
                                                 <a class="milestone-statusLink" href="{{ path('complete_milestone', {'id': milestone.id}) }}">
                                                     <svg class="milestone-statusIcon">
                                                         <use xlink:href="{{ asset('images/sprite.svg#icon-checkmark') }}"></use>
@@ -74,7 +73,7 @@
                                                         <use xlink:href="{{ asset('images/sprite.svg#icon-bin') }}"></use>
                                                     </svg>
                                                 </a>
-                                            {#{% endif %}#}
+                                            {% endif %}
                                         </div>
                                     </div>
                                 </li>
@@ -113,7 +112,7 @@
                                         </a>
                                     </span>
                             {% else %}
-                                <h5>Challenge is completed on: {{ challenge.completedOn|date('Y-m-d') }}</h5>
+                                <h5>Challenge is completed on: {{ challenge.submittedOn|date('Y-m-d') }}</h5>
                             {% endif %}
                         </div>
                         <div class="card-footer__statusBlock">
