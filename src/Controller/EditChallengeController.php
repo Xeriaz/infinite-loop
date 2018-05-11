@@ -25,9 +25,9 @@ class EditChallengeController extends Controller
 
     /**
      * @param int $id
-     * @return object
+     * @return Challenges
      */
-    public function getChallengeData(int $id): object
+    public function getChallengeData(int $id): Challenges
     {
         $challengeData = $this->getDoctrine()
             ->getRepository(Challenges::class)
@@ -102,7 +102,6 @@ class EditChallengeController extends Controller
         return $this->redirectToRoute('my_challenges');
     }
 
-
     /**
      * @Route("challenge/{id}/join-in", name="join_in_challenge")
      * @param int $id
@@ -126,7 +125,7 @@ class EditChallengeController extends Controller
 
         $challenge = $this->getChallengeData($id);
 
-        // TODO userMilestoneStatus pagal challenge id ir owner id;
+        // TODO userMilestoneStatus by challenge id ir owner id;
 
     }
 }

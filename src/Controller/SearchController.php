@@ -21,18 +21,26 @@ class SearchController extends Controller
         if ($searchQuery !== null) {
             $em = $this->getDoctrine()->getRepository('App:Challenges');
             $challenge = $em->searchChallengesByTitle($searchQuery, $this->getUser());
-        } else {
-            $challenge = $this->getDoctrine()
-                ->getRepository('App:Challenges')
-                ->findAll();
+            $publicChallenge = $em->searchPublicChallengesByTitle($searchQuery);
+            dump($publicChallenge);
+
         }
+//        else {
+//            $challenge = $this->getDoctrine()
+//                ->getRepository('App:Challenges')
+//                ->findAll();
+//        }
 
         return $this->render('search/index.html.twig', [
             'controller_name' => 'SearchController',
             'challenges' => $challenge,
+            'publicChallenges' => $publicChallenge,
         ]);
     }
 
+    /**
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     public function searchBarAction()
     {
         $form = $this->createFormBuilder()

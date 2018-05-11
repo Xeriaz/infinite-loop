@@ -10,14 +10,14 @@ use Doctrine\ORM\Mapping as ORM;
 class UserMilestoneStatus
 {
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="milestoneStatus")
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="milestoneStatus")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      * @ORM\Id
      */
     private $user;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Milestone", inversedBy="userStatus")
+     * @ORM\ManyToOne(targetEntity="Milestone", inversedBy="userStatus")
      * @ORM\JoinColumn(name="milestone_id", referencedColumnName="id")
      * @ORM\Id
      */

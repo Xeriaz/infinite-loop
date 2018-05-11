@@ -39,6 +39,11 @@ class User extends BaseUser
     private $milestoneStatus;
 
     /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Challenges", mappedBy="owner"))
+     */
+    private $ownedChallenge;
+
+    /**
      * @return mixed
      */
     public function getMilestoneStatus()
@@ -72,6 +77,8 @@ class User extends BaseUser
 
     public function __construct()
     {
+        parent::__construct();
+
         $this->challenges = new ArrayCollection();
         $this->milestoneStatus = new ArrayCollection();
     }
@@ -80,7 +87,7 @@ class User extends BaseUser
     {
         if (!$this->challenges->contains($challenge)) {
             $this->challenges[] = $challenge;
-            $challenge->addUserChallenge($this);
+            $challenge->addUser($this);
         }
 
         return $this;
@@ -90,7 +97,7 @@ class User extends BaseUser
     {
         if ($this->challenges->contains($challenge)) {
             $this->challenges->removeElement($challenge);
-            $challenge->removeUserChallenge($this);
+            $challenge->removeUser($this);
         }
 
         return $this;
@@ -137,6 +144,24 @@ class User extends BaseUser
             if ($milestoneStatus->getUser() === $this) {
                 $milestoneStatus->setUser(null);
             }
+        }
+
+        return $this;
+    }
+
+    public function getOwnedChallenge(): ?Challenges
+    {
+        return $this->ownedChallenge;
+    }
+
+    public function setOwnedChallenge(?Challenges $ownedChallenge): self
+    {
+        $this->ownedChallenge = $ownedChallenge;
+
+        // set (or unset) the owning side of the relation if necessary
+        $newOwner = $ownedChallenge === null ? null : $this;
+        if ($newOwner !== $ownedChallenge->getOwner()) {
+            $ownedChallenge->setOwner($newOwner);
         }
 
         return $this;

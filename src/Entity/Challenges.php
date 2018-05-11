@@ -45,7 +45,49 @@ class Challenges
      */
     private $completedOn;
 
-        /**
+    /**
+     * @Assert\NotBlank()
+     * @Assert\Type("\DateTime")
+     * @ORM\Column(type="datetime")
+     */
+    private $startDate;
+
+    /**
+     * @Assert\NotBlank()
+     * @Assert\Type("\DateTime")
+     * @ORM\Column(type="datetime")
+     */
+    private $endDate;
+
+    /**
+     * @Assert\NotBlank()
+     * @ORM\ManyToMany(targetEntity="User", inversedBy="challenges")
+     * @ORM\JoinTable(name="user_challenges")
+     * @var ArrayCollection
+     */
+    private $users;
+
+
+    /**
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="ownedChallenge")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     */
+    private $owner;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Milestone", mappedBy="challenge")
+     * @var Collection
+     */
+    private $milestones;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="ChallengesGroups", inversedBy="challenge")
+     * @ORM\JoinTable(name="challenge_groups")
+     * @var Collection
+     */
+    private $challengeGroup;
+
+    /**
      * @return mixed
      */
     public function getIsPublic()
@@ -60,20 +102,6 @@ class Challenges
     {
         $this->isPublic = $isPublic;
     }
-
-    /**
-     * @Assert\NotBlank()
-     * @Assert\Type("\DateTime")
-     * @ORM\Column(type="datetime")
-     */
-    private $startDate;
-
-    /**
-     * @Assert\NotBlank()
-     * @Assert\Type("\DateTime")
-     * @ORM\Column(type="datetime")
-     */
-    private $endDate;
 
     /**
      * @return mixed
@@ -107,33 +135,6 @@ class Challenges
         $this->completedOn = $completedOn;
     }
 
-    /**
-     * @Assert\NotBlank()
-     * @ORM\ManyToMany(targetEntity="App\Entity\User", inversedBy="challenges")
-     * @ORM\JoinTable(name="user_challenges")
-     * @var ArrayCollection
-     */
-    private $users;
-
-
-    /**
-     * @var ArrayCollection;
-     * @ORM\Column(type="object")
-     */
-    private $owner;
-
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Milestone", mappedBy="challenge")
-     * @var Collection
-     */
-    private $milestones;
-
-    /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\ChallengesGroups", inversedBy="challenge")
-     * @ORM\JoinTable(name="challenge_groups")
-     * @var Collection
-     */
-    private $challengeGroup;
 
     /**
      * @return Collection
@@ -357,18 +358,11 @@ class Challenges
         return $this;
     }
 
-    /**
-     * @return ArrayCollection
-     */
     public function getOwner()
     {
         return $this->owner;
     }
 
-    /**
-     * @param $owner
-     * @return Challenges
-     */
     public function setOwner($owner): self
     {
         $this->owner = $owner;

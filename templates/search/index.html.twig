@@ -4,6 +4,7 @@
 
 {% block content %}
     <div class="container">
+        <h2>Private:</h2>
         <table class="table">
             <thead>
             <tr>
@@ -27,7 +28,34 @@
                     <td>{{ challenge.endDate|date('Y-m-d') }}</td>
                     <td>{{ challenge.owner }}</td>
                     <td><a href="{{ path('join_in_challenge', {'id': challenge.id }) }}">Join In</a></td>
-                    
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <h2>Public:</h2>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Public status</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Owner</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for public_challenge in publicChallenges %}
+                <tr>
+                    <td>{{ public_challenge.id }}</td>
+                    <td>{{ public_challenge.title }}</td>
+                    <td>{{ public_challenge.description }}</td>
+                    <td>{{ public_challenge.isPublic }}</td>
+                    <td>{{ public_challenge.startDate|date('Y-m-d') }}</td>
+                    <td>{{ public_challenge.endDate|date('Y-m-d') }}</td>
+                    <td>{{ public_challenge.owner }}</td>
+                    <td><a href="{{ path('join_in_challenge', {'id': public_challenge.id }) }}">Join In</a></td>
                 </tr>
             {% endfor %}
             </tbody>
