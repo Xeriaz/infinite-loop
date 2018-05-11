@@ -26,6 +26,8 @@
                     <td>{{ challenge.startDate|date('Y-m-d') }}</td>
                     <td>{{ challenge.endDate|date('Y-m-d') }}</td>
                     <td>{{ challenge.users|join(' ') }}</td>
+                    <td><a href="{{ path('join_in_challenge', {'id': challenge.id }) }}">Join In</a></td>
+                    
                 </tr>
             {% endfor %}
             </tbody>

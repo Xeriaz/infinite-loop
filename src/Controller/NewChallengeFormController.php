@@ -36,6 +36,7 @@ class NewChallengeFormController extends Controller
         $challenge->setEndDate(new \DateTime('now'));
 //        FIXME casting to array, it shouldn't be there, I think
         $challenge->setUsers((array($this->getUser())));
+        $challenge->setOwner($this->getUser());
 
         $form = $this->createForm(NewChallengeForm::class, $challenge);
 

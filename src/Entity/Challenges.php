@@ -115,6 +115,13 @@ class Challenges
      */
     private $users;
 
+
+    /**
+     * @var ArrayCollection;
+     * @ORM\Column(type="object")
+     */
+    private $owner;
+
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Milestone", mappedBy="challenge")
      * @var Collection
@@ -267,6 +274,10 @@ class Challenges
         $this->challengeGroup = new ArrayCollection();
     }
 
+    /**
+     * @param User $user
+     * @return Challenges
+     */
     public function addUser(User $user): self
     {
         if (!$this->users->contains($user)) {
@@ -276,6 +287,10 @@ class Challenges
         return $this;
     }
 
+    /**
+     * @param User $user
+     * @return Challenges
+     */
     public function removeUser(User $user): self
     {
         if ($this->users->contains($user)) {
@@ -285,6 +300,10 @@ class Challenges
         return $this;
     }
 
+    /**
+     * @param Milestone $milestone
+     * @return Challenges
+     */
     public function addMilestone(Milestone $milestone): self
     {
         if (!$this->milestones->contains($milestone)) {
@@ -295,6 +314,10 @@ class Challenges
         return $this;
     }
 
+    /**
+     * @param Milestone $milestone
+     * @return Challenges
+     */
     public function removeMilestone(Milestone $milestone): self
     {
         if ($this->milestones->contains($milestone)) {
@@ -308,6 +331,10 @@ class Challenges
         return $this;
     }
 
+    /**
+     * @param ChallengesGroups $challengeGroup
+     * @return Challenges
+     */
     public function addChallengeGroup(ChallengesGroups $challengeGroup): self
     {
         if (!$this->challengeGroup->contains($challengeGroup)) {
@@ -317,11 +344,34 @@ class Challenges
         return $this;
     }
 
+    /**
+     * @param ChallengesGroups $challengeGroup
+     * @return Challenges
+     */
     public function removeChallengeGroup(ChallengesGroups $challengeGroup): self
     {
         if ($this->challengeGroup->contains($challengeGroup)) {
             $this->challengeGroup->removeElement($challengeGroup);
         }
+
+        return $this;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getOwner()
+    {
+        return $this->owner;
+    }
+
+    /**
+     * @param $owner
+     * @return Challenges
+     */
+    public function setOwner($owner): self
+    {
+        $this->owner = $owner;
 
         return $this;
     }

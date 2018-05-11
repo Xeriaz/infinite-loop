@@ -119,4 +119,27 @@ class User extends BaseUser
         return $this;
     }
 
+    public function addMilestoneStatus(UserMilestoneStatus $milestoneStatus): self
+    {
+        if (!$this->milestoneStatus->contains($milestoneStatus)) {
+            $this->milestoneStatus[] = $milestoneStatus;
+            $milestoneStatus->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMilestoneStatus(UserMilestoneStatus $milestoneStatus): self
+    {
+        if ($this->milestoneStatus->contains($milestoneStatus)) {
+            $this->milestoneStatus->removeElement($milestoneStatus);
+            // set the owning side to null (unless already changed)
+            if ($milestoneStatus->getUser() === $this) {
+                $milestoneStatus->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
 }

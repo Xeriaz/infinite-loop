@@ -112,4 +112,27 @@ class Milestone
 
         return $this;
     }
+
+    public function addUserStatus(UserMilestoneStatus $userStatus): self
+    {
+        if (!$this->userStatus->contains($userStatus)) {
+            $this->userStatus[] = $userStatus;
+            $userStatus->setMilestone($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUserStatus(UserMilestoneStatus $userStatus): self
+    {
+        if ($this->userStatus->contains($userStatus)) {
+            $this->userStatus->removeElement($userStatus);
+            // set the owning side to null (unless already changed)
+            if ($userStatus->getMilestone() === $this) {
+                $userStatus->setMilestone(null);
+            }
+        }
+
+        return $this;
+    }
 }
