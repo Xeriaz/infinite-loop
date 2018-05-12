@@ -5,7 +5,8 @@
   justify-content: center;
   align-items: center;
   width: 100%;
-  padding: 3rem 1rem;
+  height: calc(100vh - 7rem);
+  padding: 3rem 0;
 
   background-image: linear-gradient(
                   to right bottom,
@@ -15,6 +16,11 @@
   background-size: cover;
   background-position: center;
   position: relative;
+
+  @media only screen and (max-width: $bp-medium){
+    align-items: flex-start;
+    padding: 0;
+  }
 
 
   @media (min-resolution: 192dpi) and (min-width: 37.5em),
@@ -43,12 +49,10 @@
   }
 
   @media only screen and (max-width: $bp-medium){
-    width: 90%
-  }
-
-  @media only screen and (max-width: $bp-small){
     width: 100%
   }
+
+
 
 
 
