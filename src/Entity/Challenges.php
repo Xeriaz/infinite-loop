@@ -41,6 +41,10 @@ class Challenges
     private $isCompleted = false;
 
     /**
+     * @ORM\Column(type="boolean")
+     */
+    private $addProof = false;
+    /**
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $completedOn;
@@ -366,6 +370,18 @@ class Challenges
     public function setOwner($owner): self
     {
         $this->owner = $owner;
+
+        return $this;
+    }
+
+    public function getAddProof(): ?bool
+    {
+        return $this->addProof;
+    }
+
+    public function setAddProof(bool $addProof): self
+    {
+        $this->addProof = $addProof;
 
         return $this;
     }

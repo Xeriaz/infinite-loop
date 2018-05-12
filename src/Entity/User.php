@@ -46,7 +46,7 @@ class User extends BaseUser
     /**
      * @return mixed
      */
-    public function getMilestoneStatus()
+    public function getMilestoneStatus(): Collection
     {
         return $this->milestoneStatus;
     }
@@ -62,7 +62,7 @@ class User extends BaseUser
     /**
      * @return mixed
      */
-    public function getChallenges()
+    public function getChallenges(): Collection
     {
         return $this->challenges;
     }
@@ -81,6 +81,7 @@ class User extends BaseUser
 
         $this->challenges = new ArrayCollection();
         $this->milestoneStatus = new ArrayCollection();
+        $this->ownedChallenge = new ArrayCollection();
     }
 
     public function addChallenge(Challenges $challenge): self
@@ -149,7 +150,7 @@ class User extends BaseUser
         return $this;
     }
 
-    public function getOwnedChallenge(): ?Challenges
+    public function getOwnedChallenge(): Collection
     {
         return $this->ownedChallenge;
     }
@@ -162,6 +163,29 @@ class User extends BaseUser
         $newOwner = $ownedChallenge === null ? null : $this;
         if ($newOwner !== $ownedChallenge->getOwner()) {
             $ownedChallenge->setOwner($newOwner);
+        }
+
+        return $this;
+    }
+
+    public function addOwnedChallenge(Challenges $ownedChallenge): self
+    {
+        if (!$this->ownedChallenge->contains($ownedChallenge)) {
+            $this->ownedChallenge[] = $ownedChallenge;
+            $ownedChallenge->setOwner($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOwnedChallenge(Challenges $ownedChallenge): self
+    {
+        if ($this->ownedChallenge->contains($ownedChallenge)) {
+            $this->ownedChallenge->removeElement($ownedChallenge);
+            // set the owning side to null (unless already changed)
+            if ($ownedChallenge->getOwner() === $this) {
+                $ownedChallenge->setOwner(null);
+            }
         }
 
         return $this;
