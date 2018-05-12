@@ -151,8 +151,8 @@
     position: relative;
     transition: border 150ms ease-in-out;
 
-    &:not(:first-of-type){
-      margin-left: 0.8rem;
+    &:not(:last-of-type){
+      margin-right: 1.2rem;
     }
 
     &:hover {
@@ -166,7 +166,23 @@
         color: var(--color-primary);
       }
 
+
+
     }
+  }
+
+  .milestone-statusProgress {
+    display: flex;
+    align-items: center;
+    font-size: 0.8rem;
+    text-decoration: none;
+    padding: 0.7rem 2.4rem;
+    color: var(--color-grey-dark-1);
+    border: 1px solid var(--color-primary);
+    border-radius: 10rem;
+    white-space: nowrap;
+    position: relative;
+    margin-left: 2.5rem;
   }
 
   .card-footer {
@@ -219,6 +235,14 @@
       width: 90%;
       margin-left: 5%;
     }
+  }
+
+  .challengeControlBlock--2 {
+    &:before {
+      content: 'Milestone';
+
+    }
+
   }
 
   .list-group-item {

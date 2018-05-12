@@ -87,7 +87,7 @@
                         {% endfor %}
                     </ul>
                     <div class="card-footer">
-                        <div class="card-footer__control">
+
                             {% if not challenge.isCompleted %}
 
 
@@ -113,21 +113,32 @@
                                         </a>
                                     </div>
 
-
+                                    <div class="challengeControlBlock challengeControlBlock--2">
                                         <a class="milestone-statusLink" href="{{ path('milestone', {'id': challenge.id}) }}" c>
                                             <svg class="milestone-statusIcon">
-                                                 <use xlink:href="{{ asset('images/sprite.svg#icon-plus') }}"></use>
-                                                <span class="milestone-statusLabel">Add Milestone</span>
-                                             </svg>
+                                                <use xlink:href="{{ asset('images/sprite.svg#icon-plus') }}"></use>
+                                                <span class="milestone-statusLabel">Add new</span>
+                                            </svg>
                                         </a>
+
+                                        <div class="milestone-statusProgress" >
+                                            <span class="milestone-statusIcon">
+                                                <span >{{ completedMilestones }} / {{ milestonesCount }}</span>
+                                                <span class="milestone-statusLabel">Progress</span>
+                                            </span>
+                                        </div>
+
+                                    </div>
+
+
 
                             {% else %}
                                 <h5>Challenge is completed on: {{ challenge.completedOn|date('Y-m-d') }}</h5>
+                                <div class="card-footer__statusBlock">
+                                    Milestones accomplished: {{ completedMilestones }} / {{ milestonesCount }}
+                                </div>
                             {% endif %}
-                        </div>
-                        <div class="card-footer__statusBlock">
-                            <span>Milestone progress: {{ completedMilestones }} / {{ milestonesCount }} </span>
-                        </div>
+
                     </div>
                 </div>
             {% endfor %}
