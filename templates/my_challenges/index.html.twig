@@ -136,10 +136,19 @@
 
 
                             {% else %}
-                                <h5>Challenge is completed on: {{ challenge.completedOn|date('Y-m-d') }}</h5>
-                                <div class="card-footer__statusBlock">
-                                    Milestones accomplished: {{ completedMilestones }} / {{ milestonesCount }}
+                                <div class="challengeCompleted">
+                                    <div class="milestone-statusProgress ml-0" >
+                                        <span >{{ challenge.completedOn|date('Y-m-d') }}</span>
+                                        <span class="milestone-statusLabel">Challenge completed on</span>
+
+                                    </div>
+                                    <div class="milestone-statusProgress" >
+                                        <span >{{ completedMilestones }} / {{ milestonesCount }}</span>
+                                        <span class="milestone-statusLabel">Milestones accomplished</span>
+                                    </div>
                                 </div>
+
+
                             {% endif %}
 
                     </div>
