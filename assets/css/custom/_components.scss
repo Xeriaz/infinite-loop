@@ -4,16 +4,15 @@
 }
 
 .search {
-  flex: 0 0 30%;
+  flex: 0 0 40%;
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
 
-  @media only screen and (max-width: $bp-smallest) {
+  @media only screen and (max-width: $bp-largest) {
     order: 1;
     flex: 0 0 100%;
-    background-color: var(--color-grey-light-2);
   }
 
   #form {
@@ -31,6 +30,11 @@
     padding-right: 4.5rem;
     border: 1px solid transparent;
     transition: border 150ms ease-in-out;
+
+    @media only screen and (max-width: $bp-largest) {
+      border-radius: 0;
+
+    }
 
     &:focus {
       outline: none;
@@ -65,6 +69,11 @@
 
     }
 
+
+    @media only screen and (max-width: $bp-largest) {
+      border-radius: 0;
+    }
+
   }
 
   .search__icon {
@@ -87,13 +96,21 @@
     cursor: pointer;
     height: 100%;
     transition: all .2s;
-
     display: flex;
     align-items: center;
+
+    @media only screen and (max-width: $bp-medium) {
+      padding: 0 1.5rem;
+    }
+
   }
 
   & > *:hover {
     background-color: var(--color-grey-light-2);
+
+    @media only screen and (max-width: $bp-largest) {
+      background-color:transparent;
+    }
   }
 
   &__login:hover {
@@ -104,6 +121,10 @@
 
     .btn-nav--text {
       background-color: var(--color-grey-light-2);
+
+      @media only screen and (max-width: $bp-largest) {
+        background-color:transparent;
+      }
     }
     .user-nav__icon {
       fill: var(--color-primary);
@@ -154,6 +175,10 @@
     justify-content: center;
     align-items: center;
 
+    @media only screen and (max-width: $bp-largest) {
+      top: 0;
+    }
+
 
   }
 
@@ -171,6 +196,12 @@
 
     font-size: 1.2rem;
     color: var(--color-grey-dark-2);
+
+    @media only screen and (max-width: $bp-medium) {
+      display: none;
+    }
+
+
 
   }
 
@@ -221,6 +252,7 @@
     font-size: 1rem;
     line-height: 1;
     transition: background-color 150ms ease-in-out;
+    z-index: 1;
   }
 
   .btn-nav--topText {
@@ -240,6 +272,10 @@
 
     .btn-nav--text {
       background-color: var(--color-grey-light-2);
+
+      @media only screen and (max-width: $bp-largest) {
+        background-color:#fff;
+      }
     }
 
   }
