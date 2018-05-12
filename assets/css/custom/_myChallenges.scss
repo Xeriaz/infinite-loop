@@ -120,20 +120,52 @@
   .milestone-statusIcon {
     height: 1rem;
     width: 1rem;
+    //margin-right: 0.5rem;
     fill: var(--color-grey-dark-1);
     transition: fill 150ms ease-in-out;
     pointer-events: none;
   }
 
+  .milestone-statusLabel {
+
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%, 50%);
+    background-color: #fff;
+    padding: 0 0.5rem;
+    transition: color 150ms ease-in-out;
+  }
+
 
   .milestone-statusLink {
-    margin-left: 0.7rem;
-    width: 1.5rem;
-    height: 1.5rem;
+    display: flex;
+    align-items: center;
+    font-size: 0.8rem;
     text-decoration: none;
+    padding: 0.7rem 2.4rem;
+    color: var(--color-grey-dark-1);
+    border: 1px solid var(--color-grey-light-3);
+    border-radius: 10rem;
+    white-space: nowrap;
+    position: relative;
+    transition: border 150ms ease-in-out;
 
-    &:hover .milestone-statusIcon {
-      fill: var(--color-primary);
+    &:not(:first-of-type){
+      margin-left: 0.8rem;
+    }
+
+    &:hover {
+      border-color:var(--color-primary);
+
+
+      .milestone-statusIcon {
+        fill: var(--color-primary);
+      }
+      .milestone-statusLabel {
+        color: var(--color-primary);
+      }
+
     }
   }
 

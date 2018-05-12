@@ -57,7 +57,7 @@
                                             </span>
                                         </div>
                                     {% endif %}
-                                    <div>
+                                    {#<div>#}
                                         {% if milestone.isFailed %}
                                             {#<a href="{{ path('remove_milestone', {'id': milestone.id}) }}">Remove</a>#}
                                         {% elseif not milestone.status %}
@@ -65,22 +65,22 @@
                                                 <svg class="milestone-statusIcon">
                                                     <use xlink:href="{{ asset('images/sprite.svg#icon-checkmark') }}"></use>
                                                 </svg>
-                                                <span>Done</span>
+                                                <span class="milestone-statusLabel">Done</span>
                                             </a>
                                             <a class="milestone-statusLink" href="{{ path('failed_milestone', {'id': milestone.id}) }}">
                                                 <svg class="milestone-statusIcon">
                                                     <use xlink:href="{{ asset('images/sprite.svg#icon-cross') }}"></use>
                                                 </svg>
-                                                <span>Give up</span>
+                                                <span class="milestone-statusLabel">Give up</span>
                                             </a>
                                             <a class="milestone-statusLink" href="{{ path('remove_milestone', {'id': milestone.id}) }}">
                                                 <svg class="milestone-statusIcon">
                                                     <use xlink:href="{{ asset('images/sprite.svg#icon-bin') }}"></use>
-                                                    <span>Remove</span>
+                                                    <span class="milestone-statusLabel">Remove</span>
                                                 </svg>
                                             </a>
                                         {% endif %}
-                                    </div>
+                                    {#</div>#}
                                 </div>
                             </li>
                             {% endif %}
