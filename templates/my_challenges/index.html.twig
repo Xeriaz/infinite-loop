@@ -90,32 +90,37 @@
                         <div class="card-footer__control">
                             {% if not challenge.isCompleted %}
 
-                                    Challenge:
 
-                                    <a class="milestone-statusLink" href="{{ path('delete_challenge', {'id': challenge.id}) }}" >
-                                        <svg class="milestone-statusIcon">
-                                            <use xlink:href="{{ asset('images/sprite.svg#icon-cross') }}"></use>
-                                        </svg>
-                                    </a>
-                                    <a class="milestone-statusLink" href="{{ path('edit_challenge', {'id': challenge.id }) }}" >
-                                        <svg class="milestone-statusIcon">
-                                            <use xlink:href="{{ asset('images/sprite.svg#icon-pencil') }}"></use>
-                                        </svg>
-                                    </a>
 
-                                    <a class="milestone-statusLink" href="{{ path('mark_challenge_completed', {'id': challenge.id}) }}" >
-                                        <svg class="milestone-statusIcon">
-                                            <use xlink:href="{{ asset('images/sprite.svg#icon-checkmark') }}"></use>
-                                        </svg>
-                                    </a>
-                                    <span class="ml-5">
-                                        Milestone:
+                                    <div class="challengeControlBlock">
+                                        <a class="milestone-statusLink" href="{{ path('mark_challenge_completed', {'id': challenge.id}) }}" >
+                                            <svg class="milestone-statusIcon">
+                                                <use xlink:href="{{ asset('images/sprite.svg#icon-checkmark') }}"></use>
+                                                <span class="milestone-statusLabel">Complete</span>
+                                            </svg>
+                                        </a>
+                                        <a class="milestone-statusLink" href="{{ path('delete_challenge', {'id': challenge.id}) }}" >
+                                            <svg class="milestone-statusIcon">
+                                                <use xlink:href="{{ asset('images/sprite.svg#icon-bin') }}"></use>
+                                                <span class="milestone-statusLabel">Remove</span>
+                                            </svg>
+                                        </a>
+                                        <a class="milestone-statusLink" href="{{ path('edit_challenge', {'id': challenge.id }) }}" >
+                                            <svg class="milestone-statusIcon">
+                                                <use xlink:href="{{ asset('images/sprite.svg#icon-pencil') }}"></use>
+                                                <span class="milestone-statusLabel">Edit</span>
+                                            </svg>
+                                        </a>
+                                    </div>
+
+
                                         <a class="milestone-statusLink" href="{{ path('milestone', {'id': challenge.id}) }}" c>
                                             <svg class="milestone-statusIcon">
                                                  <use xlink:href="{{ asset('images/sprite.svg#icon-plus') }}"></use>
+                                                <span class="milestone-statusLabel">Add Milestone</span>
                                              </svg>
                                         </a>
-                                    </span>
+
                             {% else %}
                                 <h5>Challenge is completed on: {{ challenge.completedOn|date('Y-m-d') }}</h5>
                             {% endif %}
