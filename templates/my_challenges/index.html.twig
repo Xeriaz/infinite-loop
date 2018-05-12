@@ -57,7 +57,7 @@
                                             </span>
                                         </div>
                                     {% endif %}
-                                    {#<div>#}
+
                                         {% if milestone.isFailed %}
                                             {#<a href="{{ path('remove_milestone', {'id': milestone.id}) }}">Remove</a>#}
                                         {% elseif not milestone.status %}
@@ -80,11 +80,16 @@
                                                 </svg>
                                             </a>
                                         {% endif %}
-                                    {#</div>#}
+
                                 </div>
                             </li>
                             {% endif %}
                         {% endfor %}
+                        {% if milestonesCount == 0 %}
+                        <li class="list-group-item d-flex align-items-center">
+                            <h5 class="card-subtitle customCard-subtitle text-center">No milestones added yet.</h5>
+                        </li>
+                        {% endif %}
                     </ul>
                     <div class="card-footer">
 
