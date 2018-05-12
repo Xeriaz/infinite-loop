@@ -1,8 +1,10 @@
 .form-signin
 {
   max-width: 330px;
-  padding: 15px;
+  padding: 1rem;
   margin: 0 auto;
+
+
 
   ul {
     li {
@@ -18,11 +20,12 @@
   }
 
   input[type='submit'] {
-    margin-bottom: 25px!important;
+    margin-bottom: 1.5rem!important;
   }
 
 }
-.form-signin .form-signin-heading, .form-signin .checkbox
+.form-signin .form-signin-heading,
+.form-signin .checkbox
 {
   margin-bottom: 0;
 }
@@ -34,9 +37,9 @@
 .form-signin .form-control
 {
   position: relative;
-  font-size: 20px;
+  font-size: 1.3rem;
   height: auto;
-  padding: 10px;
+  padding: 0.75rem;
 
 }
 .form-signin .form-control:focus
@@ -53,7 +56,7 @@
 #fos_user_registration_form_plainPassword_second,
 #password
 {
-  margin-bottom: 25px;
+  margin-bottom: 1.5rem;
   border-top-left-radius: 0;
   border-top-right-radius: 0;
 }
@@ -66,8 +69,8 @@
 
 .account-wall
 {
-  margin-top: 20px;
-  padding: 40px 0px 20px 0px;
+  margin-top: 1.3rem;
+  padding: 2.6rem 0 1.3rem 0;
   background-color: rgba(52,73,94, .8);
   box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
 
@@ -76,21 +79,8 @@
   }
 
 }
-.login-title
-{
-  color: var(--color-primary);
-  font-size: 24px;
-  font-weight: 400;
-  display: block;
-}
-.profile-img
-{
-  width: 96px;
-  height: 96px;
-  margin: 0 auto 10px;
-  display: block;
-  border-radius: 50%;
-}
+
+
 .need-help{
 
   color: var(--color-grey-light-1);
@@ -102,7 +92,7 @@
 .new-account
 {
   display: block;
-  margin-top: 10px;
+  margin-top: 1rem;
   color: var(--color-grey-dark-1);
 
   &:hover {
@@ -114,4 +104,18 @@
   background-color: var(--color-primary-light);
   color: var(--color-grey-light-1);
   border-radius: 0;
+}
+
+.user-block {
+  display: flex;
+  justify-content: center;
+  padding: 1.5rem 0;
+
+}
+
+.user-icon {
+  display: inline-block;
+  width: 5rem;
+  height: 5rem;
+  fill: var(--color-grey-light-1);
 }
