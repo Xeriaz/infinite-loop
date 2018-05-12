@@ -8,6 +8,17 @@
 
     <nav class="user-nav">
         {% if is_granted('ROLE_USER') %}
+            <a href="{{ path('new_challenge_form') }}" class="user-nav__link">
+                <div class="user-nav__icon-box btn-nav">
+                    <svg class="user-nav__icon user-nav__icon--sm">
+                        <use xlink:href="{{ asset('images/sprite.svg#icon-plus') }}"></use>
+                    </svg>
+                    <span class="btn-nav--topText btn-nav--text">Add new</span>
+                    <span class="btn-nav--btmText btn-nav--text">Challenge</span>
+                </div>
+            </a>
+
+
             <div class="user-nav__icon-box">
                 <svg class="user-nav__icon">
                     <use xlink:href="{{ asset('images/sprite.svg#icon-bookmark') }}"></use>
@@ -26,28 +37,16 @@
                     <span class="user-nav__user-name">{{ app.user.username }}</span>
                 </div>
             </a>
+            <a href="{{ path('fos_user_security_logout') }}" class="user-nav__link">
+                <div class="user-nav__icon-box">
+                    <svg class="user-nav__icon mt--1">
+                        <use xlink:href="{{ asset('images/sprite.svg#logout') }}"></use>
+                    </svg>
+                    <span class="btn-nav--btmText1">Log out</span>
+                </div>
+            </a>
         {% endif %}
 
-        <div class="user-nav__icon-box">
-            {% if is_granted('ROLE_USER') %}
-                <a href="{{ path('fos_user_security_logout') }}">
-                    <div class="user-nav__icon-box">
-                        <svg class="user-nav__icon">
-                            <use xlink:href="{{ asset('images/sprite.svg#logout') }}"></use>
-                        </svg>
-                    </div>
-                </a>
-            {% else %}
-                <a href="{{ path('fos_user_security_login') }}">
-                    <div class="user-nav__icon-box">
-                        <svg class="user-nav__icon">
-                            <use xlink:href="{{ asset('images/sprite.svg#login') }}"></use>
-                        </svg>
-                    </div>
-                </a>
-
-            {% endif %}
-        </div>
     </nav>
 </header>
 <div class="header-fluid"></div>
