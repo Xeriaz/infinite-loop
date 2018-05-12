@@ -11,7 +11,6 @@
                 <th>Id</th>
                 <th>Title</th>
                 <th>Description</th>
-                <th>Public status</th>
                 <th>Start Date</th>
                 <th>End Date</th>
                 <th>Owner</th>
@@ -23,11 +22,9 @@
                     <td>{{ challenge.id }}</td>
                     <td>{{ challenge.title }}</td>
                     <td>{{ challenge.description }}</td>
-                    <td>{{ challenge.isPublic }}</td>
                     <td>{{ challenge.startDate|date('Y-m-d') }}</td>
                     <td>{{ challenge.endDate|date('Y-m-d') }}</td>
                     <td>{{ challenge.owner }}</td>
-                    <td><a href="{{ path('join_in_challenge', {'id': challenge.id }) }}">Join In</a></td>
                 </tr>
             {% endfor %}
             </tbody>
@@ -43,6 +40,8 @@
                 <th>Start Date</th>
                 <th>End Date</th>
                 <th>Owner</th>
+                <th>Join challenge</th>
+
             </tr>
             </thead>
             <tbody>
@@ -55,7 +54,12 @@
                     <td>{{ public_challenge.startDate|date('Y-m-d') }}</td>
                     <td>{{ public_challenge.endDate|date('Y-m-d') }}</td>
                     <td>{{ public_challenge.owner }}</td>
-                    <td><a href="{{ path('join_in_challenge', {'id': public_challenge.id }) }}">Join In</a></td>
+
+                    {% if app.user in public_challenge.users %}
+                        <td>Participating</td>
+                    {% else %}
+                        <td><a href="{{ path('join_in_challenge', {'id': public_challenge.id }) }}">Join In</a></td>
+                    {% endif %}
                 </tr>
             {% endfor %}
             </tbody>

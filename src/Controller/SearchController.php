@@ -22,8 +22,6 @@ class SearchController extends Controller
             $em = $this->getDoctrine()->getRepository('App:Challenges');
             $challenge = $em->searchChallengesByTitle($searchQuery, $this->getUser());
             $publicChallenge = $em->searchPublicChallengesByTitle($searchQuery);
-            dump($publicChallenge);
-
         }
 //        else {
 //            $challenge = $this->getDoctrine()
