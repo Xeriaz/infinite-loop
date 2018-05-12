@@ -75,9 +75,8 @@
             </div>
 
             <div class="formFooter ">
-                <input class="btn" type="submit" iid="_submit" name="_submit"
-                       value="{{ 'Save' }}"/>
                 <a href="{{ path('delete_challenge', {'id': app.request.get('id')}) }}" class="btn">Remove</a>
+                <input class="btn" type="submit" iid="_submit" name="_submit" value="{{ 'Save' }}"/>
             </div>
             {{ form_end(form) }}
         </div>
