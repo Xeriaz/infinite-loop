@@ -4,7 +4,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100%;
   width: 100%;
   padding: 3rem 1rem;
 
@@ -33,11 +32,24 @@
 
 .formBlock {
   margin: 0 auto;
-  width: 90%;
+  width: 900px;
   border-radius: 1px;
   box-shadow: 0px 2rem 4rem rgba(0, 0, 0, 0.3);
   overflow: hidden;
   background-color: rgba(255,255,255, .95);
+
+  @media only screen and (max-width: $bp-largest){
+    width: 80%
+  }
+
+  @media only screen and (max-width: $bp-medium){
+    width: 90%
+  }
+
+  @media only screen and (max-width: $bp-small){
+    width: 100%
+  }
+
 
 
   input[type=text],
