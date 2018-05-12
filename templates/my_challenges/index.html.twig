@@ -38,7 +38,7 @@
                             {% if not milestone.isDeleted %}
                                 {% set milestonesCount = milestonesCount + 1 %}
 
-                            <li class="list-group-item d-flex align-items-center">
+                            <li class="list-group-item d-flex align-items-center{% if milestone.isFailed  %} isFailed {% elseif milestone.completedOn != null %} isCompleted {% endif %}">
                                 <h5 class="card-subtitle customCard-subtitle">{{ milestone.title }}</h5>
                                 <div class="milestone-statusBlock">
                                     {% if milestone.completedOn != null %}
@@ -87,15 +87,13 @@
                         {% endfor %}
                         {% if milestonesCount == 0 %}
                         <li class="list-group-item d-flex align-items-center">
-                            <h5 class="card-subtitle customCard-subtitle text-center">No milestones added yet.</h5>
+                            <h5 class="card-subtitle customCard-subtitle text-center">No milestones has been added yet.</h5>
                         </li>
                         {% endif %}
                     </ul>
                     <div class="card-footer">
 
                             {% if not challenge.isCompleted %}
-
-
 
                                     <div class="challengeControlBlock">
                                         <a class="milestone-statusLink" href="{{ path('mark_challenge_completed', {'id': challenge.id}) }}" >
