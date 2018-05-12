@@ -41,19 +41,22 @@
                             <li class="list-group-item d-flex align-items-center">
                                 <h5 class="card-subtitle customCard-subtitle">{{ milestone.title }}</h5>
                                 <div class="milestone-statusBlock">
-                                    <div class="date-subtitle">
-                                        {% if milestone.isFailed %}
-                                            <span class="d-block">Failed on: <br>
-                                        {% else %}
-                                            <span class="d-block">Completed on: <br>
-                                        {% endif %}
-                                            {% if milestone.completedOn == null %}
-                                                TBD
+                                    {% if milestone.completedOn != null %}
+
+                                        <div class="date-subtitle">
+                                            {% if milestone.isFailed %}
+                                                <span class="d-block">Failed on: <br>
                                             {% else %}
-                                                {{ milestone.completedOn|date('Y-m-d') }}
+                                                <span class="d-block">Completed on: <br>
                                             {% endif %}
-                                        </span>
-                                    </div>
+                                                {#{% if milestone.completedOn == null %}#}
+                                                    {#TBD#}
+                                                {#{% else %}#}
+                                                    {{ milestone.completedOn|date('Y-m-d') }}
+                                                {#{% endif %}#}
+                                            </span>
+                                        </div>
+                                    {% endif %}
                                     <div>
                                         {% if milestone.isFailed %}
                                             {#<a href="{{ path('remove_milestone', {'id': milestone.id}) }}">Remove</a>#}
@@ -62,15 +65,18 @@
                                                 <svg class="milestone-statusIcon">
                                                     <use xlink:href="{{ asset('images/sprite.svg#icon-checkmark') }}"></use>
                                                 </svg>
+                                                <span>Done</span>
                                             </a>
                                             <a class="milestone-statusLink" href="{{ path('failed_milestone', {'id': milestone.id}) }}">
                                                 <svg class="milestone-statusIcon">
                                                     <use xlink:href="{{ asset('images/sprite.svg#icon-cross') }}"></use>
                                                 </svg>
+                                                <span>Give up</span>
                                             </a>
                                             <a class="milestone-statusLink" href="{{ path('remove_milestone', {'id': milestone.id}) }}">
                                                 <svg class="milestone-statusIcon">
                                                     <use xlink:href="{{ asset('images/sprite.svg#icon-bin') }}"></use>
+                                                    <span>Remove</span>
                                                 </svg>
                                             </a>
                                         {% endif %}
