@@ -165,7 +165,23 @@
 
                     </div>
                 </div>
+
             {% endfor %}
+
+            {% if challenges|length == 0 %}
+
+                <h1 class="mainHeading">Create your first challenge!</h1>
+                <div class="cta">
+                    
+                    <a href="{{ path('new_challenge_form') }}">
+                        <button class="btn">
+                            <span class="btn__visible">Getting Started</span>
+                            <span class="btn__invisible">New challenge</span>
+                        </button>
+                    </a>
+                </div>
+
+            {% endif %}
         </div>
     </div>
 {% endblock %}
