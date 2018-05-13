@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Notification;
 use Symfony\Component\Form\Extension\Core\Type\SearchType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -18,20 +19,14 @@ class NotificationController extends Controller
      */
     public function index(Request $request)
     {
-//        $searchQuery = $request->query->get('form');
-//        $searchQuery = $searchQuery['Search'];
-//
-//        if ($searchQuery !== null) {
-//            $em = $this->getDoctrine()->getRepository('App:Challenges');
-//            $challenge = $em->searchChallengesByTitle($searchQuery, $this->getUser());
-//            $publicChallenge = $em->searchPublicChallengesByTitle($searchQuery);
-//        }
-//
-//        return $this->render('search/index.html.twig', [
-//            'controller_name' => 'SearchController',
-//            'challenges' => $challenge,
-//            'publicChallenges' => $publicChallenge,
-//        ]);
+
+        $em = $this->getDoctrine()->getRepository('App:Notification');
+        $notifications = $em->getAllNotifications($this->getUser());
+
+        return $this->render('notifications/index.html.twig', [
+            'controller_name' => 'NotificationsController',
+            'notifications' => $notifications
+        ]);
     }
 
     /**
@@ -40,10 +35,31 @@ class NotificationController extends Controller
     public function getNotificationCount()
     {
         $em = $this->getDoctrine()->getRepository('App:Notification');
-        $notificationCount = $em->getNotifications($this->getUser());
+        $notifications = $em->getNewNotifications($this->getUser());
 
         return $this->render('includes/notification.html.twig', [
-            'notifications' => $notificationCount
+            'notifications' => $notifications
         ]);
+    }
+
+
+    /**
+     * @param int $id
+     * @Route("/notification/{id}", name="mark_notification_as_read")
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function markAsRead(int $id) {
+        $em = $this->getDoctrine()->getRepository('App:Notification');
+
+        /** @var Notification $notification */
+        $notification = $em->find($id);
+
+        $notification->setIsRead(1);
+        $notification->setReadOn(new \DateTime('now'));
+
+        $em = $this->getDoctrine()->getManager();
+        $em->flush();
+
+        return $this->redirectToRoute('notifications');
     }
 }

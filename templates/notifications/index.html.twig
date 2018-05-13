@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Homepage - {{ parent() }}{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h2>Notifications:</h2>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Description</th>
+                <th>Notification appeared on</th>
+                <th>Read on</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for notification in notifications %}
+
+                {% if not notification.isRead %}
+                    {#TODO add class instead of inline style#}
+                    <tr style="background-color: #ff9997">
+                {% else %}
+                    <tr>
+                {% endif %}
+
+                    <td>{{ notification.description }}</td>
+                    <td>{{ notification.createdOn|date('Y-m-d H:i:s') }}</td>
+                    <td>
+                        {% if not notification.isRead %}
+                            <a href="{{ path('mark_notification_as_read', {'id': notification.id}) }}">Mark as read</a>
+                        {% elseif notification.readOn %}
+                            {{ notification.readOn|date('Y-m-d H:i:s') }}
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

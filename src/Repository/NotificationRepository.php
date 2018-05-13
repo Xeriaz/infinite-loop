@@ -24,7 +24,7 @@ class NotificationRepository extends ServiceEntityRepository
      * @param User $user
      * @return mixed
      */
-    public function getNotifications (User $user)
+    public function getNewNotifications (User $user)
     {
         $qb = $this->createQueryBuilder('notification');
 
@@ -45,6 +45,28 @@ class NotificationRepository extends ServiceEntityRepository
         return $qb->getQuery()->getResult();
     }
 
+
+    /**
+     * @param User $user
+     * @return mixed
+     */
+    public function getAllNotifications (User $user)
+    {
+        $qb = $this->createQueryBuilder('notification');
+
+
+        $qb
+            ->where(
+                $qb->expr()->eq('notification.user', ':user')
+            )
+            ->setParameters([
+                'user' => $user
+            ])
+            ->orderBy('notification.isRead', 'ASC');
+        ;
+
+        return $qb->getQuery()->getResult();
+    }
 //    /**
 //     * @return Notification[] Returns an array of Notification objects
 //     */
