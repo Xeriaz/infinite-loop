@@ -46,10 +46,10 @@
                                 {% if not milestoneUserStatus.isDeleted %}
                                     {% set milestonesCount = milestonesCount + 1 %}
 
-                            <li class="list-group-item d-flex align-items-center{% if milestone.isFailed  %} isFailed {% elseif milestone.completedOn != null %} isCompleted {% endif %}">
+                            <li class="list-group-item d-flex align-items-center{% if milestoneUserStatus.isFailed  %} isFailed {% elseif milestoneUserStatus.submittedOn != null %} isCompleted {% endif %}">
                                 <h5 class="card-subtitle customCard-subtitle">{{ milestone.title }}</h5>
                                 <div class="milestone-statusBlock">
-                                    {% if milestone.completedOn != null %}
+                                    {#{% if milestoneUserStatus.submittedOn != null %}#}
 
                                         <div class="date-subtitle">
                                             {% if milestoneUserStatus.isFailed %}
@@ -57,11 +57,13 @@
                                             {% else %}
                                                 <span class="d-block">Completed on: <br>
                                             {% endif %}
-                                                {% if milestoneUserStatus.submittedOn == null %}
-                                                    TBD
-                                                {% else %}
-                                                    {{ milestoneUserStatus.submittedOn|date('Y-m-d') }}
-                                                {% endif %}
+
+                                            {% if milestoneUserStatus.submittedOn == null %}
+                                                TBD
+                                            {% else %}
+                                                {{ milestoneUserStatus.submittedOn|date('Y-m-d') }}
+                                            {% endif %}
+
                                             </span>
                                         </div>
                                         <div>
@@ -116,13 +118,14 @@
                                                 <span class="milestone-statusLabel">Edit</span>
                                             </svg>
                                         </a>
+                                        {#TODO add path to comments#}
                                         <a class="milestone-statusLink" href="{{ path('edit_challenge', {'id': challenge.id }) }}" >
                                             <svg class="milestone-statusIcon">
                                                 <use xlink:href="{{ asset('images/sprite.svg#icon-commenting') }}"></use>
                                                 <span class="milestone-statusLabel">Comments</span>
                                             </svg>
                                         </a>
-                                        <a class="milestone-statusLink" href="{{ path('edit_challenge', {'id': challenge.id }) }}" >
+                                        <a class="milestone-statusLink" href="{{ path('invite_user_to_challenge', {'id': challenge.id }) }}" >
                                             <svg class="milestone-statusIcon">
                                                 <use xlink:href="{{ asset('images/sprite.svg#icon-share2') }}"></use>
                                                 <span class="milestone-statusLabel">Share</span>
@@ -150,7 +153,7 @@
                             {% else %}
                                 <div class="challengeCompleted">
                                     <div class="milestone-statusProgress ml-0" >
-                                        <span >{{ challenge.submittedOn|date('Y-m-d') }}</span>
+                                        <span >{{ challenge.completedOn|date('Y-m-d') }}</span>
                                         <span class="milestone-statusLabel">Challenge completed on</span>
 
                                     </div>

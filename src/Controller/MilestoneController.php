@@ -104,7 +104,7 @@ class MilestoneController extends Controller
 
         if (!$data) {
             throw $this->createNotFoundException(
-                sprintf('Nothing found')
+                sprintf('You can not edit others milestones')
             );
         }
 

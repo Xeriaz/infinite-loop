@@ -11,6 +11,7 @@
                 <th>Description</th>
                 <th>Notification appeared on</th>
                 <th>Read on</th>
+                <th></th>
             </tr>
             </thead>
             <tbody>
@@ -32,6 +33,11 @@
                             {{ notification.readOn|date('Y-m-d H:i:s') }}
                         {% endif %}
                     </td>
+                {% if notification.challenge%}
+                    <td>
+                        <a href="{{ path('join_in_challenge', {'id': notification.challenge.id}) }}">Join in</a>
+                    </td>
+                {% endif %}
                 </tr>
             {% endfor %}
             </tbody>
