@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello {{ controller_name }}!{% endblock %}
+{% block title %}{{ app.user.username }} - challenges list!{% endblock %}
 
 {% block content %}
     <div class="myChallenge-wrapper">
@@ -8,19 +8,26 @@
             {% for challenge in challenges %}
                 <div class="card customCard">
                     <div class="card-body body-bg d-flex align-items-top">
+                        {% if challenge.isPublic %}
+                            <div class="card-groupTitle card-groupTitle--public">Public Challenge</div>
+                        {% else %}
+                            <div class="card-groupTitle card-groupTitle--private">Private Challenge</div>
+                        {% endif %}
                         <div class="card-body__textBlock">
 
                             <h4 class="card-title z-index--10">{{ challenge.title }}</h4>
                             <p class="card-text z-index--10">{{ challenge.description }}</p>
 
                             {% for challengeGroup in challenge.challengeGroup %}
-                                <span class="card-tags"> {{ challengeGroup.groupName }} </span>
+                                <span class="card-tags {% if not challenge.isPublic %}card-tags--public {% else %}card-tags--private{% endif %}"> {{ challengeGroup.groupName }} </span>
                             {% endfor %}
+                            
                             {% if challenge.isPublic %}
                                 <span class="card-tags">Public Challenge</span>
                             {% else %}
                                 <span class="card-tags">Private Challenge</span>
                             {% endif %}
+
                         </div>
                         <div class="card-body__dateBlock text-right">
                             <div class="z-index--10"><span class="mr-2">Start:</span>{{ challenge.startDate|date('Y-m-d') }}</div>
@@ -156,7 +163,23 @@
 
                     </div>
                 </div>
+
             {% endfor %}
+
+            {% if challenges|length == 0 %}
+
+                <h1 class="mainHeading">Create your first challenge!</h1>
+                <div class="cta">
+
+                    <a href="{{ path('new_challenge_form') }}">
+                        <button class="btn">
+                            <span class="btn__visible">Getting Started</span>
+                            <span class="btn__invisible">New challenge</span>
+                        </button>
+                    </a>
+                </div>
+
+            {% endif %}
         </div>
     </div>
 {% endblock %}

@@ -12,18 +12,19 @@
                 <div class="card customCard">
                     <div class="card-body body-bg d-flex align-items-top">
                         <div class="card-body__textBlock">
+                            {% if challenge.isPublic %}
+                                <div class="card-groupTitle card-groupTitle--public">Public Challenge</div>
+                            {% else %}
+                                <div class="card-groupTitle card-groupTitle--private">Private Challenge</div>
+                            {% endif %}
 
-                            <h4 class="card-title z-index--10">{{ challenge.title }}</h4>
+                            <h4 class="card-title z-index--10 mb-0">{{ challenge.title }}</h4>
                             <p class="card-text z-index--10">{{ challenge.description }}</p>
 
                             {% for challengeGroup in challenge.challengeGroup %}
-                                <span class="card-tags"> {{ challengeGroup.groupName }} </span>
+                                <span class="card-tags {% if not challenge.isPublic %}card-tags--public {% else %}card-tags--private{% endif %}"> {{ challengeGroup.groupName }} </span>
                             {% endfor %}
-                            {% if challenge.isPublic %}
-                                <span class="card-tags">Public Challenge</span>
-                            {% else %}
-                                <span class="card-tags">Private Challenge</span>
-                            {% endif %}
+
                         </div>
                     </div>
 
@@ -41,9 +42,9 @@
                         </li>
 
                     </ul>
-                    <div class="card-footer justify-content-center">
+                    <div class="card-footer justify-content-center p-0">
 
-                        <div class="challengeControlBlock">
+                        <div class="challengeControlBlock challengeControlBlock--noLabels">
                             <a class="milestone-statusLink" href="#">
                                 <svg class="milestone-statusIcon">
                                     <use xlink:href="{{ asset('images/sprite.svg#icon-share2') }}"></use>
