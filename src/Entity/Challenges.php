@@ -92,6 +92,11 @@ class Challenges
     private $challengeGroup;
 
     /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Notification", mappedBy="challenge")
+     */
+    private $notifications;
+
+    /**
      * @return mixed
      */
     public function getIsPublic()
@@ -277,6 +282,7 @@ class Challenges
         $this->users = new ArrayCollection();
         $this->milestones = new ArrayCollection();
         $this->challengeGroup = new ArrayCollection();
+        $this->notifications = new ArrayCollection();
     }
 
     /**
@@ -382,6 +388,37 @@ class Challenges
     public function setAddProof(bool $addProof): self
     {
         $this->addProof = $addProof;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Notification[]
+     */
+    public function getNotifications(): Collection
+    {
+        return $this->notifications;
+    }
+
+    public function addNotification(Notification $notification): self
+    {
+        if (!$this->notifications->contains($notification)) {
+            $this->notifications[] = $notification;
+            $notification->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeNotification(Notification $notification): self
+    {
+        if ($this->notifications->contains($notification)) {
+            $this->notifications->removeElement($notification);
+            // set the owning side to null (unless already changed)
+            if ($notification->getUser() === $this) {
+                $notification->setUser(null);
+            }
+        }
 
         return $this;
     }
