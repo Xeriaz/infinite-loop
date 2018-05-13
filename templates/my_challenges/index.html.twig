@@ -46,10 +46,10 @@
                                 {% if not milestoneUserStatus.isDeleted %}
                                     {% set milestonesCount = milestonesCount + 1 %}
 
-                            <li class="list-group-item d-flex align-items-center{% if milestone.isFailed  %} isFailed {% elseif milestone.completedOn != null %} isCompleted {% endif %}">
+                            <li class="list-group-item d-flex align-items-center{% if milestoneUserStatus.isFailed  %} isFailed {% elseif milestoneUserStatus.submittedOn != null %} isCompleted {% endif %}">
                                 <h5 class="card-subtitle customCard-subtitle">{{ milestone.title }}</h5>
                                 <div class="milestone-statusBlock">
-                                    {% if milestone.completedOn != null %}
+                                    {% if milestoneUserStatus.submittedOn != null %}
 
                                         <div class="date-subtitle">
                                             {% if milestoneUserStatus.isFailed %}
@@ -57,11 +57,13 @@
                                             {% else %}
                                                 <span class="d-block">Completed on: <br>
                                             {% endif %}
-                                                {% if milestoneUserStatus.submittedOn == null %}
-                                                    TBD
-                                                {% else %}
-                                                    {{ milestoneUserStatus.submittedOn|date('Y-m-d') }}
-                                                {% endif %}
+
+                                            {% if milestoneUserStatus.submittedOn == null %}
+                                                TBD
+                                            {% else %}
+                                                {{ milestoneUserStatus.submittedOn|date('Y-m-d') }}
+                                            {% endif %}
+
                                             </span>
                                         </div>
                                         <div>
@@ -84,6 +86,7 @@
                                             {% endif %}
                                         </div>
                                     </div>
+                                        {% endif %}
                                 </li>
                                 {% endif %}
                             {% endfor %}
