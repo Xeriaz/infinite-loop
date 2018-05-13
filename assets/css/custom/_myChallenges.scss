@@ -33,10 +33,14 @@
   align-items: center;
 
   .customCard {
-    width: 90%;
+    width: 900px;
     margin-bottom: 3rem;
     border-radius: 1px;
     overflow: hidden;
+
+    @media only screen and (max-width: $bp-medium) {
+      width: 100%;
+    }
   }
 
   .body-bg {
@@ -213,7 +217,7 @@
     position: relative;
 
     &:before {
-      content: 'Challenge control';
+      content: 'Challenge';
       display: block;
       position: absolute;
       top: -1rem;
