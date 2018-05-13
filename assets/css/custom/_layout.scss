@@ -10,9 +10,9 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  z-index: 10;
+  z-index: 100;
 
-  @media only screen and (max-width: $bp-large) {
+  @media only screen and (max-width: $bp-largest) {
     flex-wrap: wrap;
     height: 11rem;
     align-content: space-between;
@@ -26,18 +26,20 @@
   padding-bottom: 7em;
   z-index: -1;
 
-  @media only screen and (max-width: $bp-large) {
+  @media only screen and (max-width: $bp-largest) {
     padding-bottom: 11rem;
   }
 }
 
 .content {
   display: flex;
-  height: calc(100vh - 7em);
+  min-height: calc(100vh - 7em);
 
-  @media only screen and (max-width: $bp-medium){
-    flex-direction: column;
+  @media only screen and (max-width: $bp-largest) {
+    min-height: calc(100vh - 11em);
+
   }
+
 }
 
 .contentLeft {

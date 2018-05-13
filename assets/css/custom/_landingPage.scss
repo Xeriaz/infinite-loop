@@ -8,34 +8,52 @@ $color-grey-light-2: #eee;
 .wrapperLanding {
   height: 100vh;
 
-  .login {
-    width: 3rem;
-    height: 3rem;
+  .loginLink {
+    display: flex;
+    align-items: center;
+    padding: 0.5rem 2rem;
+    border: 1px solid var(--color-primary);
+    text-decoration: none;
+    color: var(--color-primary);
+    border-radius: 10rem;
+    font-size: 1.2rem;
+    transition: all 150ms ease-in-out;
+
+    &:not(:last-of-type){
+      margin-right: 3rem;
+    }
+
+    &:hover {
+      background-color: var(--color-primary);
+      color: var(--color-grey-light-1);
+
+      .loginIcon {
+        fill: var(--color-grey-light-1);
+      }
+    }
+
+
+
+
+
+  }
+
+
+  .loginBlock {
     position: absolute;
     top: 3rem;
     right: 3rem;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    transition: transform 150ms ease-in-out ;
-
-    &:hover .loginIcon {
-      transform: translateY(-2px);
-      box-shadow: 0 0.7rem 2rem rgba(0,0,0, .2);
-    }
-
-    &:active .loginIcon {
-      transform: translateY(-1px);
-      box-shadow: 0 0.5rem 2rem rgba(0,0,0, .2);
-    }
 
   }
 
   .loginIcon{
     width: auto;
-    height: 2.2rem;
+    height: 1.5rem;
     display: block;
     pointer-events: none;
+    margin-left: 0.5rem;
+    fill: var(--color-primary);
 
   }
 
@@ -49,6 +67,8 @@ $color-grey-light-2: #eee;
     top: 3rem;
     left: 3rem;
   }
+
+
 
   .logoImg {
     height: 100%;

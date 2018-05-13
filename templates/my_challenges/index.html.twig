@@ -39,9 +39,11 @@
                                 {% if not milestoneUserStatus.isDeleted %}
                                     {% set milestonesCount = milestonesCount + 1 %}
 
-                                <li class="list-group-item d-flex align-items-center">
-                                    <h5 class="card-subtitle customCard-subtitle">{{ milestone.title }}</h5>
-                                    <div class="milestone-statusBlock">
+                            <li class="list-group-item d-flex align-items-center{% if milestone.isFailed  %} isFailed {% elseif milestone.completedOn != null %} isCompleted {% endif %}">
+                                <h5 class="card-subtitle customCard-subtitle">{{ milestone.title }}</h5>
+                                <div class="milestone-statusBlock">
+                                    {% if milestone.completedOn != null %}
+
                                         <div class="date-subtitle">
                                             {% if milestoneUserStatus.isFailed %}
                                                 <span class="d-block">Failed on: <br>
@@ -56,7 +58,6 @@
                                             </span>
                                         </div>
                                         <div>
-                                            {#{% if milestoneUserStatus.isFailed %}#}
                                             {% if (not milestoneUserStatus.isCompleted and not milestoneUserStatus.isFailed )%}
                                                 <a class="milestone-statusLink" href="{{ path('complete_milestone', {'id': milestone.id}) }}">
                                                     <svg class="milestone-statusIcon">
@@ -80,52 +81,79 @@
                                 {% endif %}
                             {% endfor %}
                         {% endfor %}
+                        {% if milestonesCount == 0 %}
+                        <li class="list-group-item d-flex align-items-center">
+                            <h5 class="card-subtitle customCard-subtitle text-center">No milestones has been added yet.</h5>
+                        </li>
+                        {% endif %}
                     </ul>
                     <div class="card-footer">
-                        <div class="card-footer__control">
+
                             {% if not challenge.isCompleted %}
-
-                                    Challenge:
-
-                                    <a class="milestone-statusLink" href="{{ path('delete_challenge', {'id': challenge.id}) }}" >
-                                        <svg class="milestone-statusIcon">
-                                            <use xlink:href="{{ asset('images/sprite.svg#icon-cross') }}"></use>
-                                        </svg>
-                                    </a>
-                                    <a class="milestone-statusLink" href="{{ path('edit_challenge', {'id': challenge.id }) }}" >
-                                        <svg class="milestone-statusIcon">
-                                            <use xlink:href="{{ asset('images/sprite.svg#icon-pencil') }}"></use>
-                                        </svg>
-                                    </a>
-
-                                    <a class="milestone-statusLink" href="{{ path('mark_challenge_completed', {'id': challenge.id}) }}" >
-                                        <svg class="milestone-statusIcon">
-                                            <use xlink:href="{{ asset('images/sprite.svg#icon-checkmark') }}"></use>
-                                        </svg>
-                                    </a>
-                                    <span class="ml-5">
-                                        Milestone:
-                                        <a class="milestone-statusLink" href="{{ path('milestone', {'id': challenge.id}) }}">
+                                    <div class="challengeControlBlock">
+                                        <a class="milestone-statusLink" href="{{ path('mark_challenge_completed', {'id': challenge.id}) }}" >
                                             <svg class="milestone-statusIcon">
-                                                 <use xlink:href="{{ asset('images/sprite.svg#icon-plus') }}"></use>
-                                             </svg>
+                                                <use xlink:href="{{ asset('images/sprite.svg#icon-checkmark') }}"></use>
+                                                <span class="milestone-statusLabel">Complete</span>
+                                            </svg>
                                         </a>
-                                    </span>
-                                    <span class="ml-5">
-                                        Invite others:
-                                        <a class="milestone-statusLink" href="{{ path('invite_user_to_challenge', {'id': challenge.id}) }}">
+                                        <a class="milestone-statusLink" href="{{ path('delete_challenge', {'id': challenge.id}) }}" >
                                             <svg class="milestone-statusIcon">
-                                                 <use xlink:href="{{ asset('images/sprite.svg#icon-plus') }}"></use>
-                                             </svg>
+                                                <use xlink:href="{{ asset('images/sprite.svg#icon-bin') }}"></use>
+                                                <span class="milestone-statusLabel">Remove</span>
+                                            </svg>
                                         </a>
-                                    </span>
+                                        <a class="milestone-statusLink" href="{{ path('edit_challenge', {'id': challenge.id }) }}" >
+                                            <svg class="milestone-statusIcon">
+                                                <use xlink:href="{{ asset('images/sprite.svg#icon-pencil') }}"></use>
+                                                <span class="milestone-statusLabel">Edit</span>
+                                            </svg>
+                                        </a>
+                                        <a class="milestone-statusLink" href="{{ path('edit_challenge', {'id': challenge.id }) }}" >
+                                            <svg class="milestone-statusIcon">
+                                                <use xlink:href="{{ asset('images/sprite.svg#icon-commenting') }}"></use>
+                                                <span class="milestone-statusLabel">Comments</span>
+                                            </svg>
+                                        </a>
+                                        <a class="milestone-statusLink" href="{{ path('edit_challenge', {'id': challenge.id }) }}" >
+                                            <svg class="milestone-statusIcon">
+                                                <use xlink:href="{{ asset('images/sprite.svg#icon-share2') }}"></use>
+                                                <span class="milestone-statusLabel">Share</span>
+                                            </svg>
+                                        </a>
+                                    </div>
+
+                                    <div class="challengeControlBlock challengeControlBlock--2">
+                                        <a class="milestone-statusLink" href="{{ path('milestone', {'id': challenge.id}) }}" c>
+                                            <svg class="milestone-statusIcon">
+                                                <use xlink:href="{{ asset('images/sprite.svg#icon-plus') }}"></use>
+                                                <span class="milestone-statusLabel">Add new</span>
+                                            </svg>
+                                        </a>
+
+                                        <div class="milestone-statusProgress" >
+                                            <span class="milestone-statusIcon">
+                                                <span >{{ completedMilestones }} / {{ milestonesCount }}</span>
+                                                <span class="milestone-statusLabel">Progress</span>
+                                            </span>
+                                        </div>
+
+                                    </div>
+
                             {% else %}
-                                <h5>Challenge is completed on: {{ challenge.submittedOn|date('Y-m-d') }}</h5>
+                                <div class="challengeCompleted">
+                                    <div class="milestone-statusProgress ml-0" >
+                                        <span >{{ challenge.submittedOn|date('Y-m-d') }}</span>
+                                        <span class="milestone-statusLabel">Challenge completed on</span>
+
+                                    </div>
+                                    <div class="milestone-statusProgress" >
+                                        <span >{{ completedMilestones }} / {{ milestonesCount }}</span>
+                                        <span class="milestone-statusLabel">Milestones accomplished</span>
+                                    </div>
+                                </div>
                             {% endif %}
-                        </div>
-                        <div class="card-footer__statusBlock">
-                            <span>Milestone progress: {{ completedMilestones }} / {{ milestonesCount }} </span>
-                        </div>
+
                     </div>
                 </div>
             {% endfor %}

@@ -1,14 +1,10 @@
-{{ form_start(form, {'action': path('search_query_info'), 'method': 'GET'}) }}
+
+{{ form_start(form, {'action': path('search_query_info'), 'method': 'GET', 'attr': {class: 'search'} }) }}
 {{ form_widget(form) }}
+    <button class="search__button" type="submit" name="searchForm[Submit]">
+        <svg class="search__icon">
+            <use xlink:href="{{ asset('images/sprite.svg#icon-magnifying-glass') }}"></use>
+        </svg>
+    </button>
 {{ form_end(form) }}
 
-{#TODO fix form design, DO NOT increase search bar size on focus. #}
-
-{#<form name="searchForm" class="search" method="get" action="{{ path('home') }}" >#}
-    {#<input type="text" class="search__input" placeholder="Search Challenges" name="searchForm[Search]">#}
-    {#<button class="search__button" type="submit" name="searchForm[Submit]">#}
-        {#<svg class="search__icon">#}
-            {#<use xlink:href="{{ asset('images/sprite.svg#icon-magnifying-glass') }}"></use>#}
-        {#</svg>#}
-    {#</button>#}
-{#</form>#}

@@ -3,67 +3,72 @@
 {% block title %}Homepage - {{ parent() }}{% endblock %}
 
 {% block content %}
-    <div class="container">
-        <h2>Private:</h2>
-        <table class="table">
-            <thead>
-            <tr>
-                <th>Id</th>
-                <th>Title</th>
-                <th>Description</th>
-                <th>Start Date</th>
-                <th>End Date</th>
-                <th>Owner</th>
-            </tr>
-            </thead>
-            <tbody>
+
+    <div class="myChallenge-wrapper search-wrapper">
+        <div class="cards-wrapper">
+
             {% for challenge in challenges %}
-                <tr>
-                    <td>{{ challenge.id }}</td>
-                    <td>{{ challenge.title }}</td>
-                    <td>{{ challenge.description }}</td>
-                    <td>{{ challenge.startDate|date('Y-m-d') }}</td>
-                    <td>{{ challenge.endDate|date('Y-m-d') }}</td>
-                    <td>{{ challenge.owner }}</td>
-                </tr>
+
+                <div class="card customCard">
+                    <div class="card-body body-bg d-flex align-items-top">
+                        <div class="card-body__textBlock">
+
+                            <h4 class="card-title z-index--10">{{ challenge.title }}</h4>
+                            <p class="card-text z-index--10">{{ challenge.description }}</p>
+
+                            {% for challengeGroup in challenge.challengeGroup %}
+                                <span class="card-tags"> {{ challengeGroup.groupName }} </span>
+                            {% endfor %}
+                            {% if challenge.isPublic %}
+                                <span class="card-tags">Public Challenge</span>
+                            {% else %}
+                                <span class="card-tags">Private Challenge</span>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item text-center">
+                            <h5 class="card-subtitle customCard-subtitle">Start date
+                                - {{ challenge.startDate|date('Y-m-d') }}</h5>
+                        </li>
+                        <li class="list-group-item text-center">
+                            <h5 class="card-subtitle customCard-subtitle">End date
+                                - {{ challenge.endDate|date('Y-m-d') }}</h5>
+                        </li>
+                        <li class="list-group-item text-center">
+                            <h5 class="card-subtitle customCard-subtitle">Owner - {{ challenge.users|join(' ') }}</h5>
+                        </li>
+
+                    </ul>
+                    <div class="card-footer justify-content-center">
+
+                        <div class="challengeControlBlock">
+                            <a class="milestone-statusLink" href="#">
+                                <svg class="milestone-statusIcon">
+                                    <use xlink:href="{{ asset('images/sprite.svg#icon-share2') }}"></use>
+                                    <span class="milestone-statusLabel">Join</span>
+                                </svg>
+                            </a>
+                            <a class="milestone-statusLink" href="#">
+                                <svg class="milestone-statusIcon">
+                                    <use xlink:href="{{ asset('images/sprite.svg#icon-commenting') }}"></use>
+                                    <span class="milestone-statusLabel">Comment</span>
+                                </svg>
+                            </a>
+                            <a class="milestone-statusLink" href="#">
+                                <svg class="milestone-statusIcon">
+                                    <use xlink:href="{{ asset('images/sprite.svg#icon-navigation-more') }}"></use>
+                                    <span class="milestone-statusLabel">Read more</span>
+                                </svg>
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
+
             {% endfor %}
-            </tbody>
-        </table>
 
-        <h2>Public:</h2>
-        <table class="table">
-            <thead>
-            <tr>
-                <th>Id</th>
-                <th>Title</th>
-                <th>Description</th>
-                <th>Public status</th>
-                <th>Start Date</th>
-                <th>End Date</th>
-                <th>Owner</th>
-                <th>Join challenge</th>
-
-            </tr>
-            </thead>
-            <tbody>
-            {% for public_challenge in publicChallenges %}
-                <tr>
-                    <td>{{ public_challenge.id }}</td>
-                    <td>{{ public_challenge.title }}</td>
-                    <td>{{ public_challenge.description }}</td>
-                    <td>{{ public_challenge.isPublic }}</td>
-                    <td>{{ public_challenge.startDate|date('Y-m-d') }}</td>
-                    <td>{{ public_challenge.endDate|date('Y-m-d') }}</td>
-                    <td>{{ public_challenge.owner }}</td>
-
-                    {% if app.user in public_challenge.users %}
-                        <td>Participating</td>
-                    {% else %}
-                        <td><a href="{{ path('join_in_challenge', {'id': public_challenge.id }) }}">Join In</a></td>
-                    {% endif %}
-                </tr>
-            {% endfor %}
-            </tbody>
-        </table>
+        </div>
     </div>
 {% endblock %}
