@@ -458,6 +458,7 @@
   margin-bottom: 2rem;
   margin-top: 2rem;
   text-align: center;
+  color: var(--color-grey-dark-1);
 
   .sp-1 {
     font-weight: 900;
@@ -466,6 +467,11 @@
   .sp-2 {
     font-weight: 900;
     color: var(--color-green-normal);
+  }
+
+  .sp-3 {
+    font-weight: 100;
+    font-size: 2.5rem;
   }
 
   @media only screen and (max-width: $bp-medium) {
