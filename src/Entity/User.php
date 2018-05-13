@@ -44,6 +44,11 @@ class User extends BaseUser
     private $ownedChallenge;
 
     /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Notification", mappedBy="user")
+     */
+    private $notifications;
+
+    /**
      * @return mixed
      */
     public function getMilestoneStatus(): Collection
@@ -82,6 +87,7 @@ class User extends BaseUser
         $this->challenges = new ArrayCollection();
         $this->milestoneStatus = new ArrayCollection();
         $this->ownedChallenge = new ArrayCollection();
+        $this->notifications = new ArrayCollection();
     }
 
     public function addChallenge(Challenges $challenge): self
@@ -185,6 +191,37 @@ class User extends BaseUser
             // set the owning side to null (unless already changed)
             if ($ownedChallenge->getOwner() === $this) {
                 $ownedChallenge->setOwner(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Notification[]
+     */
+    public function getNotifications(): Collection
+    {
+        return $this->notifications;
+    }
+
+    public function addNotification(Notification $notification): self
+    {
+        if (!$this->notifications->contains($notification)) {
+            $this->notifications[] = $notification;
+            $notification->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeNotification(Notification $notification): self
+    {
+        if ($this->notifications->contains($notification)) {
+            $this->notifications->removeElement($notification);
+            // set the owning side to null (unless already changed)
+            if ($notification->getUser() === $this) {
+                $notification->setUser(null);
             }
         }
 
