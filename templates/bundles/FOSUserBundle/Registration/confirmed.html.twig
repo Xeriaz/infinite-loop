@@ -3,10 +3,15 @@
 {% trans_default_domain 'FOSUserBundle' %}
 
 {% block fos_user_content %}
+    <div class="myChallenge-wrapper">
+        <div class="welcomePage__text-box">
 
-    <h1>Welcome!</h1>
-    <p>{{ 'registration.confirmed'|trans({'%username%': user.username}) }}</p>
-    {% if targetUrl %}
-    <p><a href="{{ targetUrl }}">{{ 'registration.back'|trans }}</a></p>
-    {% endif %}
+            <h1 class="mainHeading"><span class="sp-1">Welcome!</span><br><span class="sp-3">{{ 'registration.confirmed'|trans({'%username%': user.username}) }}</span></h1>
+            {% if targetUrl %}
+                <a class="btn" href="{{ targetUrl }}">{{ 'registration.back'|trans }}</a>
+            {% endif %}
+        </div>
+    </div>
+
+
 {% endblock fos_user_content %}
