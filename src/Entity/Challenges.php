@@ -41,25 +41,13 @@ class Challenges
     private $isCompleted = false;
 
     /**
+     * @ORM\Column(type="boolean")
+     */
+    private $addProof = false;
+    /**
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $completedOn;
-
-        /**
-     * @return mixed
-     */
-    public function getIsPublic()
-    {
-        return $this->isPublic;
-    }
-
-    /**
-     * @param mixed $isPublic
-     */
-    public function setIsPublic($isPublic): void
-    {
-        $this->isPublic = $isPublic;
-    }
 
     /**
      * @Assert\NotBlank()
@@ -74,6 +62,55 @@ class Challenges
      * @ORM\Column(type="datetime")
      */
     private $endDate;
+
+    /**
+     * @Assert\NotBlank()
+     * @ORM\ManyToMany(targetEntity="User", inversedBy="challenges")
+     * @ORM\JoinTable(name="user_challenges")
+     * @var ArrayCollection
+     */
+    private $users;
+
+
+    /**
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="ownedChallenge")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     */
+    private $owner;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Milestone", mappedBy="challenge")
+     * @var Collection
+     */
+    private $milestones;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="ChallengesGroups", inversedBy="challenge")
+     * @ORM\JoinTable(name="challenge_groups")
+     * @var Collection
+     */
+    private $challengeGroup;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Notification", mappedBy="challenge")
+     */
+    private $notifications;
+
+    /**
+     * @return mixed
+     */
+    public function getIsPublic()
+    {
+        return $this->isPublic;
+    }
+
+    /**
+     * @param mixed $isPublic
+     */
+    public function setIsPublic($isPublic): void
+    {
+        $this->isPublic = $isPublic;
+    }
 
     /**
      * @return mixed
@@ -107,26 +144,6 @@ class Challenges
         $this->completedOn = $completedOn;
     }
 
-    /**
-     * @Assert\NotBlank()
-     * @ORM\ManyToMany(targetEntity="App\Entity\User", inversedBy="challenges")
-     * @ORM\JoinTable(name="user_challenges")
-     * @var ArrayCollection
-     */
-    private $users;
-
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Milestone", mappedBy="challenge")
-     * @var Collection
-     */
-    private $milestones;
-
-    /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\ChallengesGroups", inversedBy="challenge")
-     * @ORM\JoinTable(name="challenge_groups")
-     * @var Collection
-     */
-    private $challengeGroup;
 
     /**
      * @return Collection
@@ -265,8 +282,13 @@ class Challenges
         $this->users = new ArrayCollection();
         $this->milestones = new ArrayCollection();
         $this->challengeGroup = new ArrayCollection();
+        $this->notifications = new ArrayCollection();
     }
 
+    /**
+     * @param User $user
+     * @return Challenges
+     */
     public function addUser(User $user): self
     {
         if (!$this->users->contains($user)) {
@@ -276,6 +298,10 @@ class Challenges
         return $this;
     }
 
+    /**
+     * @param User $user
+     * @return Challenges
+     */
     public function removeUser(User $user): self
     {
         if ($this->users->contains($user)) {
@@ -285,6 +311,10 @@ class Challenges
         return $this;
     }
 
+    /**
+     * @param Milestone $milestone
+     * @return Challenges
+     */
     public function addMilestone(Milestone $milestone): self
     {
         if (!$this->milestones->contains($milestone)) {
@@ -295,6 +325,10 @@ class Challenges
         return $this;
     }
 
+    /**
+     * @param Milestone $milestone
+     * @return Challenges
+     */
     public function removeMilestone(Milestone $milestone): self
     {
         if ($this->milestones->contains($milestone)) {
@@ -308,6 +342,10 @@ class Challenges
         return $this;
     }
 
+    /**
+     * @param ChallengesGroups $challengeGroup
+     * @return Challenges
+     */
     public function addChallengeGroup(ChallengesGroups $challengeGroup): self
     {
         if (!$this->challengeGroup->contains($challengeGroup)) {
@@ -317,10 +355,69 @@ class Challenges
         return $this;
     }
 
+    /**
+     * @param ChallengesGroups $challengeGroup
+     * @return Challenges
+     */
     public function removeChallengeGroup(ChallengesGroups $challengeGroup): self
     {
         if ($this->challengeGroup->contains($challengeGroup)) {
             $this->challengeGroup->removeElement($challengeGroup);
+        }
+
+        return $this;
+    }
+
+    public function getOwner()
+    {
+        return $this->owner;
+    }
+
+    public function setOwner($owner): self
+    {
+        $this->owner = $owner;
+
+        return $this;
+    }
+
+    public function getAddProof(): ?bool
+    {
+        return $this->addProof;
+    }
+
+    public function setAddProof(bool $addProof): self
+    {
+        $this->addProof = $addProof;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Notification[]
+     */
+    public function getNotifications(): Collection
+    {
+        return $this->notifications;
+    }
+
+    public function addNotification(Notification $notification): self
+    {
+        if (!$this->notifications->contains($notification)) {
+            $this->notifications[] = $notification;
+            $notification->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeNotification(Notification $notification): self
+    {
+        if ($this->notifications->contains($notification)) {
+            $this->notifications->removeElement($notification);
+            // set the owning side to null (unless already changed)
+            if ($notification->getUser() === $this) {
+                $notification->setUser(null);
+            }
         }
 
         return $this;

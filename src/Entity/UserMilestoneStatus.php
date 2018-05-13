@@ -5,19 +5,19 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\UserMilestoneRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\UserMilestoneStatusRepository")
  */
-class UserMilestone
+class UserMilestoneStatus
 {
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="milestone")
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="milestoneStatus")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      * @ORM\Id
      */
     private $user;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Milestone", inversedBy="user")
+     * @ORM\ManyToOne(targetEntity="Milestone", inversedBy="userStatus")
      * @ORM\JoinColumn(name="milestone_id", referencedColumnName="id")
      * @ORM\Id
      */
@@ -37,6 +37,11 @@ class UserMilestone
      * @ORM\Column(type="boolean")
      */
     private $isFailed = false;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $submittedOn;
 
     public function getUser()
     {
@@ -94,6 +99,18 @@ class UserMilestone
     public function setIsFailed(bool $isFailed): self
     {
         $this->isFailed = $isFailed;
+
+        return $this;
+    }
+
+    public function getSubmittedOn(): ?\DateTimeInterface
+    {
+        return $this->submittedOn;
+    }
+
+    public function setSubmittedOn(?\DateTimeInterface $submittedOn): self
+    {
+        $this->submittedOn = $submittedOn;
 
         return $this;
     }

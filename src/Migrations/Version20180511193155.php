@@ -8,14 +8,14 @@ use Doctrine\DBAL\Schema\Schema;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-class Version20180425085812 extends AbstractMigration
+class Version20180511193155 extends AbstractMigration
 {
     public function up(Schema $schema)
     {
         // this up() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('ALTER TABLE user DROP challenges');
+        $this->addSql('ALTER TABLE challenges DROP INDEX UNIQ_7B5A7E0A76ED395, ADD INDEX IDX_7B5A7E0A76ED395 (user_id)');
     }
 
     public function down(Schema $schema)
@@ -23,6 +23,6 @@ class Version20180425085812 extends AbstractMigration
         // this down() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('ALTER TABLE `user` ADD challenges VARCHAR(255) DEFAULT NULL COLLATE utf8mb4_unicode_ci');
+        $this->addSql('ALTER TABLE challenges DROP INDEX IDX_7B5A7E0A76ED395, ADD UNIQUE INDEX UNIQ_7B5A7E0A76ED395 (user_id)');
     }
 }

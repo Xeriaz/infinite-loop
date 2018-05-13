@@ -72,6 +72,16 @@
                         {{ form_errors(form.isPublic) }}
                     </div>
                 </div>
+
+                <div class="formRow">
+                    <div class="formLabel">
+                        {{ form_label(form.addProof) }}
+                    </div>
+                    <div class="formControl">
+                        {{ form_widget(form.addProof, { 'attr': {'class': 'formInput' } }) }}
+                        {{ form_errors(form.addProof) }}
+                    </div>
+                </div>
             </div>
 
             <div class="formFooter ">

@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Challenges;
+use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
@@ -19,14 +20,44 @@ class ChallangesRepository extends ServiceEntityRepository
         parent::__construct($registry, Challenges::class);
     }
 
-    public function searchChallengesByTitle($title, $user)
+    public function searchChallengesByTitle(string $title, User $user)
     {
         $qb = $this->createQueryBuilder('challenge');
 
-        $qb->where($qb->expr()->like('challenge.title', ':title'))
-            ->setParameter('title', sprintf('%%%s%%', $title))
-            ->addOrderBy('challenge.isPublic', 'ASC')
-            ;
+        $qb
+            ->where(
+                $qb->expr()->andX(
+                    $qb->expr()->eq('challenge.owner', ':owner'),
+                    $qb->expr()->like('challenge.title', ':title'),
+                    $qb->expr()->eq('challenge.isPublic', 0)
+                )
+            )
+            ->setParameters([
+                'owner' => $user,
+                'title' => sprintf('%%%s%%', $title)
+            ])
+        ;
+
+        return $qb->getQuery()->getResult();
+    }
+
+    public function searchPublicChallengesByTitle(string $title)
+    {
+        $qb = $this->createQueryBuilder('challenge');
+
+        $qb
+            ->where(
+                $qb->expr()->andX(
+                    $qb->expr()->like('challenge.title', ':title'),
+                    $qb->expr()->eq('challenge.isPublic', ':true')
+                )
+            )
+            ->setParameters([
+                'title' => sprintf('%%%s%%', $title),
+                'true' => 1
+            ])
+        ;
+
         return $qb->getQuery()->getResult();
     }
 

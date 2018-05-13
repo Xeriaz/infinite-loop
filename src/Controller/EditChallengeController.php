@@ -25,9 +25,9 @@ class EditChallengeController extends Controller
 
     /**
      * @param int $id
-     * @return object
+     * @return Challenges
      */
-    public function getChallengeData(int $id): object
+    public function getChallengeData(int $id): Challenges
     {
         $challengeData = $this->getDoctrine()
             ->getRepository(Challenges::class)
@@ -95,10 +95,37 @@ class EditChallengeController extends Controller
     {
         $challenge = $this->getChallengeData($id);
 
-        $entityManager = $this->getDoctrine()->getManager();
-        $entityManager->remove($challenge);
-        $entityManager->flush();
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($challenge);
+        $em->flush();
 
         return $this->redirectToRoute('my_challenges');
+    }
+
+    /**
+     * @Route("challenge/{id}/join-in", name="join_in_challenge")
+     * @param int $id
+     * @return RedirectResponse
+     */
+    public function otherUserJoinIn(int $id)
+    {
+        /** @var Challenges $challenge */
+        $challenge = $this->getChallengeData($id);
+        $challenge->addUser($this->getUser());
+
+        $em = $this->getDoctrine()->getManager();
+        $em->flush();
+
+        return $this->redirectToRoute('home');
+    }
+
+    private function getAllMilestonesFromChallenge(int $id)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $challenge = $this->getChallengeData($id);
+
+        // TODO userMilestoneStatus by challenge id ir owner id;
+
     }
 }

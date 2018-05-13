@@ -17,14 +17,11 @@
                     <span class="btn-nav--btmText btn-nav--text">Challenge</span>
                 </div>
             </a>
+            
+            {{ render(controller(
+                'App\\Controller\\NotificationController::getNotificationCount'
+            )) }}
 
-
-            <div class="user-nav__icon-box">
-                <svg class="user-nav__icon">
-                    <use xlink:href="{{ asset('images/sprite.svg#icon-bookmark') }}"></use>
-                </svg>
-                <span class="user-nav__notification">7</span>
-            </div>
             {#<div class="user-nav__icon-box">#}
             {#<svg class="user-nav__icon">#}
             {#<use xlink:href="{{ asset('images/sprite.svg#icon-chat') }}"></use>#}

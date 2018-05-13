@@ -34,30 +34,40 @@ class User extends BaseUser
     private $challenges = [];
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\UserMilestone", mappedBy="user")
+     * @ORM\OneToMany(targetEntity="UserMilestoneStatus", mappedBy="user")
      */
-    private $milestone;
+    private $milestoneStatus;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Challenges", mappedBy="owner"))
+     */
+    private $ownedChallenge;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Notification", mappedBy="user")
+     */
+    private $notifications;
 
     /**
      * @return mixed
      */
-    public function getMilestone()
+    public function getMilestoneStatus(): Collection
     {
-        return $this->milestone;
+        return $this->milestoneStatus;
     }
 
     /**
-     * @param mixed $milestone
+     * @param mixed $milestoneStatus
      */
-    public function setMilestone($milestone): void
+    public function setMilestoneStatus($milestoneStatus): void
     {
-        $this->milestone = $milestone;
+        $this->milestoneStatus = $milestoneStatus;
     }
 
     /**
      * @return mixed
      */
-    public function getChallenges()
+    public function getChallenges(): Collection
     {
         return $this->challenges;
     }
@@ -72,15 +82,19 @@ class User extends BaseUser
 
     public function __construct()
     {
+        parent::__construct();
+
         $this->challenges = new ArrayCollection();
-        $this->milestone = new ArrayCollection();
+        $this->milestoneStatus = new ArrayCollection();
+        $this->ownedChallenge = new ArrayCollection();
+        $this->notifications = new ArrayCollection();
     }
 
     public function addChallenge(Challenges $challenge): self
     {
         if (!$this->challenges->contains($challenge)) {
             $this->challenges[] = $challenge;
-            $challenge->addUserChallenge($this);
+            $challenge->addUser($this);
         }
 
         return $this;
@@ -90,29 +104,124 @@ class User extends BaseUser
     {
         if ($this->challenges->contains($challenge)) {
             $this->challenges->removeElement($challenge);
-            $challenge->removeUserChallenge($this);
+            $challenge->removeUser($this);
         }
 
         return $this;
     }
 
-    public function addMilestone(UserMilestone $milestone): self
+    public function addMilestone(UserMilestoneStatus $milestone): self
     {
-        if (!$this->milestone->contains($milestone)) {
-            $this->milestone[] = $milestone;
+        if (!$this->milestoneStatus->contains($milestone)) {
+            $this->milestoneStatus[] = $milestone;
             $milestone->setUser($this);
         }
 
         return $this;
     }
 
-    public function removeMilestone(UserMilestone $milestone): self
+    public function removeMilestone(UserMilestoneStatus $milestone): self
     {
-        if ($this->milestone->contains($milestone)) {
-            $this->milestone->removeElement($milestone);
+        if ($this->milestoneStatus->contains($milestone)) {
+            $this->milestoneStatus->removeElement($milestone);
             // set the owning side to null (unless already changed)
             if ($milestone->getUser() === $this) {
                 $milestone->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function addMilestoneStatus(UserMilestoneStatus $milestoneStatus): self
+    {
+        if (!$this->milestoneStatus->contains($milestoneStatus)) {
+            $this->milestoneStatus[] = $milestoneStatus;
+            $milestoneStatus->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMilestoneStatus(UserMilestoneStatus $milestoneStatus): self
+    {
+        if ($this->milestoneStatus->contains($milestoneStatus)) {
+            $this->milestoneStatus->removeElement($milestoneStatus);
+            // set the owning side to null (unless already changed)
+            if ($milestoneStatus->getUser() === $this) {
+                $milestoneStatus->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getOwnedChallenge(): Collection
+    {
+        return $this->ownedChallenge;
+    }
+
+    public function setOwnedChallenge(?Challenges $ownedChallenge): self
+    {
+        $this->ownedChallenge = $ownedChallenge;
+
+        // set (or unset) the owning side of the relation if necessary
+        $newOwner = $ownedChallenge === null ? null : $this;
+        if ($newOwner !== $ownedChallenge->getOwner()) {
+            $ownedChallenge->setOwner($newOwner);
+        }
+
+        return $this;
+    }
+
+    public function addOwnedChallenge(Challenges $ownedChallenge): self
+    {
+        if (!$this->ownedChallenge->contains($ownedChallenge)) {
+            $this->ownedChallenge[] = $ownedChallenge;
+            $ownedChallenge->setOwner($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOwnedChallenge(Challenges $ownedChallenge): self
+    {
+        if ($this->ownedChallenge->contains($ownedChallenge)) {
+            $this->ownedChallenge->removeElement($ownedChallenge);
+            // set the owning side to null (unless already changed)
+            if ($ownedChallenge->getOwner() === $this) {
+                $ownedChallenge->setOwner(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Notification[]
+     */
+    public function getNotifications(): Collection
+    {
+        return $this->notifications;
+    }
+
+    public function addNotification(Notification $notification): self
+    {
+        if (!$this->notifications->contains($notification)) {
+            $this->notifications[] = $notification;
+            $notification->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeNotification(Notification $notification): self
+    {
+        if ($this->notifications->contains($notification)) {
+            $this->notifications->removeElement($notification);
+            // set the owning side to null (unless already changed)
+            if ($notification->getUser() === $this) {
+                $notification->setUser(null);
             }
         }
 
