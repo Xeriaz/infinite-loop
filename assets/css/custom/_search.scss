@@ -10,14 +10,52 @@
 
     .customCard {
       max-width: 900px;
-      width: 35%;
+      width: 30%;
 
       @media only screen and (max-width: $bp-medium) {
+        width: 100%;
+      }
+
+      @media only screen and (max-width: $bp-large) {
+        width: 40%;
+      }
+
+      @media only screen and (max-width: $bp-medium) {
+        width: 70%;
+      }
+
+      @media only screen and (max-width: $bp-small) {
+        width: 85%;
+      }
+
+      @media only screen and (max-width: $bp-smallest) {
         width: 100%;
       }
     }
 
 
+    .list-group-item{
+      padding: 1rem 0;
+    }
 
+    .customCard-subtitle {
+      font-size: 1rem;
+      margin: 0;
+    }
+
+    .challengeControlBlock--noLabels {
+      padding-top: 1rem;
+      padding-bottom: 1.5rem;
+      &:before {
+        display: none;
+
+      }
+
+      &:after {
+        display: none;
+      }
+    }
   }
+
+
 }
