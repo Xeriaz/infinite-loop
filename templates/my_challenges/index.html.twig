@@ -114,6 +114,18 @@
                                                 <span class="milestone-statusLabel">Edit</span>
                                             </svg>
                                         </a>
+                                        <a class="milestone-statusLink" href="{{ path('edit_challenge', {'id': challenge.id }) }}" >
+                                            <svg class="milestone-statusIcon">
+                                                <use xlink:href="{{ asset('images/sprite.svg#icon-commenting') }}"></use>
+                                                <span class="milestone-statusLabel">Comments</span>
+                                            </svg>
+                                        </a>
+                                        <a class="milestone-statusLink" href="{{ path('edit_challenge', {'id': challenge.id }) }}" >
+                                            <svg class="milestone-statusIcon">
+                                                <use xlink:href="{{ asset('images/sprite.svg#icon-share2') }}"></use>
+                                                <span class="milestone-statusLabel">Share</span>
+                                            </svg>
+                                        </a>
                                     </div>
 
                                     <div class="challengeControlBlock challengeControlBlock--2">

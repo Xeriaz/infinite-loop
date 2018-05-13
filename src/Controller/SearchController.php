@@ -39,10 +39,10 @@ class SearchController extends Controller
             ->setAction($this->generateUrl('search_query_info'))
             ->setMethod('GET')
             ->add('Search', SearchType::class, [
-//                FIXME remove label
-                'label' => ' '
+                'label' => false,
+                'attr' => ['class' => 'search__input', 'placeholder' => 'Search for challenge'],
             ])
-            ->add('Submit', SubmitType::class)
+//            ->add('Submit', SubmitType::class)
             ->getForm();
 
         return $this->render('includes/search.html.twig', [
