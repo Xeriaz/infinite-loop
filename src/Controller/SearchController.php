@@ -10,8 +10,11 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class SearchController extends Controller
 {
+
     /**
+     * @param Request $request
      * @Route("/search", name="search_query_info")
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function index(Request $request)
     {
@@ -23,11 +26,6 @@ class SearchController extends Controller
             $challenge = $em->searchChallengesByTitle($searchQuery, $this->getUser());
             $publicChallenge = $em->searchPublicChallengesByTitle($searchQuery);
         }
-//        else {
-//            $challenge = $this->getDoctrine()
-//                ->getRepository('App:Challenges')
-//                ->findAll();
-//        }
 
         return $this->render('search/index.html.twig', [
             'controller_name' => 'SearchController',

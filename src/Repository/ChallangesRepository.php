@@ -49,10 +49,13 @@ class ChallangesRepository extends ServiceEntityRepository
             ->where(
                 $qb->expr()->andX(
                     $qb->expr()->like('challenge.title', ':title'),
-                    $qb->expr()->eq('challenge.isPublic', 1)
+                    $qb->expr()->eq('challenge.isPublic', ':true')
                 )
             )
-            ->setParameter('title', sprintf('%%%s%%', $title))
+            ->setParameters([
+                'title' => sprintf('%%%s%%', $title),
+                'true' => 1
+            ])
         ;
 
         return $qb->getQuery()->getResult();

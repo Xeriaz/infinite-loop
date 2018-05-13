@@ -105,7 +105,15 @@
                                     </a>
                                     <span class="ml-5">
                                         Milestone:
-                                        <a class="milestone-statusLink" href="{{ path('milestone', {'id': challenge.id}) }}" c>
+                                        <a class="milestone-statusLink" href="{{ path('milestone', {'id': challenge.id}) }}">
+                                            <svg class="milestone-statusIcon">
+                                                 <use xlink:href="{{ asset('images/sprite.svg#icon-plus') }}"></use>
+                                             </svg>
+                                        </a>
+                                    </span>
+                                    <span class="ml-5">
+                                        Invite others:
+                                        <a class="milestone-statusLink" href="{{ path('invite_user_to_challenge', {'id': challenge.id}) }}">
                                             <svg class="milestone-statusIcon">
                                                  <use xlink:href="{{ asset('images/sprite.svg#icon-plus') }}"></use>
                                              </svg>
