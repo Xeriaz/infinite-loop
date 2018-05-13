@@ -38,14 +38,14 @@
                                 - {{ challenge.endDate|date('Y-m-d') }}</h5>
                         </li>
                         <li class="list-group-item text-center">
-                            <h5 class="card-subtitle customCard-subtitle">Owner - {{ challenge.users|join(' ') }}</h5>
+                            <h5 class="card-subtitle customCard-subtitle">Owner - {{ challenge.owner }}</h5>
                         </li>
 
                     </ul>
                     <div class="card-footer justify-content-center p-0">
 
                         <div class="challengeControlBlock challengeControlBlock--noLabels">
-                            <a class="milestone-statusLink" href="#">
+                            <a class="milestone-statusLink" href="{{ path('join_in_challenge', {'id': challenge.id}) }}">
                                 <svg class="milestone-statusIcon">
                                     <use xlink:href="{{ asset('images/sprite.svg#icon-share2') }}"></use>
                                     <span class="milestone-statusLabel">Join</span>
@@ -69,6 +69,8 @@
                 </div>
 
             {% endfor %}
+
+            {#FIXME 'WET' code need to make it 'DRY' #}
 
             {% for publicChallenge in publicChallenges %}
 
@@ -101,14 +103,14 @@
                                 - {{ publicChallenge.endDate|date('Y-m-d') }}</h5>
                         </li>
                         <li class="list-group-item text-center">
-                            <h5 class="card-subtitle customCard-subtitle">Owner - {{ publicChallenge.users|join(' ') }}</h5>
+                            <h5 class="card-subtitle customCard-subtitle">Owner - {{ publicChallenge.owner }}</h5>
                         </li>
 
                     </ul>
                     <div class="card-footer justify-content-center p-0">
 
                         <div class="challengeControlBlock challengeControlBlock--noLabels">
-                            <a class="milestone-statusLink" href="#">
+                            <a class="milestone-statusLink" href="{{ path('join_in_challenge', {'id': publicChallenge.id}) }}">
                                 <svg class="milestone-statusIcon">
                                     <use xlink:href="{{ asset('images/sprite.svg#icon-share2') }}"></use>
                                     <span class="milestone-statusLabel">Join</span>

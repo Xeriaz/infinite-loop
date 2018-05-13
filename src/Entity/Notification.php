@@ -165,9 +165,9 @@ class Notification
     }
 
     /**
-     * @return Collection
+     *
      */
-    public function getChallenge(): Collection
+    public function getChallenge()
     {
         return $this->challenge;
     }

@@ -116,7 +116,7 @@ class EditChallengeController extends Controller
         $em = $this->getDoctrine()->getManager();
         $em->flush();
 
-        return $this->redirectToRoute('home');
+        return $this->redirectToRoute('my_challenges');
     }
 
     private function getAllMilestonesFromChallenge(int $id)
