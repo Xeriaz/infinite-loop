@@ -51,37 +51,43 @@
                                             {#{% if milestoneUserStatus.submittedOn != null %}#}
 
                                             <div class="date-subtitle">
-                                                {% if milestoneUserStatus.isFailed %}
-                                                <span class="d-block">Failed on: <br>
-                                                    {% else %}
-                                                    <span class="d-block">Completed on: <br>
-                                                        {% endif %}
+                                                {% if milestoneUserStatus.submittedOn != null %}
 
-                                                        {% if milestoneUserStatus.submittedOn == null %}
-                                                            TBD
+                                                    <div class="date-subtitle">
+                                                        {% if milestoneUserStatus.isFailed %}
+                                                            <span class="d-block">Failed on:<br>{{ milestoneUserStatus.submittedOn|date('Y-m-d') }} </span>
                                                         {% else %}
-                                                            {{ milestoneUserStatus.submittedOn|date('Y-m-d') }}
+                                                            <span class="d-block">Completed on:<br>{{ milestoneUserStatus.submittedOn|date('Y-m-d') }} </span>
                                                         {% endif %}
+                                                    </div>
+                                                {% endif %}
 
                                             </span>
                                             </div>
-                                            <div>
-                                                {% if (not milestoneUserStatus.isCompleted and not milestoneUserStatus.isFailed )%}
-                                                    <a class="milestone-statusLink" href="{{ path('complete_milestone', {'id': milestone.id}) }}">
+                                            <div class="milestone-statusBlock">
+                                                {% if (not milestoneUserStatus.isCompleted and not milestoneUserStatus.isFailed ) %}
+                                                    <a class="milestone-statusLink"
+                                                       href="{{ path('complete_milestone', {'id': milestone.id}) }}">
                                                         <svg class="milestone-statusIcon">
                                                             <use xlink:href="{{ asset('images/sprite.svg#icon-checkmark') }}"></use>
                                                         </svg>
+                                                        <span class="milestone-statusLabel">Done</span>
                                                     </a>
-                                                    <a class="milestone-statusLink" href="{{ path('failed_milestone', {'id': milestone.id}) }}">
+                                                    <a class="milestone-statusLink"
+                                                       href="{{ path('failed_milestone', {'id': milestone.id}) }}">
                                                         <svg class="milestone-statusIcon">
                                                             <use xlink:href="{{ asset('images/sprite.svg#icon-cross') }}"></use>
                                                         </svg>
+                                                        <span class="milestone-statusLabel">Give up</span>
                                                     </a>
-                                                    <a class="milestone-statusLink" href="{{ path('remove_milestone', {'id': milestone.id}) }}">
+                                                    <a class="milestone-statusLink"
+                                                       href="{{ path('remove_milestone', {'id': milestone.id}) }}">
                                                         <svg class="milestone-statusIcon">
                                                             <use xlink:href="{{ asset('images/sprite.svg#icon-bin') }}"></use>
                                                         </svg>
+                                                        <span class="milestone-statusLabel">Remove</span>
                                                     </a>
+
                                                 {% endif %}
                                             </div>
                                         </div>
