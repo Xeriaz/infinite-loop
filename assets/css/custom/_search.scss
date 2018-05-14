@@ -69,3 +69,17 @@
 
 
 }
+
+.comments--1 {
+  .challengeControlBlock {
+    margin-top: -1rem;
+    &:before {
+      display: none!important;
+
+    }
+
+    &:after {
+      display: none!important;
+    }
+  }
+}
