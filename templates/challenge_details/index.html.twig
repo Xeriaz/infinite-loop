@@ -123,12 +123,12 @@
                                         <span class="milestone-statusLabel">Edit</span>
                                     </svg>
                                 </a>
-                                <a class="milestone-statusLink" href="{{ path('post_comment_form', {'id': challenge.id }) }}" >
-                                    <svg class="milestone-statusIcon">
-                                        <use xlink:href="{{ asset('images/sprite.svg#icon-commenting') }}"></use>
-                                        <span class="milestone-statusLabel">Comments</span>
-                                    </svg>
-                                </a>
+                                {#<a class="milestone-statusLink" href="{{ path('post_comment_form', {'id': challenge.id }) }}" >#}
+                                    {#<svg class="milestone-statusIcon">#}
+                                        {#<use xlink:href="{{ asset('images/sprite.svg#icon-commenting') }}"></use>#}
+                                        {#<span class="milestone-statusLabel">Comments</span>#}
+                                    {#</svg>#}
+                                {#</a>#}
                                 <a class="milestone-statusLink" href="{{ path('invite_user_to_challenge', {'id': challenge.id }) }}" >
                                     <svg class="milestone-statusIcon">
                                         <use xlink:href="{{ asset('images/sprite.svg#icon-share2') }}"></use>
@@ -169,8 +169,9 @@
                         {% endif %}
 
                     </div>
+                    {% include 'challenge_details/comments.html.twig' %}
                 </div>
-    {% include 'challenge_details/comments.html.twig' %}
+
         </div>
     </div>
 
