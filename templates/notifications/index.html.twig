@@ -3,44 +3,48 @@
 {% block title %}Homepage - {{ parent() }}{% endblock %}
 
 {% block content %}
-    <div class="container">
-        <h2>Notifications:</h2>
-        <table class="table">
-            <thead>
-            <tr>
-                <th>Description</th>
-                <th>Notification appeared on</th>
-                <th>Read on</th>
-                <th></th>
-            </tr>
-            </thead>
-            <tbody>
-            {% for notification in notifications %}
+    <div class="myChallenge-wrapper notifications-wrapper">
+        <div class="container">
+            <div class="notifications-container">
+            <h2 class="secondHeading">Notifications:</h2>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th class="tableTitle w-50">Description</th>
+                    <th class="tableTitle">Received on</th>
+                    <th class="tableTitle">Read on</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for notification in notifications %}
 
-                {% if not notification.isRead %}
-                    {#TODO add class instead of inline style#}
-                    <tr style="background-color: #ff9997">
-                {% else %}
-                    <tr>
-                {% endif %}
+                    {% if not notification.isRead %}
+                        {#TODO add class instead of inline style#}
+                        <tr class="newNotification">
+                    {% else %}
+                        <tr>
+                    {% endif %}
 
-                    <td>{{ notification.description }}</td>
-                    <td>{{ notification.createdOn|date('Y-m-d H:i:s') }}</td>
-                    <td>
+                    <td class="tableContent w-50">{{ notification.description }}</td>
+                    <td class="tableContent">{{ notification.createdOn|date('Y-m-d H:i:s') }}</td>
+                    <td class="tableContent">
                         {% if not notification.isRead %}
-                            <a href="{{ path('mark_notification_as_read', {'id': notification.id}) }}">Mark as read</a>
+                            <a class="btn-ghost" href="{{ path('mark_notification_as_read', {'id': notification.id}) }}">Mark as read</a>
                         {% elseif notification.readOn %}
                             {{ notification.readOn|date('Y-m-d H:i:s') }}
                         {% endif %}
                     </td>
-                {% if notification.challenge%}
-                    <td>
-                        <a href="{{ path('join_in_challenge', {'id': notification.challenge.id}) }}">Join in</a>
-                    </td>
-                {% endif %}
-                </tr>
-            {% endfor %}
-            </tbody>
-        </table>
+                    {% if notification.challenge %}
+                        <td class="tableContent">
+                            <a class="btn-ghost" href="{{ path('join_in_challenge', {'id': notification.challenge.id}) }}">Join in</a>
+                        </td>
+                    {% endif %}
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
     </div>
 {% endblock %}

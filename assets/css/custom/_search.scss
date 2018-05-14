@@ -31,6 +31,16 @@
       @media only screen and (max-width: $bp-smallest) {
         width: 100%;
       }
+
+
+      .card-title,
+      .card-text {
+        max-height: 8rem;
+        overflow: auto;
+      }
+
+
+
     }
 
 
