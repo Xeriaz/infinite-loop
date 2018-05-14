@@ -131,6 +131,12 @@
                                                 <span class="milestone-statusLabel">Share</span>
                                             </svg>
                                         </a>
+                                        <a class="milestone-statusLink" href="{{ path('challenge_details', {'id': challenge.id}) }}">
+                                            <svg class="milestone-statusIcon">
+                                                <use xlink:href="{{ asset('images/sprite.svg#icon-navigation-more') }}"></use>
+                                                <span class="milestone-statusLabel">Read more</span>
+                                            </svg>
+                                        </a>
                                     </div>
 
                                     <div class="challengeControlBlock challengeControlBlock--2">

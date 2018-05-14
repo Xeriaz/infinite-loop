@@ -18,13 +18,15 @@ class MilestoneController extends Controller
     /**
      * @Route("challenge/{id}/milestone/", name="milestone")
      * @param Request $request
+     * @param int $id
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function index(Request $request)
+    public function index(Request $request, int $id)
     {
         return $this->render('new_milestone/index.html.twig', [
             'controller_name' => 'MilestoneController',
-            'form' => $this->new($request)
+            'form' => $this->new($request),
+            'challengeId' => $id
         ]);
     }
 
