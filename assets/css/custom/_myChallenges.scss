@@ -89,11 +89,11 @@
       right: 0;
 
       &--public {
-        background-color: rgba(242, 121, 53, 0.9);
+        background-color: rgba(242, 121, 53, 1);
       }
 
       &--private {
-        background-color: rgba(46, 204, 113, 0.9);
+        background-color: #2980b9;
 
       }
     }
@@ -121,7 +121,7 @@
       }
 
       &--public {
-      border: 1px solid rgb(46, 204, 113);
+      border: 1px solid #2980b9;
       }
 
     }
