@@ -135,7 +135,9 @@ class MilestoneController extends Controller
         $em = $this->getDoctrine()->getManager();
         $em->flush();
 
-        return $this->redirectToRoute('my_challenges');
+        return $this->redirectToRoute('challenge_details', [
+            'id' => $this->getChallengeId($userMilestoneStatus)
+        ]);
     }
 
     /**
@@ -161,7 +163,9 @@ class MilestoneController extends Controller
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->flush();
 
-        return $this->redirectToRoute('my_challenges');
+        return $this->redirectToRoute('challenge_details', [
+            'id' => $this->getChallengeId($userMilestoneStatus)
+        ]);
     }
 
     /**
@@ -188,7 +192,9 @@ class MilestoneController extends Controller
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->flush();
 
-        return $this->redirectToRoute('my_challenges');
+        return $this->redirectToRoute('challenge_details', [
+            'id' => $this->getChallengeId($userMilestoneStatus)
+        ]);
     }
 
     /**
@@ -214,6 +220,23 @@ class MilestoneController extends Controller
         $entityManager->remove($userMilestoneStatus);
         $entityManager->flush();
 
-        return $this->redirectToRoute('my_challenges');
+        return $this->redirectToRoute('challenge_details', [
+            'id' => $this->getChallengeId($userMilestoneStatus)
+        ]);
+    }
+
+    /**
+     * @param UserMilestoneStatus $userMilestoneStatus
+     * @return int
+     */
+    private function getChallengeId(UserMilestoneStatus $userMilestoneStatus): int
+    {
+        /** @var Milestone $milestone */
+        $milestone = $userMilestoneStatus->getMilestone();
+
+        /** @var Challenges $challenge */
+        $challenge = $milestone->getChallenge();
+
+        return $challenge->getId();
     }
 }
