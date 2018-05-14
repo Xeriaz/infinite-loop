@@ -32,6 +32,7 @@ class NewChallengeFormController extends Controller
     public function new(Request $request): FormView
     {
         $challenge = new Challenges();
+        //FIXME check if startDate and EndDate doesn't go backdate
         $challenge->setStartDate(new \DateTime('now'));
         $challenge->setEndDate(new \DateTime('now'));
 //        FIXME casting to array, it shouldn't be there, I think

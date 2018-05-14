@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+
+{% block title %}Hello {{ app.user.username }} - invite others!{% endblock %}
+
+{% block content %}
+
+    <div class="newChallenge__wrapper new-milestone">
+        <div class="formBlock">
+            <div class="formHead">
+                <h1 class="formTitle text-left">Comment</h1>
+            </div>
+            <a href="{{ path('challenge_details', {'id': challengeId}) }}">Back to challenge</a>
+
+            {{ form_start(form) }}
+
+            <div class="formBody">
+                <div class="formRow">
+                    <div class="formLabel">
+                        {{ form_label(form.text) }}
+                    </div>
+                    <div class="formControl">
+                        {{ form_widget(form.text, { 'attr': {
+                            'class': 'formInput',
+                            'autofocus': 'true',
+                            'placeholder':'Comment Text'
+                        } }) }}
+                        {{ form_errors(form.text) }}
+                    </div>
+                </div>
+            </div>
+
+            <div class="formFooter ">
+                <input class="btn" type="submit" id="_submit" name="_submit" value="{{ 'Invite' }}"/>
+            </div>
+
+            {{ form_end(form) }}
+        </div>
+    </div>
+{% endblock %}

@@ -51,13 +51,13 @@
                                     <span class="milestone-statusLabel">Join</span>
                                 </svg>
                             </a>
-                            <a class="milestone-statusLink" href="#">
+                            <a class="milestone-statusLink" href="{{ path('post_comment_form', {'id': challenge.id}) }}">
                                 <svg class="milestone-statusIcon">
                                     <use xlink:href="{{ asset('images/sprite.svg#icon-commenting') }}"></use>
                                     <span class="milestone-statusLabel">Comment</span>
                                 </svg>
                             </a>
-                            <a class="milestone-statusLink" href="#">
+                            <a class="milestone-statusLink" href="{{ path('challenge_details', {'id': challenge.id}) }}">
                                 <svg class="milestone-statusIcon">
                                     <use xlink:href="{{ asset('images/sprite.svg#icon-navigation-more') }}"></use>
                                     <span class="milestone-statusLabel">Read more</span>
@@ -116,13 +116,13 @@
                                     <span class="milestone-statusLabel">Join</span>
                                 </svg>
                             </a>
-                            <a class="milestone-statusLink" href="#">
+                            <a class="milestone-statusLink" href="{{ path('post_comment_form', {'id': publicChallenge.id}) }}">
                                 <svg class="milestone-statusIcon">
                                     <use xlink:href="{{ asset('images/sprite.svg#icon-commenting') }}"></use>
                                     <span class="milestone-statusLabel">Comment</span>
                                 </svg>
                             </a>
-                            <a class="milestone-statusLink" href="#">
+                            <a class="milestone-statusLink" href="{{ path('challenge_details', {'id': publicChallenge.id}) }}">
                                 <svg class="milestone-statusIcon">
                                     <use xlink:href="{{ asset('images/sprite.svg#icon-navigation-more') }}"></use>
                                     <span class="milestone-statusLabel">Read more</span>

@@ -1,0 +1,47 @@
+
+<div class="myChallenge-wrapper">
+    <div class="cards-wrapper">
+        <div class="card customCard">
+            <div class="card-body body-bg d-flex align-items-top">
+                <div class="card-groupTitle card-groupTitle--private">Comments</div>
+            </div>
+
+            <ul class="list-group list-group-flush">
+                {% for comment in comments  %}
+
+                <li class="list-group-item d-flex align-items-center">
+                    <h5 class="card-subtitle customCard-subtitle">{{ comment.user }}: {{ comment.text }}</h5>
+                    <div class="milestone-statusBlock">
+                        <div class="date-subtitle">
+                            <span class="d-block">Posted on: <br>
+                                {{ comment.postedOn|date('Y-m-d') }}
+                            </span>
+                        </div>
+                    </div>
+                </li>
+                    {% endfor %}
+                {% if comments|length == 0 %}
+                    <li class="list-group-item d-flex align-items-center">
+                        <h5 class="card-subtitle customCard-subtitle text-center">No comments has been added yet.</h5>
+                    </li>
+                {% endif %}
+            </ul>
+            <div class="card-footer">
+                <div class="challengeControlBlock">
+                    <a class="milestone-statusLink" href="{{ path('post_comment_form', {'id': challenge.id }) }}" >
+                        <svg class="milestone-statusIcon">
+                            <use xlink:href="{{ asset('images/sprite.svg#icon-commenting') }}"></use>
+                            <span class="milestone-statusLabel">Comments</span>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{#<h1>Comments</h1>#}
+{#{{ render(controller(#}
+    {#'App\\Controller\\ChallengeDetailsController::newComment', {'id': 2}, {}#}
+{#)) }}#}
+

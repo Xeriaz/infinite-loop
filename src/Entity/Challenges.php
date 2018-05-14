@@ -97,6 +97,11 @@ class Challenges
     private $notifications;
 
     /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="challenge", orphanRemoval=true)
+     */
+    private $comments;
+
+    /**
      * @return mixed
      */
     public function getIsPublic()
@@ -283,6 +288,7 @@ class Challenges
         $this->milestones = new ArrayCollection();
         $this->challengeGroup = new ArrayCollection();
         $this->notifications = new ArrayCollection();
+        $this->comments = new ArrayCollection();
     }
 
     /**
@@ -417,6 +423,37 @@ class Challenges
             // set the owning side to null (unless already changed)
             if ($notification->getUser() === $this) {
                 $notification->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Comment[]
+     */
+    public function getComments(): Collection
+    {
+        return $this->comments;
+    }
+
+    public function addComment(Comment $comment): self
+    {
+        if (!$this->comments->contains($comment)) {
+            $this->comments[] = $comment;
+            $comment->setChallenge($this);
+        }
+
+        return $this;
+    }
+
+    public function removeComment(Comment $comment): self
+    {
+        if ($this->comments->contains($comment)) {
+            $this->comments->removeElement($comment);
+            // set the owning side to null (unless already changed)
+            if ($comment->getChallenge() === $this) {
+                $comment->setChallenge(null);
             }
         }
 
