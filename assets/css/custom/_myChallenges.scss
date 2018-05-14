@@ -193,7 +193,7 @@
     transition: border 150ms ease-in-out;
 
     &:not(:last-of-type){
-      margin-right: 1.2rem;
+      margin-right: 0.5rem;
     }
 
     &:hover {
@@ -223,7 +223,7 @@
     border-radius: 10rem;
     white-space: nowrap;
     position: relative;
-    margin-left: 2.5rem;
+    margin-left: 0.5rem;
   }
 
   .card-footer {

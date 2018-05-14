@@ -30,6 +30,9 @@
                             <div class="z-index--10"><span class="mr-2">End:</span>{{ challenge.endDate|date('Y-m-d') }}
                             </div>
                         </div>
+
+
+
                     </div>
 
                     {% set completedMilestones = 0 %}
@@ -88,6 +91,7 @@
                                                         </svg>
                                                         <span class="milestone-statusLabel">Remove</span>
                                                     </a>
+
                                                 {% endif %}
 
                                         </div>
@@ -140,6 +144,12 @@
                                     <svg class="milestone-statusIcon">
                                         <use xlink:href="{{ asset('images/sprite.svg#icon-share2') }}"></use>
                                         <span class="milestone-statusLabel">Share</span>
+                                    </svg>
+                                </a>
+                                <a class="milestone-statusLink" href="#">
+                                    <svg class="milestone-statusIcon">
+                                        <use xlink:href="{{ asset('images/sprite.svg#icon-navigation-more') }}"></use>
+                                        <span class="milestone-statusLabel">Read more</span>
                                     </svg>
                                 </a>
                             </div>
