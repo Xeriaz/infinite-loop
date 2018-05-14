@@ -14,6 +14,7 @@
                     <th class="tableTitle">Received on</th>
                     <th class="tableTitle">Read on</th>
                     <th></th>
+                    <th></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -39,6 +40,9 @@
                             <a class="btn-ghost" href="{{ path('join_in_challenge', {'id': notification.challenge.id}) }}">Join in</a>
                         </td>
                     {% endif %}
+                        <td class="tableContent">
+                            <a class="btn-ghost" href="{{ path('challenge_details', {'id': notification.challenge.id}) }}">Details</a>
+                        </td>
                     </tr>
                 {% endfor %}
                 </tbody>
