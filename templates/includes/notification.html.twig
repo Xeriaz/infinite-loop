@@ -1,12 +1,11 @@
-{#FIXME add div.user-nav_icon-box inside of <a> and fix style#}
-
 <div class="user-nav__icon-box">
-    <a href="{{ path('notifications') }}">
+    <i>
         <svg class="user-nav__icon">
             <use xlink:href="{{ asset('images/sprite.svg#icon-bookmark') }}"></use>
         </svg>
         {% if notifications|length > 0 %}
             <span class="user-nav__notification">{{ notifications|length }}</span>
         {% endif %}
-    </a>
+    </i>
+    <a class="linkAbsolute" href="{{ path('notifications') }}"></a>
 </div>
