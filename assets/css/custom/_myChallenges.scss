@@ -103,12 +103,14 @@
     .card-text {
       font-size: 1.2rem;
       margin-bottom: 2rem;
+
     }
 
     .card-tags {
       padding: 0.5rem 1rem;
       border-radius: 10rem;
       font-size: 1rem;
+      line-height: 2.5rem;
 
       &:not(:last-of-type) {
         margin-right: 0.5rem;
@@ -225,7 +227,7 @@
   }
 
   .card-footer {
-    border-top: 2px solid var(--color-grey-light-5);
+    border-top: 1px solid var(--color-grey-light-5);
     display: flex;
     justify-content: space-between;
     align-items: center;
