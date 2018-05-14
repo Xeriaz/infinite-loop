@@ -117,8 +117,7 @@
                                         <span class="milestone-statusLabel">Edit</span>
                                     </svg>
                                 </a>
-                                {#TODO add path to comments#}
-                                <a class="milestone-statusLink" href="{{ path('edit_challenge', {'id': challenge.id }) }}" >
+                                <a class="milestone-statusLink" href="{{ path('post_comment_form', {'id': challenge.id }) }}" >
                                     <svg class="milestone-statusIcon">
                                         <use xlink:href="{{ asset('images/sprite.svg#icon-commenting') }}"></use>
                                         <span class="milestone-statusLabel">Comments</span>
@@ -165,6 +164,9 @@
 
                     </div>
                 </div>
+    {% include 'challenge_details/comments.html.twig' %}
         </div>
     </div>
+
+
 {% endblock %}
