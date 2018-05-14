@@ -1,8 +1,10 @@
 
 {#<div class="myChallenge-wrapper">#}
+
     {#<div class="cards-wrapper">#}
         <div class="card customCard mb-0">
             <div class="card-body body-bg border-0 comments">
+
                 <div class="card-groupTitle card-groupTitle--private">Comments</div>
             </div>
 
@@ -10,8 +12,10 @@
                 {% for comment in comments  %}
 
                 <li class="list-group-item d-flex align-items-center">
+
                     <h5 class="card-subtitle customCard-subtitle d-flex justify-content-between align-items-center fz-1-1 mr-5"><span>{{ comment.user }}</span> <span class="w-60">{{ comment.text }}</span></h5>
                     {#<div class="milestone-statusBlock w-25">#}
+
                         <div class="date-subtitle">
                             <span class="d-block">Posted on: <br>
                                 {{ comment.postedOn|date('Y-m-d') }}
@@ -31,13 +35,17 @@
                     <a class="milestone-statusLink" href="{{ path('post_comment_form', {'id': challenge.id }) }}" >
                         <svg class="milestone-statusIcon">
                             <use xlink:href="{{ asset('images/sprite.svg#icon-commenting') }}"></use>
-                            <span class="milestone-statusLabel">Comments</span>
+                            <span class="milestone-statusLabel">Comment</span>
                         </svg>
                     </a>
                 </div>
             </div>
         </div>
+
     {#</div>#}
+
+   
+
 {#</div>#}
 
 {#<h1>Comments</h1>#}
