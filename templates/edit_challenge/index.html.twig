@@ -12,77 +12,7 @@
             </div>
             {{ form_start(form, {'method': 'post', 'action': path('edit_challenge', {'id': app.request.get('id') }), 'attr': {'class': 'edit_challenge_form'}}) }}
 
-            <div class="formBody">
-                <div class="formRow">
-                    <div class="formLabel">
-                        {{ form_label(form.Title) }}
-                    </div>
-                    <div class="formControl">
-                        {{ form_widget(form.Title, { 'attr': {'class': 'formInput','autofocus': 'true','placeholder':'Give a title for your challenge' } }) }}
-                        {{ form_errors(form.Title) }}
-                    </div>
-                </div>
-
-                <div class="formRow mb-3">
-                    <div class="formLabel">
-                        {{ form_label(form.Description) }}
-                    </div>
-                    <div class="formControl">
-                        {{ form_widget(form.Description, { 'attr': {'class': 'formInput','placeholder':'Short description (*optional)' } }) }}
-                        {{ form_errors(form.Description) }}
-                    </div>
-                </div>
-
-                <div class="formRow">
-                    <div class="formLabel">
-                        {{ form_label(form.Start_date) }}
-                    </div>
-                    <div class="formControl">
-                        {{ form_widget(form.Start_date, { 'attr': {'class': 'formInput' } }) }}
-                        {{ form_errors(form.Start_date) }}
-                    </div>
-                </div>
-
-                <div class="formRow mb-3">
-                    <div class="formLabel">
-                        {{ form_label(form.End_date) }}
-                    </div>
-                    <div class="formControl">
-                        {{ form_widget(form.End_date, { 'attr': {'class': 'formInput' } }) }}
-                        {{ form_errors(form.End_date) }}
-                    </div>
-                </div>
-
-                <div class="formRow">
-                    <div class="formLabel">
-                        {{ form_label(form.challengeGroup) }}
-                    </div>
-                    <div class="formControl">
-                        {{ form_widget(form.challengeGroup, { 'attr': {'class': 'formInput' } }) }}
-                        {{ form_errors(form.challengeGroup) }}
-                    </div>
-                </div>
-
-                <div class="formRow">
-                    <div class="formLabel">
-                        {{ form_label(form.isPublic) }}
-                    </div>
-                    <div class="formControl">
-                        {{ form_widget(form.isPublic, { 'attr': {'class': 'formInput' } }) }}
-                        {{ form_errors(form.isPublic) }}
-                    </div>
-                </div>
-
-                <div class="formRow">
-                    <div class="formLabel">
-                        {{ form_label(form.addProof) }}
-                    </div>
-                    <div class="formControl">
-                        {{ form_widget(form.addProof, { 'attr': {'class': 'formInput' } }) }}
-                        {{ form_errors(form.addProof) }}
-                    </div>
-                </div>
-            </div>
+            {% include 'includes/formBody.html.twig' %}
 
             <div class="formFooter ">
                 <a href="{{ path('delete_challenge', {'id': app.request.get('id')}) }}" class="btn">Remove</a>

@@ -21,7 +21,7 @@
         </svg>
     </a>
     {#TODO add path to comments#}
-    <a class="milestone-statusLink js-displayNone"
+    <a class="milestone-statusLink isHidden"
        href="{{ path('post_comment_form', {'id': challenge.id }) }}">
         <svg class="milestone-statusIcon">
             <use xlink:href="{{ asset('images/sprite.svg#icon-commenting') }}"></use>
@@ -35,7 +35,7 @@
             <span class="milestone-statusLabel">Share</span>
         </svg>
     </a>
-    <a class="milestone-statusLink js-displayNone"
+    <a class="milestone-statusLink isHidden"
        href="{{ path('challenge_details', {'id': challenge.id}) }}">
         <svg class="milestone-statusIcon">
             <use xlink:href="{{ asset('images/sprite.svg#icon-navigation-more') }}"></use>
@@ -53,10 +53,10 @@
     </a>
 
     <div class="milestone-statusProgress">
+        <div class="milestone-statusIcon">
+            <span>{{ completedMilestones }} / {{ milestonesCount }}</span>
+            <span class="milestone-statusLabel">Progress</span>
+        </div>
 
-                                            <span class="milestone-statusIcon">
-                                                <span>{{ completedMilestones }} / {{ milestonesCount }}</span>
-                                                <span class="milestone-statusLabel">Progress</span>
-                                            </span>
     </div>
 </div>
