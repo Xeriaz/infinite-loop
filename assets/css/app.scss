@@ -3,19 +3,12 @@
 @import "~bootstrap/scss/bootstrap";
 
 
-
+//Imports Infiniteloop custom theme
 @import "custom/abstracts/abstractsBundle";
-
-//BASE seting for custom theme
 @import "custom/base/baseBundle";
-
-
-
 @import "custom/layouts/layoutsBundle";
-
 @import "custom/components/componentsBundle";
 
-@import "custom/layout";
 
 
 

@@ -35,7 +35,7 @@
 
   .checkbox {
     font-weight: normal;
-    color: var(--color-grey-light-1);
+    color: $color-grey-light-1;
   }
 
   .form-control {
@@ -75,8 +75,8 @@
 
 .account-wall {
   padding: 2.6rem 0 1.3rem 0;
-  background-color: rgba(52, 73, 94, .8);
-  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+  background-color: rgba($color-grey-dark-1, .8);
+  box-shadow: $shadow-light;
 
   .user-block {
     display: flex;
@@ -89,7 +89,7 @@
     display: inline-block;
     width: 5rem;
     height: 5rem;
-    fill: var(--color-grey-light-1);
+    fill: $color-grey-light-1;
   }
 
   .btn {
@@ -101,21 +101,21 @@
 .new-account {
   display: block;
   margin-top: 1rem;
-  color: var(--color-grey-dark-1);
+  color: $color-grey-dark-1;
 
   &:hover {
-    color: var(--color-primary);
+    color: $color-primary;
   }
 }
 
 .alert-custom {
-  background-color: var(--color-primary-light);
-  color: var(--color-grey-light-1);
+  background-color: $color-primary-light;
+  color: $color-grey-light-1;
   border-radius: 0;
 }
 
 .welcomePage__text-box {
-  max-width: 900px;
+  max-width: 56.25rem;
   width: 60%;
   margin: 0 auto;
 

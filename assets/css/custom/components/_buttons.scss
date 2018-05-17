@@ -6,7 +6,7 @@
   text-decoration: none;
   border: none;
   border-radius: 10rem;
-  background-image: linear-gradient(to right, var(--color-primary-light), var(--color-primary));
+  background-image: linear-gradient(to right, $color-primary-light, $color-primary);
   color: $color-white;
   user-select: none;
   cursor: pointer;
@@ -32,7 +32,7 @@
   }
 
   &:hover {
-    background-image: linear-gradient(to left, var(--color-primary-light), var(--color-primary));
+    background-image: linear-gradient(to left, $color-primary-light, $color-primary);
     color: $color-white;
   }
 
@@ -53,7 +53,7 @@
 //----------HEADER NEW CHALLENGE BUTTON-------------
 
 .btn-nav {
-  border: 1px solid var(--color-primary);
+  border: 1px solid $color-primary;
   border-radius: 10rem;
   font-size: 1rem;
   position: relative;
@@ -63,8 +63,8 @@
   .btn-nav--text {
     position: absolute;
     left: 50%;
-    color: var(--color-grey-dark-1);
-    background-color: #fff;
+    color: $color-grey-dark-1;
+    background-color: $color-white;
     white-space: nowrap;
     padding: 0 0.9rem;
     font-size: 1rem;
@@ -85,20 +85,18 @@
 
   &:hover {
     .user-nav__icon {
-      fill: var(--color-primary);
+      fill: $color-primary;
     }
 
     .btn-nav--text {
-      background-color: var(--color-grey-light-2);
+      background-color: $color-grey-light-2;
 
       @media only screen and (max-width: $bp-largest) {
-        background-color:#fff;
+        background-color:$color-white;
       }
     }
 
   }
-
-
 
 }
 
@@ -109,7 +107,7 @@
 
 .btn-inline {
   border: none;
-  color: var(--color-primary);
+  color: $color-primary;
   font-size: inherit;  
   padding-bottom: 2px;
   display: inline-block;
@@ -125,7 +123,7 @@
   }
 
   &:hover {
-    color: var(--color-grey-dark-1);
+    color: $color-grey-dark-1;
 
     span {
       margin-left: 8px;

@@ -94,9 +94,7 @@
 
   }
 
-  &__user {
 
-  }
 
   &__user-photo {
     border-radius: 50%;
@@ -105,7 +103,6 @@
   }
 
   &__user-name {
-
     font-size: 1.2rem;
     color: $color-grey-dark-2;
 
@@ -138,11 +135,7 @@
 
   .linkAbsolute {
     text-decoration: none;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
+    @include fillWholeBlock
   }
 
 

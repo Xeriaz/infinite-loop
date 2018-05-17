@@ -33,14 +33,11 @@
 
     &:before {
       content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      height: 100%;
+      @include fillWholeBlock;
       width: 3px;
       background-color: $color-primary;
       transform: scaleY(0);
-      transition: transform .2s,
+      transition: transform 150ms ease-in-out,
       width .4s cubic-bezier(1,0,0,1) .2s,
       background-color .1s;
     }
@@ -97,7 +94,7 @@
   bottom: 10%;
   font-size: 1.2rem;
   text-align: center;
-  color: var(--color-grey-light-4);
+  color: $color-grey-light-4;
   padding: 2.5rem;
   margin-top: 40vh;
 
@@ -107,5 +104,5 @@
 }
 
 .isClicked {
-  background-color: var(--color-primary);
+  background-color: $color-primary;
 }
