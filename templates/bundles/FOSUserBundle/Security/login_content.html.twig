@@ -21,14 +21,13 @@
         <input class="form-control" type="password" id="password" name="_password" required="required"
                autocomplete="current-password" placeholder="Password"/>
 
-        <input class="btn btn-lg btn-block mb-2" type="submit" id="_submit" name="_submit"
-               value="{{ 'security.login.submit'|trans }}"/>
+        <input class="btn btn-lg btn-block" type="submit" id="_submit" name="_submit"
+               value="{{ 'Sign in' }}"/>
 
         <label class="checkbox float-left-left" for="remember_me">
             <input type="checkbox" id="remember_me" name="_remember_me" value="on"/>
             {{ 'security.login.remember_me'|trans }}
         </label>
-        <a href="#" class="float-right need-help">Need help? </a><span class="clearfix"></span>
     </form>
 </div>
 <a  class="text-center new-account" href="{{ path('fos_user_registration_register') }}">Not a member? Create an account! </a>

@@ -1,0 +1,135 @@
+.landingPage {
+  height: 100%;
+  background-image: linear-gradient(
+                  to right bottom,
+                  rgba($color-grey-light-1, .8),
+                  rgba($color-grey-light-2, .8)),
+  url("../public/images/hero-small.jpg");
+  background-size: cover;
+  background-position: center;
+  position: relative;
+
+  //used for high resolution screen
+  @media (min-resolution: 192dpi) and (min-width: 37.5em),
+  (-webkit-min-device-pixel-ratio: 2) and (min-width: 37.5em),
+  (min-width: 125em) {
+    background-image: linear-gradient(
+                    to right bottom,
+                    rgba($color-grey-light-1, .8),
+                    rgba($color-grey-light-2, .8)),
+    url("../public/images/hero.jpg");
+  }
+
+  &__text-box {
+    @include absCenter;
+    text-align: center;
+    width: 80%;
+  }
+}
+
+
+.wrapperLanding {
+  height: 100vh;
+
+  .loginLink {
+    display: flex;
+    align-items: center;
+    padding: 0.5rem 2rem;
+    border: 1px solid $color-primary;
+    text-decoration: none;
+    color: $color-primary;
+    border-radius: 10rem;
+    font-size: 1.2rem;
+    transition: all 150ms ease-in-out;
+
+    &:not(:last-of-type){
+      margin-right: 3rem;
+    }
+
+    &:hover {
+      background-color: $color-primary;
+      color: $color-grey-light-1;
+
+      .loginIcon {
+        fill: $color-grey-light-1;
+      }
+    }
+  }
+
+
+  .loginBlock {
+    position: absolute;
+    top: 3rem;
+    right: 3rem;
+    display: flex;
+
+  }
+
+  .loginIcon{
+    width: auto;
+    height: 1.5rem;
+    display: block;
+    pointer-events: none;
+    margin-left: 0.5rem;
+    fill: $color-primary;
+
+  }
+
+  .logo {
+    display: block;
+    width: auto;
+    height: 3rem;
+    position: absolute;
+    top: 3rem;
+    left: 3rem;
+  }
+
+
+
+  .logoImg {
+    height: 100%;
+    width: auto;
+  }
+}
+
+
+//-----------CALL TO ACTION------------
+
+.cta {
+  padding: 3.5rem 0;
+  text-align: center;
+
+  @media only screen and (max-width: $bp-medium){
+    padding: 2.5rem 0;
+  }
+
+  @media only screen and (max-width: $bp-smallest){
+    padding: 2rem 0;
+  }
+
+  &__book-now {
+    color: $color-grey-dark-1;
+    font-size: 2rem;
+    text-transform: uppercase;
+    font-weight: 300;
+    margin-bottom: 2.5rem;
+
+    @media only screen and (max-width: $bp-small){
+      font-size: 1.75rem;
+    }
+
+    @media only screen and (max-width: $bp-smallest){
+      font-size: 1.6rem;
+      margin-bottom: 2rem;
+    }
+  }
+}
+
+
+
+
+
+
+
+
+

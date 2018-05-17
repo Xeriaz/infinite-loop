@@ -2,13 +2,24 @@
 // the ~ allows you to reference things in node_modules
 @import "~bootstrap/scss/bootstrap";
 
-//BASE seting for custom theme
-@import "custom/base";
-@import "custom/layout";
-@import "custom/components";
-@import "custom/login";
 
-@import "custom/landingPage";
+
+@import "custom/abstracts/abstractsBundle";
+
+//BASE seting for custom theme
+@import "custom/base/baseBundle";
+
+
+@import "custom/layout";
+@import "custom/layouts/layoutsBundle";
+
+
+@import "custom/components";
+@import "custom/components/componentsBundle";
+
+
+
+
 @import "custom/newChallenge";
 @import "custom/myChallenges";
 @import "custom/search";
