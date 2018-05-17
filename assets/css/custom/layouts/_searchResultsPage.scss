@@ -1,6 +1,4 @@
 .search-wrapper {
-  height: auto;
-
 
   .cards-wrapper {
     flex-direction: row;
@@ -9,7 +7,7 @@
     align-items: flex-start;
 
     .customCard {
-      max-width: 900px;
+      max-width: 56.25rem;
       width: 30%;
 
       @media only screen and (max-width: $bp-medium) {
@@ -32,20 +30,20 @@
         width: 100%;
       }
 
-
       .card-title,
       .card-text {
         max-height: 8rem;
         overflow: auto;
       }
 
-
-
     }
 
-
-    .list-group-item{
+    .list-group-item {
       padding: 1rem 0;
+    }
+
+    .card-title {
+      font-size: 1.4rem;
     }
 
     .customCard-subtitle {
@@ -66,20 +64,5 @@
       }
     }
   }
-
-
 }
 
-.comments--1 {
-  .challengeControlBlock {
-    margin-top: -1rem;
-    &:before {
-      display: none!important;
-
-    }
-
-    &:after {
-      display: none!important;
-    }
-  }
-}

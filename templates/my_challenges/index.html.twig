@@ -32,7 +32,6 @@
                         </div>
 
 
-
                     </div>
 
                     {% set completedMilestones = 0 %}
@@ -69,30 +68,30 @@
                                                 </div>
                                             {% endif %}
 
-                                                {% if (not milestoneUserStatus.isCompleted and not milestoneUserStatus.isFailed ) %}
-                                                    <a class="milestone-statusLink"
-                                                       href="{{ path('complete_milestone', {'id': milestone.id}) }}">
-                                                        <svg class="milestone-statusIcon">
-                                                            <use xlink:href="{{ asset('images/sprite.svg#icon-checkmark') }}"></use>
-                                                        </svg>
-                                                        <span class="milestone-statusLabel">Done</span>
-                                                    </a>
-                                                    <a class="milestone-statusLink"
-                                                       href="{{ path('failed_milestone', {'id': milestone.id}) }}">
-                                                        <svg class="milestone-statusIcon">
-                                                            <use xlink:href="{{ asset('images/sprite.svg#icon-cross') }}"></use>
-                                                        </svg>
-                                                        <span class="milestone-statusLabel">Give up</span>
-                                                    </a>
-                                                    <a class="milestone-statusLink"
-                                                       href="{{ path('remove_milestone', {'id': milestone.id}) }}">
-                                                        <svg class="milestone-statusIcon">
-                                                            <use xlink:href="{{ asset('images/sprite.svg#icon-bin') }}"></use>
-                                                        </svg>
-                                                        <span class="milestone-statusLabel">Remove</span>
-                                                    </a>
+                                            {% if (not milestoneUserStatus.isCompleted and not milestoneUserStatus.isFailed ) %}
+                                                <a class="milestone-statusLink"
+                                                   href="{{ path('complete_milestone', {'id': milestone.id}) }}">
+                                                    <svg class="milestone-statusIcon">
+                                                        <use xlink:href="{{ asset('images/sprite.svg#icon-checkmark') }}"></use>
+                                                    </svg>
+                                                    <span class="milestone-statusLabel">Done</span>
+                                                </a>
+                                                <a class="milestone-statusLink"
+                                                   href="{{ path('failed_milestone', {'id': milestone.id}) }}">
+                                                    <svg class="milestone-statusIcon">
+                                                        <use xlink:href="{{ asset('images/sprite.svg#icon-cross') }}"></use>
+                                                    </svg>
+                                                    <span class="milestone-statusLabel">Give up</span>
+                                                </a>
+                                                <a class="milestone-statusLink"
+                                                   href="{{ path('remove_milestone', {'id': milestone.id}) }}">
+                                                    <svg class="milestone-statusIcon">
+                                                        <use xlink:href="{{ asset('images/sprite.svg#icon-bin') }}"></use>
+                                                    </svg>
+                                                    <span class="milestone-statusLabel">Remove</span>
+                                                </a>
 
-                                                {% endif %}
+                                            {% endif %}
 
                                         </div>
                                     </li>
@@ -108,77 +107,12 @@
                     </ul>
                     <div class="card-footer">
 
-                            {% if not challenge.isCompleted %}
-                                    <div class="challengeControlBlock">
-                                        <a class="milestone-statusLink" href="{{ path('mark_challenge_completed', {'id': challenge.id}) }}" >
-                                            <svg class="milestone-statusIcon">
-                                                <use xlink:href="{{ asset('images/sprite.svg#icon-checkmark') }}"></use>
-                                                <span class="milestone-statusLabel">Complete</span>
-                                            </svg>
-                                        </a>
-                                        <a class="milestone-statusLink" href="{{ path('delete_challenge', {'id': challenge.id}) }}" >
-                                            <svg class="milestone-statusIcon">
-                                                <use xlink:href="{{ asset('images/sprite.svg#icon-bin') }}"></use>
-                                                <span class="milestone-statusLabel">Remove</span>
-                                            </svg>
-                                        </a>
-                                        <a class="milestone-statusLink" href="{{ path('edit_challenge', {'id': challenge.id }) }}" >
-                                            <svg class="milestone-statusIcon">
-                                                <use xlink:href="{{ asset('images/sprite.svg#icon-pencil') }}"></use>
-                                                <span class="milestone-statusLabel">Edit</span>
-                                            </svg>
-                                        </a>
-                                        {#TODO add path to comments#}
-                                        <a class="milestone-statusLink" href="{{ path('post_comment_form', {'id': challenge.id }) }}" >
-                                            <svg class="milestone-statusIcon">
-                                                <use xlink:href="{{ asset('images/sprite.svg#icon-commenting') }}"></use>
-                                                <span class="milestone-statusLabel">Comments</span>
-                                            </svg>
-                                        </a>
-                                        <a class="milestone-statusLink" href="{{ path('invite_user_to_challenge', {'id': challenge.id }) }}" >
-                                            <svg class="milestone-statusIcon">
-                                                <use xlink:href="{{ asset('images/sprite.svg#icon-share2') }}"></use>
-                                                <span class="milestone-statusLabel">Share</span>
-                                            </svg>
-                                        </a>
-                                        <a class="milestone-statusLink" href="{{ path('challenge_details', {'id': challenge.id}) }}">
-                                            <svg class="milestone-statusIcon">
-                                                <use xlink:href="{{ asset('images/sprite.svg#icon-navigation-more') }}"></use>
-                                                <span class="milestone-statusLabel">Read more</span>
-                                            </svg>
-                                        </a>
-                                    </div>
-
-                                    <div class="challengeControlBlock challengeControlBlock--2">
-                                        <a class="milestone-statusLink" href="{{ path('milestone', {'id': challenge.id}) }}" c>
-                                            <svg class="milestone-statusIcon">
-                                                <use xlink:href="{{ asset('images/sprite.svg#icon-plus') }}"></use>
-                                                <span class="milestone-statusLabel">Add new</span>
-                                            </svg>
-                                        </a>
-
-                                        <div class="milestone-statusProgress">
-
-                                            <span class="milestone-statusIcon">
-                                                <span>{{ completedMilestones }} / {{ milestonesCount }}</span>
-                                                <span class="milestone-statusLabel">Progress</span>
-                                            </span>
-                                </div>
-
-                            </div>
+                        {% if not challenge.isCompleted %}
+                            {% include 'includes/challengeControlButtons.htm.twig' %}
 
                         {% else %}
-                            <div class="challengeCompleted">
-                                <div class="milestone-statusProgress ml-0">
-                                    <span>{{ challenge.completedOn|date('Y-m-d') }}</span>
-                                    <span class="milestone-statusLabel">Challenge completed on</span>
+                            {% include 'includes/challengeCompleted.html.twig' %}
 
-                                </div>
-                                <div class="milestone-statusProgress">
-                                    <span>{{ completedMilestones }} / {{ milestonesCount }}</span>
-                                    <span class="milestone-statusLabel">Milestones accomplished</span>
-                                </div>
-                            </div>
                         {% endif %}
 
                     </div>

@@ -3,6 +3,7 @@
 .content {
   display: flex;
   min-height: calc(100vh - 7em);
+  position: relative;
 
   @media only screen and (max-width: $bp-largest) {
     min-height: calc(100vh - 11em);
@@ -57,4 +58,10 @@
   }
 
 }
+
+
+
+
+
+
 
