@@ -1,0 +1,25 @@
+.myChallenge-wrapper {
+  padding: 3rem 0;
+  @include fillWholeBlock;
+  overflow: scroll;
+  background-size: cover;
+  background-position: center;
+
+  background-image: linear-gradient(
+                  to right bottom,
+                  rgba($color-grey-light-1, .8),
+                  rgba($color-grey-light-2, .8)),
+  url("../public/images/hero-small.jpg");
+
+
+  @media (min-resolution: 192dpi) and (min-width: 37.5em),
+  (-webkit-min-device-pixel-ratio: 2) and (min-width: 37.5em),
+  (min-width: 125em) {
+    background-image: linear-gradient(
+                    to right bottom,
+                    rgba($color-grey-light-1, .8),
+                    rgba($color-grey-light-2, .8)),
+    url("../public/images/hero.jpg");
+  }
+
+}

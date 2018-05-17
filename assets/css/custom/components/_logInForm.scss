@@ -1,0 +1,125 @@
+.loginContainer {
+  width: 21rem;
+  @include absCenter;
+
+  .form-signin {
+    padding: 1rem;
+    margin: 0 auto;
+
+    ul {
+      li {
+        list-style-type: none;
+        color: $color-warningText;
+
+        &:before {
+          content: '*';
+          display: inline-block;
+          margin-right: 5px;
+        }
+      }
+    }
+
+    input[type='submit'] {
+      margin-bottom: 1.5rem;
+    }
+
+  }
+}
+
+.form-signin {
+  .form-signin-heading,
+  .checkbox {
+    margin-bottom: 0;
+
+  }
+
+  .checkbox {
+    font-weight: normal;
+    color: $color-grey-light-1;
+  }
+
+  .form-control {
+    position: relative;
+    font-size: 1.3rem;
+    height: auto;
+    padding: 0.75rem;
+
+    &:focus {
+      outline: none;
+      box-shadow: none;
+      border-bottom-color: $color-primary!important;
+    }
+
+  }
+
+}
+
+#username,
+#fos_user_registration_form_email {
+  margin-bottom: -1px;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+#fos_user_registration_form_plainPassword_second,
+#password {
+  margin-bottom: 1.5rem;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+#fos_user_registration_form_username,
+#fos_user_registration_form_plainPassword_first {
+  border-radius: 0;
+}
+
+.account-wall {
+  padding: 2.6rem 0 1.3rem 0;
+  background-color: rgba($color-grey-dark-1, .8);
+  box-shadow: $shadow-light;
+
+  .user-block {
+    display: flex;
+    justify-content: center;
+    padding: 1.5rem 0;
+
+  }
+
+  .user-icon {
+    display: inline-block;
+    width: 5rem;
+    height: 5rem;
+    fill: $color-grey-light-1;
+  }
+
+  .btn {
+    text-transform: capitalize;
+  }
+
+}
+
+.new-account {
+  display: block;
+  margin-top: 1rem;
+  color: $color-grey-dark-1;
+
+  &:hover {
+    color: $color-primary;
+  }
+}
+
+.alert-custom {
+  background-color: $color-primary-light;
+  color: $color-grey-light-1;
+  border-radius: 0;
+}
+
+.welcomePage__text-box {
+  max-width: 56.25rem;
+  width: 60%;
+  margin: 0 auto;
+
+  @media only screen and (max-width: $bp-medium) {
+    width: 100%;
+  }
+}

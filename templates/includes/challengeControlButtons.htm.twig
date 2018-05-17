@@ -1,0 +1,62 @@
+<div class="challengeControlBlock">
+    <a class="milestone-statusLink"
+       href="{{ path('mark_challenge_completed', {'id': challenge.id}) }}">
+        <svg class="milestone-statusIcon">
+            <use xlink:href="{{ asset('images/sprite.svg#icon-checkmark') }}"></use>
+            <span class="milestone-statusLabel">Complete</span>
+        </svg>
+    </a>
+    <a class="milestone-statusLink"
+       href="{{ path('delete_challenge', {'id': challenge.id}) }}">
+        <svg class="milestone-statusIcon">
+            <use xlink:href="{{ asset('images/sprite.svg#icon-bin') }}"></use>
+            <span class="milestone-statusLabel">Remove</span>
+        </svg>
+    </a>
+    <a class="milestone-statusLink"
+       href="{{ path('edit_challenge', {'id': challenge.id }) }}">
+        <svg class="milestone-statusIcon">
+            <use xlink:href="{{ asset('images/sprite.svg#icon-pencil') }}"></use>
+            <span class="milestone-statusLabel">Edit</span>
+        </svg>
+    </a>
+    {#TODO add path to comments#}
+    <a class="milestone-statusLink isHidden"
+       href="{{ path('post_comment_form', {'id': challenge.id }) }}">
+        <svg class="milestone-statusIcon">
+            <use xlink:href="{{ asset('images/sprite.svg#icon-commenting') }}"></use>
+            <span class="milestone-statusLabel">Comments</span>
+        </svg>
+    </a>
+    <a class="milestone-statusLink"
+       href="{{ path('invite_user_to_challenge', {'id': challenge.id }) }}">
+        <svg class="milestone-statusIcon">
+            <use xlink:href="{{ asset('images/sprite.svg#icon-share2') }}"></use>
+            <span class="milestone-statusLabel">Share</span>
+        </svg>
+    </a>
+    <a class="milestone-statusLink isHidden"
+       href="{{ path('challenge_details', {'id': challenge.id}) }}">
+        <svg class="milestone-statusIcon">
+            <use xlink:href="{{ asset('images/sprite.svg#icon-navigation-more') }}"></use>
+            <span class="milestone-statusLabel">Read more</span>
+        </svg>
+    </a>
+</div>
+
+<div class="challengeControlBlock challengeControlBlock--2">
+    <a class="milestone-statusLink" href="{{ path('milestone', {'id': challenge.id}) }}" c>
+        <svg class="milestone-statusIcon">
+            <use xlink:href="{{ asset('images/sprite.svg#icon-plus') }}"></use>
+            <span class="milestone-statusLabel">Add new</span>
+        </svg>
+    </a>
+
+    <div class="milestone-statusProgress">
+        <div class="milestone-statusIcon">
+            <span>{{ completedMilestones }} / {{ milestonesCount }}</span>
+            <span class="milestone-statusLabel">Progress</span>
+        </div>
+
+    </div>
+</div>

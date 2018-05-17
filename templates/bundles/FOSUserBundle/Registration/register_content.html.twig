@@ -1,44 +1,39 @@
 {% trans_default_domain 'FOSUserBundle' %}
 
-<div class="container justify-content-center h-100 align-items-center">
-    <div class="row justify-content-center h-100 align-items-center">
-        <div class="col-sm-6 col-md-4 ">
-            <div class="account-wall">
-                <div class="user-block">
-                    <svg class="user-icon">
-                        <use xlink:href="{{ asset('images/sprite.svg#icon-group') }}"></use>
-                    </svg>
-                </div>
-                {{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register'}}) }}
 
-                <div class="form-signin" id="fos_user_registration_form">
-                    {{ form_widget(form.email, { 'attr': {'class': 'form-control', 'autofocus': 'true','placeholder': 'form.email'|trans } }) }}
-                    {{ form_errors(form.email) }}
+<div class="loginContainer">
+    <div class="account-wall">
+        <div class="user-block">
+            <svg class="user-icon">
+                <use xlink:href="{{ asset('images/sprite.svg#icon-group') }}"></use>
+            </svg>
+        </div>
+        {{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register'}}) }}
 
-                    {{ form_widget(form.username, { 'attr': {'class': 'form-control', 'placeholder': 'form.username'|trans } }) }}
-                    {{ form_errors(form.username) }}
+        <div class="form-signin" id="fos_user_registration_form">
+            {{ form_widget(form.email, { 'attr': {'class': 'form-control', 'autofocus': 'true','placeholder': 'form.email'|trans } }) }}
+            {{ form_errors(form.email) }}
 
-                    {{ form_widget(form.plainPassword.first, { 'attr': {'class': 'form-control', 'placeholder': 'form.password'|trans } }) }}
-                    {{ form_errors(form.plainPassword.first) }}
+            {{ form_widget(form.username, { 'attr': {'class': 'form-control', 'placeholder': 'form.username'|trans } }) }}
+            {{ form_errors(form.username) }}
 
-                    {{ form_widget(form.plainPassword.second, { 'attr': {'class': 'form-control', 'placeholder': 'form.password_confirmation'|trans } }) }}
-                    {{ form_errors(form.plainPassword.second) }}
+            {{ form_widget(form.plainPassword.first, { 'attr': {'class': 'form-control', 'placeholder': 'form.password'|trans } }) }}
+            {{ form_errors(form.plainPassword.first) }}
 
-
-                    <input class="btn btn-lg btn-block mb-2" type="submit" id="_submit" name="_submit"
-                           value="{{ 'registration.submit'|trans }}"/>
-
-                    <a href="#" class="float-right need-help">Need help? </a><span class="clearfix"></span>
-
-                </div>
-            </div>
-            <a class="text-center new-account" href="{{ path('fos_user_security_login') }}">Already registered?
-                Login </a>
+            {{ form_widget(form.plainPassword.second, { 'attr': {'class': 'form-control', 'placeholder': 'form.password_confirmation'|trans } }) }}
+            {{ form_errors(form.plainPassword.second) }}
 
 
-            {{ form_end(form) }}
+            <input class="btn btn-lg btn-block mb-2" type="submit" id="_submit" name="_submit"
+                   value="{{ 'Sign up' }}"/>
 
         </div>
     </div>
+    <a class="text-center new-account" href="{{ path('fos_user_security_login') }}">Already registered?
+        Login </a>
+
+
+    {{ form_end(form) }}
+
 </div>
 
