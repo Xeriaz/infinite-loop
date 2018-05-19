@@ -55,12 +55,7 @@ class MilestoneController extends Controller
             $em->persist($milestone);
             $em->flush();
 
-            /** @var UserMilestoneStatus $newUserMilestoneStatus */
-            $newUserMilestoneStatus = new UserMilestoneStatus();
-            $newUserMilestoneStatus->setUser($this->getUser());
-            $newUserMilestoneStatus->setMilestone($milestone);
-
-            $em->persist($newUserMilestoneStatus);
+            $em->persist($this->newUserMilestoneStatus($milestone));
             $em->flush();
 
             // TODO change route
@@ -68,6 +63,16 @@ class MilestoneController extends Controller
         }
 
         return $form->createView();
+    }
+
+    public function newUserMilestoneStatus(Milestone $milestone): UserMilestoneStatus
+    {
+        /** @var UserMilestoneStatus $newUserMilestoneStatus */
+        $newUserMilestoneStatus = new UserMilestoneStatus();
+        $newUserMilestoneStatus->setUser($this->getUser());
+        $newUserMilestoneStatus->setMilestone($milestone);
+
+        return $newUserMilestoneStatus;
     }
 
     /**
@@ -105,9 +110,16 @@ class MilestoneController extends Controller
             ]);
 
         if (!$data) {
-            throw $this->createNotFoundException(
-                sprintf('You can not edit others milestones')
-            );
+//            throw $this->createNotFoundException(
+//                sprintf('You can not edit others milestones')
+//            );
+            $newUserMilestoneStatus = $this->newUserMilestoneStatus($milestone);
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($newUserMilestoneStatus);
+            $em->flush();
+
+            return $newUserMilestoneStatus;
         }
 
         return $data;
@@ -126,10 +138,7 @@ class MilestoneController extends Controller
         $milestone = $this->getDataById($milestoneId, Milestone::class);
 
         /** @var UserMilestoneStatus $userMilestoneStatus */
-        $userMilestoneStatus = $this->getDataByMilestone(
-            $milestone,
-            UserMilestoneStatus::class
-        );
+        $userMilestoneStatus = $this->getDataByMilestone($milestone, UserMilestoneStatus::class);
 
         $userMilestoneStatus->setIsCompleted(true);
         $userMilestoneStatus->setSubmittedOn(new \DateTime('now'));
