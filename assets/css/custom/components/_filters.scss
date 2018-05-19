@@ -36,14 +36,6 @@
 
   }
 
-
-
-  .pagination {
-    li {
-      border: 1px solid $color-primary;
-    }
-  }
-
   .sort {
     padding: 0.5rem 1rem;
     border-radius: 10rem;
@@ -80,32 +72,82 @@
     }
 
 
-    &.desc:after,
+
     &.asc:after {
       width: 0;
       height: 0;
       border-left: 0.3rem solid transparent;
       border-right: 0.3rem solid transparent;
-      border-top: 0.3rem solid $color-grey-light-1;
+      border-top: 0.3rem solid #fff;
       content:"";
       position: relative;
+      top:0.9rem;
       right:-0.3rem;
     }
 
-
-    &.asc:after {
-      top:0.9rem;
+    &.desc:after {
+      width: 0;
+      height: 0;
+      border-left: 0.3rem solid transparent;
+      border-right: 0.3rem solid transparent;
+      border-bottom: 0.3rem solid #fff;
+      content:"";
+      position: relative;
+      top:-0.85rem;
+      right:-0.3rem;
     }
 
     &.desc:after {
+      width: 0;
+      height: 0;
+      border-left: 0.3rem solid transparent;
+      border-right: 0.3rem solid transparent;
+      border-bottom: 0.3rem solid #fff;
+      content:"";
+      position: relative;
       top:-0.85rem;
-
+      right:-0.3rem;
     }
 
     &.asc,
     &.desc {
       background-color: $color-primary;
       border-color: $color-primary;
+    }
+
+  }
+
+}
+
+
+.pagination {
+  display: flex;
+  justify-content: center;
+
+  li{
+    &:not(:last-of-type){
+      margin-right: 1px;
+    }
+  }
+
+  .page {
+    display: inline-block;
+    font-size: 1.2rem;
+    padding: 0.5rem 1rem;
+    text-decoration: none;
+    background-color: $color-grey-dark-1;
+    color: $color-grey-light-1;
+    transition: background-color 150ms ease-in-out;
+
+    &:hover {
+      background-color: $color-primary;
+
+    }
+
+  }
+  .active {
+    .page {
+      background-color: $color-primary;
     }
 
   }

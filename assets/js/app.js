@@ -5,9 +5,9 @@ const List = require('list.js');
 
 
 
-var monkeyList = new List('test-list', {
+var challengeList = new List('challenge-list', {
     valueNames: ['js-name','js-description','js-type', 'js-dateEnd','js-dateStart'],
-    page: 2,
+    page: 5,
     pagination: true
 
 });
