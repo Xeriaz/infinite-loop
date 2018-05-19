@@ -110,9 +110,6 @@ class MilestoneController extends Controller
             ]);
 
         if (!$data) {
-//            throw $this->createNotFoundException(
-//                sprintf('You can not edit others milestones')
-//            );
             $newUserMilestoneStatus = $this->newUserMilestoneStatus($milestone);
 
             $em = $this->getDoctrine()->getManager();
