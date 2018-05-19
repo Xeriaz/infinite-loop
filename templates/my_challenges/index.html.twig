@@ -4,11 +4,15 @@
 
 {% block content %}
     <div class="myChallenge-wrapper" id="test-list">
-        <input type="search" class="search" />
-        <button class="sort" data-sort="js-type">Sort by type</button>
-        <button class="sort" data-sort="js-dateStart">Sort by start date</button>
-        <button class="sort" data-sort="js-dateEnd">Sort by end date</button>
-        <ul class="pagination"></ul>
+        <div class="filterContainer">
+            <input type="search" class="search" placeholder="Search in your challenges"/>
+            <div>
+                <button class="sort" data-sort="js-type">type</button>
+                <button class="sort" data-sort="js-dateStart">start date</button>
+                <button class="sort" data-sort="js-dateEnd">end date</button>
+            </div>
+        </div>
+
         <div class="cards-wrapper list" >
 
             {% for challenge in challenges %}
@@ -68,5 +72,6 @@
 
             {% endif %}
         </div>
+        <ul class="pagination"></ul>
     </div>
 {% endblock %}
