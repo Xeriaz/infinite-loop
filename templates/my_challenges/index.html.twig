@@ -3,8 +3,14 @@
 {% block title %}{{ app.user.username }} - challenges list!{% endblock %}
 
 {% block content %}
-    <div class="myChallenge-wrapper">
-        <div class="cards-wrapper">
+    <div class="myChallenge-wrapper" id="test-list">
+        <input type="search" class="search" />
+        <button class="sort" data-sort="js-type">Sort by type</button>
+        <button class="sort" data-sort="js-dateStart">Sort by start date</button>
+        <button class="sort" data-sort="js-dateEnd">Sort by end date</button>
+        <ul class="pagination"></ul>
+        <div class="cards-wrapper list" >
+
             {% for challenge in challenges %}
                 <div class="card customCard">
 
