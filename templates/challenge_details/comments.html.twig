@@ -1,21 +1,31 @@
-<div class="card customCard mb-0">
+<div class="card customCard mb-0" id="comments-list">
     <div class="card-body body-bg border-0 comments">
-
-        <div class="card-groupTitle card-groupTitle--private">Comments</div>
+        <div class="card-groupTitle">Comments</div>
+        <div class="filterContainer">
+            {% if comments|length > 0 %}
+                <input type="search" class="search" placeholder="Comment search..."/>
+                <div>
+                    <div class="sort-label">Sort by</div>
+                    <button class="sort" data-sort="js-user">user</button>
+                    <button class="sort" data-sort="js-commentDate">date</button>
+                </div>
+            {% endif %}
+        </div>
     </div>
 
-    <ul class="list-group list-group-flush">
+
+    <ul class="list-group list-group-flush list">
         {% for comment in comments %}
 
             <li class="list-group-item d-flex align-items-center">
 
                 <h5 class="card-subtitle customCard-subtitle d-flex justify-content-between align-items-center fz-1-1 mr-5">
-                    <span>{{ comment.user }}</span> <span class="w-75">{{ comment.text }}</span></h5>
+                    <span class="js-user">{{ comment.user }}</span> <span class="w-75 js-commentText">{{ comment.text }}</span></h5>
 
 
                 <div class="date-subtitle">
                             <span class="d-block">Posted on: <br>
-                                {{ comment.postedOn|date('Y-m-d') }}
+                                <span class="js-commentDate">{{ comment.postedOn|date('Y-m-d') }}</span>
                             </span>
                 </div>
 
@@ -27,6 +37,7 @@
             </li>
         {% endif %}
     </ul>
+
     <div class="card-footer comments--1">
         <div class="challengeControlBlock">
             <a class="milestone-statusLink" href="{{ path('post_comment_form', {'id': challenge.id }) }}">
@@ -36,6 +47,9 @@
                 </svg>
             </a>
         </div>
+        {% if comments|length > 0 %}
+            <ul class="pagination"></ul>
+        {% endif %}
     </div>
 </div>
 
