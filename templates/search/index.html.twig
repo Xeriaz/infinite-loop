@@ -5,14 +5,18 @@
 {% block content %}
 
     <div class="myChallenge-wrapper search-wrapper" id="search-list">
-        <div class="filterContainer">
-            <div class="sort-label2">Sort by:</div>
-            <div>
-                <button class="sort" data-sort="js-type">type</button>
-                <button class="sort" data-sort="js-dateStart">start date</button>
-                <button class="sort" data-sort="js-dateEnd">end date</button>
+        {% if (challenges|length == 0) and (publicChallenges|length == 0)  %}
+            <h1 class="mainHeading">No results found.<span class="sp-3"><br>Try other keywords</span></h1>
+            {% else %}
+            <div class="filterContainer">
+                <div class="sort-label2">Sort by:</div>
+                <div>
+                    <button class="sort" data-sort="js-type">type</button>
+                    <button class="sort" data-sort="js-dateStart">start date</button>
+                    <button class="sort" data-sort="js-dateEnd">end date</button>
+                </div>
             </div>
-        </div>
+        {% endif %}
         <div class="cards-wrapper list">
 
             {% for challenge in challenges %}
@@ -26,6 +30,10 @@
 
             {% endfor %}
         </div>
-        <ul class="pagination"></ul>
+        {% if (challenges|length == 0) and (publicChallenges|length == 0)  %}
+        {% else %}
+            <ul class="pagination"></ul>
+        {% endif %}
+
     </div>
 {% endblock %}

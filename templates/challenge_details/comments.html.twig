@@ -1,19 +1,15 @@
 <div class="card customCard mb-0" id="comments-list">
-    <div class="card-body body-bg border-0 comments
-        {#{% if challenge.isPublic %}#}
-            {#isPublic#}
-        {#{% else %}#}
-            {#isPrivate#}
-        {#{% endif %}#}
-    ">
+    <div class="card-body body-bg border-0 comments">
         <div class="card-groupTitle">Comments</div>
         <div class="filterContainer">
-            <input type="search" class="search" placeholder="Comment search..."/>
-            <div>
-                <div class="sort-label">Sort by</div>
-                <button class="sort" data-sort="js-user">user</button>
-                <button class="sort" data-sort="js-commentDate">date</button>
-            </div>
+            {% if comments|length > 0 %}
+                <input type="search" class="search" placeholder="Comment search..."/>
+                <div>
+                    <div class="sort-label">Sort by</div>
+                    <button class="sort" data-sort="js-user">user</button>
+                    <button class="sort" data-sort="js-commentDate">date</button>
+                </div>
+            {% endif %}
         </div>
     </div>
 
@@ -51,7 +47,9 @@
                 </svg>
             </a>
         </div>
-        <ul class="pagination"></ul>
+        {% if comments|length > 0 %}
+            <ul class="pagination"></ul>
+        {% endif %}
     </div>
 </div>
 

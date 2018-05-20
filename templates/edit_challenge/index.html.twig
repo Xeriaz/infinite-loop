@@ -15,7 +15,6 @@
             {% include 'includes/formBody.html.twig' %}
 
             <div class="formFooter ">
-                {#<a class="btn" href="{{ path('challenge_details', {'id': app.request.get('id')} }}"><< Back</a>#}
                 <a href="{{ path('challenge_details', {'id': app.request.get('id')}) }}" class="btn"><< Back</a>
                 <input class="btn" type="submit" iid="_submit" name="_submit" value="{{ 'Save' }}"/>
             </div>
