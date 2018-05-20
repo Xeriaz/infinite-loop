@@ -21,13 +21,14 @@
         </svg>
     </a>
     {#TODO add path to comments#}
-    <a class="milestone-statusLink isHidden"
-       href="{{ path('post_comment_form', {'id': challenge.id }) }}">
-        <svg class="milestone-statusIcon">
-            <use xlink:href="{{ asset('images/sprite.svg#icon-commenting') }}"></use>
-            <span class="milestone-statusLabel">Comments</span>
-        </svg>
-    </a>
+    {#<a class="milestone-statusLink isHidden"#}
+       {#href="{{ path('post_comment_form', {'id': challenge.id }) }}">#}
+        {#<svg class="milestone-statusIcon">#}
+            {#<use xlink:href="{{ asset('images/sprite.svg#icon-commenting') }}"></use>#}
+            {#<span class="milestone-statusLabel">Comments</span>#}
+        {#</svg>#}
+        {##}
+    {#</a>#}
     <a class="milestone-statusLink"
        href="{{ path('invite_user_to_challenge', {'id': challenge.id }) }}">
         <svg class="milestone-statusIcon">
@@ -40,7 +41,12 @@
         <svg class="milestone-statusIcon">
             <use xlink:href="{{ asset('images/sprite.svg#icon-navigation-more') }}"></use>
             <span class="milestone-statusLabel">Read more</span>
+
+            {% if challenge.comments|length > 0 %}
+            <span class="milestone-statusNotification" >{{ challenge.comments|length }}</span>
+            {% endif %}
         </svg>
+
     </a>
 </div>
 

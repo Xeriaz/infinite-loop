@@ -12,3 +12,9 @@ var challengeList = new List('challenge-list', {
 
 });
 
+var commentsList = new List('comments-list', {
+    valueNames: ['js-user','js-commentDate','js-commentText'],
+    page: 10,
+    pagination: true
+
+});

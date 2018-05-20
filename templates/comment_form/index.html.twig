@@ -10,7 +10,7 @@
             <div class="formHead">
                 <h1 class="formTitle text-left">Comment</h1>
             </div>
-            <a href="{{ path('challenge_details', {'id': challengeId}) }}">Back to challenge</a>
+
 
             {{ form_start(form) }}
 
@@ -31,6 +31,7 @@
             </div>
 
             <div class="formFooter ">
+                <a class="btn" href="{{ path('challenge_details', {'id': challengeId}) }}"><< Back</a>
                 <input class="btn" type="submit" id="_submit" name="_submit" value="{{ 'Invite' }}"/>
             </div>
 

@@ -21,6 +21,10 @@
     border: 1px solid $color-grey-dark-1;
     transition: border 150ms ease-in-out;
     background-color: $color-grey-light-2;
+    flex: 0 0 40%;
+    order: 0;
+
+
 
 
     &:focus {
