@@ -54,7 +54,6 @@ class NotificationRepository extends ServiceEntityRepository
     {
         $qb = $this->createQueryBuilder('notification');
 
-
         $qb
             ->where(
                 $qb->expr()->eq('notification.user', ':user')

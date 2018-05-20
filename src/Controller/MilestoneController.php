@@ -6,6 +6,7 @@ use App\Entity\Challenges;
 use App\Entity\Milestone;
 use App\Entity\UserMilestoneStatus;
 use App\Form\NewChallengeMilestoneForm;
+use App\Form\NewChallengeMilestoneOwnerForm;
 use FOS\UserBundle\Model\UserInterface;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\HttpFoundation\Request;
@@ -23,10 +24,12 @@ class MilestoneController extends Controller
      */
     public function index(Request $request, int $id)
     {
+        $em = $this->getDoctrine()->getRepository('App:Challenges');
+
         return $this->render('new_milestone/index.html.twig', [
             'controller_name' => 'MilestoneController',
             'form' => $this->new($request),
-            'challengeId' => $id
+            'challenge' => $em->find($id)
         ]);
     }
 
@@ -37,13 +40,21 @@ class MilestoneController extends Controller
     public function new(Request $request): FormView
     {
         $id = $request->attributes->get('id');
+
+        /** @var Challenges $challenge */
         $challenge = $this->getDataById($id, Challenges::class);
 
         /** @var Milestone $milestone */
         $milestone = new Milestone();
         $milestone->setChallenge($challenge);
 
-        $form = $this->createForm(NewChallengeMilestoneForm::class, $milestone);
+        if ($challenge->getOwner()->getId() === $this->getUser()->getId()) {
+            $formClass = NewChallengeMilestoneOwnerForm::class;
+        } else {
+            $formClass = NewChallengeMilestoneForm::class;
+        }
+
+        $form = $this->createForm($formClass, $milestone);
 
         $form->handleRequest($request);
 
@@ -65,6 +76,10 @@ class MilestoneController extends Controller
         return $form->createView();
     }
 
+    /**
+     * @param Milestone $milestone
+     * @return UserMilestoneStatus
+     */
     public function newUserMilestoneStatus(Milestone $milestone): UserMilestoneStatus
     {
         /** @var UserMilestoneStatus $newUserMilestoneStatus */

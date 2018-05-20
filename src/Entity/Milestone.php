@@ -34,6 +34,11 @@ class Milestone
      */
     private $challenge;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isPublic = false;
+
     public function __construct()
     {
         $this->userStatus = new ArrayCollection();
@@ -132,6 +137,18 @@ class Milestone
                 $userStatus->setMilestone(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getIsPublic(): ?bool
+    {
+        return $this->isPublic;
+    }
+
+    public function setIsPublic(bool $isPublic): self
+    {
+        $this->isPublic = $isPublic;
 
         return $this;
     }

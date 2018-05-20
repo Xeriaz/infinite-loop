@@ -11,7 +11,7 @@
                 <h1 class="formTitle text-left">Add New Milestone</h1>
                 <p class="formText mb-0">Don't be pushed by you problems, be lead by your dreams</p>
             </div>
-                <a href="{{ path('challenge_details', {'id': challengeId}) }}">Back to challenge</a>
+                <a href="{{ path('challenge_details', {'id': challenge.id}) }}">Back to challenge</a>
             {{ form_start(form) }}
 
             <div class="formBody">
@@ -24,11 +24,22 @@
                         {{ form_errors(form.Title) }}
                     </div>
                 </div>
+
+                {% if app.user.id == challenge.owner.id %}
+                    <div class="formRow">
+                        <div class="formLabel">
+                            {{ form_label(form.isPublic) }}
+                        </div>
+                        <div class="formControl">
+                            {{ form_widget(form.isPublic) }}
+                            {{ form_errors(form.isPublic) }}
+                        </div>
+                    </div>
+                {% endif %}
             </div>
 
             <div class="formFooter ">
-                <input class="btn" type="submit" id="_submit" name="_submit"
-                       value="{{ 'Add' }}"/>
+                <input class="btn" type="submit" id="_submit" name="_submit" value="{{ 'Add' }}"/>
             </div>
 
             {{ form_end(form) }}
