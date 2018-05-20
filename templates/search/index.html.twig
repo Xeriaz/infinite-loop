@@ -4,136 +4,28 @@
 
 {% block content %}
 
-    <div class="myChallenge-wrapper search-wrapper">
-        <div class="cards-wrapper">
+    <div class="myChallenge-wrapper search-wrapper" id="search-list">
+        <div class="filterContainer">
+            <div class="sort-label2">Sort by:</div>
+            <div>
+                <button class="sort" data-sort="js-type">type</button>
+                <button class="sort" data-sort="js-dateStart">start date</button>
+                <button class="sort" data-sort="js-dateEnd">end date</button>
+            </div>
+        </div>
+        <div class="cards-wrapper list">
 
             {% for challenge in challenges %}
-
-                <div class="card customCard">
-                    <div class="card-body body-bg d-flex align-items-top">
-                        <div class="card-body__textBlock">
-                            {% if challenge.isPublic %}
-                                <div class="card-groupTitle card-groupTitle--public">Public Challenge</div>
-                            {% else %}
-                                <div class="card-groupTitle card-groupTitle--private">Private Challenge</div>
-                            {% endif %}
-
-                            <h4 class="card-title z-index--10">{{ challenge.title }}</h4>
-                            <p class="card-text z-index--10">{{ challenge.description }}</p>
-
-                            {% for challengeGroup in challenge.challengeGroup %}
-                                <span class="card-tags {% if not challenge.isPublic %}card-tags--public {% else %}card-tags--private{% endif %}"> {{ challengeGroup.groupName }} </span>
-                            {% endfor %}
-
-                        </div>
-                    </div>
-
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item text-center">
-                            <h5 class="card-subtitle customCard-subtitle">Start date
-                                - {{ challenge.startDate|date('Y-m-d') }}</h5>
-                        </li>
-                        <li class="list-group-item text-center">
-                            <h5 class="card-subtitle customCard-subtitle">End date
-                                - {{ challenge.endDate|date('Y-m-d') }}</h5>
-                        </li>
-                        <li class="list-group-item text-center">
-                            <h5 class="card-subtitle customCard-subtitle">Owner - {{ challenge.owner }}</h5>
-                        </li>
-
-                    </ul>
-                    <div class="card-footer justify-content-center p-0">
-
-                        <div class="challengeControlBlock challengeControlBlock--noLabels">
-                            <a class="milestone-statusLink" href="{{ path('join_in_challenge', {'id': challenge.id}) }}">
-                                <svg class="milestone-statusIcon">
-                                    <use xlink:href="{{ asset('images/sprite.svg#icon-share2') }}"></use>
-                                    <span class="milestone-statusLabel">Join</span>
-                                </svg>
-                            </a>
-                            <a class="milestone-statusLink" href="{{ path('post_comment_form', {'id': challenge.id}) }}">
-                                <svg class="milestone-statusIcon">
-                                    <use xlink:href="{{ asset('images/sprite.svg#icon-commenting') }}"></use>
-                                    <span class="milestone-statusLabel">Comment</span>
-                                </svg>
-                            </a>
-                            <a class="milestone-statusLink" href="{{ path('challenge_details', {'id': challenge.id}) }}">
-                                <svg class="milestone-statusIcon">
-                                    <use xlink:href="{{ asset('images/sprite.svg#icon-navigation-more') }}"></use>
-                                    <span class="milestone-statusLabel">Read more</span>
-                                </svg>
-                            </a>
-                        </div>
-
-                    </div>
-                </div>
-
+                {% include 'includes/searchCardContent.html.twig' %}
             {% endfor %}
 
-            {#FIXME 'WET' code need to make it 'DRY' #}
 
-            {% for publicChallenge in publicChallenges %}
 
-                <div class="card customCard">
-                    <div class="card-body body-bg d-flex align-items-top">
-                        <div class="card-body__textBlock">
-                            {% if publicChallenge.isPublic %}
-                                <div class="card-groupTitle card-groupTitle--public">Public Challenge</div>
-                            {% else %}
-                                <div class="card-groupTitle card-groupTitle--private">Private Challenge</div>
-                            {% endif %}
-
-                            <h4 class="card-title z-index--10">{{ publicChallenge.title }}</h4>
-                            <p class="card-text z-index--10">{{ publicChallenge.description }}</p>
-
-                            {% for challengeGroup in publicChallenge.challengeGroup %}
-                                <span class="card-tags {% if not publicChallenge.isPublic %}card-tags--public {% else %}card-tags--private{% endif %}"> {{ challengeGroup.groupName }} </span>
-                            {% endfor %}
-
-                        </div>
-                    </div>
-
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item text-center">
-                            <h5 class="card-subtitle customCard-subtitle">Start date
-                                - {{ publicChallenge.startDate|date('Y-m-d') }}</h5>
-                        </li>
-                        <li class="list-group-item text-center">
-                            <h5 class="card-subtitle customCard-subtitle">End date
-                                - {{ publicChallenge.endDate|date('Y-m-d') }}</h5>
-                        </li>
-                        <li class="list-group-item text-center">
-                            <h5 class="card-subtitle customCard-subtitle">Owner - {{ publicChallenge.owner }}</h5>
-                        </li>
-
-                    </ul>
-                    <div class="card-footer justify-content-center p-0">
-
-                        <div class="challengeControlBlock challengeControlBlock--noLabels">
-                            <a class="milestone-statusLink" href="{{ path('join_in_challenge', {'id': publicChallenge.id}) }}">
-                                <svg class="milestone-statusIcon">
-                                    <use xlink:href="{{ asset('images/sprite.svg#icon-share2') }}"></use>
-                                    <span class="milestone-statusLabel">Join</span>
-                                </svg>
-                            </a>
-                            <a class="milestone-statusLink" href="{{ path('post_comment_form', {'id': publicChallenge.id}) }}">
-                                <svg class="milestone-statusIcon">
-                                    <use xlink:href="{{ asset('images/sprite.svg#icon-commenting') }}"></use>
-                                    <span class="milestone-statusLabel">Comment</span>
-                                </svg>
-                            </a>
-                            <a class="milestone-statusLink" href="{{ path('challenge_details', {'id': publicChallenge.id}) }}">
-                                <svg class="milestone-statusIcon">
-                                    <use xlink:href="{{ asset('images/sprite.svg#icon-navigation-more') }}"></use>
-                                    <span class="milestone-statusLabel">Read more</span>
-                                </svg>
-                            </a>
-                        </div>
-
-                    </div>
-                </div>
+            {% for challenge in publicChallenges %}
+                {% include 'includes/searchCardContent.html.twig' %}
 
             {% endfor %}
         </div>
+        <ul class="pagination"></ul>
     </div>
 {% endblock %}
