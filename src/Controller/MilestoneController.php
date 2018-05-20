@@ -48,7 +48,7 @@ class MilestoneController extends Controller
         $milestone = new Milestone();
         $milestone->setChallenge($challenge);
 
-        if ($challenge->getOwner()->getId() === $this->getUser()->getId()) {
+        if ($challenge->getOwner()->getId() === $this->getUser()->getId() && $challenge->getIsPublic()) {
             $formClass = NewChallengeMilestoneOwnerForm::class;
         } else {
             $formClass = NewChallengeMilestoneForm::class;
