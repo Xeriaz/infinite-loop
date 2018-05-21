@@ -44,6 +44,13 @@
 
     &:not(:last-of-type){
       margin-right: 3rem;
+
+      @media only screen and (max-width: $bp-smallest){
+        margin-right: 1rem;;
+      }
+
+
+
     }
 
     &:hover {
