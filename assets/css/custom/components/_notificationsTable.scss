@@ -2,6 +2,24 @@
 
 .notifications-wrapper {
 
+
+  .notifications-container {
+    background-color: $color-grey-dark-2;
+    padding: 2rem;
+    width: 90%;
+    max-width: 75rem;
+    margin: 0 auto;
+
+
+    @media only screen and (max-width: $bp-largest) {
+      width: 100%;
+    }
+
+
+  }
+
+
+
   .secondHeading {
     font-size: 2.4rem;
     color: $color-grey-light-1;
@@ -9,14 +27,16 @@
   }
 
 
-  .notifications-container {
-    background-color: $color-grey-dark-2;
-    padding: 2rem;
-  }
+
 
   .tableTitle {
     font-size: 1.2rem;
     color: $color-grey-light-1;
+
+    @media only screen and (max-width: $bp-large) {
+      padding-left: 0.25rem;
+      padding-right: 0.25rem;
+    }
 
   }
 
