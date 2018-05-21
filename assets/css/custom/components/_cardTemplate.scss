@@ -151,6 +151,11 @@
     position: relative;
     transition: border 150ms ease-in-out;
 
+    @media only screen and (max-width: $bp-smallest) {
+      padding: 0.7rem 2rem;
+      border: none;
+    }
+
     &:not(:last-of-type) {
       margin-right: 0.5rem;
     }

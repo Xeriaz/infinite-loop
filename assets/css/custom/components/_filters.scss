@@ -58,6 +58,10 @@
     cursor: pointer;
     transition: background-color 150ms ease-in-out, border 150ms ease-in-out ;
 
+    @media only screen and (max-width: $bp-smallest) {
+      width: 7rem;
+    }
+
     &:hover {
       background-color: $color-primary;
       border-color: $color-primary;
