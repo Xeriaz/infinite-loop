@@ -32,17 +32,25 @@
   .tableTitle {
     font-size: 1.2rem;
     color: $color-grey-light-1;
-
+    
     @media only screen and (max-width: $bp-large) {
       padding-left: 0.25rem;
       padding-right: 0.25rem;
     }
+
+
 
   }
 
   .tableContent {
     font-size: 1rem;
     color: $color-grey-light-1;
+
+
+    @media only screen and (max-width: $bp-large) {
+      padding-left: 0.25rem;
+      padding-right: 0.25rem;
+    }
 
   }
 
