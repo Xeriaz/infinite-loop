@@ -6,7 +6,9 @@
 
     <div class="myChallenge-wrapper search-wrapper" id="search-list">
         {% if (challenges|length == 0) and (publicChallenges|length == 0)  %}
-            <h1 class="mainHeading">No results found.<span class="sp-3"><br>Try other keywords</span></h1>
+            <div class="noChallenges">
+                <h1 class="mainHeading">No results found.<span class="sp-3"><br>Try other keywords</span></h1>
+            </div>
             {% else %}
             <div class="filterContainer">
                 <div class="sort-label2">Sort by:</div>

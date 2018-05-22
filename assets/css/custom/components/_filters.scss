@@ -7,6 +7,10 @@
   padding: 2rem 1.25rem;
   margin: 0 auto 3rem auto;
 
+  @media only screen and (max-width: $bp-small) {
+    padding: 1rem 0.6rem
+  }
+
 
   @media only screen and (max-width: $bp-medium) {
     width: 100%;
@@ -58,9 +62,18 @@
     cursor: pointer;
     transition: background-color 150ms ease-in-out, border 150ms ease-in-out ;
 
+    @media only screen and (max-width: $bp-small) {
+      padding: 0.4rem 0.6rem
+    }
+
     @media only screen and (max-width: $bp-smallest) {
       width: 7rem;
     }
+
+    @media only screen and (max-width: $bp-micro) {
+      width: 6.3rem;
+    }
+
 
     &:hover {
       background-color: $color-primary;

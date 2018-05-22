@@ -63,15 +63,17 @@
 
             {% if challenges|length == 0 %}
 
-                <h1 class="mainHeading">Create your first challenge!</h1>
-                <div class="cta">
+                <div class="noChallenges">
+                    <h1 class="mainHeading">Create your first challenge!</h1>
+                    <div class="cta">
 
-                    <a href="{{ path('new_challenge_form') }}">
-                        <button class="btn">
-                            <span class="btn__visible">Getting Started</span>
-                            <span class="btn__invisible">New challenge</span>
-                        </button>
-                    </a>
+                        <a href="{{ path('new_challenge_form') }}">
+                            <button class="btn">
+                                <span class="btn__visible">Getting Started</span>
+                                <span class="btn__invisible">New challenge</span>
+                            </button>
+                        </a>
+                    </div>
                 </div>
 
             {% endif %}

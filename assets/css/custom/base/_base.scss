@@ -27,6 +27,11 @@ html {
 
   }
 
+  @media only screen and (max-width: $bp-micro) {
+    font-size: 50%;
+
+  }
+
 
   @media only screen and (min-width: $bp-desktopLarge) {
     font-size: 125%;

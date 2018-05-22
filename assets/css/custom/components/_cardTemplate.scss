@@ -370,3 +370,15 @@
 
 }
 
+.noChallenges {
+  padding: 3rem 0;
+
+
+  @media only screen and (max-width: $bp-small) and (orientation: portrait) {
+    @include absCenter;
+    top: 40%;
+  }
+
+
+}
+
