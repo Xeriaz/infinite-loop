@@ -2,9 +2,13 @@
 
 namespace App\Repository;
 
+use App\Entity\Challenges;
 use App\Entity\Milestone;
+use App\Entity\User;
+use App\Entity\UserMilestoneStatus;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
+use Doctrine\ORM\Query\Expr;
 
 /**
  * @method Milestone|null find($id, $lockMode = null, $lockVersion = null)
@@ -19,37 +23,49 @@ class MilestoneRepository extends ServiceEntityRepository
         parent::__construct($registry, Milestone::class);
     }
 
-//    public function getMilestones()
-//    {
-
-//    }
-
-//    /**
-//     * @return Milestone[] Returns an array of Milestone objects
-//     */
-    /*
-    public function findByExampleField($value)
+    public function getMilestones(Challenges $challenge, User $owner)
     {
-        return $this->createQueryBuilder('m')
-            ->andWhere('m.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('m.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
+        $qb = $this->createQueryBuilder('milestone');
+        $qb
+            ->where(
+                $qb->expr()->andX(
+                    $qb->expr()->eq('milestone.isPublic', ':private'),
+                    $qb->expr()->eq('milestone.challenge', ':challenge'),
+                    $qb->expr()->eq('milestone.owner', ':owner')
+                )
+            )
+//            ->leftJoin(
+//                'milestone.challenge',
+//                'challenge',
+//                Expr\Join::WITH,
+//                'milestones.isPublic = :public'
+//            )
+            ->setParameters([
+                'private'    => false,
+                'challenge'  => $challenge,
+                'owner'      => $owner,
+//                'public'     => true,
+            ]);
 
-    /*
-    public function findOneBySomeField($value): ?Milestone
-    {
-        return $this->createQueryBuilder('m')
-            ->andWhere('m.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
+        return $qb->getQuery()->getResult();
     }
-    */
+
+    public function getPublicChallenges(Challenges $challenge)
+    {
+        $qb = $this->createQueryBuilder('milestone');
+        $qb
+            ->where(
+                $qb->expr()->andX(
+                    $qb->expr()->eq('milestone.isPublic', ':public'),
+                    $qb->expr()->eq('milestone.challenge', ':challenge')
+                )
+            )
+            ->setParameters([
+                'public'     => true,
+                'challenge'  => $challenge,
+            ]);
+
+        return $qb->getQuery()->getResult();
+    }
+
 }
