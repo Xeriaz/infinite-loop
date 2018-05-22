@@ -23,8 +23,7 @@ class ChallengeDetailsController extends Controller
         $challenge = $em->find($id);
 
         $em = $this->getDoctrine()->getRepository('App:Milestone');
-        $privateMilestones = $em->getMilestones($challenge, $this->getUser());
-        $publicMilestones = $em->getPublicChallenges($challenge);
+        $milestones = $em->getMilestonesByChallengeAndUser($challenge, $this->getUser());
 
         $em = $this->getDoctrine()->getRepository('App:Comment');
         $comments = $em->getChallengeComments($challenge);
@@ -32,8 +31,7 @@ class ChallengeDetailsController extends Controller
         return $this->render('challenge_details/index.html.twig', [
             'controller_name'  => 'ChallengeDetailsController',
             'challenge'        => $challenge,
-            'privateMilestones' => $privateMilestones,
-            'publicMilestones' => $publicMilestones,
+            'milestones' => $milestones,
             'comments'         => $comments
         ]);
     }

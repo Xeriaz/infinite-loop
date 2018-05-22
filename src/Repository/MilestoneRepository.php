@@ -23,49 +23,30 @@ class MilestoneRepository extends ServiceEntityRepository
         parent::__construct($registry, Milestone::class);
     }
 
-    public function getMilestones(Challenges $challenge, User $owner)
+    public function getMilestonesByChallengeAndUser(Challenges $challenge, User $owner)
     {
         $qb = $this->createQueryBuilder('milestone');
         $qb
             ->where(
-                $qb->expr()->andX(
-                    $qb->expr()->eq('milestone.isPublic', ':private'),
-                    $qb->expr()->eq('milestone.challenge', ':challenge'),
-                    $qb->expr()->eq('milestone.owner', ':owner')
+                $qb->expr()->orX(
+                    $qb->expr()->andX(
+                        $qb->expr()->eq('milestone.isPublic', $qb->expr()->literal(false)),
+                        $qb->expr()->eq('milestone.challenge', ':challenge'),
+                        $qb->expr()->eq('milestone.owner', ':owner')
+                    ),
+                    $qb->expr()->andX(
+                        $qb->expr()->eq('milestone.isPublic', $qb->expr()->literal(true)),
+                        $qb->expr()->eq('milestone.challenge', ':challenge')
+                    )
                 )
             )
-//            ->leftJoin(
-//                'milestone.challenge',
-//                'challenge',
-//                Expr\Join::WITH,
-//                'milestones.isPublic = :public'
-//            )
-            ->setParameters([
-                'private'    => false,
+            ->setParameters(
+                [
                 'challenge'  => $challenge,
                 'owner'      => $owner,
-//                'public'     => true,
-            ]);
+                ]
+            );
 
         return $qb->getQuery()->getResult();
     }
-
-    public function getPublicChallenges(Challenges $challenge)
-    {
-        $qb = $this->createQueryBuilder('milestone');
-        $qb
-            ->where(
-                $qb->expr()->andX(
-                    $qb->expr()->eq('milestone.isPublic', ':public'),
-                    $qb->expr()->eq('milestone.challenge', ':challenge')
-                )
-            )
-            ->setParameters([
-                'public'     => true,
-                'challenge'  => $challenge,
-            ]);
-
-        return $qb->getQuery()->getResult();
-    }
-
 }

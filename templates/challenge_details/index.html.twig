@@ -7,29 +7,12 @@
         <div class="cards-wrapper">
             <div class="card customCard">
                 {% include 'includes/cardHead.html.twig' %}
-                {{ dump(publicMilestones) }}
-                {{ dump(privateMilestones) }}
+
+                {{ dump(milestones) }}
                 {% set completedMilestones = 0 %}
                 {% set milestonesCount = 0 %}
                 <ul class="list-group list-group-flush">
-                    {% for milestone in publicMilestones %}
-                        {#{% for milestone in challenge.milestones %}#}
-                        {% for milestoneUserStatus in milestone.userStatus %}
-                            {{ dump(milestoneUserStatus) }}
-                            {% if milestoneUserStatus.user == app.user %}
-                                {% if milestoneUserStatus.isCompleted and not milestoneUserStatus.isDeleted %}
-                                    {% set completedMilestones = completedMilestones + 1 %}
-                                {% endif %}
-
-                                {% if not milestoneUserStatus.isDeleted %}
-                                    {% set milestonesCount = milestonesCount + 1 %}
-                                    {% include 'includes/milestoneBlock.html.twig' %}
-                                {% endif %}
-                            {% endif %}
-                        {% endfor %}
-                    {% endfor %}
-
-                    {% for milestone in privateMilestones %}
+                    {% for milestone in milestones %}
                     {#{% for milestone in challenge.milestones %}#}
                         {% for milestoneUserStatus in milestone.userStatus %}
 
