@@ -23,3 +23,11 @@
   }
 
 }
+
+@media only screen and (max-width: $bp-medium) {
+  #challenge-list,
+  #search-list{
+    padding-top: 0;
+  }
+}
+
