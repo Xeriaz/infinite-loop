@@ -1,0 +1,234 @@
+.filterContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 56.25rem;
+  background-color: rgba($color-grey-dark-1, 0.8);
+  padding: 2rem 1.25rem;
+  margin: 0 auto 3rem auto;
+
+  @media only screen and (max-width: $bp-small) {
+    padding: 1rem 0.6rem
+  }
+
+
+  @media only screen and (max-width: $bp-medium) {
+    width: 100%;
+  }
+
+
+  .search {
+    padding: 0.5rem 1rem;
+    box-shadow: none;
+    font-size: 1.2rem;
+    color: $color-grey-dark-1;
+    border: 1px solid $color-grey-dark-1;
+    transition: border 150ms ease-in-out;
+    background-color: $color-grey-light-2;
+    flex: 0 0 40%;
+    order: 0;
+
+    @media only screen and (max-width: $bp-medium) {
+      order: 2;
+    }
+
+
+
+
+    &:focus {
+      outline: none;
+      border-color: $color-primary;
+    }
+
+    &::placeholder {
+      font-weight: 100;
+      color: $color-grey-light-4;
+    }
+
+
+  }
+
+  .sort {
+    padding: 0.4rem 0.8rem;
+    border-radius: 10rem;
+    font-size: 0.9rem;
+    border:1px solid $color-grey-light-1;
+    display:inline-block;
+    color:$color-grey-light-1;
+    text-decoration: none;
+    background-color: transparent;
+    line-height: 1;
+    width: 8rem;
+    cursor: pointer;
+    transition: background-color 150ms ease-in-out, border 150ms ease-in-out ;
+
+    @media only screen and (max-width: $bp-small) {
+      padding: 0.4rem 0.6rem
+    }
+
+    @media only screen and (max-width: $bp-smallest) {
+      width: 7rem;
+    }
+
+    @media only screen and (max-width: $bp-micro) {
+      width: 6.3rem;
+    }
+
+
+    &:hover {
+      background-color: $color-primary;
+      border-color: $color-primary;
+    }
+
+    &:focus {
+      outline: none;
+    }
+
+    &:after {
+      width: 0;
+      height: 0;
+      border-left: 0.3rem solid transparent;
+      border-right: 0.3rem solid transparent;
+      border-bottom: 0.3rem solid transparent;
+      content:"";
+      position: relative;
+      top:-0.85rem;
+      right:-0.3rem;
+    }
+
+
+
+    &.asc:after {
+      width: 0;
+      height: 0;
+      border-left: 0.3rem solid transparent;
+      border-right: 0.3rem solid transparent;
+      border-top: 0.3rem solid #fff;
+      content:"";
+      position: relative;
+      top:0.9rem;
+      right:-0.5rem;
+    }
+
+    &.desc:after {
+      width: 0;
+      height: 0;
+      border-left: 0.3rem solid transparent;
+      border-right: 0.3rem solid transparent;
+      border-bottom: 0.3rem solid #fff;
+      content:"";
+      position: relative;
+      top:-0.85rem;
+      right:-0.5rem;
+    }
+
+    &.desc:after {
+      width: 0;
+      height: 0;
+      border-left: 0.3rem solid transparent;
+      border-right: 0.3rem solid transparent;
+      border-bottom: 0.3rem solid #fff;
+      content:"";
+      position: relative;
+      top:-0.85rem;
+      right:-0.5rem;
+    }
+
+    &.asc,
+    &.desc {
+      background-color: $color-primary;
+      border-color: $color-primary;
+    }
+
+  }
+
+}
+
+
+.pagination {
+  display: flex;
+  justify-content: center;
+
+  li{
+    &:not(:last-of-type){
+      margin-right: 1px;
+    }
+  }
+
+  .page {
+    display: inline-block;
+    font-size: 1.2rem;
+    padding: 0.5rem 1rem;
+    text-decoration: none;
+    background-color: $color-grey-dark-1;
+    color: $color-grey-light-1;
+    transition: background-color 150ms ease-in-out;
+
+
+    &:hover {
+      background-color: $color-primary;
+
+    }
+
+  }
+  .active {
+    .page {
+      background-color: $color-primary;
+    }
+
+  }
+
+}
+
+.sort-label {
+  color: $color-grey-light-1;
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+  text-align: center;
+  position: relative;
+  padding: 0 1rem;
+  z-index: 2;
+
+
+
+
+  &:before {
+    content: '';
+    display: block;
+    border-top: 1px solid $color-grey-light-1;
+    width: 35%;
+    position: absolute;
+    top: 50%;
+    left: 5%;
+    opacity: 0.3;
+  }
+
+  &:after {
+    content: '';
+    display: block;
+    border-top: 1px solid $color-grey-light-1;
+    width: 35%;
+    position: absolute;
+    top: 50%;
+    right: 5%;
+    opacity: 0.3;
+
+  }
+}
+
+.sort-label2 {
+  font-size: 1.4rem;
+  color: $color-grey-light-1;
+}
+
+
+
+
+
+
+
+
+
+
+
+

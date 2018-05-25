@@ -4,15 +4,15 @@
 
 {% block content %}
     <div class="myChallenge-wrapper notifications-wrapper">
-        <div class="container">
+        {#<div class="container">#}
             <div class="notifications-container">
             <h2 class="secondHeading">Notifications:</h2>
             <table class="table">
                 <thead>
                 <tr>
                     <th class="tableTitle w-50">Description</th>
-                    <th class="tableTitle">Received on</th>
-                    <th class="tableTitle">Read on</th>
+                    <th class="tableTitle">Received</th>
+                    <th class="tableTitle">Read</th>
                     <th></th>
                     <th></th>
                 </tr>
@@ -30,7 +30,7 @@
                     <td class="tableContent">{{ notification.createdOn|date('Y-m-d H:i:s') }}</td>
                     <td class="tableContent">
                         {% if not notification.isRead %}
-                            <a class="btn-ghost" href="{{ path('mark_notification_as_read', {'id': notification.id}) }}">Mark as read</a>
+                            <a class="btn-ghost" href="{{ path('mark_notification_as_read', {'id': notification.id}) }}">Check in</a>
                         {% elseif notification.readOn %}
                             {{ notification.readOn|date('Y-m-d H:i:s') }}
                         {% endif %}
@@ -48,6 +48,6 @@
                 </tbody>
             </table>
         </div>
-    </div>
+    {#</div>#}
     </div>
 {% endblock %}

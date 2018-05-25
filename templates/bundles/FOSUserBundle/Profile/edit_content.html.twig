@@ -1,9 +1,41 @@
 {% trans_default_domain 'FOSUserBundle' %}
 
-<h1>Edit info</h1>
-{{ form_start(form, { 'action': path('fos_user_profile_edit'), 'attr': { 'class': 'fos_user_profile_edit' } }) }}
-    {{ form_widget(form) }}
-    <div>
-        <input type="submit" value="{{ 'profile.edit.submit'|trans }}" />
+<div class="myChallenge-wrapper">
+
+
+    <div class="loginContainer">
+        <div class="account-wall">
+            <div class="user-block">
+                <svg class="user-icon">
+                    <use xlink:href="{{ asset('images/sprite.svg#icon-group') }}"></use>
+                </svg>
+            </div>
+            {{ form_start(form, { 'action': path('fos_user_profile_edit'), 'attr': { 'class': 'fos_user_profile_edit' } }) }}
+
+            <div class="form-signin" id="fos_user_registration_form">
+                {{ form_widget(form.email, { 'attr': {'class': 'form-control', 'autofocus': 'true','placeholder': 'form.email'|trans } }) }}
+                {{ form_errors(form.email) }}
+
+                {{ form_widget(form.username, { 'attr': {'class': 'form-control', 'placeholder': 'form.username'|trans } }) }}
+                {{ form_errors(form.username) }}
+
+                {{ form_widget(form.current_password, { 'attr': {'class': 'form-control', 'placeholder': 'form.password'|trans } }) }}
+                {{ form_errors(form.current_password) }}
+
+
+                <input class="btn btn-lg btn-block mb-0 mt-4" type="submit" value="{{ 'profile.edit.submit'|trans }}"/>
+
+
+            </div>
+        </div>
+
+
+        {{ form_end(form) }}
+
     </div>
-{{ form_end(form) }}
+
+</div>
+
+
+
+

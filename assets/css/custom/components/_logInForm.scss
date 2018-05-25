@@ -118,8 +118,24 @@
   max-width: 56.25rem;
   width: 60%;
   margin: 0 auto;
+  transform: translateY(30%);
+  text-align: center;
+
+  @media only screen and (max-width: $bp-medium) and (orientation:landscape) {
+    margin-bottom: 3rem;
+  }
+
+  .mainHeading {
+    margin-bottom: 4rem;
+  }
+
+  .sp-3 {
+    display: inline-block;
+    line-height: 1.5;
+    margin-top: 2rem;
+  }
 
   @media only screen and (max-width: $bp-medium) {
-    width: 100%;
+    width: 90%;
   }
 }

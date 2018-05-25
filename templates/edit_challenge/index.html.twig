@@ -15,7 +15,7 @@
             {% include 'includes/formBody.html.twig' %}
 
             <div class="formFooter ">
-                <a href="{{ path('delete_challenge', {'id': app.request.get('id')}) }}" class="btn">Remove</a>
+                <a href="{{ path('challenge_details', {'id': app.request.get('id')}) }}" class="btn"><< Back</a>
                 <input class="btn" type="submit" iid="_submit" name="_submit" value="{{ 'Save' }}"/>
             </div>
             {{ form_end(form) }}

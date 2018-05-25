@@ -3,8 +3,21 @@
 {% block title %}{{ app.user.username }} - challenges list!{% endblock %}
 
 {% block content %}
-    <div class="myChallenge-wrapper">
-        <div class="cards-wrapper">
+    <div class="myChallenge-wrapper" id="challenge-list">
+        {% if challenges|length > 0 %}
+            <div class="filterContainer">
+                <input type="search" class="search" placeholder="Search in your challenges"/>
+                <div>
+                    <div class="sort-label">Sort by</div>
+                    <button class="sort" data-sort="js-type">type</button>
+                    <button class="sort" data-sort="js-dateStart">start date</button>
+                    <button class="sort" data-sort="js-dateEnd">end date</button>
+                </div>
+            </div>
+        {% endif %}
+
+        <div class="cards-wrapper list" >
+
             {% for challenge in challenges %}
                 <div class="card customCard">
 
@@ -21,6 +34,7 @@
                                     {% set milestonesCount = milestonesCount + 1 %}
 
                                     {% include 'includes/milestoneBlock.html.twig' %}
+
 
                                 {% endif %}
                             {% endfor %}
@@ -47,18 +61,23 @@
 
             {% if challenges|length == 0 %}
 
-                <h1 class="mainHeading">Create your first challenge!</h1>
-                <div class="cta">
+                <div class="noChallenges">
+                    <h1 class="mainHeading">Create your first challenge!</h1>
+                    <div class="cta">
 
-                    <a href="{{ path('new_challenge_form') }}">
-                        <button class="btn">
-                            <span class="btn__visible">Getting Started</span>
-                            <span class="btn__invisible">New challenge</span>
-                        </button>
-                    </a>
+                        <a href="{{ path('new_challenge_form') }}">
+                            <button class="btn">
+                                <span class="btn__visible">Getting Started</span>
+                                <span class="btn__invisible">New challenge</span>
+                            </button>
+                        </a>
+                    </div>
                 </div>
 
             {% endif %}
         </div>
+        {% if challenges|length > 0 %}
+            <ul class="pagination"></ul>
+        {% endif %}
     </div>
 {% endblock %}
