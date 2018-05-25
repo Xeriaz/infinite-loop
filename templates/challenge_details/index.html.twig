@@ -11,17 +11,42 @@
                 {% set completedMilestones = 0 %}
                 {% set milestonesCount = 0 %}
                 <ul class="list-group list-group-flush">
-                    {% for milestone in challenge.milestones %}
+                    {% for milestone in milestones %}
+
+                        {% if milestone.isPublic %}
+                            {% set milestoneUserStatusExist = 0 %}
+
+                            {% for userStatus in milestone.userStatus %}
+                                {% if userStatus.user == app.user %}
+                                    {% set milestoneUserStatusExist = 1 %}
+                                {% endif %}
+                            {% endfor %}
+
+                            {% if milestoneUserStatusExist == 0 %}
+                                {% include 'includes/publicMilestoneBlock.html.twig' %}
+                            {% endif %}
+                        {% endif %}
+
                         {% for milestoneUserStatus in milestone.userStatus %}
-                            {% if milestoneUserStatus.isCompleted and not milestoneUserStatus.isDeleted %}
-                                {% set completedMilestones = completedMilestones + 1 %}
-                            {% endif %}
-                            {% if not milestoneUserStatus.isDeleted %}
-                                {% set milestonesCount = milestonesCount + 1 %}
-                                {% include 'includes/milestoneBlock.html.twig' %}
-                            {% endif %}
+
+                                {% if milestoneUserStatus.isCompleted and
+                                    not milestoneUserStatus.isDeleted and
+                                    milestoneUserStatus.user == app.user
+                                %}
+                                    {% set completedMilestones = completedMilestones + 1 %}
+                                {% endif %}
+
+                                {% if not milestoneUserStatus.isDeleted and
+                                    milestoneUserStatus.user == app.user
+                                %}
+                                    {% set milestonesCount = milestonesCount + 1 %}
+                                    {% include 'includes/milestoneBlock.html.twig' %}
+                                {% endif %}
+
+
                         {% endfor %}
                     {% endfor %}
+
                     {% if milestonesCount == 0 %}
                         <li class="list-group-item d-flex align-items-center">
                             <h5 class="card-subtitle customCard-subtitle text-center">No milestones has been added
@@ -45,8 +70,5 @@
 
         </div>
     </div>
-
-
-
 
 {% endblock %}

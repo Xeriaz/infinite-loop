@@ -6,6 +6,7 @@ use App\Entity\Challenges;
 use App\Entity\Milestone;
 use App\Entity\UserMilestoneStatus;
 use App\Form\NewChallengeMilestoneForm;
+use App\Form\NewChallengeMilestoneOwnerForm;
 use FOS\UserBundle\Model\UserInterface;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\HttpFoundation\Request;
@@ -14,7 +15,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class MilestoneController extends Controller
 {
-
     /**
      * @Route("challenge/{id}/milestone/", name="milestone")
      * @param Request $request
@@ -23,10 +23,12 @@ class MilestoneController extends Controller
      */
     public function index(Request $request, int $id)
     {
+        $em = $this->getDoctrine()->getRepository('App:Challenges');
+
         return $this->render('new_milestone/index.html.twig', [
             'controller_name' => 'MilestoneController',
             'form' => $this->new($request),
-            'challengeId' => $id
+            'challenge' => $em->find($id)
         ]);
     }
 
@@ -37,13 +39,22 @@ class MilestoneController extends Controller
     public function new(Request $request): FormView
     {
         $id = $request->attributes->get('id');
+
+        /** @var Challenges $challenge */
         $challenge = $this->getDataById($id, Challenges::class);
 
         /** @var Milestone $milestone */
         $milestone = new Milestone();
         $milestone->setChallenge($challenge);
+        $milestone->setOwner($this->getUser());
 
-        $form = $this->createForm(NewChallengeMilestoneForm::class, $milestone);
+        if ($challenge->getOwner()->getId() === $this->getUser()->getId() && $challenge->getIsPublic()) {
+            $formClass = NewChallengeMilestoneOwnerForm::class;
+        } else {
+            $formClass = NewChallengeMilestoneForm::class;
+        }
+
+        $form = $this->createForm($formClass, $milestone);
 
         $form->handleRequest($request);
 
@@ -55,19 +66,30 @@ class MilestoneController extends Controller
             $em->persist($milestone);
             $em->flush();
 
-            /** @var UserMilestoneStatus $newUserMilestoneStatus */
-            $newUserMilestoneStatus = new UserMilestoneStatus();
-            $newUserMilestoneStatus->setUser($this->getUser());
-            $newUserMilestoneStatus->setMilestone($milestone);
-
-            $em->persist($newUserMilestoneStatus);
-            $em->flush();
+            if (!$milestone->getIsPublic()) {
+                $em->persist($this->newUserMilestoneStatus($milestone));
+                $em->flush();
+            }
 
             // TODO change route
 //            return $this->redirectToRoute('my_challenges');
         }
 
         return $form->createView();
+    }
+
+    /**
+     * @param Milestone $milestone
+     * @return UserMilestoneStatus
+     */
+    public function newUserMilestoneStatus(Milestone $milestone): UserMilestoneStatus
+    {
+        /** @var UserMilestoneStatus $newUserMilestoneStatus */
+        $newUserMilestoneStatus = new UserMilestoneStatus();
+        $newUserMilestoneStatus->setUser($this->getUser());
+        $newUserMilestoneStatus->setMilestone($milestone);
+
+        return $newUserMilestoneStatus;
     }
 
     /**
@@ -105,9 +127,13 @@ class MilestoneController extends Controller
             ]);
 
         if (!$data) {
-            throw $this->createNotFoundException(
-                sprintf('You can not edit others milestones')
-            );
+            $newUserMilestoneStatus = $this->newUserMilestoneStatus($milestone);
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($newUserMilestoneStatus);
+            $em->flush();
+
+            return $newUserMilestoneStatus;
         }
 
         return $data;
@@ -126,10 +152,7 @@ class MilestoneController extends Controller
         $milestone = $this->getDataById($milestoneId, Milestone::class);
 
         /** @var UserMilestoneStatus $userMilestoneStatus */
-        $userMilestoneStatus = $this->getDataByMilestone(
-            $milestone,
-            UserMilestoneStatus::class
-        );
+        $userMilestoneStatus = $this->getDataByMilestone($milestone, UserMilestoneStatus::class);
 
         $userMilestoneStatus->setIsCompleted(true);
         $userMilestoneStatus->setSubmittedOn(new \DateTime('now'));

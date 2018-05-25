@@ -44,6 +44,11 @@ class User extends BaseUser
     private $ownedChallenge;
 
     /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Milestone", mappedBy="owner")
+     */
+    private $ownedMilestone;
+
+    /**
      * @ORM\OneToMany(targetEntity="App\Entity\Notification", mappedBy="user")
      */
     private $notifications;
@@ -94,6 +99,7 @@ class User extends BaseUser
         $this->ownedChallenge = new ArrayCollection();
         $this->notifications = new ArrayCollection();
         $this->comments = new ArrayCollection();
+        $this->ownedMilestone = new ArrayCollection();
     }
 
     public function addChallenge(Challenges $challenge): self
@@ -259,6 +265,37 @@ class User extends BaseUser
             // set the owning side to null (unless already changed)
             if ($comment->getUser() === $this) {
                 $comment->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Milestone[]
+     */
+    public function getOwnedMilestone(): Collection
+    {
+        return $this->ownedMilestone;
+    }
+
+    public function addOwnedMilestone(Milestone $ownedMilestone): self
+    {
+        if (!$this->ownedMilestone->contains($ownedMilestone)) {
+            $this->ownedMilestone[] = $ownedMilestone;
+            $ownedMilestone->setOwner($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOwnedMilestone(Milestone $ownedMilestone): self
+    {
+        if ($this->ownedMilestone->contains($ownedMilestone)) {
+            $this->ownedMilestone->removeElement($ownedMilestone);
+            // set the owning side to null (unless already changed)
+            if ($ownedMilestone->getOwner() === $this) {
+                $ownedMilestone->setOwner(null);
             }
         }
 

@@ -1,18 +1,8 @@
-<li class="list-group-item d-flex align-items-center{% if milestoneUserStatus.isFailed %} isFailed {% elseif milestoneUserStatus.submittedOn != null %} isCompleted {% endif %}">
+<li class="list-group-item d-flex align-items-center">
     <h5 class="card-subtitle customCard-subtitle">{{ milestone.title }}</h5>
     <div class="milestone-statusBlock">
-        {% if milestoneUserStatus.submittedOn != null %}
 
-            <div class="date-subtitle">
-                {% if milestoneUserStatus.isFailed and milestoneUserStatus.user == app.user %}
-                    <span class="d-block">Failed on:<br>{{ milestoneUserStatus.submittedOn|date('Y-m-d') }} </span>
-                {% elseif milestoneUserStatus.isCompleted and milestoneUserStatus.user == app.user %}
-                    <span class="d-block">Completed on:<br>{{ milestoneUserStatus.submittedOn|date('Y-m-d') }} </span>
-                {% endif %}
-            </div>
-        {% endif %}
-
-        {% if not milestoneUserStatus.isCompleted and not milestoneUserStatus.isFailed%}
+        {% if milestone.isPublic %}
             <a class="milestone-statusLink"
                href="{{ path('complete_milestone', {'id': milestone.id}) }}">
                 <svg class="milestone-statusIcon">

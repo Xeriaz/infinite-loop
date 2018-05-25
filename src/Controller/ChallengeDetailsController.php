@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Challenges;
 use App\Entity\Comment;
+use App\Entity\Milestone;
 use App\Form\CommentForm;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -22,13 +23,18 @@ class ChallengeDetailsController extends Controller
         $em = $this->getDoctrine()->getRepository('App:Challenges');
         $challenge = $em->find($id);
 
+        $em = $this->getDoctrine()->getRepository('App:Milestone');
+        /** @var Milestone $milestones */
+        $milestones = $em->getMilestonesByChallengeAndUser($challenge, $this->getUser());
+
         $em = $this->getDoctrine()->getRepository('App:Comment');
         $comments = $em->getChallengeComments($challenge);
 
         return $this->render('challenge_details/index.html.twig', [
-            'controller_name' => 'ChallengeDetailsController',
-            'challenge' => $challenge,
-            'comments' => $comments
+            'controller_name'  => 'ChallengeDetailsController',
+            'challenge'        => $challenge,
+            'milestones'       => $milestones,
+            'comments'         => $comments
         ]);
     }
 
@@ -42,8 +48,8 @@ class ChallengeDetailsController extends Controller
     {
         return $this->render('comment_form/index.html.twig', [
             'controller_name' => 'ChallengeDetailsController',
-            'form' => $this->newComment($request, $id),
-            'challengeId' => $id
+            'form'            => $this->newComment($request, $id),
+            'challengeId'     => $id,
         ]);
     }
 

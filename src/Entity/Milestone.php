@@ -34,6 +34,17 @@ class Milestone
      */
     private $challenge;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isPublic = false;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="ownedMilestone")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     */
+    private $owner;
+
     public function __construct()
     {
         $this->userStatus = new ArrayCollection();
@@ -132,6 +143,30 @@ class Milestone
                 $userStatus->setMilestone(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getIsPublic(): ?bool
+    {
+        return $this->isPublic;
+    }
+
+    public function setIsPublic(bool $isPublic): self
+    {
+        $this->isPublic = $isPublic;
+
+        return $this;
+    }
+
+    public function getOwner(): ?User
+    {
+        return $this->owner;
+    }
+
+    public function setOwner(?User $owner): self
+    {
+        $this->owner = $owner;
 
         return $this;
     }
