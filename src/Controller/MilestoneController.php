@@ -15,7 +15,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class MilestoneController extends Controller
 {
-
     /**
      * @Route("challenge/{id}/milestone/", name="milestone")
      * @param Request $request
@@ -47,6 +46,7 @@ class MilestoneController extends Controller
         /** @var Milestone $milestone */
         $milestone = new Milestone();
         $milestone->setChallenge($challenge);
+        $milestone->setOwner($this->getUser());
 
         if ($challenge->getOwner()->getId() === $this->getUser()->getId() && $challenge->getIsPublic()) {
             $formClass = NewChallengeMilestoneOwnerForm::class;
@@ -66,8 +66,10 @@ class MilestoneController extends Controller
             $em->persist($milestone);
             $em->flush();
 
-            $em->persist($this->newUserMilestoneStatus($milestone));
-            $em->flush();
+            if (!$milestone->getIsPublic()) {
+                $em->persist($this->newUserMilestoneStatus($milestone));
+                $em->flush();
+            }
 
             // TODO change route
 //            return $this->redirectToRoute('my_challenges');
