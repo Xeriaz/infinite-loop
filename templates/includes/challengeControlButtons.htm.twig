@@ -1,11 +1,14 @@
 <div class="challengeControlBlock">
-    <a class="milestone-statusLink"
-       href="{{ path('mark_challenge_completed', {'id': challenge.id}) }}">
-        <svg class="milestone-statusIcon">
-            <use xlink:href="{{ asset('images/sprite.svg#icon-checkmark') }}"></use>
-            <span class="milestone-statusLabel">Complete</span>
-        </svg>
-    </a>
+    {% if not challenge.isPublic %}
+        <a class="milestone-statusLink"
+           href="{{ path('mark_challenge_completed', {'id': challenge.id}) }}">
+            <svg class="milestone-statusIcon">
+                <use xlink:href="{{ asset('images/sprite.svg#icon-checkmark') }}"></use>
+                <span class="milestone-statusLabel">Complete</span>
+            </svg>
+        </a>
+    {% endif %}
+
     <a class="milestone-statusLink"
        href="{{ path('delete_challenge', {'id': challenge.id}) }}">
         <svg class="milestone-statusIcon">
@@ -20,15 +23,7 @@
             <span class="milestone-statusLabel">Edit</span>
         </svg>
     </a>
-    {#TODO add path to comments#}
-    {#<a class="milestone-statusLink isHidden"#}
-       {#href="{{ path('post_comment_form', {'id': challenge.id }) }}">#}
-        {#<svg class="milestone-statusIcon">#}
-            {#<use xlink:href="{{ asset('images/sprite.svg#icon-commenting') }}"></use>#}
-            {#<span class="milestone-statusLabel">Comments</span>#}
-        {#</svg>#}
-        {##}
-    {#</a>#}
+
     <a class="milestone-statusLink"
        href="{{ path('invite_user_to_challenge', {'id': challenge.id }) }}">
         <svg class="milestone-statusIcon">
