@@ -9,7 +9,7 @@
             <div class="noChallenges">
                 <h1 class="mainHeading">No results found.<span class="sp-3"><br>Try other keywords</span></h1>
             </div>
-            {% else %}
+            {% elseif (challenges|length + publicChallenges|length) > 2%}
             <div class="filterContainer">
                 <div class="sort-label2">Sort by:</div>
                 <div>
@@ -32,8 +32,7 @@
 
             {% endfor %}
         </div>
-        {% if (challenges|length == 0) and (publicChallenges|length == 0)  %}
-        {% else %}
+        {% if (challenges|length + publicChallenges|length) > 6  %}
             <ul class="pagination"></ul>
         {% endif %}
 
