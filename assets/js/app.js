@@ -7,11 +7,23 @@ $(document).ready(function() {
 
     if ($("#challenge-list").length !==0 ) {
         const challengeList = new List('challenge-list', {
-            valueNames: ['js-name','js-description','js-type', 'js-dateEnd','js-dateStart'],
+            valueNames: [
+                            'js-name',
+                            'js-description',
+                            'js-type',
+                            'js-dateEnd',
+                            'js-dateStart'],
+
             page: 5,
             pagination: true
 
         });
+
+        $('#form_Search').on('keyup', function() {
+            let searchString = $(this).val();
+            challengeList.search(searchString);
+        });
+
     }
     if ($("#comments-list").length !==0 ) {
         const commentsList = new List('comments-list', {
@@ -30,6 +42,7 @@ $(document).ready(function() {
 
         });
     }
+
 
 
 });

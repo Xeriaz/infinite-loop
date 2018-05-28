@@ -7,8 +7,8 @@
                 <div class="card-groupTitle card-groupTitle--private js-type">Private Challenge</div>
             {% endif %}
 
-            <h4 class="card-title z-index--10">{{ challenge.title }}</h4>
-            <p class="card-text z-index--10">{{ challenge.description }}</p>
+            <h4 class="card-title z-index--10">{{ (app.request.attributes.get('_route') == 'search_query_info') and (challenge.title|length > 50)? challenge.title|slice(0, 47) ~ '…' : challenge.title }}</h4>
+            <p class="card-text z-index--10">{{ (app.request.attributes.get('_route') == 'search_query_info') and (challenge.description|length > 100)? challenge.description|slice(0, 97) ~ '…' : challenge.description }}</p>
 
             {% for challengeGroup in challenge.challengeGroup %}
                 <span class="card-tags {% if not challenge.isPublic %}card-tags--public {% else %}card-tags--private{% endif %}"> {{ challengeGroup.groupName }} </span>

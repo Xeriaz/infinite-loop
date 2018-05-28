@@ -6,8 +6,9 @@
     {% endif %}
     <div class="card-body__textBlock">
 
-        <h4 class="card-title z-index--10 js-name">{{ challenge.title }}</h4>
-        <p class="card-text z-index--10 js-description">{{ challenge.description }}</p>
+        <h4 class="card-title z-index--10 js-name">{{ (app.request.attributes.get('_route') == 'my_challenges') and (challenge.title|length > 50)? challenge.title|slice(0, 50) ~ '…' : challenge.title }}</h4>
+        {#<p class="card-text z-index--10 js-description">{{ challenge.description }}</p>#}
+        <p class="card-text z-index--10 js-description">{{ (app.request.attributes.get('_route') == 'my_challenges') and (challenge.description|length > 140)? challenge.description|slice(0, 137) ~ '…' : challenge.description }}</p>
 
         {% for challengeGroup in challenge.challengeGroup %}
             <span class="card-tags {% if not challenge.isPublic %}card-tags--public {% else %}card-tags--private{% endif %}"> {{ challengeGroup.groupName }} </span>
@@ -16,9 +17,9 @@
 
     </div>
     <div class="card-body__dateBlock text-right">
-        <div class="z-index--10"><span class="mr-2 ">Start:</span><span class="dateStart">{{ challenge.startDate|date('Y-m-d') }}</span>
+        <div class="z-index--10"><span class="mr-2 ">Start:</span><span class="dateStart js-dateStart timestamp" data-timestamp="{{ challenge.startDate | date('U') }}">{{ challenge.startDate|date('Y-m-d') }}</span>
         </div>
-        <div class="z-index--10"><span class="mr-2 ">End:</span><span class="dateEnd">{{ challenge.endDate|date('Y-m-d') }}</span>
+        <div class="z-index--10"><span class="mr-2 ">End:</span><span class="dateEnd js-dateEnd timestamp" data-timestamp="{{ challenge.endDate | date('U') }}">{{ challenge.endDate|date('Y-m-d') }}</span>
         </div>
     </div>
 </div>

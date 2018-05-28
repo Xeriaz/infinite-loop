@@ -4,11 +4,11 @@
 
 {% block content %}
     <div class="myChallenge-wrapper" id="challenge-list">
-        {% if challenges|length > 0 %}
+        {% if challenges|length > 2 %}
             <div class="filterContainer">
-                <input type="search" class="search" placeholder="Search in your challenges"/>
+                <div class="sort-label2">Sort by:</div>
                 <div>
-                    <div class="sort-label">Sort by</div>
+                    {#<div class="sort-label">Sort by</div>#}
                     <button class="sort" data-sort="js-type">type</button>
                     <button class="sort" data-sort="js-dateStart">start date</button>
                     <button class="sort" data-sort="js-dateEnd">end date</button>
@@ -16,10 +16,10 @@
             </div>
         {% endif %}
 
-        <div class="cards-wrapper list" >
+        <ul class="cards-wrapper list" >
 
             {% for challenge in challenges %}
-                <div class="card customCard">
+                <li class="card customCard">
 
                     {% include 'includes/cardHead.html.twig' %}
                     <ul class="list-group list-group-flush">
@@ -47,7 +47,7 @@
                         {% endif %}
 
                     </div>
-                </div>
+                </li>
             {% endfor %}
 
             {% if challenges|length == 0 %}
@@ -66,8 +66,8 @@
                 </div>
 
             {% endif %}
-        </div>
-        {% if challenges|length > 0 %}
+        </ul>
+        {% if challenges|length > 5 %}
             <ul class="pagination"></ul>
         {% endif %}
     </div>

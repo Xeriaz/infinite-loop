@@ -1,16 +1,16 @@
 <div class="card customCard mb-0" id="comments-list">
     <div class="card-body body-bg border-0 comments">
         <div class="card-groupTitle">Comments</div>
-        <div class="filterContainer">
-            {% if comments|length > 0 %}
-                <input type="search" class="search" placeholder="Comment search..."/>
-                <div>
-                    <div class="sort-label">Sort by</div>
-                    <button class="sort" data-sort="js-user">user</button>
-                    <button class="sort" data-sort="js-commentDate">date</button>
-                </div>
-            {% endif %}
-        </div>
+        {#<div class="filterContainer">#}
+            {#{% if comments|length > 0 %}#}
+                {#<input type="search" class="search" placeholder="Comment search..."/>#}
+                {#<div>#}
+                    {#<div class="sort-label">Sort by</div>#}
+                    {#<button class="sort" data-sort="js-user">user</button>#}
+                    {#<button class="sort" data-sort="js-commentDate">date</button>#}
+                {#</div>#}
+            {#{% endif %}#}
+        {#</div>#}
     </div>
 
 
@@ -47,7 +47,7 @@
                 </svg>
             </a>
         </div>
-        {% if comments|length > 0 %}
+        {% if comments|length > 10 %}
             <ul class="pagination"></ul>
         {% endif %}
     </div>
