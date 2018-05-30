@@ -26,6 +26,7 @@
     },
     "require-dev": {
         "squizlabs/php_codesniffer": "*",
+        "symfony/browser-kit": "^4.0",
         "symfony/debug-bundle": "^4.0",
         "symfony/profiler-pack": "^1.0"
     },

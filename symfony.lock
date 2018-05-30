@@ -107,6 +107,9 @@
     "symfony/asset": {
         "version": "v4.0.6"
     },
+    "symfony/browser-kit": {
+        "version": "v4.0.11"
+    },
     "symfony/cache": {
         "version": "v4.0.6"
     },
@@ -139,6 +142,9 @@
     },
     "symfony/doctrine-bridge": {
         "version": "v4.0.8"
+    },
+    "symfony/dom-crawler": {
+        "version": "v4.0.11"
     },
     "symfony/dotenv": {
         "version": "v4.0.6"
@@ -202,6 +208,9 @@
     },
     "symfony/orm-pack": {
         "version": "v1.0.5"
+    },
+    "symfony/polyfill-ctype": {
+        "version": "v1.8.0"
     },
     "symfony/polyfill-intl-icu": {
         "version": "v1.7.0"
