@@ -23,5 +23,4 @@ class InviteToChallengeForm extends AbstractType
             ->add('targetedUsername', TextType::class)
         ;
     }
-
 }

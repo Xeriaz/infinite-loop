@@ -201,5 +201,4 @@ class Notification
 
         return $this;
     }
-
 }

@@ -24,5 +24,4 @@ class NewChallengeMilestoneForm extends AbstractType
             //->add('save', SubmitType::class, ['label' => 'Add milestone'])
         ;
     }
-
 }
