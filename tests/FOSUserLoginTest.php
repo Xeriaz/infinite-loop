@@ -20,13 +20,11 @@ class FOSUserLoginTest extends WebTestCase
         $this->assertSame(200, $client->getResponse()->getStatusCode());
 
         $redirectPage = $client->getCrawler();
-
         $link = $redirectPage->filter('.loginLink')->link();
-
-        $redirectedPage = $client->click($link);
+        $redirectPage = $client->click($link);
 
         try {
-            $loginForm = $redirectedPage->filter('.form-signin')->selectButton('Sign in')->form();
+            $loginForm = $redirectPage->filter('.form-signin')->selectButton('Sign in')->form();
 
             $loginForm->setValues([
                 '_username' => $username,
@@ -47,10 +45,8 @@ class FOSUserLoginTest extends WebTestCase
         $this->assertSame('http://localhost/', $login_check);
 
         $redirectToHome = $client->click($link);
-
-        $logOut = $redirectToHome->filter('body > header > nav > a:nth-child(4) > div > span')->text();
-
-        $this->assertEquals('Log out', $logOut);
+        $logOutText = $redirectToHome->filter('body > header > nav > a:nth-child(4) > div > span')->text();
+        $this->assertEquals('Log out', $logOutText);
     }
 
     public function userDataInfo()
