@@ -176,7 +176,7 @@ class Notification
      * @param string $targetedUsername
      * @return Notification
      */
-    public function setTargetedUsername (string $targetedUsername)
+    public function setTargetedUsername(string $targetedUsername)
     {
         $this->targetedUsername = $targetedUsername;
 
@@ -186,7 +186,7 @@ class Notification
     /**
      * @return string
      */
-    public function getTargetedUsername (): ?string
+    public function getTargetedUsername(): ?string
     {
         return $this->targetedUsername;
     }

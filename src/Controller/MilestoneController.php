@@ -58,8 +58,7 @@ class MilestoneController extends Controller
 
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid())
-        {
+        if ($form->isSubmitted() && $form->isValid()) {
             $milestone = $form->getData();
 
             $em = $this->getDoctrine()->getManager();
@@ -144,7 +143,7 @@ class MilestoneController extends Controller
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function markMilestoneAsCompleted (Request $request)
+    public function markMilestoneAsCompleted(Request $request)
     {
         $milestoneId = $request->attributes->get('id');
 
@@ -170,7 +169,7 @@ class MilestoneController extends Controller
      * @Route("/remove/milestone/{id}", name="remove_milestone")
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function markMilestoneAsDeleted (Request $request)
+    public function markMilestoneAsDeleted(Request $request)
     {
         $id = $request->attributes->get('id');
 
@@ -198,7 +197,7 @@ class MilestoneController extends Controller
      * @Route("/failed/milestone/{id}", name="failed_milestone")
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function markMilestoneAsFailed (Request $request)
+    public function markMilestoneAsFailed(Request $request)
     {
         $id = $request->attributes->get('id');
 
@@ -227,7 +226,7 @@ class MilestoneController extends Controller
      * @Route("/remove/completed/milestone/{id}", name="remove_completed_milestone")
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function removeCompletedMilestone (Request $request)
+    public function removeCompletedMilestone(Request $request)
     {
         $id = $request->attributes->get('id');
 

@@ -24,7 +24,7 @@ class NotificationRepository extends ServiceEntityRepository
      * @param User $user
      * @return mixed
      */
-    public function getNewNotifications (User $user)
+    public function getNewNotifications(User $user)
     {
         $qb = $this->createQueryBuilder('notification');
 
@@ -50,7 +50,7 @@ class NotificationRepository extends ServiceEntityRepository
      * @param User $user
      * @return mixed
      */
-    public function getAllNotifications (User $user)
+    public function getAllNotifications(User $user)
     {
         $qb = $this->createQueryBuilder('notification');
 

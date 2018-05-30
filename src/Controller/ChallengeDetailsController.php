@@ -83,5 +83,4 @@ class ChallengeDetailsController extends Controller
 
         return $form->createView();
     }
-
 }

@@ -126,6 +126,5 @@ class EditChallengeController extends Controller
         $challenge = $this->getChallengeData($id);
 
         // TODO userMilestoneStatus by challenge id ir owner id;
-
     }
 }

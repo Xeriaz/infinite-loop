@@ -13,6 +13,8 @@ class NewChallengeGroupFormController extends Controller
 {
     /**
      * @Route("/new/challenge/group/", name="new_challenge_group_form")
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function index(Request $request)
     {
@@ -35,8 +37,7 @@ class NewChallengeGroupFormController extends Controller
 
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid())
-        {
+        if ($form->isSubmitted() && $form->isValid()) {
             $challengeGroup = $form->getData();
 
             $entityManager = $this->getDoctrine()->getManager();

@@ -48,7 +48,8 @@ class NotificationController extends Controller
      * @Route("/notification/{id}", name="mark_notification_as_read")
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function markAsRead(int $id) {
+    public function markAsRead(int $id)
+    {
         $em = $this->getDoctrine()->getRepository('App:Notification');
 
         /** @var Notification $notification */

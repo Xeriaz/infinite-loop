@@ -16,6 +16,8 @@ class NewChallengeFormController extends Controller
 {
     /**
      * @Route("/new/challenge", name="new_challenge_form")
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function index(Request $request)
     {
@@ -43,8 +45,7 @@ class NewChallengeFormController extends Controller
 
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid())
-        {
+        if ($form->isSubmitted() && $form->isValid()) {
             $challenge = $form->getData();
 
             $entityManager = $this->getDoctrine()->getManager();

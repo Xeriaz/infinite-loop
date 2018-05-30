@@ -55,8 +55,7 @@ class InviteToChallengeController extends Controller
         $form = $this->createForm(InviteToChallengeForm::class, $notification);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid())
-        {
+        if ($form->isSubmitted() && $form->isValid()) {
             $notification = $form->getData();
             $notification->setUser(
                 $this->getUserByUsername(

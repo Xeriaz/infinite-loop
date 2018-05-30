@@ -20,13 +20,13 @@ class CommentRepository extends ServiceEntityRepository
         parent::__construct($registry, Comment::class);
     }
 
-    public function getChallengeComments (Challenges $challenge)
+    public function getChallengeComments(Challenges $challenge)
     {
         $qb = $this->createQueryBuilder('comment');
 
         $qb
             ->where(
-                    $qb->expr()->eq('comment.challenge', ':challenge')
+                $qb->expr()->eq('comment.challenge', ':challenge')
             )
             ->setParameters([
                 'challenge' => $challenge
