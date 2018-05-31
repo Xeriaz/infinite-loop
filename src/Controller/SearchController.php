@@ -16,7 +16,7 @@ class SearchController extends Controller
      * @Route("/search", name="search_query_info")
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function index(Request $request)
+    public function search(Request $request)
     {
         $searchQuery = $request->query->get('form');
         $searchQuery = $searchQuery['Search'];
