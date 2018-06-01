@@ -9,6 +9,7 @@ use App\Form\NewChallengeMilestoneForm;
 use App\Form\NewChallengeMilestoneOwnerForm;
 use FOS\UserBundle\Model\UserInterface;
 use Symfony\Component\Form\FormView;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -143,7 +144,7 @@ class MilestoneController extends Controller
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function markMilestoneAsCompleted(Request $request)
+    public function markMilestoneAsCompleted(Request $request): RedirectResponse
     {
         $milestoneId = $request->attributes->get('id');
 
@@ -169,7 +170,7 @@ class MilestoneController extends Controller
      * @Route("/remove/milestone/{id}", name="remove_milestone")
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function markMilestoneAsDeleted(Request $request)
+    public function markMilestoneAsDeleted(Request $request): RedirectResponse
     {
         $id = $request->attributes->get('id');
 
@@ -197,7 +198,7 @@ class MilestoneController extends Controller
      * @Route("/failed/milestone/{id}", name="failed_milestone")
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function markMilestoneAsFailed(Request $request)
+    public function markMilestoneAsFailed(Request $request): RedirectResponse
     {
         $id = $request->attributes->get('id');
 
@@ -226,7 +227,7 @@ class MilestoneController extends Controller
      * @Route("/remove/completed/milestone/{id}", name="remove_completed_milestone")
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function removeCompletedMilestone(Request $request)
+    public function removeCompletedMilestone(Request $request): RedirectResponse
     {
         $id = $request->attributes->get('id');
 
