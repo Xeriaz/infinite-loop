@@ -18,12 +18,16 @@ class ChallengeDetailsController extends Controller
     /**
      * @param int $id
      * @Route("/challenge/details/{id}", name="challenge_details")
-     * @return Response
+     * @return Response|RedirectResponse
      */
     public function index(int $id)
     {
         $em = $this->getDoctrine()->getRepository('App:Challenges');
         $challenge = $em->find($id);
+
+        if (($challenge->getOwner() !== $this->getUser()) && $challenge->getIsPublic() === false) {
+            return $this->redirectToRoute('my_challenges');
+        }
 
         $em = $this->getDoctrine()->getRepository('App:Milestone');
         /** @var Milestone $milestones */
