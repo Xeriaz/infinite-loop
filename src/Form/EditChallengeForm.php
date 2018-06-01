@@ -36,8 +36,16 @@ class EditChallengeForm extends AbstractType
                 'label' => "Add proof?",
                 'required' => false
             ])
-            ->add('Start_date', DateType::class)
-            ->add('End_date', DateType::class)
+            ->add(
+                'Start_date',
+                DateType::class,
+                ['years' => range(date('Y'), date('Y') + 5)]
+            )
+            ->add(
+                'End_date',
+                DateType::class,
+                ['years' => range(date('Y'), date('Y') + 5)]
+            )
 //            ->add('update', SubmitType::class, ['label' => 'Update challenge'])
             ;
     }
