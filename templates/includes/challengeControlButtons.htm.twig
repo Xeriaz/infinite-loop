@@ -35,13 +35,6 @@
                 <span class="milestone-statusLabel">Share</span>
             </svg>
         </a>
-
-        <a class="milestone-statusLink" href="{{ path('post_comment_form', {'id': challenge.id }) }}">
-            <svg class="milestone-statusIcon">
-                <use xlink:href="{{ asset('images/sprite.svg#icon-commenting') }}"></use>
-                <span class="milestone-statusLabel">Comment</span>
-            </svg>
-        </a>
     {% endif %}
 
     <a class="milestone-statusLink isHidden"
