@@ -24,20 +24,26 @@ class MilestoneController extends Controller
      */
     public function index(Request $request, int $id)
     {
+        $createNewFormOrRedirect = $this->new($request);
+
+        if ($createNewFormOrRedirect instanceof RedirectResponse) {
+            return $createNewFormOrRedirect;
+        }
+
         $em = $this->getDoctrine()->getRepository('App:Challenges');
 
         return $this->render('new_milestone/index.html.twig', [
             'controller_name' => 'MilestoneController',
-            'form' => $this->new($request),
+            'form' => $createNewFormOrRedirect,
             'challenge' => $em->find($id)
         ]);
     }
 
     /**
      * @param Request $request
-     * @return FormView
+     * @return FormView|RedirectResponse
      */
-    public function new(Request $request): FormView
+    public function new(Request $request)
     {
         $id = $request->attributes->get('id');
 
@@ -72,7 +78,7 @@ class MilestoneController extends Controller
             }
 
             // TODO change route
-//            return $this->redirectToRoute('my_challenges');
+            return $this->redirectToRoute('my_challenges');
         }
 
         return $form->createView();
