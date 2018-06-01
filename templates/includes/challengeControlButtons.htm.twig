@@ -24,13 +24,16 @@
         </svg>
     </a>
 
-    <a class="milestone-statusLink"
-       href="{{ path('invite_user_to_challenge', {'id': challenge.id }) }}">
-        <svg class="milestone-statusIcon">
-            <use xlink:href="{{ asset('images/sprite.svg#icon-share2') }}"></use>
-            <span class="milestone-statusLabel">Share</span>
-        </svg>
-    </a>
+    {% if challenge.isPublic %}
+        <a class="milestone-statusLink"
+           href="{{ path('invite_user_to_challenge', {'id': challenge.id }) }}">
+            <svg class="milestone-statusIcon">
+                <use xlink:href="{{ asset('images/sprite.svg#icon-share2') }}"></use>
+                <span class="milestone-statusLabel">Share</span>
+            </svg>
+        </a>
+    {% endif %}
+
     <a class="milestone-statusLink isHidden"
        href="{{ path('challenge_details', {'id': challenge.id}) }}">
         <svg class="milestone-statusIcon">
