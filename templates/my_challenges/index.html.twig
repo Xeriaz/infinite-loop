@@ -27,11 +27,16 @@
                         {% set milestonesCount = 0 %}
                         {% for milestone in challenge.milestones %}
                             {% for milestoneUserStatus in milestone.userStatus %}
-                                {% if milestoneUserStatus.isCompleted and not milestoneUserStatus.isDeleted %}
+                                {% if milestoneUserStatus.isCompleted and
+                                    not milestoneUserStatus.isDeleted and
+                                    milestoneUserStatus.user == app.user
+                                %}
                                     {% set completedMilestones = completedMilestones + 1 %}
                                 {% endif %}
 
-                                {% if not milestoneUserStatus.isDeleted %}
+                                {% if not milestoneUserStatus.isDeleted and
+                                    milestoneUserStatus.user == app.user
+                                %}
                                     {% set milestonesCount = milestonesCount + 1 %}
                                 {% endif %}
                             {% endfor %}

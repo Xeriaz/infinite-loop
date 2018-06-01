@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\ChallengesGroups;
 use App\Form\NewChallengeGroupForm;
 use Symfony\Component\Form\FormView;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -26,9 +27,9 @@ class NewChallengeGroupFormController extends Controller
 
     /**
      * @param Request $request
-     * @return \Symfony\Component\Form\FormView
+     * @return FormView|RedirectResponse
      */
-    public function new(Request $request): FormView
+    public function new(Request $request)
     {
         $challengeGroup = new ChallengesGroups();
         $challengeGroup->setGroupName('');
@@ -43,9 +44,6 @@ class NewChallengeGroupFormController extends Controller
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($challengeGroup);
             $entityManager->flush();
-
-            // TODO change route
-//            return $this->redirectToRoute('home');
         }
 
         return $form->createView();

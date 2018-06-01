@@ -3,10 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\Challenges;
-use Symfony\Component\Form\Extension\Core\Type\DateType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormView;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -21,23 +19,29 @@ class NewChallengeFormController extends Controller
      */
     public function index(Request $request)
     {
+        $createNewFormOrRedirect = $this->new($request);
+
+        if ($createNewFormOrRedirect instanceof RedirectResponse) {
+            return $createNewFormOrRedirect;
+        }
+
         return $this->render('new_challenge_form/index.html.twig', [
             'controller_name' => 'NewChallengeFormController',
-            'form' => $this->new($request)
+            'form' => $createNewFormOrRedirect
         ]);
     }
 
     /**
      * @param Request $request
-     * @return \Symfony\Component\Form\FormView
+     * @return FormView|RedirectResponse
      */
-    public function new(Request $request): FormView
+    public function new(Request $request)
     {
         $challenge = new Challenges();
-        //FIXME check if startDate and EndDate doesn't go backdate
+
         $challenge->setStartDate(new \DateTime('now'));
         $challenge->setEndDate(new \DateTime('now'));
-//        FIXME casting to array, it shouldn't be there, I think
+
         $challenge->setUsers((array($this->getUser())));
         $challenge->setOwner($this->getUser());
 
@@ -52,8 +56,9 @@ class NewChallengeFormController extends Controller
             $entityManager->persist($challenge);
             $entityManager->flush();
 
-            // TODO change route to my challenges
-//            return $this->redirectToRoute('home');
+            $id = $challenge->getId();
+
+            return $this->redirectToRoute('challenge_details', ['id' => $id]);
         }
 
         return $form->createView();

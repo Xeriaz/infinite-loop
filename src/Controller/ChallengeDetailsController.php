@@ -6,6 +6,8 @@ use App\Entity\Challenges;
 use App\Entity\Comment;
 use App\Entity\Milestone;
 use App\Form\CommentForm;
+use Symfony\Component\Form\FormView;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -46,9 +48,15 @@ class ChallengeDetailsController extends Controller
      */
     public function commentFormRender(Request $request, int $id)
     {
+        $newCommentOrRedirect = $this->newComment($request, $id);
+
+        if ($newCommentOrRedirect instanceof RedirectResponse) {
+            return $newCommentOrRedirect;
+        }
+
         return $this->render('comment_form/index.html.twig', [
             'controller_name' => 'ChallengeDetailsController',
-            'form'            => $this->newComment($request, $id),
+            'form'            => $newCommentOrRedirect,
             'challengeId'     => $id,
         ]);
     }
@@ -56,8 +64,7 @@ class ChallengeDetailsController extends Controller
     /**
      * @param Request $request
      * @param int $id
-//     * @Route("challenge/{id}/post-comment/", name="post_new_comment")
-     * @return \Symfony\Component\Form\FormView
+     * @return FormView|RedirectResponse
      */
     public function newComment(Request $request, int $id)
     {
@@ -79,6 +86,8 @@ class ChallengeDetailsController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($comment);
             $em->flush();
+
+            return $this->redirectToRoute('challenge_details', ['id' => $id]);
         }
 
         return $form->createView();

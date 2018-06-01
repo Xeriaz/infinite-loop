@@ -7,6 +7,7 @@ use App\Form\EditChallengeForm;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
@@ -14,12 +15,21 @@ class EditChallengeController extends Controller
 {
     /**
      * @Route("/edit/challenge/{id}", name="edit_challenge")
+     * @param  Request $request
+     * @param int $id
+     * @return Response
      */
     public function index(Request $request, int $id)
     {
+        $createNewFormOrRedirect = $this->updateChallenge($request, $id);
+
+        if ($createNewFormOrRedirect instanceof RedirectResponse) {
+            return $createNewFormOrRedirect;
+        }
+
         return $this->render('edit_challenge/index.html.twig', [
             'controller_name' => 'EditChallengeController',
-            'form' => $this->updateChallenge($request, $id)
+            'form' => $createNewFormOrRedirect
         ]);
     }
 
@@ -45,9 +55,9 @@ class EditChallengeController extends Controller
     /**
      * @param Request $request
      * @param int $id
-     * @return \Symfony\Component\Form\FormView
+     * @return FormView|RedirectResponse
      */
-    public function updateChallenge(Request $request, int $id): FormView
+    public function updateChallenge(Request $request, int $id)
     {
         $challenge = $this->getChallengeData($id);
 
@@ -59,8 +69,7 @@ class EditChallengeController extends Controller
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->flush();
 
-            // TODO change route
-//            return $this->redirectToRoute('my_challenges');
+            return $this->redirectToRoute('challenge_details', ['id' => $id]);
         }
 
         return $form->createView();
@@ -117,14 +126,5 @@ class EditChallengeController extends Controller
         $em->flush();
 
         return $this->redirectToRoute('my_challenges');
-    }
-
-    private function getAllMilestonesFromChallenge(int $id)
-    {
-        $em = $this->getDoctrine()->getManager();
-
-        $challenge = $this->getChallengeData($id);
-
-        // TODO userMilestoneStatus by challenge id ir owner id;
     }
 }

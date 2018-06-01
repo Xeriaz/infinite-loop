@@ -10,6 +10,7 @@ use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormView;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -26,18 +27,24 @@ class InviteToChallengeController extends Controller
      */
     public function index(Request $request, int $id)
     {
+        $createNewFormOrRedirect = $this->inviteUser($request, $id);
+
+        if ($createNewFormOrRedirect instanceof RedirectResponse) {
+            return $createNewFormOrRedirect;
+        }
+
         return $this->render('invite_user_to_challenge_form/index.html.twig', [
             'controller_name' => 'InviteUserController',
-            'form' => $this->inviteUser($request, $id)
+            'form' => $createNewFormOrRedirect
         ]);
     }
 
     /**
      * @param Request $request
      * @param int $id
-     * @return \Symfony\Component\Form\FormView
+     * @return FormView|RedirectResponse
      */
-    public function inviteUser(Request $request, int $id): FormView
+    public function inviteUser(Request $request, int $id)
     {
         /** @var Challenges $challenge */
         $challenge = $this->getDataById($id, Challenges::class);
@@ -66,8 +73,7 @@ class InviteToChallengeController extends Controller
             $entityManager->persist($notification);
             $entityManager->flush();
 
-            // TODO change route
-//            return $this->redirectToRoute('home');
+            return $this->redirectToRoute('challenge_details', ['id' => $id]);
         }
 
         return $form->createView();
