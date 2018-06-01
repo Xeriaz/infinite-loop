@@ -36,18 +36,15 @@
     <div class="card-footer justify-content-center p-0">
 
         <div class="challengeControlBlock challengeControlBlock--noLabels">
-            <a class="milestone-statusLink" href="{{ path('join_in_challenge', {'id': challenge.id}) }}">
-                <svg class="milestone-statusIcon">
-                    <use xlink:href="{{ asset('images/sprite.svg#icon-share2') }}"></use>
-                    <span class="milestone-statusLabel">Join</span>
-                </svg>
-            </a>
-            <a class="milestone-statusLink" href="{{ path('post_comment_form', {'id': challenge.id}) }}">
-                <svg class="milestone-statusIcon">
-                    <use xlink:href="{{ asset('images/sprite.svg#icon-commenting') }}"></use>
-                    <span class="milestone-statusLabel">Comment</span>
-                </svg>
-            </a>
+            {% if challenge.isPublic %}
+                <a class="milestone-statusLink" href="{{ path('join_in_challenge', {'id': challenge.id}) }}">
+                    <svg class="milestone-statusIcon">
+                        <use xlink:href="{{ asset('images/sprite.svg#icon-share2') }}"></use>
+                        <span class="milestone-statusLabel">Join</span>
+                    </svg>
+                </a>
+            {% endif %}
+
             <a class="milestone-statusLink" href="{{ path('challenge_details', {'id': challenge.id}) }}">
                 <svg class="milestone-statusIcon">
                     <use xlink:href="{{ asset('images/sprite.svg#icon-navigation-more') }}"></use>
