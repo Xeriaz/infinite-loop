@@ -69,8 +69,7 @@ class EditChallengeController extends Controller
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->flush();
 
-            // TODO change route
-            return $this->redirectToRoute('my_challenges');
+            return $this->redirectToRoute('challenge_details', ['id' => $id]);
         }
 
         return $form->createView();
@@ -127,14 +126,5 @@ class EditChallengeController extends Controller
         $em->flush();
 
         return $this->redirectToRoute('my_challenges');
-    }
-
-    private function getAllMilestonesFromChallenge(int $id)
-    {
-        $em = $this->getDoctrine()->getManager();
-
-        $challenge = $this->getChallengeData($id);
-
-        // TODO userMilestoneStatus by challenge id ir owner id;
     }
 }

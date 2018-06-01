@@ -44,9 +44,6 @@ class NewChallengeGroupFormController extends Controller
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($challengeGroup);
             $entityManager->flush();
-
-            // TODO change route
-            return $this->redirectToRoute('home');
         }
 
         return $form->createView();

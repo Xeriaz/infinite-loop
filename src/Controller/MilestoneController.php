@@ -77,8 +77,7 @@ class MilestoneController extends Controller
                 $em->flush();
             }
 
-            // TODO change route
-            return $this->redirectToRoute('my_challenges');
+            return $this->redirectToRoute('challenge_details', ['id' => $id]);
         }
 
         return $form->createView();

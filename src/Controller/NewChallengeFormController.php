@@ -56,8 +56,9 @@ class NewChallengeFormController extends Controller
             $entityManager->persist($challenge);
             $entityManager->flush();
 
-            //TODO change route path
-            return $this->redirectToRoute('my_challenges');
+            $id = $challenge->getId();
+
+            return $this->redirectToRoute('challenge_details', ['id' => $id]);
         }
 
         return $form->createView();

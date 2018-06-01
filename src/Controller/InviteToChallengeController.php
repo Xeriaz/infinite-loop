@@ -73,8 +73,7 @@ class InviteToChallengeController extends Controller
             $entityManager->persist($notification);
             $entityManager->flush();
 
-            // TODO change route
-            return $this->redirectToRoute('home');
+            return $this->redirectToRoute('challenge_details', ['id' => $id]);
         }
 
         return $form->createView();
