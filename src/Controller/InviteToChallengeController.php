@@ -6,16 +6,12 @@ use App\Entity\Challenges;
 use App\Entity\Notification;
 use App\Entity\User;
 use App\Form\InviteToChallengeForm;
-use Symfony\Component\Form\Extension\Core\Type\DateType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use App\Form\NewChallengeForm;
-use Symfony\Component\Validator\Constraints\Date;
 
 class InviteToChallengeController extends Controller
 {
@@ -23,10 +19,16 @@ class InviteToChallengeController extends Controller
      * @Route("/invite-to-challenge/{id}", name="invite_user_to_challenge")
      * @param Request $request
      * @param int $id
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response|RedirectResponse
      */
     public function index(Request $request, int $id)
     {
+        $challenge = $this->getDoctrine()->getRepository('App:Challenges')->find($id);
+
+        if (!$challenge->getIsPublic()) {
+            return $this->redirectToRoute('challenge_details', ['id' => $id]);
+        }
+
         $createNewFormOrRedirect = $this->inviteUser($request, $id);
 
         if ($createNewFormOrRedirect instanceof RedirectResponse) {
@@ -44,7 +46,7 @@ class InviteToChallengeController extends Controller
      * @param int $id
      * @return FormView|RedirectResponse
      */
-    public function inviteUser(Request $request, int $id)
+    private function inviteUser(Request $request, int $id)
     {
         /** @var Challenges $challenge */
         $challenge = $this->getDataById($id, Challenges::class);

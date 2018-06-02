@@ -26,7 +26,7 @@ class MyChallengesController extends Controller
     /**
      * @return Collection
      */
-    public function getUserChallenges(): Collection
+    private function getUserChallenges(): Collection
     {
         $user = $this->getUser();
         $challenges = $user->getChallenges();

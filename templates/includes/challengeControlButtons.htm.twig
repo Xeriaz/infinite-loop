@@ -9,28 +9,34 @@
         </a>
     {% endif %}
 
-    <a class="milestone-statusLink"
-       href="{{ path('delete_challenge', {'id': challenge.id}) }}">
-        <svg class="milestone-statusIcon">
-            <use xlink:href="{{ asset('images/sprite.svg#icon-bin') }}"></use>
-            <span class="milestone-statusLabel">Remove</span>
-        </svg>
-    </a>
-    <a class="milestone-statusLink"
-       href="{{ path('edit_challenge', {'id': challenge.id }) }}">
-        <svg class="milestone-statusIcon">
-            <use xlink:href="{{ asset('images/sprite.svg#icon-pencil') }}"></use>
-            <span class="milestone-statusLabel">Edit</span>
-        </svg>
-    </a>
+    {% if challenge.owner == app.user %}
+        <a class="milestone-statusLink"
+           href="{{ path('delete_challenge', {'id': challenge.id}) }}">
+            <svg class="milestone-statusIcon">
+                <use xlink:href="{{ asset('images/sprite.svg#icon-bin') }}"></use>
+                <span class="milestone-statusLabel">Remove</span>
+            </svg>
+        </a>
+        <a class="milestone-statusLink"
+           href="{{ path('edit_challenge', {'id': challenge.id }) }}">
+            <svg class="milestone-statusIcon">
+                <use xlink:href="{{ asset('images/sprite.svg#icon-pencil') }}"></use>
+                <span class="milestone-statusLabel">Edit</span>
+            </svg>
+        </a>
+    {% endif %}
 
-    <a class="milestone-statusLink"
-       href="{{ path('invite_user_to_challenge', {'id': challenge.id }) }}">
-        <svg class="milestone-statusIcon">
-            <use xlink:href="{{ asset('images/sprite.svg#icon-share2') }}"></use>
-            <span class="milestone-statusLabel">Share</span>
-        </svg>
-    </a>
+
+    {% if challenge.isPublic %}
+        <a class="milestone-statusLink"
+           href="{{ path('invite_user_to_challenge', {'id': challenge.id }) }}">
+            <svg class="milestone-statusIcon">
+                <use xlink:href="{{ asset('images/sprite.svg#icon-share2') }}"></use>
+                <span class="milestone-statusLabel">Share</span>
+            </svg>
+        </a>
+    {% endif %}
+
     <a class="milestone-statusLink isHidden"
        href="{{ path('challenge_details', {'id': challenge.id}) }}">
         <svg class="milestone-statusIcon">
@@ -38,10 +44,9 @@
             <span class="milestone-statusLabel">Read more</span>
 
             {% if challenge.comments|length > 0 %}
-            <span class="milestone-statusNotification" >{{ challenge.comments|length }}</span>
+                <span class="milestone-statusNotification" >{{ challenge.comments|length }}</span>
             {% endif %}
         </svg>
-
     </a>
 </div>
 
@@ -58,6 +63,5 @@
             <span>{{ completedMilestones }} / {{ milestonesCount }}</span>
             <span class="milestone-statusLabel">Progress</span>
         </div>
-
     </div>
 </div>

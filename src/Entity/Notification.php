@@ -146,9 +146,9 @@ class Notification
     }
 
     /**
-     * @return Collection
+     * @return ArrayCollection
      */
-    public function getUser(): Collection
+    public function getUser()
     {
         return $this->user;
     }
@@ -165,7 +165,7 @@ class Notification
     }
 
     /**
-     *
+     * @return ArrayCollection
      */
     public function getChallenge()
     {

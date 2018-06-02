@@ -55,6 +55,11 @@ class NotificationController extends Controller
         /** @var Notification $notification */
         $notification = $em->find($id);
 
+
+        if ($notification->getUser()->getId() !== $this->getUser()->getId()) {
+            return $this->redirectToRoute('notifications');
+        }
+
         $notification->setIsRead(1);
         $notification->setReadOn(new \DateTime('now'));
 

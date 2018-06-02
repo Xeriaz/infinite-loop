@@ -35,7 +35,7 @@ class NewChallengeFormController extends Controller
      * @param Request $request
      * @return FormView|RedirectResponse
      */
-    public function new(Request $request)
+    private function new(Request $request)
     {
         $challenge = new Challenges();
 
