@@ -28,14 +28,14 @@ class EditChallengeForm extends AbstractType
                 'label' => 'Type',
                 'multiple' => true,
             ])
-            ->add('isPublic', CheckboxType::class, [
-                'label' => 'Is it public?',
-                'required' => false
-            ])
-            ->add('addProof', CheckboxType::class, [
-                'label' => "Add proof?",
-                'required' => false
-            ])
+//            ->add('isPublic', CheckboxType::class, [
+//                'label' => 'Is it public?',
+//                'required' => false
+//            ])
+//            ->add('addProof', CheckboxType::class, [
+//                'label' => "Add proof?",
+//                'required' => false
+//            ])
             ->add(
                 'Start_date',
                 DateType::class,
