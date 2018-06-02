@@ -1,0 +1,7 @@
+{% extends 'base.html.twig' %}
+
+{#{% block title %}Hello {{ controller_name }}!{% endblock %}#}
+
+{% block content %}
+    {{ { 'error': { 'code': status_code, 'message': status_text } }|json_encode|raw }}
+{% endblock %}
