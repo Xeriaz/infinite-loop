@@ -13,7 +13,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 class MyChallengesController extends Controller
 {
     /**
-     * @Route("/challenges/list", name="my_challenges")
+     * @Route("/list", name="my_challenges")
      */
     public function list(): Response
     {
