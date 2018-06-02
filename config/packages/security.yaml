@@ -35,4 +35,12 @@ security:
          - { path: ^/new/challenge, roles: ROLE_USER }
          - { path: ^/my/challenges, roles: ROLE_USER }
          - { path: ^/profile, roles: ROLE_USER }
+         - { path: ^/challenge, roles: ROLE_USER }
+         - { path: ^/list, roles: ROLE_USER }
+         - { path: ^/notifications, roles: ROLE_USER }
+         - { path: ^/notification, roles: ROLE_USER }
+         - { path: ^/delete, roles: ROLE_USER }
+         - { path: ^/invite-to-challenge, roles: ROLE_USER }
+         - { path: ^/completed, roles: ROLE_USER }
+         - { path: ^/mark-as-removed, roles: ROLE_USER }
 
