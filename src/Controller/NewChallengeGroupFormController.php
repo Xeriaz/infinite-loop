@@ -29,7 +29,7 @@ class NewChallengeGroupFormController extends Controller
      * @param Request $request
      * @return FormView|RedirectResponse
      */
-    public function new(Request $request)
+    private function new(Request $request)
     {
         $challengeGroup = new ChallengesGroups();
         $challengeGroup->setGroupName('');
