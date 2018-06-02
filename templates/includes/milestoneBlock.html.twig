@@ -5,9 +5,9 @@
 
             <div class="date-subtitle">
                 {% if milestoneUserStatus.isFailed and milestoneUserStatus.user == app.user %}
-                    <span class="d-block">Failed on:<br>{{ milestoneUserStatus.submittedOn|date('Y-m-d') }} </span>
+                    <span class="d-block">Failed on:<br>{{ milestoneUserStatus.submittedOn|date('Y-m-d H:i') }} </span>
                 {% elseif milestoneUserStatus.isCompleted and milestoneUserStatus.user == app.user %}
-                    <span class="d-block">Completed on:<br>{{ milestoneUserStatus.submittedOn|date('Y-m-d') }} </span>
+                    <span class="d-block">Completed on:<br>{{ milestoneUserStatus.submittedOn|date('Y-m-d H:i') }} </span>
                 {% endif %}
             </div>
         {% endif %}
@@ -34,7 +34,6 @@
                 </svg>
                 <span class="milestone-statusLabel">Remove</span>
             </a>
-
         {% endif %}
 
     </div>
