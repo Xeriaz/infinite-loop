@@ -48,10 +48,16 @@ class ChallengeDetailsController extends Controller
      * @param Request $request
      * @param int $id
      * @Route("comment/challenge/{id}", name="post_comment_form")
-     * @return Response
+     * @return Response|RedirectResponse
      */
     public function commentFormRender(Request $request, int $id)
     {
+        $challenge = $this->getDoctrine()->getRepository('App:Challenges')->find($id);
+
+        if (!$challenge->getIsPublic() && $challenge->getOwner() !== $this->getUser()) {
+            return $this->redirectToRoute('my_challenges');
+        }
+
         $newCommentOrRedirect = $this->newComment($request, $id);
 
         if ($newCommentOrRedirect instanceof RedirectResponse) {
@@ -70,7 +76,7 @@ class ChallengeDetailsController extends Controller
      * @param int $id
      * @return FormView|RedirectResponse
      */
-    public function newComment(Request $request, int $id)
+    private function newComment(Request $request, int $id)
     {
         $em = $this->getDoctrine()->getRepository('App:Challenges');
         $challenge = $em->find($id);

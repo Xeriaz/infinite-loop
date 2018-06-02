@@ -12,6 +12,10 @@ class HomeController extends Controller
      */
     public function index()
     {
+        if ($this->isGranted('ROLE_USER')) {
+            return $this->redirectToRoute('my_challenges');
+        }
+
         return $this->render('home/index.html.twig', [
             'controller_name' => 'HomeController',
         ]);

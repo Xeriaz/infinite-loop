@@ -11,6 +11,7 @@ use FOS\UserBundle\Model\UserInterface;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
@@ -20,10 +21,16 @@ class MilestoneController extends Controller
      * @Route("challenge/{id}/milestone/", name="milestone")
      * @param Request $request
      * @param int $id
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response|RedirectResponse
      */
     public function index(Request $request, int $id)
     {
+        $challenge = $this->getDoctrine()->getRepository('App:Challenges')->find($id);
+
+        if ($challenge->getOwner() !== $this->getUser()) {
+            return $this->redirectToRoute('my_challenges');
+        }
+
         $createNewFormOrRedirect = $this->new($request);
 
         if ($createNewFormOrRedirect instanceof RedirectResponse) {
@@ -43,7 +50,7 @@ class MilestoneController extends Controller
      * @param Request $request
      * @return FormView|RedirectResponse
      */
-    public function new(Request $request)
+    private function new(Request $request)
     {
         $id = $request->attributes->get('id');
 
@@ -87,7 +94,7 @@ class MilestoneController extends Controller
      * @param Milestone $milestone
      * @return UserMilestoneStatus
      */
-    public function newUserMilestoneStatus(Milestone $milestone): UserMilestoneStatus
+    private function newUserMilestoneStatus(Milestone $milestone): UserMilestoneStatus
     {
         /** @var UserMilestoneStatus $newUserMilestoneStatus */
         $newUserMilestoneStatus = new UserMilestoneStatus();
@@ -156,6 +163,10 @@ class MilestoneController extends Controller
         /** @var Milestone $milestone */
         $milestone = $this->getDataById($milestoneId, Milestone::class);
 
+        if ($milestone->getOwner() !== $this->getUser()) {
+            return $this->redirectToRoute('my_challenges');
+        }
+
         /** @var UserMilestoneStatus $userMilestoneStatus */
         $userMilestoneStatus = $this->getDataByMilestone($milestone, UserMilestoneStatus::class);
 
@@ -181,6 +192,10 @@ class MilestoneController extends Controller
 
         /** @var Milestone $milestone */
         $milestone = $this->getDataById($id, Milestone::class);
+
+        if ($milestone->getOwner() !== $this->getUser()) {
+            return $this->redirectToRoute('my_challenges');
+        }
 
         /** @var UserMilestoneStatus $userMilestoneStatus */
         $userMilestoneStatus = $this->getDataByMilestone(
@@ -210,6 +225,10 @@ class MilestoneController extends Controller
         /** @var Milestone $milestone */
         $milestone = $this->getDataById($id, Milestone::class);
 
+        if ($milestone->getOwner() !== $this->getUser()) {
+            return $this->redirectToRoute('my_challenges');
+        }
+
         /** @var UserMilestoneStatus $userMilestoneStatus */
         $userMilestoneStatus = $this->getDataByMilestone(
             $milestone,
@@ -238,6 +257,10 @@ class MilestoneController extends Controller
 
         /** @var Milestone $milestone */
         $milestone = $this->getDataById($id, Milestone::class);
+
+        if ($milestone->getOwner() !== $this->getUser()) {
+            return $this->redirectToRoute('my_challenges');
+        }
 
         /** @var UserMilestoneStatus $userMilestoneStatus */
         $userMilestoneStatus = $this->getDataByMilestone(

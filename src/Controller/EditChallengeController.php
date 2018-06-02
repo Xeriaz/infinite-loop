@@ -37,7 +37,7 @@ class EditChallengeController extends Controller
      * @param int $id
      * @return Challenges
      */
-    public function getChallengeData(int $id): Challenges
+    private function getChallengeData(int $id): Challenges
     {
         $challengeData = $this->getDoctrine()
             ->getRepository(Challenges::class)
@@ -57,7 +57,7 @@ class EditChallengeController extends Controller
      * @param int $id
      * @return FormView|RedirectResponse
      */
-    public function updateChallenge(Request $request, int $id)
+    private function updateChallenge(Request $request, int $id)
     {
         $challenge = $this->getChallengeData($id);
 
@@ -86,6 +86,11 @@ class EditChallengeController extends Controller
 
         /** @var Challenges $challenge */
         $challenge = $this->getChallengeData($id);
+
+        if ($challenge->getIsPublic()) {
+            return $this->redirectToRoute('challenge_details', ['id' => $id]);
+        }
+
         $challenge->setIsCompleted(true);
         $challenge->setCompletedOn(new \DateTime('now'));
 
@@ -103,6 +108,10 @@ class EditChallengeController extends Controller
     public function removeChallenge(int $id)
     {
         $challenge = $this->getChallengeData($id);
+
+        if ($challenge->getOwner() !== $this->getUser()) {
+            return $this->redirectToRoute('challenge_details', ['id' => $id]);
+        }
 
         $em = $this->getDoctrine()->getManager();
         $em->remove($challenge);
