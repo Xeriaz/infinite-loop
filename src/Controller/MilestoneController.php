@@ -183,7 +183,7 @@ class MilestoneController extends Controller
 
     /**
      * @param Request $request
-     * @Route("/remove/milestone/{id}", name="remove_milestone")
+     * @Route("/mark-as-removed/milestone/{id}", name="mark_as_removed_milestone")
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function markMilestoneAsDeleted(Request $request): RedirectResponse
@@ -248,7 +248,7 @@ class MilestoneController extends Controller
 
     /**
      * @param Request $request
-     * @Route("/remove/completed/milestone/{id}", name="remove_completed_milestone")
+     * @Route("/remove/milestone/{id}", name="remove_milestone")
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function removeCompletedMilestone(Request $request): RedirectResponse
@@ -258,15 +258,18 @@ class MilestoneController extends Controller
         /** @var Milestone $milestone */
         $milestone = $this->getDataById($id, Milestone::class);
 
-        if ($milestone->getOwner() !== $this->getUser()) {
-            return $this->redirectToRoute('my_challenges');
-        }
-
         /** @var UserMilestoneStatus $userMilestoneStatus */
         $userMilestoneStatus = $this->getDataByMilestone(
             $milestone,
             UserMilestoneStatus::class
         );
+
+        if ($milestone->getOwner() !== $this->getUser() ||
+           ($userMilestoneStatus->getIsCompleted() || $userMilestoneStatus->getIsFailed())
+        ) {
+            $challengeId = $milestone->getChallenge()->getId();
+            return $this->redirectToRoute('challenge_details', ['id' => $challengeId]);
+        }
 
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->remove($milestone);
