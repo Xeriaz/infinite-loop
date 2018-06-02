@@ -17,14 +17,15 @@
                 </svg>
                 <span class="milestone-statusLabel">Give up</span>
             </a>
-            <a class="milestone-statusLink"
-               href="{{ path('remove_milestone', {'id': milestone.id}) }}">
-                <svg class="milestone-statusIcon">
-                    <use xlink:href="{{ asset('images/sprite.svg#icon-bin') }}"></use>
-                </svg>
-                <span class="milestone-statusLabel">Remove</span>
-            </a>
-
+            {% if milestone.owner == app.user %}
+                <a class="milestone-statusLink"
+                   href="{{ path('remove_milestone', {'id': milestone.id}) }}">
+                    <svg class="milestone-statusIcon">
+                        <use xlink:href="{{ asset('images/sprite.svg#icon-bin') }}"></use>
+                    </svg>
+                    <span class="milestone-statusLabel">Remove</span>
+                </a>
+            {% endif %}
         {% endif %}
 
     </div>
