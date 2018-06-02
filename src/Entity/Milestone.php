@@ -24,7 +24,7 @@ class Milestone
     private $title;
 
     /**
-     * @ORM\OneToMany(targetEntity="UserMilestoneStatus", mappedBy="milestone")
+     * @ORM\OneToMany(targetEntity="UserMilestoneStatus", mappedBy="milestone", cascade={"remove"})
      */
     private $userStatus;
 

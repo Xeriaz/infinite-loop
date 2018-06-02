@@ -79,7 +79,7 @@ class Challenges
     private $owner;
 
     /**
-     * @ORM\OneToMany(targetEntity="Milestone", mappedBy="challenge")
+     * @ORM\OneToMany(targetEntity="Milestone", mappedBy="challenge", cascade={"remove"})
      * @var Collection
      */
     private $milestones;
@@ -92,12 +92,12 @@ class Challenges
     private $challengeGroup;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Notification", mappedBy="challenge")
+     * @ORM\OneToMany(targetEntity="App\Entity\Notification", mappedBy="challenge", cascade={"remove"})
      */
     private $notifications;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="challenge", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="challenge", orphanRemoval=true, cascade={"remove"})
      */
     private $comments;
 
