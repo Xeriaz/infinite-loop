@@ -31,10 +31,10 @@ class NewChallengeForm extends AbstractType
                 'label' => 'Is it public?',
                 'required' => false
             ])
-            ->add('addProof', CheckboxType::class, [
-                'label' => "Add proof?",
-                'required' => false
-            ])
+//            ->add('addProof', CheckboxType::class, [
+//                'label' => "Add proof?",
+//                'required' => false
+//            ])
             ->add(
                 'Start_date',
                 DateType::class,
