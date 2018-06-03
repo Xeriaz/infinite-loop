@@ -1,7 +1,35 @@
 {% extends 'base.html.twig' %}
 
-{#{% block title %}Hello {{ controller_name }}!{% endblock %}#}
+{% block title %}Error: {{ status_code }}{% endblock %}
 
 {% block content %}
-    {{ { 'error': { 'code': status_code, 'message': status_text } }|json_encode|raw }}
+
+    <div class="myChallenge-wrapper challengeDetails">
+        <div class="cards-wrapper">
+            <div class="card customCard">
+                <div class="card-body body-bg d-flex align-items-top">
+                    <div class="card-body__textBlock">
+                        <h4 class="card-title z-index--10 js-name">Error: {{ status_code }}</h4>
+                        <p class="card-text z-index--10 js-description">{{ status_text }}</p>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <a class="milestone-statusLink"
+                       href="{{ path('my_challenges') }}">
+                        <svg class="milestone-statusIcon">
+                            <use xlink:href="{{ asset('images/sprite.svg#icon-list') }}"></use>
+                        </svg>
+                        <span class="milestone-statusLabel">To challenge list</span>
+                    </a>
+                    <a class="milestone-statusLink"
+                       href="https://github.com/nfqakademija/infinite-loop/issues" target="_blank">
+                        <svg class="milestone-statusIcon">
+                            <use xlink:href="{{ asset('images/sprite.svg#icon-group') }}"></use>
+                        </svg>
+                        <span class="milestone-statusLabel">Report issue</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
