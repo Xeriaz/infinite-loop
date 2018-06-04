@@ -2,8 +2,30 @@
     <div class="milestone-statusProgress ml-0" >
         <span >{{ challenge.completedOn|date('Y-m-d') }}</span>
         <span class="milestone-statusLabel">Challenge completed on</span>
-
     </div>
+
+    <a class="milestone-statusLink isHidden"
+       href="{{ path('challenge_details', {'id': challenge.id}) }}">
+        <svg class="milestone-statusIcon">
+            <use xlink:href="{{ asset('images/sprite.svg#icon-navigation-more') }}"></use>
+            <span class="milestone-statusLabel">Read more</span>
+
+            {% if challenge.comments|length > 0 %}
+                <span class="milestone-statusNotification" >{{ challenge.comments|length }}</span>
+            {% endif %}
+        </svg>
+    </a>
+
+    {% if challenge.owner == app.user %}
+    <a class="milestone-statusLink"
+       href="{{ path('delete_challenge', {'id': challenge.id}) }}">
+        <svg class="milestone-statusIcon">
+            <use xlink:href="{{ asset('images/sprite.svg#icon-bin') }}"></use>
+            <span class="milestone-statusLabel">Remove</span>
+        </svg>
+    </a>
+    {% endif %}
+
     <div class="milestone-statusProgress" >
         <span >{{ completedMilestones }} / {{ milestonesCount }}</span>
         <span class="milestone-statusLabel">Milestones accomplished</span>
