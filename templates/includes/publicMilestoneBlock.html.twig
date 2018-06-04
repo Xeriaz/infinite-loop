@@ -1,5 +1,9 @@
 <li class="list-group-item d-flex align-items-center">
-    <h5 class="card-subtitle customCard-subtitle">{{ milestone.title }}</h5>
+    <h5 class="card-subtitle customCard-subtitle">
+        {{ milestone.title }}
+        {% if milestone.public %}
+            <sup style="font-size: 0.6em;vertical-align: super">Public</sup>
+        {% endif %}</h5>
     <div class="milestone-statusBlock">
 
         {% if milestone.public %}
