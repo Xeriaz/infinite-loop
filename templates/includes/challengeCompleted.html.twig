@@ -17,13 +17,13 @@
     </a>
 
     {% if challenge.owner == app.user %}
-    <a class="milestone-statusLink"
-       href="{{ path('delete_challenge', {'id': challenge.id}) }}">
-        <svg class="milestone-statusIcon">
-            <use xlink:href="{{ asset('images/sprite.svg#icon-bin') }}"></use>
-            <span class="milestone-statusLabel">Remove</span>
-        </svg>
-    </a>
+        <a class="milestone-statusLink"
+           href="{{ path('delete_challenge', {'id': challenge.id}) }}">
+            <svg class="milestone-statusIcon">
+                <use xlink:href="{{ asset('images/sprite.svg#icon-bin') }}"></use>
+                <span class="milestone-statusLabel">Remove</span>
+            </svg>
+        </a>
     {% endif %}
 
     <div class="milestone-statusProgress" >
