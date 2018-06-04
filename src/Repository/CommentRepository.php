@@ -31,6 +31,7 @@ class CommentRepository extends ServiceEntityRepository
             ->setParameters([
                 'challenge' => $challenge
             ])
+            ->orderBy('comment.postedOn', 'DESC')
         ;
 
         return $qb->getQuery()->getResult();
