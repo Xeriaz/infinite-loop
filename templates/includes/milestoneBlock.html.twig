@@ -1,4 +1,4 @@
-<li class="list-group-item d-flex align-items-center{% if milestoneUserStatus.failed %} failed {% elseif milestoneUserStatus.submittedOn != null %} completed {% endif %}">
+<li class="list-group-item d-flex align-items-center{% if milestoneUserStatus.failed %} isFailed {% elseif milestoneUserStatus.submittedOn != null %} isCompleted {% endif %}">
     <h5 class="card-subtitle customCard-subtitle">{{ milestone.title }}</h5>
     <div class="milestone-statusBlock">
         {% if milestoneUserStatus.submittedOn != null %}
