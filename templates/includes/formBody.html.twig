@@ -70,4 +70,15 @@
         {#</div>#}
     {% endif %}
 
+
+        <div class="formRow">
+            <div class="formLabel" style="border: none; font-size: 1.2rem;color: #8b0000;">
+                Error
+            </div>
+            <div class="formControl" style="color: #8b0000;">
+                {% for error in form.vars.errors %}
+                    {{ error.message }} <br>
+                {% endfor %}
+            </div>
+        </div>
 </div>

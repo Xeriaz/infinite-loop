@@ -102,6 +102,15 @@ class Challenge
     private $comments;
 
     /**
+     * @Assert\IsFalse(message="End date must be later than start date")
+     * @return bool
+     */
+    public function isEndDateAfterStartDate()
+    {
+        return $this->startDate > $this->endDate;
+    }
+
+    /**
      * @return mixed
      */
     public function getPublic()
