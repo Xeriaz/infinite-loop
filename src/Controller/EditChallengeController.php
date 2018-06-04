@@ -3,7 +3,11 @@
 namespace App\Controller;
 
 use App\Entity\Challenge;
+use App\Entity\Milestone;
+use App\Entity\UserMilestoneStatus;
 use App\Form\EditChallengeForm;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -97,11 +101,66 @@ class EditChallengeController extends Controller
         $em = $this->getDoctrine()->getManager();
         $em->flush();
 
+        $notSubmittedMilestones = $this->findNotSubmittedMilestones($challenge->getMilestones());
+        $this->markNotSubmittedMilestonesAsFailed($notSubmittedMilestones);
+
         $this->addFlash(
             'success',
             sprintf('Congratulations! You have completed "%s" challenge', $challenge->getTitle())
         );
-        return $this->redirectToRoute('my_challenges');
+        return $this->redirectToRoute('challenge_details', ['id' => $id]);
+    }
+
+    /**
+     * @param Collection $milestones
+     * @return array
+     */
+    private function findNotSubmittedMilestones(Collection $milestones): array
+    {
+        $notSubmittedMilestone = [];
+
+        $em = $this->getDoctrine()->getRepository('App:UserMilestoneStatus');
+
+        foreach ($milestones as $milestone) {
+            $userMilestoneStatus = $em->findBy(
+                [
+                    'milestone' => $milestone,
+                    'user' => $this->getUser(),
+                    'submittedOn' => null,
+                    'completed' => 0,
+                    'failed' => 0
+                ]
+            );
+
+            if (isset($userMilestoneStatus) && $userMilestoneStatus != null) {
+                $notSubmittedMilestone[] = $userMilestoneStatus;
+            }
+        }
+
+        if (count($notSubmittedMilestone) > 0) {
+            $this->addFlash(
+                'danger',
+                sprintf('%d milestones was marked as failed', count($notSubmittedMilestone))
+            );
+        }
+        return $notSubmittedMilestone;
+    }
+
+    /**
+     * @param array $milestones
+     */
+    private function markNotSubmittedMilestonesAsFailed(array $milestones): void
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        foreach ($milestones as $milestoneStatusArray) {
+            foreach ($milestoneStatusArray as $milestone) {
+                $milestone->setSubmittedOn(new \DateTime('now'));
+                $milestone->setFailed(1);
+            }
+        }
+
+        $em->flush();
     }
 
     /**
