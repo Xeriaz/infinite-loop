@@ -122,7 +122,7 @@ class EditChallengeController extends Controller
         $em = $this->getDoctrine()->getRepository('App:UserMilestoneStatus');
 
         foreach ($milestones as $milestone) {
-            $notSubmittedMilestone[] = $em->findBy(
+            $userMilestoneStatus = $em->findBy(
                 [
                     'milestone' => $milestone,
                     'user' => $this->getUser(),
@@ -131,8 +131,18 @@ class EditChallengeController extends Controller
                     'failed' => 0
                 ]
             );
+
+            if (isset($userMilestoneStatus) && $userMilestoneStatus != null) {
+                $notSubmittedMilestone[] = $userMilestoneStatus;
+            }
         }
 
+        if (count($notSubmittedMilestone) > 0) {
+            $this->addFlash(
+                'danger',
+                sprintf('%d milestones was marked as failed', count($notSubmittedMilestone))
+            );
+        }
         return $notSubmittedMilestone;
     }
 
