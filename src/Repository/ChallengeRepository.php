@@ -2,22 +2,22 @@
 
 namespace App\Repository;
 
-use App\Entity\Challenges;
+use App\Entity\Challenge;
 use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
- * @method Challenges|null find($id, $lockMode = null, $lockVersion = null)
- * @method Challenges|null findOneBy(array $criteria, array $orderBy = null)
- * @method Challenges[]    findAll()
- * @method Challenges[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Challenge|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Challenge|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Challenge[]    findAll()
+ * @method Challenge[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class ChallangesRepository extends ServiceEntityRepository
+class ChallengeRepository extends ServiceEntityRepository
 {
     public function __construct(RegistryInterface $registry)
     {
-        parent::__construct($registry, Challenges::class);
+        parent::__construct($registry, Challenge::class);
     }
 
     public function searchChallengesByTitle(string $title, User $user)

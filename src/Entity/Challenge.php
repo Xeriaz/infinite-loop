@@ -8,9 +8,9 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\ChallangesRepository")
+ * @ORM\Entity(repositoryClass="ChallengeRepository")
  */
-class Challenges
+class Challenge
 {
     /**
      * @ORM\Id()
@@ -31,14 +31,14 @@ class Challenges
     private $description;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean", name="is_public")
      */
-    private $isPublic = false;
+    private $public = false;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean", name="is_completed")
      */
-    private $isCompleted = false;
+    private $completed = false;
 
     /**
      * @ORM\Column(type="boolean")
@@ -85,7 +85,7 @@ class Challenges
     private $milestones;
 
     /**
-     * @ORM\ManyToMany(targetEntity="ChallengesGroups", inversedBy="challenge")
+     * @ORM\ManyToMany(targetEntity="ChallengeGroup", inversedBy="challenge")
      * @ORM\JoinTable(name="challenge_groups")
      * @var Collection
      */
@@ -104,33 +104,33 @@ class Challenges
     /**
      * @return mixed
      */
-    public function getIsPublic()
+    public function getPublic()
     {
-        return $this->isPublic;
+        return $this->public;
     }
 
     /**
-     * @param mixed $isPublic
+     * @param mixed $public
      */
-    public function setIsPublic($isPublic): void
+    public function setPublic($public): void
     {
-        $this->isPublic = $isPublic;
+        $this->public = $public;
     }
 
     /**
      * @return mixed
      */
-    public function getIsCompleted()
+    public function getCompleted()
     {
-        return $this->isCompleted;
+        return $this->completed;
     }
 
     /**
-     * @param mixed $isCompleted
+     * @param mixed $completed
      */
-    public function setIsCompleted($isCompleted): void
+    public function setCompleted($completed): void
     {
-        $this->isCompleted = $isCompleted;
+        $this->completed = $completed;
     }
 
     /**
@@ -216,7 +216,7 @@ class Challenges
 
     /**
      * @param string $title
-     * @return Challenges
+     * @return Challenge
      */
     public function setTitle(string $title): self
     {
@@ -235,7 +235,7 @@ class Challenges
 
     /**
      * @param null|string $description
-     * @return Challenges
+     * @return Challenge
      */
     public function setDescription(?string $description): self
     {
@@ -254,7 +254,7 @@ class Challenges
 
     /**
      * @param \DateTimeInterface $startDate
-     * @return Challenges
+     * @return Challenge
      */
     public function setStartDate(\DateTimeInterface $startDate): self
     {
@@ -273,7 +273,7 @@ class Challenges
 
     /**
      * @param \DateTimeInterface $endDate
-     * @return Challenges
+     * @return Challenge
      */
     public function setEndDate(\DateTimeInterface $endDate): self
     {
@@ -293,7 +293,7 @@ class Challenges
 
     /**
      * @param User $user
-     * @return Challenges
+     * @return Challenge
      */
     public function addUser(User $user): self
     {
@@ -306,7 +306,7 @@ class Challenges
 
     /**
      * @param User $user
-     * @return Challenges
+     * @return Challenge
      */
     public function removeUser(User $user): self
     {
@@ -319,7 +319,7 @@ class Challenges
 
     /**
      * @param Milestone $milestone
-     * @return Challenges
+     * @return Challenge
      */
     public function addMilestone(Milestone $milestone): self
     {
@@ -333,7 +333,7 @@ class Challenges
 
     /**
      * @param Milestone $milestone
-     * @return Challenges
+     * @return Challenge
      */
     public function removeMilestone(Milestone $milestone): self
     {
@@ -349,10 +349,10 @@ class Challenges
     }
 
     /**
-     * @param ChallengesGroups $challengeGroup
-     * @return Challenges
+     * @param ChallengeGroup $challengeGroup
+     * @return Challenge
      */
-    public function addChallengeGroup(ChallengesGroups $challengeGroup): self
+    public function addChallengeGroup(ChallengeGroup $challengeGroup): self
     {
         if (!$this->challengeGroup->contains($challengeGroup)) {
             $this->challengeGroup[] = $challengeGroup;
@@ -362,10 +362,10 @@ class Challenges
     }
 
     /**
-     * @param ChallengesGroups $challengeGroup
-     * @return Challenges
+     * @param ChallengeGroup $challengeGroup
+     * @return Challenge
      */
-    public function removeChallengeGroup(ChallengesGroups $challengeGroup): self
+    public function removeChallengeGroup(ChallengeGroup $challengeGroup): self
     {
         if ($this->challengeGroup->contains($challengeGroup)) {
             $this->challengeGroup->removeElement($challengeGroup);

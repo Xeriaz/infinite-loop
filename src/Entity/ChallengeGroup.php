@@ -8,9 +8,9 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\ChallangesGroupsRepository")
+ * @ORM\Entity(repositoryClass="ChallengeGroupRepository")
  */
-class ChallengesGroups
+class ChallengeGroup
 {
     /**
      * @ORM\Id()
@@ -26,7 +26,7 @@ class ChallengesGroups
     private $groupName;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Challenges", mappedBy="challengeGroup")
+     * @ORM\ManyToMany(targetEntity="Challenge.php", mappedBy="challengeGroup")
      */
     private $challenge;
 
@@ -69,7 +69,7 @@ class ChallengesGroups
 
     /**
      * @param string $groupName
-     * @return ChallengesGroups
+     * @return ChallengeGroup
      */
     public function setGroupName(string $groupName): self
     {
@@ -78,7 +78,7 @@ class ChallengesGroups
         return $this;
     }
 
-    public function addChallenge(Challenges $challenge): self
+    public function addChallenge(Challenge $challenge): self
     {
         if (!$this->challenge->contains($challenge)) {
             $this->challenge[] = $challenge;
@@ -88,7 +88,7 @@ class ChallengesGroups
         return $this;
     }
 
-    public function removeChallenge(Challenges $challenge): self
+    public function removeChallenge(Challenge $challenge): self
     {
         if ($this->challenge->contains($challenge)) {
             $this->challenge->removeElement($challenge);

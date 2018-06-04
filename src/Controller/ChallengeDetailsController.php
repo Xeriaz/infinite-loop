@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\Entity\Challenges;
+use App\Entity\Challenge;
 use App\Entity\Comment;
 use App\Entity\Milestone;
 use App\Form\CommentForm;
@@ -22,7 +22,7 @@ class ChallengeDetailsController extends Controller
      */
     public function index(int $id)
     {
-        $em = $this->getDoctrine()->getRepository('App:Challenges');
+        $em = $this->getDoctrine()->getRepository('Challenge.php');
         $challenge = $em->find($id);
 
         if (($challenge->getOwner() !== $this->getUser()) && $challenge->getIsPublic() === false) {
@@ -52,7 +52,7 @@ class ChallengeDetailsController extends Controller
      */
     public function commentFormRender(Request $request, int $id)
     {
-        $challenge = $this->getDoctrine()->getRepository('App:Challenges')->find($id);
+        $challenge = $this->getDoctrine()->getRepository('Challenge.php')->find($id);
 
         if (!$challenge->getIsPublic() && $challenge->getOwner() !== $this->getUser()) {
             return $this->redirectToRoute('my_challenges');
@@ -78,7 +78,7 @@ class ChallengeDetailsController extends Controller
      */
     private function newComment(Request $request, int $id)
     {
-        $em = $this->getDoctrine()->getRepository('App:Challenges');
+        $em = $this->getDoctrine()->getRepository('Challenge.php');
         $challenge = $em->find($id);
 
         $comment = new Comment();

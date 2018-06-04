@@ -2,7 +2,7 @@
 
 namespace App\Form;
 
-use App\Entity\ChallengesGroups;
+use App\Entity\ChallengeGroup;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
@@ -23,7 +23,7 @@ class EditChallengeForm extends AbstractType
             ->add('Title', TextType::class)
             ->add('Description', TextType::class, ['required' => false])
             ->add('challengeGroup', EntityType::class, [
-                'class' => ChallengesGroups::class,
+                'class' => ChallengeGroup::class,
                 'choice_label' => 'group_name',
                 'label' => 'Type',
                 'multiple' => true,

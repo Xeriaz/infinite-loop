@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\Entity\ChallengesGroups;
+use App\Entity\ChallengeGroup;
 use App\Form\NewChallengeGroupForm;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -31,7 +31,7 @@ class NewChallengeGroupFormController extends Controller
      */
     private function new(Request $request)
     {
-        $challengeGroup = new ChallengesGroups();
+        $challengeGroup = new ChallengeGroup();
         $challengeGroup->setGroupName('');
 
         $form = $this->createForm(NewChallengeGroupForm::class, $challengeGroup);

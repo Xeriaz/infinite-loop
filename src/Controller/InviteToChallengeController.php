@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\Entity\Challenges;
+use App\Entity\Challenge;
 use App\Entity\Notification;
 use App\Entity\User;
 use App\Form\InviteToChallengeForm;
@@ -23,7 +23,7 @@ class InviteToChallengeController extends Controller
      */
     public function index(Request $request, int $id)
     {
-        $challenge = $this->getDoctrine()->getRepository('App:Challenges')->find($id);
+        $challenge = $this->getDoctrine()->getRepository('Challenge.php')->find($id);
 
         if (!$challenge->getIsPublic()) {
             return $this->redirectToRoute('challenge_details', ['id' => $id]);
@@ -48,8 +48,8 @@ class InviteToChallengeController extends Controller
      */
     private function inviteUser(Request $request, int $id)
     {
-        /** @var Challenges $challenge */
-        $challenge = $this->getDataById($id, Challenges::class);
+        /** @var Challenge $challenge */
+        $challenge = $this->getDataById($id, Challenge::class);
 
         /** @var Notification $notification */
         $notification = new Notification();

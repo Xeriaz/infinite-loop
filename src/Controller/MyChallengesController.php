@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\Entity\Challenges;
+use App\Entity\Challenge;
 use App\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;

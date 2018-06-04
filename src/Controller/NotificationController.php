@@ -60,7 +60,7 @@ class NotificationController extends Controller
             return $this->redirectToRoute('notifications');
         }
 
-        $notification->setIsRead(1);
+        $notification->setRead(1);
         $notification->setReadOn(new \DateTime('now'));
 
         $em = $this->getDoctrine()->getManager();

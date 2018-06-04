@@ -2,7 +2,7 @@
 
 namespace App\Repository;
 
-use App\Entity\Challenges;
+use App\Entity\Challenge;
 use App\Entity\Milestone;
 use App\Entity\User;
 use App\Entity\UserMilestoneStatus;
@@ -23,7 +23,7 @@ class MilestoneRepository extends ServiceEntityRepository
         parent::__construct($registry, Milestone::class);
     }
 
-    public function getMilestonesByChallengeAndUser(Challenges $challenge, User $owner)
+    public function getMilestonesByChallengeAndUser(Challenge $challenge, User $owner)
     {
         $qb = $this->createQueryBuilder('milestone');
         $qb
