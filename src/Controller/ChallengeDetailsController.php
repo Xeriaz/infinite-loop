@@ -22,7 +22,7 @@ class ChallengeDetailsController extends Controller
      */
     public function index(int $id)
     {
-        $em = $this->getDoctrine()->getRepository('Challenge.php');
+        $em = $this->getDoctrine()->getRepository('App:Challenge');
         $challenge = $em->find($id);
 
         if (($challenge->getOwner() !== $this->getUser()) && $challenge->getPublic() === false) {
@@ -52,7 +52,7 @@ class ChallengeDetailsController extends Controller
      */
     public function commentFormRender(Request $request, int $id)
     {
-        $challenge = $this->getDoctrine()->getRepository('Challenge.php')->find($id);
+        $challenge = $this->getDoctrine()->getRepository('App:Challenge')->find($id);
 
         if (!$challenge->getPublic() && $challenge->getOwner() !== $this->getUser()) {
             return $this->redirectToRoute('my_challenges');
@@ -78,7 +78,7 @@ class ChallengeDetailsController extends Controller
      */
     private function newComment(Request $request, int $id)
     {
-        $em = $this->getDoctrine()->getRepository('Challenge.php');
+        $em = $this->getDoctrine()->getRepository('App:Challenge');
         $challenge = $em->find($id);
 
         $comment = new Comment();

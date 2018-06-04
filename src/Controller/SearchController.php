@@ -22,7 +22,7 @@ class SearchController extends Controller
         $searchQuery = $searchQuery['Search'];
 
         if ($searchQuery !== null) {
-            $em = $this->getDoctrine()->getRepository('Challenge.php');
+            $em = $this->getDoctrine()->getRepository('App:Challenge');
             $challenge = $em->searchChallengesByTitle($searchQuery, $this->getUser());
             $publicChallenge = $em->searchPublicChallengesByTitle($searchQuery);
         }

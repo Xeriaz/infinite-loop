@@ -23,7 +23,7 @@ class InviteToChallengeController extends Controller
      */
     public function index(Request $request, int $id)
     {
-        $challenge = $this->getDoctrine()->getRepository('Challenge.php')->find($id);
+        $challenge = $this->getDoctrine()->getRepository('App:Challenge')->find($id);
 
         if (!$challenge->getPublic()) {
             return $this->redirectToRoute('challenge_details', ['id' => $id]);

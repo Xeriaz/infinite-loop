@@ -25,7 +25,7 @@ class MilestoneController extends Controller
      */
     public function index(Request $request, int $id)
     {
-        $challenge = $this->getDoctrine()->getRepository('Challenge.php')->find($id);
+        $challenge = $this->getDoctrine()->getRepository('App:Challenge')->find($id);
 
         if ($challenge->getOwner() !== $this->getUser() && !$challenge->getPublic()) {
             return $this->redirectToRoute('my_challenges');
@@ -37,7 +37,7 @@ class MilestoneController extends Controller
             return $createNewFormOrRedirect;
         }
 
-        $em = $this->getDoctrine()->getRepository('Challenge.php');
+        $em = $this->getDoctrine()->getRepository('App:Challenge');
 
         return $this->render('new_milestone/index.html.twig', [
             'controller_name' => 'MilestoneController',
