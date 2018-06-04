@@ -2,7 +2,7 @@
     <h5 class="card-subtitle customCard-subtitle">{{ milestone.title }}</h5>
     <div class="milestone-statusBlock">
 
-        {% if milestone.isPublic %}
+        {% if milestone.public %}
             <a class="milestone-statusLink"
                href="{{ path('complete_milestone', {'id': milestone.id}) }}">
                 <svg class="milestone-statusIcon">

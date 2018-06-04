@@ -21,7 +21,7 @@ class NewChallengeMilestoneOwnerForm extends AbstractType
     {
         $builder
             ->add('Title', TextType::class)
-            ->add('isPublic', CheckboxType::class, [
+            ->add('public', CheckboxType::class, [
                 'label' => 'Is it public?',
                 'required' => false
             ])

@@ -30,12 +30,12 @@ class MilestoneRepository extends ServiceEntityRepository
             ->where(
                 $qb->expr()->orX(
                     $qb->expr()->andX(
-                        $qb->expr()->eq('milestone.isPublic', $qb->expr()->literal(false)),
+                        $qb->expr()->eq('milestone.public', $qb->expr()->literal(false)),
                         $qb->expr()->eq('milestone.challenge', ':challenge'),
                         $qb->expr()->eq('milestone.owner', ':owner')
                     ),
                     $qb->expr()->andX(
-                        $qb->expr()->eq('milestone.isPublic', $qb->expr()->literal(true)),
+                        $qb->expr()->eq('milestone.public', $qb->expr()->literal(true)),
                         $qb->expr()->eq('milestone.challenge', ':challenge')
                     )
                 )

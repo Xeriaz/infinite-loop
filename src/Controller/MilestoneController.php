@@ -27,7 +27,7 @@ class MilestoneController extends Controller
     {
         $challenge = $this->getDoctrine()->getRepository('Challenge.php')->find($id);
 
-        if ($challenge->getOwner() !== $this->getUser() && !$challenge->getIsPublic()) {
+        if ($challenge->getOwner() !== $this->getUser() && !$challenge->getPublic()) {
             return $this->redirectToRoute('my_challenges');
         }
 
@@ -79,7 +79,7 @@ class MilestoneController extends Controller
             $em->persist($milestone);
             $em->flush();
 
-            if (!$milestone->getIsPublic()) {
+            if (!$milestone->getPublic()) {
                 $em->persist($this->newUserMilestoneStatus($milestone));
                 $em->flush();
             }
@@ -163,7 +163,7 @@ class MilestoneController extends Controller
         /** @var Milestone $milestone */
         $milestone = $this->getDataById($milestoneId, Milestone::class);
 
-        if ($milestone->getOwner() !== $this->getUser() && !$milestone->getIsPublic()) {
+        if ($milestone->getOwner() !== $this->getUser() && !$milestone->getPublic()) {
             return $this->redirectToRoute('my_challenges');
         }
 
@@ -225,7 +225,7 @@ class MilestoneController extends Controller
         /** @var Milestone $milestone */
         $milestone = $this->getDataById($id, Milestone::class);
 
-        if ($milestone->getOwner() !== $this->getUser() && !$milestone->getIsPublic()) {
+        if ($milestone->getOwner() !== $this->getUser() && !$milestone->getPublic()) {
             return $this->redirectToRoute('my_challenges');
         }
 

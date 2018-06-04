@@ -51,11 +51,11 @@
     {% if app.request.get('id') == null %}
         <div class="formRow">
             <div class="formLabel">
-                {{ form_label(form.isPublic) }}
+                {{ form_label(form.public) }}
             </div>
             <div class="formControl">
-                {{ form_widget(form.isPublic, { 'attr': {'class': 'formInput' } }) }}
-                {{ form_errors(form.isPublic) }}
+                {{ form_widget(form.public, { 'attr': {'class': 'formInput' } }) }}
+                {{ form_errors(form.public) }}
             </div>
         </div>
 

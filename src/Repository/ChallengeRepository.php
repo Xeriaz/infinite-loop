@@ -29,7 +29,7 @@ class ChallengeRepository extends ServiceEntityRepository
                 $qb->expr()->andX(
                     $qb->expr()->eq('challenge.owner', ':owner'),
                     $qb->expr()->like('challenge.title', ':title'),
-                    $qb->expr()->eq('challenge.isPublic', 0)
+                    $qb->expr()->eq('challenge.public', 0)
                 )
             )
             ->setParameters([
@@ -49,7 +49,7 @@ class ChallengeRepository extends ServiceEntityRepository
             ->where(
                 $qb->expr()->andX(
                     $qb->expr()->like('challenge.title', ':title'),
-                    $qb->expr()->eq('challenge.isPublic', ':true')
+                    $qb->expr()->eq('challenge.public', ':true')
                 )
             )
             ->setParameters([

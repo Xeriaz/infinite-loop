@@ -13,7 +13,7 @@
                 <ul class="list-group list-group-flush">
                     {% for milestone in milestones %}
 
-                        {% if milestone.isPublic %}
+                        {% if milestone.public %}
                             {% set milestoneUserStatusExist = 0 %}
 
                             {% for userStatus in milestone.userStatus %}
@@ -29,7 +29,7 @@
 
                         {% for milestoneUserStatus in milestone.userStatus %}
 
-                                {% if milestoneUserStatus.isCompleted and
+                                {% if milestoneUserStatus.completed and
                                     not milestoneUserStatus.isDeleted and
                                     milestoneUserStatus.user == app.user
                                 %}
@@ -56,7 +56,7 @@
                 </ul>
                 <div class="card-footer">
 
-                    {% if not challenge.isCompleted %}
+                    {% if not challenge.completed %}
                         {% include 'includes/challengeControlButtons.htm.twig' %}
                     {% else %}
                         {% include 'includes/challengeCompleted.html.twig' %}

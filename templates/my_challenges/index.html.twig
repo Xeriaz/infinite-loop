@@ -27,7 +27,7 @@
                         {% set milestonesCount = 0 %}
                         {% for milestone in challenge.milestones %}
                             {% for milestoneUserStatus in milestone.userStatus %}
-                                {% if milestoneUserStatus.isCompleted and
+                                {% if milestoneUserStatus.completed and
                                     not milestoneUserStatus.isDeleted and
                                     milestoneUserStatus.user == app.user
                                 %}
@@ -45,7 +45,7 @@
 
                     <div class="card-footer">
 
-                        {% if not challenge.isCompleted %}
+                        {% if not challenge.completed %}
                             {% include 'includes/challengeControlButtons.htm.twig' %}
                         {% else %}
                             {% include 'includes/challengeCompleted.html.twig' %}

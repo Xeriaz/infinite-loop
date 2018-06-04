@@ -27,7 +27,7 @@ class NewChallengeForm extends AbstractType
                 'label' => 'Type',
                 'multiple' => true,
             ])
-            ->add('isPublic', CheckboxType::class, [
+            ->add('public', CheckboxType::class, [
                 'label' => 'Is it public?',
                 'required' => false
             ])
