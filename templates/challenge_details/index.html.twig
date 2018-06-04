@@ -13,7 +13,7 @@
                 <ul class="list-group list-group-flush">
                     {% for milestone in milestones %}
 
-                        {% if milestone.isPublic %}
+                        {% if milestone.public %}
                             {% set milestoneUserStatusExist = 0 %}
 
                             {% for userStatus in milestone.userStatus %}
@@ -23,40 +23,42 @@
                             {% endfor %}
 
                             {% if milestoneUserStatusExist == 0 %}
+                                {% set milestonesCount = milestonesCount + 1 %}
+
                                 {% include 'includes/publicMilestoneBlock.html.twig' %}
                             {% endif %}
                         {% endif %}
 
                         {% for milestoneUserStatus in milestone.userStatus %}
 
-                                {% if milestoneUserStatus.isCompleted and
-                                    not milestoneUserStatus.isDeleted and
+                                {% if milestoneUserStatus.completed and
+                                    not milestoneUserStatus.deleted and
                                     milestoneUserStatus.user == app.user
                                 %}
                                     {% set completedMilestones = completedMilestones + 1 %}
                                 {% endif %}
 
-                                {% if not milestoneUserStatus.isDeleted and
+                                {% if not milestoneUserStatus.deleted and
                                     milestoneUserStatus.user == app.user
                                 %}
                                     {% set milestonesCount = milestonesCount + 1 %}
                                     {% include 'includes/milestoneBlock.html.twig' %}
                                 {% endif %}
 
-
                         {% endfor %}
                     {% endfor %}
 
                     {% if milestonesCount == 0 %}
                         <li class="list-group-item d-flex align-items-center">
-                            <h5 class="card-subtitle customCard-subtitle text-center">No milestones has been added
-                                yet.</h5>
+                            <h5 class="card-subtitle customCard-subtitle text-center">
+                                No milestones has been added yet.
+                            </h5>
                         </li>
                     {% endif %}
                 </ul>
                 <div class="card-footer">
 
-                    {% if not challenge.isCompleted %}
+                    {% if not challenge.completed %}
                         {% include 'includes/challengeControlButtons.htm.twig' %}
                     {% else %}
                         {% include 'includes/challengeCompleted.html.twig' %}

@@ -2,7 +2,7 @@
 
 namespace App\Repository;
 
-use App\Entity\Challenges;
+use App\Entity\Challenge;
 use App\Entity\Milestone;
 use App\Entity\User;
 use App\Entity\UserMilestoneStatus;
@@ -23,19 +23,19 @@ class MilestoneRepository extends ServiceEntityRepository
         parent::__construct($registry, Milestone::class);
     }
 
-    public function getMilestonesByChallengeAndUser(Challenges $challenge, User $owner)
+    public function getMilestonesByChallengeAndUser(Challenge $challenge, User $owner)
     {
         $qb = $this->createQueryBuilder('milestone');
         $qb
             ->where(
                 $qb->expr()->orX(
                     $qb->expr()->andX(
-                        $qb->expr()->eq('milestone.isPublic', $qb->expr()->literal(false)),
+                        $qb->expr()->eq('milestone.public', $qb->expr()->literal(false)),
                         $qb->expr()->eq('milestone.challenge', ':challenge'),
                         $qb->expr()->eq('milestone.owner', ':owner')
                     ),
                     $qb->expr()->andX(
-                        $qb->expr()->eq('milestone.isPublic', $qb->expr()->literal(true)),
+                        $qb->expr()->eq('milestone.public', $qb->expr()->literal(true)),
                         $qb->expr()->eq('milestone.challenge', ':challenge')
                     )
                 )

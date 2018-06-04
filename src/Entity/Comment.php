@@ -33,7 +33,7 @@ class Comment
     private $user;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Challenges", inversedBy="comments")
+     * @ORM\ManyToOne(targetEntity="Challenge", inversedBy="comments")
      * @ORM\JoinColumn(nullable=false)
      */
     private $challenge;
@@ -79,12 +79,12 @@ class Comment
         return $this;
     }
 
-    public function getChallenge(): ?Challenges
+    public function getChallenge(): ?Challenge
     {
         return $this->challenge;
     }
 
-    public function setChallenge(?Challenges $challenge): self
+    public function setChallenge(?Challenge $challenge): self
     {
         $this->challenge = $challenge;
 

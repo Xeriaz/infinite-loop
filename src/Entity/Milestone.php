@@ -29,15 +29,15 @@ class Milestone
     private $userStatus;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Challenges", inversedBy="milestones")
+     * @ORM\ManyToOne(targetEntity="Challenge", inversedBy="milestones")
      * @ORM\JoinColumn(name="challenge_id", referencedColumnName="id")
      */
     private $challenge;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean", name="is_public")
      */
-    private $isPublic = false;
+    private $public = false;
 
     /**
      * @ORM\ManyToOne(targetEntity="User", inversedBy="ownedMilestone")
@@ -147,14 +147,14 @@ class Milestone
         return $this;
     }
 
-    public function getIsPublic(): ?bool
+    public function getPublic(): ?bool
     {
-        return $this->isPublic;
+        return $this->public;
     }
 
-    public function setIsPublic(bool $isPublic): self
+    public function setPublic(bool $public): self
     {
-        $this->isPublic = $isPublic;
+        $this->public = $public;
 
         return $this;
     }

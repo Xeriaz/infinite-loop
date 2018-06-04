@@ -31,7 +31,7 @@ class NotificationRepository extends ServiceEntityRepository
         $qb
             ->where(
                 $qb->expr()->andX(
-                    $qb->expr()->eq('notification.isRead', ':false'),
+                    $qb->expr()->eq('notification.read', ':false'),
                     $qb->expr()->eq('notification.user', ':user')
                 )
             )
@@ -60,7 +60,7 @@ class NotificationRepository extends ServiceEntityRepository
             ->setParameters([
                 'user' => $user
             ])
-            ->orderBy('notification.isRead', 'ASC')
+            ->orderBy('notification.read', 'ASC')
             ->orderBy('notification.createdOn', 'DESC');
         ;
 

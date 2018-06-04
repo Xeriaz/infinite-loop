@@ -1,5 +1,5 @@
 <div class="challengeControlBlock">
-    {% if not challenge.isPublic %}
+    {% if not challenge.public %}
         <a class="milestone-statusLink"
            href="{{ path('mark_challenge_completed', {'id': challenge.id}) }}">
             <svg class="milestone-statusIcon">
@@ -27,7 +27,7 @@
     {% endif %}
 
 
-    {% if challenge.isPublic %}
+    {% if challenge.public %}
         <a class="milestone-statusLink"
            href="{{ path('invite_user_to_challenge', {'id': challenge.id }) }}">
             <svg class="milestone-statusIcon">

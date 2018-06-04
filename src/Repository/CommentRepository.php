@@ -2,7 +2,7 @@
 
 namespace App\Repository;
 
-use App\Entity\Challenges;
+use App\Entity\Challenge;
 use App\Entity\Comment;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
@@ -20,7 +20,7 @@ class CommentRepository extends ServiceEntityRepository
         parent::__construct($registry, Comment::class);
     }
 
-    public function getChallengeComments(Challenges $challenge)
+    public function getChallengeComments(Challenge $challenge)
     {
         $qb = $this->createQueryBuilder('comment');
 
@@ -31,6 +31,7 @@ class CommentRepository extends ServiceEntityRepository
             ->setParameters([
                 'challenge' => $challenge
             ])
+            ->orderBy('comment.postedOn', 'DESC')
         ;
 
         return $qb->getQuery()->getResult();

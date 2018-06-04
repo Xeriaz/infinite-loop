@@ -24,9 +24,9 @@ class Notification
     private $createdOn;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean", name="is_read")
      */
-    private $isRead = false;
+    private $read = false;
 
     /**
      * @ORM\Column(type="text")
@@ -45,7 +45,7 @@ class Notification
     private $user;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Challenges", inversedBy="notifications")
+     * @ORM\ManyToOne(targetEntity="Challenge", inversedBy="notifications")
      * @ORM\JoinColumn(name="challenge_id", referencedColumnName="id")
      */
     private $challenge;
@@ -91,18 +91,18 @@ class Notification
     /**
      * @return bool|null
      */
-    public function getIsRead(): ?bool
+    public function getRead(): ?bool
     {
-        return $this->isRead;
+        return $this->read;
     }
 
     /**
-     * @param bool $isRead
+     * @param bool $read
      * @return Notification
      */
-    public function setIsRead(bool $isRead): self
+    public function setRead(bool $read): self
     {
-        $this->isRead = $isRead;
+        $this->read = $read;
 
         return $this;
     }
@@ -192,10 +192,10 @@ class Notification
     }
 
     /**
-     * @param Challenges|null $challenge
+     * @param Challenge|null $challenge
      * @return Notification
      */
-    public function setChallenge(?Challenges $challenge): self
+    public function setChallenge(?Challenge $challenge): self
     {
         $this->challenge = $challenge;
 

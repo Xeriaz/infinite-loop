@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\Entity\Challenges;
+use App\Entity\Challenge;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -37,7 +37,7 @@ class NewChallengeFormController extends Controller
      */
     private function new(Request $request)
     {
-        $challenge = new Challenges();
+        $challenge = new Challenge();
 
         $challenge->setStartDate(new \DateTime('now'));
         $challenge->setEndDate(new \DateTime('now'));

@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\Entity\Challenges;
+use App\Entity\Challenge;
 use App\Entity\Milestone;
 use App\Entity\UserMilestoneStatus;
 use App\Form\NewChallengeMilestoneForm;
@@ -25,9 +25,9 @@ class MilestoneController extends Controller
      */
     public function index(Request $request, int $id)
     {
-        $challenge = $this->getDoctrine()->getRepository('App:Challenges')->find($id);
+        $challenge = $this->getDoctrine()->getRepository('App:Challenge')->find($id);
 
-        if ($challenge->getOwner() !== $this->getUser() && !$challenge->getIsPublic()) {
+        if ($challenge->getOwner() !== $this->getUser() && !$challenge->getPublic()) {
             return $this->redirectToRoute('my_challenges');
         }
 
@@ -37,7 +37,7 @@ class MilestoneController extends Controller
             return $createNewFormOrRedirect;
         }
 
-        $em = $this->getDoctrine()->getRepository('App:Challenges');
+        $em = $this->getDoctrine()->getRepository('App:Challenge');
 
         return $this->render('new_milestone/index.html.twig', [
             'controller_name' => 'MilestoneController',
@@ -54,15 +54,15 @@ class MilestoneController extends Controller
     {
         $id = $request->attributes->get('id');
 
-        /** @var Challenges $challenge */
-        $challenge = $this->getDataById($id, Challenges::class);
+        /** @var Challenge $challenge */
+        $challenge = $this->getDataById($id, Challenge::class);
 
         /** @var Milestone $milestone */
         $milestone = new Milestone();
         $milestone->setChallenge($challenge);
         $milestone->setOwner($this->getUser());
 
-        if ($challenge->getOwner()->getId() === $this->getUser()->getId() && $challenge->getIsPublic()) {
+        if ($challenge->getOwner()->getId() === $this->getUser()->getId() && $challenge->getPublic()) {
             $formClass = NewChallengeMilestoneOwnerForm::class;
         } else {
             $formClass = NewChallengeMilestoneForm::class;
@@ -79,7 +79,7 @@ class MilestoneController extends Controller
             $em->persist($milestone);
             $em->flush();
 
-            if (!$milestone->getIsPublic()) {
+            if (!$milestone->getPublic()) {
                 $em->persist($this->newUserMilestoneStatus($milestone));
                 $em->flush();
             }
@@ -163,14 +163,14 @@ class MilestoneController extends Controller
         /** @var Milestone $milestone */
         $milestone = $this->getDataById($milestoneId, Milestone::class);
 
-        if ($milestone->getOwner() !== $this->getUser() && !$milestone->getIsPublic()) {
+        if ($milestone->getOwner() !== $this->getUser() && !$milestone->getPublic()) {
             return $this->redirectToRoute('my_challenges');
         }
 
         /** @var UserMilestoneStatus $userMilestoneStatus */
         $userMilestoneStatus = $this->getDataByMilestone($milestone, UserMilestoneStatus::class);
 
-        $userMilestoneStatus->setIsCompleted(true);
+        $userMilestoneStatus->setCompleted(true);
         $userMilestoneStatus->setSubmittedOn(new \DateTime('now'));
 
         $em = $this->getDoctrine()->getManager();
@@ -203,7 +203,7 @@ class MilestoneController extends Controller
             UserMilestoneStatus::class
         );
 
-        $userMilestoneStatus->setIsDeleted(true);
+        $userMilestoneStatus->setDeleted(true);
 
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->flush();
@@ -225,7 +225,7 @@ class MilestoneController extends Controller
         /** @var Milestone $milestone */
         $milestone = $this->getDataById($id, Milestone::class);
 
-        if ($milestone->getOwner() !== $this->getUser() && !$milestone->getIsPublic()) {
+        if ($milestone->getOwner() !== $this->getUser() && !$milestone->getPublic()) {
             return $this->redirectToRoute('my_challenges');
         }
 
@@ -235,7 +235,7 @@ class MilestoneController extends Controller
             UserMilestoneStatus::class
         );
 
-        $userMilestoneStatus->setIsFailed(true);
+        $userMilestoneStatus->setFailed(true);
         $userMilestoneStatus->setSubmittedOn(new \DateTime('now'));
 
         $entityManager = $this->getDoctrine()->getManager();
@@ -265,7 +265,7 @@ class MilestoneController extends Controller
         );
 
         if ($milestone->getOwner() !== $this->getUser() ||
-           ($userMilestoneStatus->getIsCompleted() || $userMilestoneStatus->getIsFailed())
+           ($userMilestoneStatus->getCompleted() || $userMilestoneStatus->getFailed())
         ) {
             $challengeId = $milestone->getChallenge()->getId();
             return $this->redirectToRoute('challenge_details', ['id' => $challengeId]);
@@ -290,7 +290,7 @@ class MilestoneController extends Controller
         /** @var Milestone $milestone */
         $milestone = $userMilestoneStatus->getMilestone();
 
-        /** @var Challenges $challenge */
+        /** @var Challenge $challenge */
         $challenge = $milestone->getChallenge();
 
         return $challenge->getId();

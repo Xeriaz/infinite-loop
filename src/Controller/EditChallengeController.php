@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\Entity\Challenges;
+use App\Entity\Challenge;
 use App\Form\EditChallengeForm;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -35,12 +35,12 @@ class EditChallengeController extends Controller
 
     /**
      * @param int $id
-     * @return Challenges
+     * @return Challenge
      */
-    private function getChallengeData(int $id): Challenges
+    private function getChallengeData(int $id): Challenge
     {
         $challengeData = $this->getDoctrine()
-            ->getRepository(Challenges::class)
+            ->getRepository(Challenge::class)
             ->find($id);
 
         if (!$challengeData) {
@@ -84,14 +84,14 @@ class EditChallengeController extends Controller
     {
         $id = $request->attributes->get('id');
 
-        /** @var Challenges $challenge */
+        /** @var Challenge $challenge */
         $challenge = $this->getChallengeData($id);
 
-        if ($challenge->getIsPublic()) {
+        if ($challenge->getPublic()) {
             return $this->redirectToRoute('challenge_details', ['id' => $id]);
         }
 
-        $challenge->setIsCompleted(true);
+        $challenge->setCompleted(true);
         $challenge->setCompletedOn(new \DateTime('now'));
 
         $em = $this->getDoctrine()->getManager();
@@ -127,7 +127,7 @@ class EditChallengeController extends Controller
      */
     public function otherUserJoinIn(int $id)
     {
-        /** @var Challenges $challenge */
+        /** @var Challenge $challenge */
         $challenge = $this->getChallengeData($id);
         $challenge->addUser($this->getUser());
 

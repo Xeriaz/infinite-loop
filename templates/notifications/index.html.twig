@@ -20,7 +20,7 @@
                 <tbody>
                 {% for notification in notifications %}
 
-                    {% if not notification.isRead %}
+                    {% if not notification.read %}
                         <tr class="newNotification">
                     {% else %}
                         <tr>
@@ -29,7 +29,7 @@
                     <td class="tableContent w-50">{{ notification.description }}</td>
                     <td class="tableContent">{{ notification.createdOn|date('Y-m-d H:i:s') }}</td>
                     <td class="tableContent">
-                        {% if not notification.isRead %}
+                        {% if not notification.read %}
                             <a class="btn-ghost" href="{{ path('mark_notification_as_read', {'id': notification.id}) }}">Check in</a>
                         {% elseif notification.readOn %}
                             {{ notification.readOn|date('Y-m-d H:i:s') }}

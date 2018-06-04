@@ -8,6 +8,17 @@
 
     <nav class="user-nav">
         {% if is_granted('ROLE_USER') %}
+            {% if is_granted('ROLE_ADMIN') %}
+                <a href="{{ path('new_challenge_group_form') }}" class="user-nav__link">
+                    <div class="user-nav__icon-box btn-nav">
+                        <svg class="user-nav__icon user-nav__icon--sm">
+                            <use xlink:href="{{ asset('images/sprite.svg#icon-group') }}"></use>
+                        </svg>
+                        <span class="btn-nav--topText btn-nav--text">Add new</span>
+                        <span class="btn-nav--btmText btn-nav--text">Group</span>
+                    </div>
+                </a>
+            {% endif %}
             <a href="{{ path('new_challenge_form') }}" class="user-nav__link">
                 <div class="user-nav__icon-box btn-nav">
                     <svg class="user-nav__icon user-nav__icon--sm">

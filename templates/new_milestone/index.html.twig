@@ -24,14 +24,14 @@
                     </div>
                 </div>
 
-                {% if app.user.id == challenge.owner.id and challenge.isPublic %}
+                {% if app.user.id == challenge.owner.id and challenge.public %}
                     <div class="formRow">
                         <div class="formLabel">
-                            {{ form_label(form.isPublic) }}
+                            {{ form_label(form.public) }}
                         </div>
                         <div class="formControl">
-                            {{ form_widget(form.isPublic) }}
-                            {{ form_errors(form.isPublic) }}
+                            {{ form_widget(form.public) }}
+                            {{ form_errors(form.public) }}
                         </div>
                     </div>
                 {% endif %}

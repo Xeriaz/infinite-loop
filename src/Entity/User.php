@@ -29,7 +29,7 @@ class User extends BaseUser
     }
 
     /**
-     * @ORM\ManyToMany(targetEntity="Challenges", mappedBy="users")
+     * @ORM\ManyToMany(targetEntity="Challenge", mappedBy="users")
      */
     private $challenges = [];
 
@@ -39,7 +39,7 @@ class User extends BaseUser
     private $milestoneStatus;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Challenges", mappedBy="owner"))
+     * @ORM\OneToMany(targetEntity="Challenge", mappedBy="owner"))
      */
     private $ownedChallenge;
 
@@ -102,7 +102,7 @@ class User extends BaseUser
         $this->ownedMilestone = new ArrayCollection();
     }
 
-    public function addChallenge(Challenges $challenge): self
+    public function addChallenge(Challenge $challenge): self
     {
         if (!$this->challenges->contains($challenge)) {
             $this->challenges[] = $challenge;
@@ -112,7 +112,7 @@ class User extends BaseUser
         return $this;
     }
 
-    public function removeChallenge(Challenges $challenge): self
+    public function removeChallenge(Challenge $challenge): self
     {
         if ($this->challenges->contains($challenge)) {
             $this->challenges->removeElement($challenge);
@@ -173,7 +173,7 @@ class User extends BaseUser
         return $this->ownedChallenge;
     }
 
-    public function setOwnedChallenge(?Challenges $ownedChallenge): self
+    public function setOwnedChallenge(?Challenge $ownedChallenge): self
     {
         $this->ownedChallenge = $ownedChallenge;
 
@@ -186,7 +186,7 @@ class User extends BaseUser
         return $this;
     }
 
-    public function addOwnedChallenge(Challenges $ownedChallenge): self
+    public function addOwnedChallenge(Challenge $ownedChallenge): self
     {
         if (!$this->ownedChallenge->contains($ownedChallenge)) {
             $this->ownedChallenge[] = $ownedChallenge;
@@ -196,7 +196,7 @@ class User extends BaseUser
         return $this;
     }
 
-    public function removeOwnedChallenge(Challenges $ownedChallenge): self
+    public function removeOwnedChallenge(Challenge $ownedChallenge): self
     {
         if ($this->ownedChallenge->contains($ownedChallenge)) {
             $this->ownedChallenge->removeElement($ownedChallenge);

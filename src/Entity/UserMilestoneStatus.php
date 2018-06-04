@@ -24,19 +24,19 @@ class UserMilestoneStatus
     private $milestone;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean", name="is_completed")
      */
-    private $isCompleted = false;
+    private $completed = false;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean", name="is_deleted")
      */
-    private $isDeleted = false;
+    private $deleted = false;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean", name="is_failed")
      */
-    private $isFailed = false;
+    private $failed = false;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
@@ -67,38 +67,38 @@ class UserMilestoneStatus
         return $this;
     }
 
-    public function getIsCompleted(): ?bool
+    public function getCompleted(): ?bool
     {
-        return $this->isCompleted;
+        return $this->completed;
     }
 
-    public function setIsCompleted(bool $isCompleted): self
+    public function setCompleted(bool $completed): self
     {
-        $this->isCompleted = $isCompleted;
+        $this->completed = $completed;
 
         return $this;
     }
 
-    public function getIsDeleted(): ?bool
+    public function getDeleted(): ?bool
     {
-        return $this->isDeleted;
+        return $this->deleted;
     }
 
-    public function setIsDeleted(bool $isDeleted): self
+    public function setDeleted(bool $deleted): self
     {
-        $this->isDeleted = $isDeleted;
+        $this->deleted = $deleted;
 
         return $this;
     }
 
-    public function getIsFailed(): ?bool
+    public function getFailed(): ?bool
     {
-        return $this->isFailed;
+        return $this->failed;
     }
 
-    public function setIsFailed(bool $isFailed): self
+    public function setFailed(bool $failed): self
     {
-        $this->isFailed = $isFailed;
+        $this->failed = $failed;
 
         return $this;
     }

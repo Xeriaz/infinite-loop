@@ -2,7 +2,7 @@
 
 namespace App\Form;
 
-use App\Entity\ChallengesGroups;
+use App\Entity\ChallengeGroup;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
@@ -21,7 +21,7 @@ class NewChallengeMilestoneOwnerForm extends AbstractType
     {
         $builder
             ->add('Title', TextType::class)
-            ->add('isPublic', CheckboxType::class, [
+            ->add('public', CheckboxType::class, [
                 'label' => 'Is it public?',
                 'required' => false
             ])
