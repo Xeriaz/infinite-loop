@@ -3,6 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\Challenge;
+use App\Entity\Milestone;
+use App\Entity\UserMilestoneStatus;
 use App\Form\EditChallengeForm;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -97,11 +99,39 @@ class EditChallengeController extends Controller
         $em = $this->getDoctrine()->getManager();
         $em->flush();
 
+        $this->markNotSubmittedMilestonesAsFailed();
+
         $this->addFlash(
             'success',
             sprintf('Congratulations! You have completed "%s" challenge', $challenge->getTitle())
         );
-        return $this->redirectToRoute('my_challenges');
+        return $this->redirectToRoute('challenge_details', ['id' => $id]);
+    }
+
+    private function findNotSubmittedMilestones()
+    {
+        $em = $this->getDoctrine()->getRepository('App:UserMilestoneStatus');
+        return $em->findBy(
+            [
+                'user' => $this->getUser(),
+                'submittedOn' => null,
+                'completed' => 0,
+                'failed' => 0
+            ]
+        );
+    }
+
+    private function markNotSubmittedMilestonesAsFailed()
+    {
+        $milestones = $this->findNotSubmittedMilestones();
+        $em = $this->getDoctrine()->getManager();
+
+        foreach ($milestones as $milestone) {
+            $milestone->setSubmittedOn(new \DateTime('now'));
+            $milestone->setFailed(1);
+        }
+
+        $em->flush();
     }
 
     /**
