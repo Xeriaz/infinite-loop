@@ -39,7 +39,7 @@ class User extends BaseUser
     private $milestoneStatus;
 
     /**
-     * @ORM\OneToMany(targetEntity="Challenge.php", mappedBy="owner"))
+     * @ORM\OneToMany(targetEntity="Challenge", mappedBy="owner"))
      */
     private $ownedChallenge;
 

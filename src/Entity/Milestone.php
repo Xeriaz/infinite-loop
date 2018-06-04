@@ -29,7 +29,7 @@ class Milestone
     private $userStatus;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Challenge.php", inversedBy="milestones")
+     * @ORM\ManyToOne(targetEntity="Challenge", inversedBy="milestones")
      * @ORM\JoinColumn(name="challenge_id", referencedColumnName="id")
      */
     private $challenge;

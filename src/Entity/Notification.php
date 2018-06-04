@@ -24,7 +24,7 @@ class Notification
     private $createdOn;
 
     /**
-     * @ORM\Column(type="boolean" name="is_read")
+     * @ORM\Column(type="boolean", name="is_read")
      */
     private $read = false;
 
@@ -45,7 +45,7 @@ class Notification
     private $user;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Challenge.php", inversedBy="notifications")
+     * @ORM\ManyToOne(targetEntity="Challenge", inversedBy="notifications")
      * @ORM\JoinColumn(name="challenge_id", referencedColumnName="id")
      */
     private $challenge;

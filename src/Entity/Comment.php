@@ -33,7 +33,7 @@ class Comment
     private $user;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Challenge.php", inversedBy="comments")
+     * @ORM\ManyToOne(targetEntity="Challenge", inversedBy="comments")
      * @ORM\JoinColumn(nullable=false)
      */
     private $challenge;
