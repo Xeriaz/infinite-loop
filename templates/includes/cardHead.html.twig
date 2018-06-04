@@ -1,6 +1,13 @@
 <div class="card-body body-bg d-flex align-items-top">
     {% if challenge.public %}
-        <div class="card-groupTitle card-groupTitle--public js-type">Public Challenge</div>
+        <div class="card-groupTitle card-groupTitle--public js-type">
+            Public Challenge
+            {% if app.user == challenge.owner %}
+                - owner
+            {% elseif(app.user in challenge.users) %}
+            - joined
+            {% endif %}
+        </div>
     {% else %}
         <div class="card-groupTitle card-groupTitle--private js-type">Private Challenge</div>
     {% endif %}

@@ -24,8 +24,7 @@ class ChallengeDetailsController extends Controller
     {
         $em = $this->getDoctrine()->getRepository('App:Challenge');
         $challenge = $em->find($id);
-
-        if (($challenge->getOwner() !== $this->getUser()) && $challenge->getPublic() === false) {
+        if ($challenge == null || ($challenge->getOwner() !== $this->getUser()) && $challenge->getPublic() === false) {
             return $this->redirectToRoute('my_challenges');
         }
 
