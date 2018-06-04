@@ -17,6 +17,17 @@
     {% if is_granted('ROLE_USER') %}
         {% include 'includes/header.html.twig' %}
 
+        {% for label, messages in app.flashes %}
+            {% for message in messages %}
+                <div class="alert alert-{{ label }} alert-dismissible fade show" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endfor %}
+
         <div class="content">
             {#{% include 'includes/sideNav.html.twig' %}#}
             {% block content %}{% endblock %}
@@ -59,9 +70,9 @@
 
                     {% endif %}
 
-
                 </div>
-                {% block body %}{% endblock %}
+                {% block body %}
+                {% endblock %}
 
             </section>
         </div>
