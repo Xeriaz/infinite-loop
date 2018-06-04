@@ -97,6 +97,10 @@ class EditChallengeController extends Controller
         $em = $this->getDoctrine()->getManager();
         $em->flush();
 
+        $this->addFlash(
+            'success',
+            sprintf('Congratulations! You have completed "%s" challenge', $challenge->getTitle())
+        );
         return $this->redirectToRoute('my_challenges');
     }
 
@@ -117,6 +121,7 @@ class EditChallengeController extends Controller
         $em->remove($challenge);
         $em->flush();
 
+        $this->addFlash('warning', sprintf('Challenge "%s" was removed', $challenge->getTitle()));
         return $this->redirectToRoute('my_challenges');
     }
 
@@ -134,6 +139,7 @@ class EditChallengeController extends Controller
         $em = $this->getDoctrine()->getManager();
         $em->flush();
 
+        $this->addFlash('info', sprintf('You joined "%s" challenge', $challenge->getTitle()));
         return $this->redirectToRoute('my_challenges');
     }
 }

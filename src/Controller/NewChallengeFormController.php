@@ -58,6 +58,7 @@ class NewChallengeFormController extends Controller
 
             $id = $challenge->getId();
 
+            $this->addFlash('success', sprintf('Challenge "%s" was created', $challenge->getTitle()));
             return $this->redirectToRoute('challenge_details', ['id' => $id]);
         }
 

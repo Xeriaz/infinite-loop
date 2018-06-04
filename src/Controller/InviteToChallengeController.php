@@ -66,16 +66,17 @@ class InviteToChallengeController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $notification = $form->getData();
-            $notification->setUser(
-                $this->getUserByUsername(
-                    $notification->getTargetedUsername()
-                )
-            );
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($notification);
-            $entityManager->flush();
 
-            return $this->redirectToRoute('challenge_details', ['id' => $id]);
+            $userOrRedirect = $this->getUserByUsername($notification->getTargetedUsername(), $id);
+
+            if ($userOrRedirect instanceof User) {
+                $notification->setUser($userOrRedirect);
+                $entityManager = $this->getDoctrine()->getManager();
+                $entityManager->persist($notification);
+                $entityManager->flush();
+
+                return $this->redirectToRoute('challenge_details', ['id' => $id]);
+            }
         }
 
         return $form->createView();
@@ -101,7 +102,11 @@ class InviteToChallengeController extends Controller
         return $data;
     }
 
-    private function getUserByUsername(string $username): User
+    /**
+     * @param string $username
+     * @return User|RedirectResponse
+     */
+    private function getUserByUsername(string $username, int $id)
     {
         $user = $this->getDoctrine()
             ->getRepository(User::class)
@@ -110,10 +115,8 @@ class InviteToChallengeController extends Controller
             ]);
 
         if (!$user) {
-            throw $this->createNotFoundException(sprintf(
-                'User %s was not found',
-                $username
-            ));
+            $this->addFlash('danger', sprintf('User %s was not found', $username));
+            return $this->redirectToRoute('invite_user_to_challenge', ['id' => $id]);
         }
 
         return $user;

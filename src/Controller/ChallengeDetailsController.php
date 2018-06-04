@@ -96,6 +96,7 @@ class ChallengeDetailsController extends Controller
             $em->persist($comment);
             $em->flush();
 
+            $this->addFlash('success', sprintf('Comment was added'));
             return $this->redirectToRoute('challenge_details', ['id' => $id]);
         }
 

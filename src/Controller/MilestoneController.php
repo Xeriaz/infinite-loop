@@ -84,6 +84,7 @@ class MilestoneController extends Controller
                 $em->flush();
             }
 
+            $this->addFlash('success', sprintf('Milestone "%s" was created', $milestone->getTitle()));
             return $this->redirectToRoute('challenge_details', ['id' => $id]);
         }
 
@@ -176,6 +177,7 @@ class MilestoneController extends Controller
         $em = $this->getDoctrine()->getManager();
         $em->flush();
 
+        $this->addFlash('success', sprintf('Milestone "%s" was completed', $milestone->getTitle()));
         return $this->redirectToRoute('challenge_details', [
             'id' => $this->getChallengeId($userMilestoneStatus)
         ]);
@@ -241,6 +243,7 @@ class MilestoneController extends Controller
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->flush();
 
+        $this->addFlash('danger', sprintf('Milestone "%s" was failed', $milestone->getTitle()));
         return $this->redirectToRoute('challenge_details', [
             'id' => $this->getChallengeId($userMilestoneStatus)
         ]);
@@ -276,6 +279,7 @@ class MilestoneController extends Controller
         $entityManager->remove($userMilestoneStatus);
         $entityManager->flush();
 
+        $this->addFlash('warning', sprintf('Milestone "%s" was removed', $milestone->getTitle()));
         return $this->redirectToRoute('challenge_details', [
             'id' => $this->getChallengeId($userMilestoneStatus)
         ]);

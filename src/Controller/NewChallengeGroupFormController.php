@@ -31,6 +31,7 @@ class NewChallengeGroupFormController extends Controller
      */
     private function new(Request $request)
     {
+        /** @var ChallengeGroup $challengeGroup */
         $challengeGroup = new ChallengeGroup();
         $challengeGroup->setGroupName('');
 
@@ -44,6 +45,11 @@ class NewChallengeGroupFormController extends Controller
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($challengeGroup);
             $entityManager->flush();
+
+            $this->addFlash(
+                'success',
+                sprintf('Challenge group "%s" was added', $challengeGroup->getGroupName())
+            );
         }
 
         return $form->createView();
