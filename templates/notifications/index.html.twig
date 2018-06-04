@@ -18,6 +18,7 @@
                 </tr>
                 </thead>
                 <tbody>
+
                 {% for notification in notifications %}
 
                     {% if not notification.read %}
@@ -47,6 +48,9 @@
                 {% endfor %}
                 </tbody>
             </table>
+                {% if notifications|length == 0 %}
+                    <h2 style="text-align: center;color: #ffffff;">You have not received any notifications, yet</h2>
+                {% endif %}
         </div>
     {#</div>#}
     </div>
