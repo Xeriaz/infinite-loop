@@ -23,6 +23,8 @@
                             {% endfor %}
 
                             {% if milestoneUserStatusExist == 0 %}
+                                {% set milestonesCount = milestonesCount + 1 %}
+
                                 {% include 'includes/publicMilestoneBlock.html.twig' %}
                             {% endif %}
                         {% endif %}
